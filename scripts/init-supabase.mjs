@@ -86,7 +86,7 @@ async function main() {
       VALUES (
         'contact_info',
         'json',
-        '{"brand_name": "inoibai.vn", "hotline": "0928015280", "hotline_display": "0928.015.280", "zalo": "0905876231", "telegram": "https://t.me/inoibai_vn", "email": "inoibai.vn@gmail.com", "address": "Sảnh A1, T1 - Sân bay Quốc tế Nội Bài, Sóc Sơn, Hà Nội", "logo_url": "/images/Brand.jpg", "working_hours": "24/7 (Phục vụ cả ngày lễ & Tết)"}'::jsonb
+        '{"brand_name": "maigo79.com", "hotline": "0928015280", "hotline_display": "0928.015.280", "zalo": "0905876231", "telegram": "https://t.me/maigo79_vn", "email": "contact@maigo79.com", "address": "Cột số 3 & 4 - Sảnh Đến Ga Quốc Nội & Quốc Tế, Sân bay Quốc tế Cam Ranh, Khánh Hòa", "logo_url": "/images/Brand.jpg", "working_hours": "24/7 (Phục vụ cả ngày lễ & Tết)"}'::jsonb
       )
       ON CONFLICT (content_key) DO UPDATE
       SET value = EXCLUDED.value, updated_at = now();

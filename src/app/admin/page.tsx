@@ -187,24 +187,26 @@ export default function AdminPage() {
   }
 
   // 2. Login Screen
+  const [showPassword, setShowPassword] = useState(false);
+
   if (!authorized) {
     return (
-      <main className="min-h-screen grid place-items-center bg-gradient-to-br from-blue-50 via-gray-100 to-indigo-50 p-4">
-        <div className="w-full max-w-md bg-white rounded-3xl p-8 shadow-2xl border border-gray-100 animate-in zoom-in-95 duration-200">
+      <main className="min-h-screen grid place-items-center bg-gradient-to-br from-blue-50 via-slate-100 to-indigo-50 p-4">
+        <div className="w-full max-w-md bg-white rounded-3xl p-8 shadow-2xl border border-gray-200 animate-in zoom-in-95 duration-200">
           <div className="text-center mb-6">
             <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-700 text-white flex items-center justify-center font-black text-2xl mx-auto shadow-lg shadow-blue-200 mb-4">
               IA
             </div>
-            <h1 className="text-2xl font-black text-gray-900 tracking-tight">
+            <h1 className="text-2xl font-black text-gray-950 tracking-tight">
               inoibai<span className="text-blue-600">Admin</span>
             </h1>
-            <p className="text-xs text-gray-500 mt-1">
-              Đăng nhập tài khoản Supabase có phân quyền quản trị
+            <p className="text-xs md:text-sm text-gray-600 font-medium mt-1.5">
+              Đăng nhập tài khoản quản trị hệ thống
             </p>
           </div>
 
           {message && (
-            <div className="mb-4 p-3.5 bg-red-50 border border-red-200 rounded-xl text-xs text-red-700 font-semibold flex items-center gap-2">
+            <div className="mb-4 p-3.5 bg-red-50 border border-red-300 rounded-xl text-xs text-red-800 font-bold flex items-center gap-2">
               <AlertCircle size={16} className="text-red-600 flex-shrink-0" />
               <span>{message}</span>
             </div>
@@ -212,11 +214,11 @@ export default function AdminPage() {
 
           <form onSubmit={login} className="space-y-4">
             <div>
-              <label className="block text-xs font-bold text-gray-700 mb-1.5">
+              <label className="block text-xs font-extrabold text-gray-900 mb-1.5">
                 Email Quản Trị
               </label>
               <div className="relative flex items-center">
-                <Mail size={16} className="absolute left-3.5 text-gray-400" />
+                <Mail size={18} className="absolute left-3.5 text-gray-500" />
                 <input
                   type="email"
                   placeholder="admin@inoibai.vn"
@@ -225,34 +227,41 @@ export default function AdminPage() {
                     setCredentials({ ...credentials, email: e.target.value })
                   }
                   required
-                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition-all font-medium"
+                  className="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-gray-300 bg-white text-gray-950 text-sm font-semibold outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition-all placeholder:text-gray-400 shadow-xs"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-gray-700 mb-1.5">
+              <label className="block text-xs font-extrabold text-gray-900 mb-1.5">
                 Mật Khẩu
               </label>
               <div className="relative flex items-center">
-                <Lock size={16} className="absolute left-3.5 text-gray-400" />
+                <Lock size={18} className="absolute left-3.5 text-gray-500" />
                 <input
-                  type="password"
-                  placeholder="••••••••"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Nhập mật khẩu..."
                   value={credentials.password}
                   onChange={(e) =>
                     setCredentials({ ...credentials, password: e.target.value })
                   }
                   required
-                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition-all font-medium"
+                  className="w-full pl-10 pr-12 py-3 rounded-xl border-2 border-gray-300 bg-white text-gray-950 text-sm font-semibold outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition-all placeholder:text-gray-400 shadow-xs"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3.5 text-gray-500 hover:text-gray-800 text-xs font-bold p-1 cursor-pointer"
+                >
+                  {showPassword ? "Ẩn" : "Hiện"}
+                </button>
               </div>
             </div>
 
             <button
               type="submit"
               disabled={isLoggingIn}
-              className="w-full mt-2 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-blue-200 transition-all flex items-center justify-center gap-2 text-sm cursor-pointer"
+              className="w-full mt-2 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-3.5 rounded-xl shadow-lg shadow-blue-200 transition-all flex items-center justify-center gap-2 text-sm cursor-pointer"
             >
               {isLoggingIn ? (
                 <>
@@ -268,7 +277,7 @@ export default function AdminPage() {
             </button>
           </form>
 
-          <div className="mt-6 text-center text-[11px] text-gray-400">
+          <div className="mt-6 text-center text-xs font-medium text-gray-500">
             inoibai.vn • Hệ thống điều phối & quản lý xe chuyên nghiệp 24/7
           </div>
         </div>

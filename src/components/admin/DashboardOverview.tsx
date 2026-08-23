@@ -99,7 +99,7 @@ export default function DashboardOverview({
             Dashboard
           </h1>
           <p className="text-xs md:text-sm text-gray-500">
-            Tổng quan hiệu suất đặt xe, doanh thu và lưu lượng truy cập inoibai.vn
+            Tổng quan hiệu suất đặt xe, doanh thu và lưu lượng truy cập inhatrang.vn
           </p>
         </div>
         <div className="text-xs font-semibold text-gray-400">
@@ -110,7 +110,7 @@ export default function DashboardOverview({
       {/* 4 Metric Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
         {/* Card 1: Doanh thu tháng */}
-        <div className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+        <div className="bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
           <div className="flex items-start justify-between">
             <div>
               <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">
@@ -120,8 +120,8 @@ export default function DashboardOverview({
                 {totalRevenue > 0 ? formatCurrency(totalRevenue) : "45.800.000₫"}
               </span>
             </div>
-            <div className="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shadow-xs shrink-0">
-              <Calendar size={22} />
+            <div className="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shadow-xs shrink-0">
+              <Calendar size={20} />
             </div>
           </div>
           <div className="flex items-center gap-1.5 text-xs text-emerald-600 font-bold mt-4">
@@ -132,7 +132,7 @@ export default function DashboardOverview({
         </div>
 
         {/* Card 2: Tổng cuốc xe */}
-        <div className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+        <div className="bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
           <div className="flex items-start justify-between">
             <div>
               <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">
@@ -142,8 +142,8 @@ export default function DashboardOverview({
                 {totalBookings > 0 ? `${totalBookings} chuyến` : "142 chuyến"}
               </span>
             </div>
-            <div className="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shadow-xs shrink-0">
-              <Car size={22} />
+            <div className="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shadow-xs shrink-0">
+              <Car size={20} />
             </div>
           </div>
           <div className="flex items-center gap-1.5 text-xs text-emerald-600 font-bold mt-4">
@@ -154,7 +154,7 @@ export default function DashboardOverview({
         </div>
 
         {/* Card 3: Khách hàng mới */}
-        <div className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+        <div className="bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
           <div className="flex items-start justify-between">
             <div>
               <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">
@@ -164,8 +164,8 @@ export default function DashboardOverview({
                 {uniqueCustomers > 0 ? `${uniqueCustomers} khách` : "98 khách"}
               </span>
             </div>
-            <div className="w-11 h-11 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center shadow-xs shrink-0">
-              <Users size={22} />
+            <div className="w-10 h-10 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center shadow-xs shrink-0">
+              <Users size={20} />
             </div>
           </div>
           <div className="flex items-center gap-1.5 text-xs text-emerald-600 font-bold mt-4">
@@ -176,7 +176,7 @@ export default function DashboardOverview({
         </div>
 
         {/* Card 4: Đơn chờ xử lý */}
-        <div className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+        <div className="bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
           <div className="flex items-start justify-between">
             <div>
               <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">
@@ -186,8 +186,8 @@ export default function DashboardOverview({
                 {pendingRequests} đơn
               </span>
             </div>
-            <div className="w-11 h-11 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shadow-xs shrink-0">
-              <MessageSquare size={22} />
+            <div className="w-10 h-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shadow-xs shrink-0">
+              <MessageSquare size={20} />
             </div>
           </div>
           <div className="flex items-center gap-1.5 text-xs text-rose-600 font-bold mt-4">
@@ -201,7 +201,7 @@ export default function DashboardOverview({
       {/* Middle Section: Chart (65%) & Top Routes (35%) */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left: Monthly Recap Report Chart */}
-        <div className="lg:col-span-2 bg-white rounded-2xl p-5 md:p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
+        <div className="lg:col-span-2 bg-white rounded-xl p-5 md:p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h2 className="text-base md:text-lg font-extrabold text-blue-950">
@@ -282,7 +282,7 @@ export default function DashboardOverview({
         </div>
 
         {/* Right: Products Sold / Top Routes */}
-        <div className="bg-white rounded-2xl p-5 md:p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
+        <div className="bg-white rounded-xl p-5 md:p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-5">
               <h2 className="text-base font-extrabold text-blue-950">
@@ -295,7 +295,7 @@ export default function DashboardOverview({
                       prev === "Tháng này" ? "Hôm nay" : prev === "Hôm nay" ? "Năm nay" : "Tháng này"
                     )
                   }
-                  className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 shadow-sm cursor-pointer"
+                  className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-1.5 rounded-md flex items-center gap-1 shadow-xs cursor-pointer"
                 >
                   <span>{selectedRange}</span>
                   <ChevronDown size={12} />
@@ -337,7 +337,7 @@ export default function DashboardOverview({
       </div>
 
       {/* Bottom Section: Recent Bookings (Invoice Widget) */}
-      <div className="bg-white rounded-2xl p-5 md:p-6 border border-gray-100 shadow-sm">
+      <div className="bg-white rounded-xl p-5 md:p-6 border border-gray-100 shadow-sm">
         <div className="flex items-center justify-between mb-4">
           <div>
             <h2 className="text-lg font-extrabold text-gray-800">
@@ -349,7 +349,7 @@ export default function DashboardOverview({
           </div>
           <button
             onClick={() => onNavigateTab("bookings")}
-            className="bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs px-4 py-2 rounded-xl shadow-sm transition-all flex items-center gap-1 cursor-pointer"
+            className="bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs px-3.5 py-1.5 rounded-lg shadow-xs transition-all flex items-center gap-1 cursor-pointer"
           >
             <span>Xem Tất Cả</span>
             <ArrowRight size={14} />
@@ -361,13 +361,13 @@ export default function DashboardOverview({
           <table className="w-full text-left text-sm">
             <thead>
               <tr className="border-b border-gray-100 text-[11px] font-bold text-gray-400 uppercase tracking-wider bg-gray-50/50">
-                <th className="py-3 px-4 rounded-l-xl">Khách Hàng</th>
+                <th className="py-3 px-4 rounded-l-lg">Khách Hàng</th>
                 <th className="py-3 px-3">Điện Thoại</th>
                 <th className="py-3 px-3">Tuyến Đón Trả</th>
                 <th className="py-3 px-3">Ngày Giờ Đi</th>
                 <th className="py-3 px-3">Loại Xe</th>
                 <th className="py-3 px-3">Giá Cước</th>
-                <th className="py-3 px-4 rounded-r-xl text-right">Thao Tác</th>
+                <th className="py-3 px-4 rounded-r-lg text-right">Thao Tác</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-50">

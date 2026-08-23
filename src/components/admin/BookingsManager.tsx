@@ -91,14 +91,14 @@ export default function BookingsManager({
         <div className="flex items-center gap-2">
           <button
             onClick={onRefresh}
-            className="p-2.5 rounded-xl border border-gray-200 hover:bg-gray-50 text-gray-600 transition-colors cursor-pointer bg-white shadow-xs"
+            className="p-2.5 rounded-md border border-gray-200 hover:bg-gray-50 text-gray-600 transition-colors cursor-pointer bg-white shadow-xs"
             title="Làm mới dữ liệu"
           >
             <RefreshCw size={16} />
           </button>
           <button
             onClick={exportCSV}
-            className="flex items-center gap-1.5 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-sm transition-all cursor-pointer"
+            className="flex items-center gap-1.5 px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-md text-xs font-bold shadow-xs transition-all cursor-pointer"
           >
             <Download size={15} />
             <span>Xuất file Excel/CSV</span>
@@ -107,15 +107,15 @@ export default function BookingsManager({
       </div>
 
       {/* Filter Bar */}
-      <div className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex flex-col md:flex-row gap-3 items-center justify-between">
+      <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm flex flex-col md:flex-row gap-3 items-center justify-between">
         <div className="relative w-full md:w-80">
-          <Search size={16} className="absolute left-3.5 top-3 text-gray-400" />
+          <Search size={16} className="absolute left-3.5 top-2.5 text-gray-400" />
           <input
             type="text"
             placeholder="Tìm theo tên, SĐT, điểm đón/đến..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 rounded-xl border border-gray-200 text-xs md:text-sm outline-none focus:border-blue-500 transition-colors"
+            className="w-full pl-10 pr-4 py-2 rounded-md border border-gray-200 text-xs md:text-sm outline-none focus:border-blue-500 transition-colors"
           />
         </div>
 
@@ -123,7 +123,7 @@ export default function BookingsManager({
           <select
             value={filterCar}
             onChange={(e) => setFilterCar(e.target.value)}
-            className="px-3 py-2 rounded-xl border border-gray-200 text-xs font-semibold text-gray-700 outline-none bg-white flex-1 md:flex-initial"
+            className="px-3 py-2 rounded-md border border-gray-200 text-xs font-semibold text-gray-700 outline-none bg-white flex-1 md:flex-initial"
           >
             <option value="all">Tất cả loại xe</option>
             <option value="5">Xe 5 chỗ</option>
@@ -134,7 +134,7 @@ export default function BookingsManager({
           <select
             value={filterWay}
             onChange={(e) => setFilterWay(e.target.value)}
-            className="px-3 py-2 rounded-xl border border-gray-200 text-xs font-semibold text-gray-700 outline-none bg-white flex-1 md:flex-initial"
+            className="px-3 py-2 rounded-md border border-gray-200 text-xs font-semibold text-gray-700 outline-none bg-white flex-1 md:flex-initial"
           >
             <option value="all">Tất cả loại vé</option>
             <option value="one-way">Một chiều</option>
@@ -144,7 +144,7 @@ export default function BookingsManager({
       </div>
 
       {/* Bookings Table */}
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead>

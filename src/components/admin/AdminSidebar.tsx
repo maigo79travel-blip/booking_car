@@ -130,7 +130,7 @@ export default function AdminSidebar({
                       setActiveTab(item.id);
                       setIsOpen(false);
                     }}
-                    className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-medium transition-all cursor-pointer ${
+                    className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-all cursor-pointer ${
                       isActive
                         ? "bg-blue-50 text-blue-700 font-bold shadow-xs"
                         : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
@@ -173,7 +173,7 @@ export default function AdminSidebar({
             <Link
               href="/"
               target="_blank"
-              className="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-all"
+              className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-all"
             >
               <div className="flex items-center gap-3">
                 <ExternalLink size={18} className="text-gray-400" />
@@ -187,13 +187,13 @@ export default function AdminSidebar({
         <div className="p-3 border-t border-gray-100 bg-gray-50/70">
           <button
             onClick={onLogout}
-            className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-sm font-bold text-red-600 hover:bg-red-50 hover:text-red-700 transition-colors border border-red-200 cursor-pointer shadow-xs"
+            className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg text-sm font-bold text-red-600 hover:bg-red-50 hover:text-red-700 transition-colors border border-red-200 cursor-pointer shadow-xs"
           >
             <LogOut size={16} />
             <span>Đăng xuất hệ thống</span>
           </button>
           <div className="mt-2 text-center text-[11px] text-gray-400">
-            inoibai.vn Admin • Phiên bản 2.4.0
+            inhatrang.vn Admin • Phiên bản 2.4.0
           </div>
         </div>
       </aside>

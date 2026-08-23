@@ -147,9 +147,9 @@ export default function PostModal({ post, onClose, onSave }: PostModalProps) {
 
   return (
     <div className="fixed inset-0 z-100000 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs overflow-y-auto">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col border border-gray-100 animate-in zoom-in-95 duration-200">
+      <div className="bg-white rounded-xl shadow-lg w-full max-w-4xl max-h-[90vh] flex flex-col border border-gray-100 animate-in zoom-in-95 duration-200">
         {/* Modal Header */}
-        <div className="bg-linear-to-r from-blue-600 to-indigo-700 p-4 md:p-6 text-white flex items-center justify-between rounded-t-2xl">
+        <div className="bg-linear-to-r from-blue-600 to-indigo-700 p-4 md:p-6 text-white flex items-center justify-between rounded-t-xl">
           <div className="flex items-center gap-2.5">
             <FileText size={22} className="text-orange-300" />
             <div>
@@ -163,7 +163,7 @@ export default function PostModal({ post, onClose, onSave }: PostModalProps) {
           </div>
           <button
             onClick={onClose}
-            className="text-white hover:text-orange-200 p-1 rounded-lg cursor-pointer"
+            className="text-white hover:text-orange-200 p-1 rounded-md cursor-pointer"
           >
             <X size={22} />
           </button>
@@ -172,7 +172,7 @@ export default function PostModal({ post, onClose, onSave }: PostModalProps) {
         {/* Form Body */}
         <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-6 space-y-6">
           {/* General Metadata Section */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-gray-50 rounded-xl border border-gray-200">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
             <div>
               <label className="block text-xs font-bold text-gray-700 mb-1">
                 Đường dẫn tĩnh (Slug) *
@@ -183,7 +183,7 @@ export default function PostModal({ post, onClose, onSave }: PostModalProps) {
                 onChange={(e) => setSlug(e.target.value)}
                 placeholder="kinh-nghiem-dat-xe-san-bay"
                 required
-                className="w-full px-3 py-2 text-sm bg-white rounded-lg border border-gray-300 outline-none focus:border-blue-500 font-mono"
+                className="w-full px-3 py-2 text-sm bg-white rounded-md border border-gray-300 outline-none focus:border-blue-500 font-mono"
               />
             </div>
 
@@ -195,7 +195,7 @@ export default function PostModal({ post, onClose, onSave }: PostModalProps) {
                 <button
                   type="button"
                   onClick={() => setStatus("published")}
-                  className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                  className={`flex-1 py-2 rounded-md text-xs font-bold transition-all cursor-pointer ${
                     status === "published"
                       ? "bg-green-600 text-white shadow-xs"
                       : "bg-gray-200 text-gray-700 hover:bg-gray-300"
@@ -206,7 +206,7 @@ export default function PostModal({ post, onClose, onSave }: PostModalProps) {
                 <button
                   type="button"
                   onClick={() => setStatus("draft")}
-                  className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                  className={`flex-1 py-2 rounded-md text-xs font-bold transition-all cursor-pointer ${
                     status === "draft"
                       ? "bg-amber-600 text-white shadow-xs"
                       : "bg-gray-200 text-gray-700 hover:bg-gray-300"
@@ -236,7 +236,7 @@ export default function PostModal({ post, onClose, onSave }: PostModalProps) {
                 type="date"
                 value={publishedAt}
                 onChange={(e) => setPublishedAt(e.target.value)}
-                className="w-full px-3 py-2 text-sm bg-white rounded-lg border border-gray-300 outline-none focus:border-blue-500 font-mono"
+                className="w-full px-3 py-2 text-sm bg-white rounded-md border border-gray-300 outline-none focus:border-blue-500 font-mono"
               />
             </div>
           </div>
@@ -253,13 +253,13 @@ export default function PostModal({ post, onClose, onSave }: PostModalProps) {
               </span>
             </div>
 
-            <div className="flex flex-wrap gap-2 p-1.5 bg-gray-100 rounded-xl">
+            <div className="flex flex-wrap gap-2 p-1.5 bg-gray-100 rounded-lg">
               {SUPPORTED_LANGUAGES.map((lang) => (
                 <button
                   key={lang.code}
                   type="button"
                   onClick={() => setActiveLang(lang.code)}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-bold transition-all cursor-pointer ${
                     activeLang === lang.code
                       ? "bg-blue-600 text-white shadow-sm"
                       : "bg-transparent text-gray-600 hover:bg-white/60"
@@ -276,7 +276,7 @@ export default function PostModal({ post, onClose, onSave }: PostModalProps) {
           </div>
 
           {/* Localized Content Inputs */}
-          <div className="space-y-4 p-4 border border-blue-100 rounded-2xl bg-blue-50/20">
+          <div className="space-y-4 p-4 border border-blue-100 rounded-lg bg-blue-50/20">
             <div>
               <label className="block text-xs font-bold text-gray-800 mb-1">
                 Tiêu đề bài viết ({activeLang.toUpperCase()}) *
@@ -286,7 +286,7 @@ export default function PostModal({ post, onClose, onSave }: PostModalProps) {
                 value={title[activeLang] || ""}
                 onChange={(e) => handleTextChange("title", e.target.value)}
                 placeholder={`Nhập tiêu đề bằng ${SUPPORTED_LANGUAGES.find((l) => l.code === activeLang)?.name}...`}
-                className="w-full px-3 py-2 text-sm bg-white rounded-lg border border-gray-300 outline-none focus:border-blue-500 font-bold text-gray-900"
+                className="w-full px-3 py-2 text-sm bg-white rounded-md border border-gray-300 outline-none focus:border-blue-500 font-bold text-gray-900"
               />
             </div>
 
@@ -299,7 +299,7 @@ export default function PostModal({ post, onClose, onSave }: PostModalProps) {
                 value={excerpt[activeLang] || ""}
                 onChange={(e) => handleTextChange("excerpt", e.target.value)}
                 placeholder="Mô tả ngắn hiển thị trên danh sách bài viết..."
-                className="w-full px-3 py-2 text-sm bg-white rounded-lg border border-gray-300 outline-none focus:border-blue-500"
+                className="w-full px-3 py-2 text-sm bg-white rounded-md border border-gray-300 outline-none focus:border-blue-500"
               />
             </div>
 
@@ -313,7 +313,7 @@ export default function PostModal({ post, onClose, onSave }: PostModalProps) {
                   value={seoTitle[activeLang] || ""}
                   onChange={(e) => handleTextChange("seoTitle", e.target.value)}
                   placeholder="Tiêu đề hiển thị trên Google..."
-                  className="w-full px-3 py-2 text-xs bg-white rounded-lg border border-gray-300 outline-none focus:border-blue-500"
+                  className="w-full px-3 py-2 text-xs bg-white rounded-md border border-gray-300 outline-none focus:border-blue-500"
                 />
               </div>
 
@@ -326,7 +326,7 @@ export default function PostModal({ post, onClose, onSave }: PostModalProps) {
                   value={seoDescription[activeLang] || ""}
                   onChange={(e) => handleTextChange("seoDescription", e.target.value)}
                   placeholder="Mô tả thẻ meta description..."
-                  className="w-full px-3 py-2 text-xs bg-white rounded-lg border border-gray-300 outline-none focus:border-blue-500"
+                  className="w-full px-3 py-2 text-xs bg-white rounded-md border border-gray-300 outline-none focus:border-blue-500"
                 />
               </div>
             </div>
@@ -340,7 +340,7 @@ export default function PostModal({ post, onClose, onSave }: PostModalProps) {
                 value={body[activeLang] || ""}
                 onChange={(e) => handleTextChange("body", e.target.value)}
                 placeholder="Nhập toàn bộ nội dung bài viết..."
-                className="w-full px-4 py-3 text-sm bg-white rounded-xl border border-gray-300 outline-none focus:border-blue-500 leading-relaxed font-sans"
+                className="w-full px-4 py-3 text-sm bg-white rounded-md border border-gray-300 outline-none focus:border-blue-500 leading-relaxed font-sans"
               />
             </div>
           </div>
@@ -350,14 +350,14 @@ export default function PostModal({ post, onClose, onSave }: PostModalProps) {
             <button
               type="button"
               onClick={onClose}
-              className="px-5 py-2.5 rounded-xl border border-gray-200 text-gray-600 hover:bg-gray-100 text-sm font-semibold cursor-pointer"
+              className="px-5 py-2.5 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-100 text-sm font-semibold cursor-pointer"
             >
               Hủy bỏ
             </button>
             <button
               type="submit"
               disabled={isSaving}
-              className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-linear-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white text-sm font-bold shadow-md transition-all cursor-pointer"
+              className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-linear-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white text-sm font-bold shadow-md transition-all cursor-pointer"
             >
               <Save size={16} />
               <span>{isSaving ? "Đang lưu..." : "Lưu bài viết"}</span>

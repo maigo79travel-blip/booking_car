@@ -76,7 +76,7 @@ export default function PostsManager({
         </div>
         <button
           onClick={() => setIsCreating(true)}
-          className="flex items-center gap-2 px-4 py-2.5 bg-linear-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white rounded-xl text-xs md:text-sm font-bold shadow-md transition-all cursor-pointer"
+          className="flex items-center gap-2 px-4 py-2 bg-linear-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white rounded-md text-xs md:text-sm font-bold shadow-sm transition-all cursor-pointer"
         >
           <Plus size={16} />
           <span>Tạo Bài Viết Mới</span>
@@ -84,15 +84,15 @@ export default function PostsManager({
       </div>
 
       {/* Filter Bar */}
-      <div className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex flex-col md:flex-row gap-3 items-center justify-between">
+      <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm flex flex-col md:flex-row gap-3 items-center justify-between">
         <div className="relative w-full md:w-80">
-          <Search size={16} className="absolute left-3.5 top-3 text-gray-400" />
+          <Search size={16} className="absolute left-3.5 top-2.5 text-gray-400" />
           <input
             type="text"
             placeholder="Tìm theo tiêu đề hoặc slug..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 rounded-xl border border-gray-200 text-xs md:text-sm outline-none focus:border-blue-500 transition-colors"
+            className="w-full pl-10 pr-4 py-2 rounded-md border border-gray-200 text-xs md:text-sm outline-none focus:border-blue-500 transition-colors"
           />
         </div>
 
@@ -100,7 +100,7 @@ export default function PostsManager({
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-3 py-2 rounded-xl border border-gray-200 text-xs font-semibold text-gray-700 outline-none bg-white"
+            className="px-3 py-2 rounded-md border border-gray-200 text-xs font-semibold text-gray-700 outline-none bg-white"
           >
             <option value="all">Tất cả trạng thái</option>
             <option value="published">Đã công khai (Published)</option>
@@ -110,7 +110,7 @@ export default function PostsManager({
       </div>
 
       {/* Posts List */}
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead>
@@ -135,7 +135,7 @@ export default function PostsManager({
                     >
                       <td className="py-3.5 px-4">
                         <div className="flex items-center gap-3">
-                          <div className="relative w-12 h-12 rounded-xl overflow-hidden bg-gray-100 shrink-0 border border-gray-200">
+                          <div className="relative w-12 h-12 rounded-md overflow-hidden bg-gray-100 shrink-0 border border-gray-200">
                             {p.cover_image ? (
                               <Image
                                 src={p.cover_image}

@@ -67,7 +67,7 @@ export default function RoutesManager({
         </div>
         <button
           onClick={() => setIsCreating(true)}
-          className="flex items-center gap-2 px-4 py-2.5 bg-linear-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white rounded-xl text-xs md:text-sm font-bold shadow-md transition-all cursor-pointer"
+          className="flex items-center gap-2 px-4 py-2 bg-linear-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white rounded-md text-xs md:text-sm font-bold shadow-sm transition-all cursor-pointer"
         >
           <Plus size={16} />
           <span>Thêm Tuyến Xe Mới</span>
@@ -75,15 +75,15 @@ export default function RoutesManager({
       </div>
 
       {/* Filter Bar */}
-      <div className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex flex-col md:flex-row gap-3 items-center justify-between">
+      <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm flex flex-col md:flex-row gap-3 items-center justify-between">
         <div className="relative w-full md:w-80">
-          <Search size={16} className="absolute left-3.5 top-3 text-gray-400" />
+          <Search size={16} className="absolute left-3.5 top-2.5 text-gray-400" />
           <input
             type="text"
             placeholder="Tìm theo điểm đi hoặc điểm đến..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 rounded-xl border border-gray-200 text-xs md:text-sm outline-none focus:border-blue-500 transition-colors"
+            className="w-full pl-10 pr-4 py-2 rounded-md border border-gray-200 text-xs md:text-sm outline-none focus:border-blue-500 transition-colors"
           />
         </div>
 
@@ -91,7 +91,7 @@ export default function RoutesManager({
           <select
             value={vehicleFilter}
             onChange={(e) => setVehicleFilter(e.target.value)}
-            className="px-3 py-2 rounded-xl border border-gray-200 text-xs font-semibold text-gray-700 outline-none bg-white"
+            className="px-3 py-2 rounded-md border border-gray-200 text-xs font-semibold text-gray-700 outline-none bg-white"
           >
             <option value="all">Tất cả loại xe</option>
             <option value="5">Xe 5 chỗ</option>
@@ -102,7 +102,7 @@ export default function RoutesManager({
       </div>
 
       {/* Routes Table */}
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead>

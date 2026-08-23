@@ -260,7 +260,7 @@ export default function ContentManager({
   return (
     <div className="space-y-6 pb-16">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-white p-5 md:p-6 rounded-xl border border-slate-200 shadow-sm">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-xs font-black uppercase tracking-wider mb-2">
             <Sparkles size={14} />
@@ -275,7 +275,7 @@ export default function ContentManager({
         </div>
 
         {/* Global Language Selector */}
-        <div className="flex items-center gap-2 bg-slate-100 p-1.5 rounded-2xl">
+        <div className="flex items-center gap-2 bg-slate-100 p-1.5 rounded-lg">
           <Globe size={16} className="text-slate-500 ml-2" />
           <span className="text-xs font-extrabold text-slate-700 mr-1">Ngôn ngữ soạn thảo:</span>
           <div className="flex gap-1">
@@ -284,9 +284,9 @@ export default function ContentManager({
                 key={lang.code}
                 type="button"
                 onClick={() => setSelectedLang(lang.code)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer ${
+                className={`px-3 py-1.5 rounded-md text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer ${
                   selectedLang === lang.code
-                    ? "bg-white text-blue-600 shadow-sm"
+                    ? "bg-white text-blue-600 shadow-xs"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
@@ -316,9 +316,9 @@ export default function ContentManager({
               key={tab.id}
               type="button"
               onClick={() => setActiveTab(tab.id as CMSTab)}
-              className={`flex items-center gap-2 px-4 py-3 rounded-2xl whitespace-nowrap transition-all cursor-pointer font-extrabold ${
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-lg whitespace-nowrap transition-all cursor-pointer font-extrabold ${
                 isActive
-                  ? "bg-blue-600 text-white shadow-md shadow-blue-200"
+                  ? "bg-blue-600 text-white shadow-sm shadow-blue-200"
                   : "bg-white text-slate-600 hover:text-slate-900 border border-slate-200"
               }`}
             >
@@ -330,7 +330,7 @@ export default function ContentManager({
       </div>
 
       {saveSuccess && (
-        <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl text-xs font-extrabold text-emerald-800 flex items-center gap-2 animate-in fade-in">
+        <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-lg text-xs font-extrabold text-emerald-800 flex items-center gap-2 animate-in fade-in">
           <Check size={18} className="text-emerald-600 shrink-0" />
           <span>Đã lưu nội dung thành công và cập nhật ngay lên website!</span>
         </div>
@@ -340,7 +340,7 @@ export default function ContentManager({
       {/* TAB 1: HERO & BANNERS */}
       {/* ========================================================================= */}
       {activeTab === "hero" && (
-        <div className="bg-white rounded-3xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
+        <div className="bg-white rounded-xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
           <div className="flex items-center justify-between border-b border-slate-100 pb-4">
             <div>
               <h2 className="text-lg font-black text-slate-900">
@@ -354,7 +354,7 @@ export default function ContentManager({
               type="button"
               disabled={isSaving}
               onClick={() => handleSaveSection("hero_section", heroData)}
-              className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-black shadow-md shadow-blue-200 transition-all cursor-pointer"
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-xs font-black shadow-sm transition-all cursor-pointer"
             >
               <Save size={15} />
               <span>{isSaving ? "Đang lưu..." : "Lưu Khối Hero"}</span>
@@ -376,7 +376,7 @@ export default function ContentManager({
                     title1: { ...heroData.title1, [selectedLang]: e.target.value },
                   })
                 }
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>
 
@@ -394,7 +394,7 @@ export default function ContentManager({
                     title2: { ...heroData.title2, [selectedLang]: e.target.value },
                   })
                 }
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-orange-600 outline-none focus:bg-white focus:border-blue-600"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-bold text-orange-600 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>
 
@@ -412,7 +412,7 @@ export default function ContentManager({
                     subtitle: { ...heroData.subtitle, [selectedLang]: e.target.value },
                   })
                 }
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-medium text-slate-800 outline-none focus:bg-white focus:border-blue-600"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-medium text-slate-800 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>
 
@@ -430,7 +430,7 @@ export default function ContentManager({
                     badgeText: { ...heroData.badgeText, [selectedLang]: e.target.value },
                   })
                 }
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>
 
@@ -441,7 +441,7 @@ export default function ContentManager({
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {[0, 1, 2].map((idx) => (
-                  <div key={idx} className="p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                  <div key={idx} className="p-4 bg-slate-50 rounded-lg border border-slate-200">
                     <ImageUploadField
                       label={`Banner ${idx + 1}`}
                       value={heroData.banners[idx] || ""}
@@ -450,7 +450,7 @@ export default function ContentManager({
                         newBanners[idx] = url;
                         setHeroData({ ...heroData, banners: newBanners });
                       }}
-                      folder="inoibai/banners"
+                      folder="inhatrang/banners"
                       placeholder={`/images/Hero${idx + 1}.jpg`}
                       helperText={`Ảnh hiển thị ở vị trí slide thứ ${idx + 1}`}
                     />
@@ -466,7 +466,7 @@ export default function ContentManager({
       {/* TAB 2: BRAND & CONTACT */}
       {/* ========================================================================= */}
       {activeTab === "brand" && (
-        <div className="bg-white rounded-3xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
+        <div className="bg-white rounded-xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
           <div className="flex items-center justify-between border-b border-slate-100 pb-4">
             <div>
               <h2 className="text-lg font-black text-slate-900">
@@ -480,7 +480,7 @@ export default function ContentManager({
               type="button"
               disabled={isSaving}
               onClick={() => handleSaveSection("contact_info", contactData)}
-              className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-black shadow-md shadow-blue-200 transition-all cursor-pointer"
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-xs font-black shadow-sm transition-all cursor-pointer"
             >
               <Save size={15} />
               <span>{isSaving ? "Đang lưu..." : "Lưu Thông Tin Liên Hệ"}</span>
@@ -493,7 +493,7 @@ export default function ContentManager({
                 label="Logo Thương Hiệu (Header & Footer)"
                 value={contactData.logo_url}
                 onChange={(url) => setContactData({ ...contactData, logo_url: url })}
-                folder="inoibai/branding"
+                folder="inhatrang/branding"
                 placeholder="/images/logo.png hoặc https://res.cloudinary.com/..."
                 helperText="Ảnh logo hiển thị trên thanh điều hướng đầu trang và chân trang website"
               />
@@ -507,7 +507,7 @@ export default function ContentManager({
                 type="text"
                 value={contactData.brand_name}
                 onChange={(e) => setContactData({ ...contactData, brand_name: e.target.value })}
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>
 
@@ -520,7 +520,7 @@ export default function ContentManager({
                 value={contactData.hotline}
                 onChange={(e) => setContactData({ ...contactData, hotline: e.target.value })}
                 placeholder="0928015280"
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>
 
@@ -535,7 +535,7 @@ export default function ContentManager({
                   setContactData({ ...contactData, hotline_display: e.target.value })
                 }
                 placeholder="0928.015.280"
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>
 
@@ -548,7 +548,7 @@ export default function ContentManager({
                 value={contactData.zalo}
                 onChange={(e) => setContactData({ ...contactData, zalo: e.target.value })}
                 placeholder="0905876231 hoặc https://zalo.me/..."
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>
 
@@ -561,7 +561,7 @@ export default function ContentManager({
                 value={contactData.telegram}
                 onChange={(e) => setContactData({ ...contactData, telegram: e.target.value })}
                 placeholder="https://t.me/inoibai_vn"
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>
 
@@ -574,7 +574,7 @@ export default function ContentManager({
                 value={contactData.email}
                 onChange={(e) => setContactData({ ...contactData, email: e.target.value })}
                 placeholder="inhatrang.vn@gmail.com"
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>
 
@@ -586,7 +586,7 @@ export default function ContentManager({
                 type="text"
                 value={contactData.address}
                 onChange={(e) => setContactData({ ...contactData, address: e.target.value })}
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>
           </div>
@@ -597,7 +597,7 @@ export default function ContentManager({
       {/* TAB 3: VEHICLES & FLEET IMAGES */}
       {/* ========================================================================= */}
       {activeTab === "vehicles" && (
-        <div className="bg-white rounded-3xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
+        <div className="bg-white rounded-xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
           <div className="flex items-center justify-between border-b border-slate-100 pb-4">
             <div>
               <h2 className="text-lg font-black text-slate-900">
@@ -611,7 +611,7 @@ export default function ContentManager({
               type="button"
               disabled={isSaving}
               onClick={() => handleSaveSection("vehicles_fleet", vehiclesData)}
-              className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-black shadow-md shadow-blue-200 transition-all cursor-pointer"
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-xs font-black shadow-sm transition-all cursor-pointer"
             >
               <Save size={15} />
               <span>{isSaving ? "Đang lưu..." : "Lưu Thông Tin Đội Xe"}</span>
@@ -622,10 +622,10 @@ export default function ContentManager({
             {vehiclesData.map((v: any, index: number) => (
               <div
                 key={v.id || index}
-                className="p-6 bg-slate-50 rounded-3xl border border-slate-200 space-y-4"
+                className="p-5 bg-slate-50 rounded-lg border border-slate-200 space-y-4"
               >
                 <div className="flex items-center justify-between">
-                  <span className="px-3 py-1 bg-blue-600 text-white rounded-xl text-xs font-black">
+                  <span className="px-3 py-1 bg-blue-600 text-white rounded-md text-xs font-black">
                     Xe {v.type} Chỗ
                   </span>
                   <span className="text-xs font-bold text-slate-500">
@@ -644,7 +644,7 @@ export default function ContentManager({
                         updated[index].image = url;
                         setVehiclesData(updated);
                       }}
-                      folder="inoibai/vehicles"
+                      folder="inhatrang/vehicles"
                       placeholder={`/images/${v.type}1.png`}
                       helperText="Ảnh hiển thị trên trang danh sách loại xe và form chọn xe"
                     />
@@ -665,7 +665,7 @@ export default function ContentManager({
                             updated[index].name = e.target.value;
                             setVehiclesData(updated);
                           }}
-                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-sm font-bold text-slate-900 outline-none focus:border-blue-600"
+                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm font-bold text-slate-900 outline-none focus:border-blue-600"
                         />
                       </div>
 
@@ -681,7 +681,7 @@ export default function ContentManager({
                             updated[index].models = e.target.value;
                             setVehiclesData(updated);
                           }}
-                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-sm font-medium text-slate-800 outline-none focus:border-blue-600"
+                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm font-medium text-slate-800 outline-none focus:border-blue-600"
                         />
                       </div>
 
@@ -697,7 +697,7 @@ export default function ContentManager({
                             updated[index].seats = e.target.value;
                             setVehiclesData(updated);
                           }}
-                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-sm font-medium text-slate-800 outline-none focus:border-blue-600"
+                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm font-medium text-slate-800 outline-none focus:border-blue-600"
                         />
                       </div>
 
@@ -713,7 +713,7 @@ export default function ContentManager({
                             updated[index].luggage = e.target.value;
                             setVehiclesData(updated);
                           }}
-                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-sm font-medium text-slate-800 outline-none focus:border-blue-600"
+                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm font-medium text-slate-800 outline-none focus:border-blue-600"
                         />
                       </div>
 
@@ -729,7 +729,7 @@ export default function ContentManager({
                             updated[index].price = e.target.value;
                             setVehiclesData(updated);
                           }}
-                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-sm font-bold text-orange-600 outline-none focus:border-blue-600"
+                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm font-bold text-orange-600 outline-none focus:border-blue-600"
                         />
                       </div>
                     </div>
@@ -745,7 +745,7 @@ export default function ContentManager({
       {/* TAB 4: TESTIMONIALS */}
       {/* ========================================================================= */}
       {activeTab === "testimonials" && (
-        <div className="bg-white rounded-3xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
+        <div className="bg-white rounded-xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
           <div className="flex items-center justify-between border-b border-slate-100 pb-4">
             <div>
               <h2 className="text-lg font-black text-slate-900">
@@ -771,7 +771,7 @@ export default function ContentManager({
                     },
                   ])
                 }
-                className="flex items-center gap-1.5 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold transition-colors cursor-pointer"
+                className="flex items-center gap-1.5 px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-md text-xs font-bold transition-colors cursor-pointer"
               >
                 <Plus size={14} />
                 <span>Thêm Đánh Giá</span>
@@ -781,7 +781,7 @@ export default function ContentManager({
                 type="button"
                 disabled={isSaving}
                 onClick={() => handleSaveSection("testimonials", testimonialsData)}
-                className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-black shadow-md shadow-blue-200 transition-all cursor-pointer"
+                className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-xs font-black shadow-sm transition-all cursor-pointer"
               >
                 <Save size={15} />
                 <span>{isSaving ? "Đang lưu..." : "Lưu Đánh Giá"}</span>
@@ -793,7 +793,7 @@ export default function ContentManager({
             {testimonialsData.map((item: any, idx: number) => (
               <div
                 key={idx}
-                className="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-4 relative"
+                className="p-5 bg-slate-50 rounded-lg border border-slate-200 space-y-4 relative"
               >
                 <button
                   type="button"
@@ -801,7 +801,7 @@ export default function ContentManager({
                     const filtered = testimonialsData.filter((_: any, i: number) => i !== idx);
                     setTestimonialsData(filtered);
                   }}
-                  className="absolute top-4 right-4 text-slate-400 hover:text-rose-600 p-1 rounded-lg transition-colors cursor-pointer"
+                  className="absolute top-4 right-4 text-slate-400 hover:text-rose-600 p-1 rounded-md transition-colors cursor-pointer"
                   title="Xóa đánh giá này"
                 >
                   <Trash2 size={16} />
@@ -820,7 +820,7 @@ export default function ContentManager({
                         updated[idx].name = e.target.value;
                         setTestimonialsData(updated);
                       }}
-                      className="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-bold text-slate-900 outline-none"
+                      className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-xs font-bold text-slate-900 outline-none"
                     />
                   </div>
 
@@ -836,7 +836,7 @@ export default function ContentManager({
                         updated[idx].role = e.target.value;
                         setTestimonialsData(updated);
                       }}
-                      className="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-medium text-slate-800 outline-none"
+                      className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-xs font-medium text-slate-800 outline-none"
                     />
                   </div>
                 </div>
@@ -854,7 +854,7 @@ export default function ContentManager({
                         updated[idx].route = e.target.value;
                         setTestimonialsData(updated);
                       }}
-                      className="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-medium text-slate-800 outline-none"
+                      className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-xs font-medium text-slate-800 outline-none"
                     />
                   </div>
 
@@ -869,7 +869,7 @@ export default function ContentManager({
                         updated[idx].stars = Number(e.target.value);
                         setTestimonialsData(updated);
                       }}
-                      className="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-bold text-amber-600 outline-none"
+                      className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-xs font-bold text-amber-600 outline-none"
                     >
                       <option value={5}>⭐⭐⭐⭐⭐ (5 sao - Xuất sắc)</option>
                       <option value={4}>⭐⭐⭐⭐ (4 sao - Tốt)</option>
@@ -886,7 +886,7 @@ export default function ContentManager({
                     updated[idx].avatar = url;
                     setTestimonialsData(updated);
                   }}
-                  folder="inoibai/testimonials"
+                  folder="inhatrang/testimonials"
                   placeholder="/images/Hero1.jpg"
                 />
 
@@ -902,7 +902,7 @@ export default function ContentManager({
                       updated[idx].comment = e.target.value;
                       setTestimonialsData(updated);
                     }}
-                    className="w-full p-3 bg-white border border-slate-300 rounded-xl text-xs font-medium text-slate-800 outline-none"
+                    className="w-full p-3 bg-white border border-slate-300 rounded-md text-xs font-medium text-slate-800 outline-none"
                   />
                 </div>
               </div>
@@ -915,7 +915,7 @@ export default function ContentManager({
       {/* TAB 5: FAQ (CÂU HỎI THƯỜNG GẶP) */}
       {/* ========================================================================= */}
       {activeTab === "faq" && (
-        <div className="bg-white rounded-3xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
+        <div className="bg-white rounded-xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
           <div className="flex items-center justify-between border-b border-slate-100 pb-4">
             <div>
               <h2 className="text-lg font-black text-slate-900">
@@ -937,7 +937,7 @@ export default function ContentManager({
                     },
                   ])
                 }
-                className="flex items-center gap-1.5 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold transition-colors cursor-pointer"
+                className="flex items-center gap-1.5 px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-md text-xs font-bold transition-colors cursor-pointer"
               >
                 <Plus size={14} />
                 <span>Thêm Câu Hỏi</span>
@@ -947,7 +947,7 @@ export default function ContentManager({
                 type="button"
                 disabled={isSaving}
                 onClick={() => handleSaveSection("faq_list", faqData)}
-                className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-black shadow-md shadow-blue-200 transition-all cursor-pointer"
+                className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-xs font-black shadow-sm transition-all cursor-pointer"
               >
                 <Save size={15} />
                 <span>{isSaving ? "Đang lưu..." : "Lưu Danh Sách FAQ"}</span>
@@ -959,7 +959,7 @@ export default function ContentManager({
             {faqData.map((item: any, idx: number) => (
               <div
                 key={idx}
-                className="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3 relative"
+                className="p-5 bg-slate-50 rounded-lg border border-slate-200 space-y-3 relative"
               >
                 <button
                   type="button"
@@ -967,7 +967,7 @@ export default function ContentManager({
                     const filtered = faqData.filter((_: any, i: number) => i !== idx);
                     setFaqData(filtered);
                   }}
-                  className="absolute top-4 right-4 text-slate-400 hover:text-rose-600 p-1 rounded-lg transition-colors cursor-pointer"
+                  className="absolute top-4 right-4 text-slate-400 hover:text-rose-600 p-1 rounded-md transition-colors cursor-pointer"
                   title="Xóa câu hỏi này"
                 >
                   <Trash2 size={16} />
@@ -989,7 +989,7 @@ export default function ContentManager({
                       setFaqData(updated);
                     }}
                     placeholder="Nhập câu hỏi..."
-                    className="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-xl text-xs font-bold text-slate-900 outline-none focus:border-blue-600"
+                    className="w-full px-3.5 py-2 bg-white border border-slate-300 rounded-md text-xs font-bold text-slate-900 outline-none focus:border-blue-600"
                   />
                 </div>
 
@@ -1009,7 +1009,7 @@ export default function ContentManager({
                       setFaqData(updated);
                     }}
                     placeholder="Nhập câu trả lời..."
-                    className="w-full p-3 bg-white border border-slate-300 rounded-xl text-xs font-medium text-slate-800 outline-none focus:border-blue-600 leading-relaxed"
+                    className="w-full p-3 bg-white border border-slate-300 rounded-md text-xs font-medium text-slate-800 outline-none focus:border-blue-600 leading-relaxed"
                   />
                 </div>
               </div>
@@ -1022,7 +1022,7 @@ export default function ContentManager({
       {/* TAB 6: CLOUDINARY CONFIG */}
       {/* ========================================================================= */}
       {activeTab === "cloudinary" && (
-        <div className="bg-white rounded-3xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
+        <div className="bg-white rounded-xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
           <div className="flex items-center justify-between border-b border-slate-100 pb-4">
             <div>
               <h2 className="text-lg font-black text-slate-900 flex items-center gap-2">
@@ -1037,14 +1037,14 @@ export default function ContentManager({
               type="button"
               disabled={isSaving}
               onClick={() => handleSaveSection("cloudinary_config", cloudinaryConfig)}
-              className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-black shadow-md shadow-blue-200 transition-all cursor-pointer"
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-xs font-black shadow-sm transition-all cursor-pointer"
             >
               <Save size={15} />
               <span>{isSaving ? "Đang lưu..." : "Lưu Cấu Hình Cloudinary"}</span>
             </button>
           </div>
 
-          <div className="p-4 bg-blue-50/60 border border-blue-200 rounded-2xl text-xs text-blue-900 font-medium space-y-2">
+          <div className="p-4 bg-blue-50/60 border border-blue-200 rounded-lg text-xs text-blue-900 font-medium space-y-2">
             <p className="font-extrabold flex items-center gap-1.5 text-blue-700">
               <span>💡 Cách lấy thông tin Cloudinary (Miễn phí 100%):</span>
             </p>
@@ -1077,7 +1077,7 @@ export default function ContentManager({
                   setCloudinaryConfig({ ...cloudinaryConfig, cloud_name: e.target.value })
                 }
                 placeholder="ví dụ: dinoibai hoặc dx9xyz..."
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600 font-mono"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600 font-mono"
               />
             </div>
 
@@ -1091,8 +1091,8 @@ export default function ContentManager({
                 onChange={(e) =>
                   setCloudinaryConfig({ ...cloudinaryConfig, upload_preset: e.target.value })
                 }
-                placeholder="ví dụ: ml_default hoặc inoibai_preset"
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-medium text-slate-900 outline-none focus:bg-white focus:border-blue-600 font-mono"
+                placeholder="ví dụ: ml_default hoặc inhatrang_preset"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-medium text-slate-900 outline-none focus:bg-white focus:border-blue-600 font-mono"
               />
             </div>
 
@@ -1107,7 +1107,7 @@ export default function ContentManager({
                   setCloudinaryConfig({ ...cloudinaryConfig, api_key: e.target.value })
                 }
                 placeholder="ví dụ: 123456789012345"
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-mono text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-mono text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>
 
@@ -1122,7 +1122,7 @@ export default function ContentManager({
                   setCloudinaryConfig({ ...cloudinaryConfig, api_secret: e.target.value })
                 }
                 placeholder="••••••••••••••••••••••••••••"
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-mono text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-mono text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>
           </div>
@@ -1133,7 +1133,7 @@ export default function ContentManager({
       {/* TAB 7: RAW JSON (ADVANCED) */}
       {/* ========================================================================= */}
       {activeTab === "raw_json" && (
-        <div className="bg-white rounded-3xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
+        <div className="bg-white rounded-xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
           <div>
             <h2 className="text-lg font-black text-slate-900">
               Quản Trị Nâng Cao - Dữ Liệu Thô (Raw JSON Database)
@@ -1147,7 +1147,7 @@ export default function ContentManager({
             {content.map((item) => (
               <div
                 key={item.id}
-                className="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3"
+                className="p-5 bg-slate-50 rounded-lg border border-slate-200 space-y-3"
               >
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-xs font-extrabold text-blue-600">
@@ -1167,7 +1167,7 @@ export default function ContentManager({
                         alert("Lỗi cú pháp JSON: " + e.message);
                       }
                     }}
-                    className="flex items-center gap-1 px-3 py-1.5 bg-blue-600 text-white rounded-lg text-xs font-bold cursor-pointer"
+                    className="flex items-center gap-1 px-3 py-1.5 bg-blue-600 text-white rounded-md text-xs font-bold cursor-pointer"
                   >
                     <Save size={12} />
                     <span>Lưu</span>
@@ -1177,7 +1177,7 @@ export default function ContentManager({
                   id={`textarea-${item.id}`}
                   rows={6}
                   defaultValue={JSON.stringify(item.value, null, 2)}
-                  className="w-full p-3 bg-white font-mono text-xs text-slate-800 rounded-xl border border-slate-300 outline-none focus:border-blue-600"
+                  className="w-full p-3 bg-white font-mono text-xs text-slate-800 rounded-md border border-slate-300 outline-none focus:border-blue-600"
                 />
               </div>
             ))}

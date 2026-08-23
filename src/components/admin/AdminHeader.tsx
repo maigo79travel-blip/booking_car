@@ -39,7 +39,7 @@ export default function AdminHeader({
         </button>
 
         {/* Search Box */}
-        <div className="hidden sm:flex items-center bg-white/15 hover:bg-white/20 focus-within:bg-white focus-within:text-gray-800 transition-all rounded-xl px-3 py-1.5 w-60 md:w-80 border border-white/20">
+        <div className="hidden sm:flex items-center bg-white/15 hover:bg-white/20 focus-within:bg-white focus-within:text-gray-800 transition-all rounded-lg px-3 py-1.5 w-60 md:w-80 border border-white/20">
           <Search size={16} className="mr-2 text-white/70 focus-within:text-gray-500" />
           <input
             type="text"
@@ -67,12 +67,12 @@ export default function AdminHeader({
           </button>
 
           {showNotifications && (
-            <div className="absolute right-0 mt-2 w-72 bg-white rounded-2xl shadow-2xl border border-gray-100 py-2 text-gray-800 z-50 animate-in fade-in-50 zoom-in-95 duration-150">
+            <div className="absolute right-0 mt-2 w-72 bg-white rounded-lg shadow-lg border border-gray-100 py-2 text-gray-800 z-50 animate-in fade-in-50 zoom-in-95 duration-150">
               <div className="px-4 py-2 border-b border-gray-100 font-bold text-xs text-gray-400 uppercase tracking-wider">
                 Thông báo hệ thống
               </div>
               <div className="p-3 text-xs text-gray-600 space-y-2">
-                <div className="p-2 bg-blue-50 rounded-lg border border-blue-100">
+                <div className="p-2 bg-blue-50 rounded-md border border-blue-100">
                   <p className="font-bold text-blue-900">🔔 Đơn xe mới</p>
                   <p className="text-gray-500 text-[11px]">
                     Có {pendingCount} đơn xe mới đang chờ xác nhận từ khách hàng.
@@ -109,13 +109,13 @@ export default function AdminHeader({
         <div className="relative">
           <button
             onClick={() => setShowUserDropdown(!showUserDropdown)}
-            className="flex items-center gap-2.5 pl-2 pr-3 py-1.5 rounded-full hover:bg-white/10 transition-colors cursor-pointer border border-white/20"
+            className="flex items-center gap-2.5 pl-2 pr-3 py-1.5 rounded-lg hover:bg-white/10 transition-colors cursor-pointer border border-white/20"
           >
             <div className="w-8 h-8 rounded-full bg-linear-to-tr from-orange-400 to-amber-300 border-2 border-white flex items-center justify-center font-bold text-xs text-white shadow-sm">
               <User size={16} />
             </div>
             <div className="hidden md:flex flex-col text-left">
-              <span className="text-xs font-bold leading-tight">Admin inoibai</span>
+              <span className="text-xs font-bold leading-tight">Admin inhatrang</span>
               <span className="text-[10px] text-green-300 flex items-center gap-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
                 Online
@@ -125,10 +125,10 @@ export default function AdminHeader({
           </button>
 
           {showUserDropdown && (
-            <div className="absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-2xl border border-gray-100 py-1.5 text-gray-800 z-50 animate-in fade-in-50 zoom-in-95 duration-150">
+            <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 py-1.5 text-gray-800 z-50 animate-in fade-in-50 zoom-in-95 duration-150">
               <div className="px-4 py-2 border-b border-gray-100">
                 <p className="text-xs font-bold text-gray-900">Quản trị viên</p>
-                <p className="text-[11px] text-gray-500 truncate">inoibai.vn@gmail.com</p>
+                <p className="text-[11px] text-gray-500 truncate">inhatrang.vn@gmail.com</p>
               </div>
               <button
                 onClick={onLogout}

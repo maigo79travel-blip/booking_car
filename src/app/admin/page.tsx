@@ -209,7 +209,7 @@ export default function AdminPage() {
     return (
       <main className="min-h-screen grid place-items-center bg-gray-50 text-gray-600">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center shadow-lg animate-bounce">
+          <div className="w-12 h-12 rounded-lg bg-blue-600 text-white flex items-center justify-center shadow-md animate-bounce">
             <Car size={24} />
           </div>
           <p className="text-sm font-semibold text-gray-500 flex items-center gap-2">
@@ -225,9 +225,9 @@ export default function AdminPage() {
   if (!authorized) {
     return (
       <main className="min-h-screen grid place-items-center bg-linear-to-br from-blue-50 via-slate-100 to-indigo-50 p-4">
-        <div className="w-full max-w-md bg-white rounded-3xl p-8 shadow-2xl border border-gray-200 animate-in zoom-in-95 duration-200">
+        <div className="w-full max-w-md bg-white rounded-xl p-6 md:p-8 shadow-lg border border-gray-200 animate-in zoom-in-95 duration-200">
           <div className="text-center mb-6">
-            <div className="w-16 h-16 rounded-2xl bg-linear-to-tr from-blue-600 to-indigo-700 text-white flex items-center justify-center font-black text-2xl mx-auto shadow-lg shadow-blue-200 mb-4">
+            <div className="w-14 h-14 rounded-lg bg-linear-to-tr from-blue-600 to-indigo-700 text-white flex items-center justify-center font-black text-xl mx-auto shadow-md shadow-blue-200 mb-3.5">
               IA
             </div>
             <h1 className="text-2xl font-black text-gray-950 tracking-tight">
@@ -239,7 +239,7 @@ export default function AdminPage() {
           </div>
 
           {message && (
-            <div className="mb-4 p-3.5 bg-red-50 border border-red-300 rounded-xl text-xs text-red-800 font-bold flex items-center gap-2">
+            <div className="mb-4 p-3 bg-red-50 border border-red-300 rounded-md text-xs text-red-800 font-bold flex items-center gap-2">
               <AlertCircle size={16} className="text-red-600 shrink-0" />
               <span>{message}</span>
             </div>
@@ -260,7 +260,7 @@ export default function AdminPage() {
                     setCredentials({ ...credentials, email: e.target.value })
                   }
                   required
-                  className="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-gray-300 bg-white text-gray-950 text-sm font-semibold outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition-all placeholder:text-gray-400 shadow-xs"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-md border border-gray-300 bg-white text-gray-950 text-sm font-semibold outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-100 transition-all placeholder:text-gray-400"
                 />
               </div>
             </div>
@@ -279,7 +279,7 @@ export default function AdminPage() {
                     setCredentials({ ...credentials, password: e.target.value })
                   }
                   required
-                  className="w-full pl-10 pr-12 py-3 rounded-xl border-2 border-gray-300 bg-white text-gray-950 text-sm font-semibold outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition-all placeholder:text-gray-400 shadow-xs"
+                  className="w-full pl-10 pr-12 py-2.5 rounded-md border border-gray-300 bg-white text-gray-950 text-sm font-semibold outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-100 transition-all placeholder:text-gray-400"
                 />
                 <button
                   type="button"
@@ -294,7 +294,7 @@ export default function AdminPage() {
             <button
               type="submit"
               disabled={isLoggingIn}
-              className="w-full mt-2 bg-linear-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-3.5 rounded-xl shadow-lg shadow-blue-200 transition-all flex items-center justify-center gap-2 text-sm cursor-pointer"
+              className="w-full mt-2 bg-linear-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-3 rounded-md shadow-md shadow-blue-200 transition-all flex items-center justify-center gap-2 text-sm cursor-pointer"
             >
               {isLoggingIn ? (
                 <>

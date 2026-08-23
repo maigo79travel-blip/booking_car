@@ -80,6 +80,7 @@ export default function VehiclesView() {
                               alt={`${category.title} - ${vehicle.name}`}
                               fill
                               className="object-contain"
+                              unoptimized={vehicle.image.startsWith("http") || vehicle.image.startsWith("data:")}
                             />
                           </div>
                           <p className="text-xs font-bold text-gray-800 text-center">
@@ -139,6 +140,7 @@ export default function VehiclesView() {
                           alt={`${category.title} - ${vehicle.name}`}
                           fill
                           className="object-contain"
+                          unoptimized={vehicle.image.startsWith("http") || vehicle.image.startsWith("data:")}
                         />
                       </div>
                       <p className="text-sm font-bold text-gray-800 text-center">

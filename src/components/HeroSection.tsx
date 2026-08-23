@@ -92,6 +92,7 @@ const HeroSection = () => {
                   fill
                   className="object-cover"
                   priority={index === 0}
+                  unoptimized={src.startsWith("http") || src.startsWith("data:")}
                 />
               </div>
             ))}

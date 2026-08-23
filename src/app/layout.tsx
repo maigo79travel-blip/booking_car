@@ -108,7 +108,7 @@ const jsonLdGraph = {
       "inLanguage": "vi-VN",
     },
     {
-      "@type": ["TaxiService", "LocalBusiness"],
+      "@type": "TaxiService",
       "@id": `${siteUrl}/#taxiservice`,
       "name": "maigo79.com - Đặt xe sân bay Cam Ranh Nha Trang",
       "alternateName": "Taxi Sân Bay Cam Ranh - maigo79.com",
@@ -169,13 +169,6 @@ const jsonLdGraph = {
           "name": "Mũi Né, Bình Thuận",
         },
       ],
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "1250",
-        "bestRating": "5",
-        "worstRating": "1",
-      },
       "sameAs": [
         "https://www.facebook.com/profile.php?id=61557164784193",
       ],

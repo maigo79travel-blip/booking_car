@@ -68,7 +68,7 @@ const Header = () => {
                   href={`tel:${hotlineNum.replace(/[^0-9+]/g, "")}`}
                   className="flex items-center text-[#174978] font-black text-lg hover:text-[#003366] transition-colors"
                 >
-                  <Phone size={18} className="mr-1.5 text-[#2F5F8A]" />
+                  <Phone size={18} className="mr-1.5 text-brand-marine" />
                   {hotlineDisplay}
                 </a>
               </div>
@@ -87,7 +87,7 @@ const Header = () => {
       </div>
 
       {/* Main Nav - Ocean Blue Gradient (Hidden on Mobile) */}
-      <div className="hidden lg:block bg-linear-to-r from-[#003366] via-[#174978] to-[#2F5F8A] text-white">
+      <div className="hidden lg:block bg-linear-to-r from-[#003366] via-[#174978] to-brand-marine text-white">
         <div className="container mx-auto px-4 md:px-12 lg:px-24">
           <div className="flex justify-between items-center h-14">
             {/* Desktop Nav */}

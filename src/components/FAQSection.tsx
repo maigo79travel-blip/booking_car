@@ -69,12 +69,12 @@ export default function FAQSection() {
                 <div
                   key={index}
                   className={`border rounded-2xl overflow-hidden transition-all shadow-none ${
-                    isOpen ? "border-[#75A2BF]" : "border-gray-100"
+                    isOpen ? "border-brand-coastal" : "border-gray-100"
                   }`}
                 >
                   <button
                     onClick={() => toggle(index)}
-                    className="w-full text-left p-4 md:p-5 bg-gray-50 hover:bg-[#EAF2F8]/60 flex justify-between items-center transition-colors gap-4 cursor-pointer"
+                    className="w-full text-left p-4 md:p-5 bg-gray-50 hover:bg-brand-light/60 flex justify-between items-center transition-colors gap-4 cursor-pointer"
                     aria-expanded={isOpen}
                   >
                     <span className={`font-bold text-base md:text-lg transition-colors ${

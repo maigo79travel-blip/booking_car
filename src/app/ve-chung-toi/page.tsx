@@ -84,7 +84,7 @@ export default function AboutPage() {
         {/* Core Values */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <div className="bg-white rounded-2xl p-6 text-center border border-gray-100 shadow-xs hover:shadow-sm transition-all">
-            <div className="bg-[#EAF2F8] w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="bg-brand-light w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4">
               <Shield className="text-[#003366]" size={28} />
             </div>
             <h3 className="text-lg font-bold text-[#003366] mb-2">An Toàn Tuyệt Đối</h3>
@@ -94,7 +94,7 @@ export default function AboutPage() {
           </div>
 
           <div className="bg-white rounded-2xl p-6 text-center border border-gray-100 shadow-xs hover:shadow-sm transition-all">
-            <div className="bg-[#EAF2F8] w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="bg-brand-light w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4">
               <Clock className="text-[#174978]" size={28} />
             </div>
             <h3 className="text-lg font-bold text-[#003366] mb-2">Đón Đúng Giờ</h3>
@@ -104,8 +104,8 @@ export default function AboutPage() {
           </div>
 
           <div className="bg-white rounded-2xl p-6 text-center border border-gray-100 shadow-xs hover:shadow-sm transition-all">
-            <div className="bg-[#EAF2F8] w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Award className="text-[#2F5F8A]" size={28} />
+            <div className="bg-brand-light w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Award className="text-brand-marine" size={28} />
             </div>
             <h3 className="text-lg font-bold text-[#003366] mb-2">
               Chuyên Nghiệp
@@ -116,8 +116,8 @@ export default function AboutPage() {
           </div>
 
           <div className="bg-white rounded-2xl p-6 text-center border border-gray-100 shadow-xs hover:shadow-sm transition-all">
-            <div className="bg-[#EAF2F8] w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Users className="text-[#46769B]" size={28} />
+            <div className="bg-brand-light w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Users className="text-brand-steel" size={28} />
             </div>
             <h3 className="text-lg font-bold text-[#003366] mb-2">Tận Tâm 24/7</h3>
             <p className="text-sm text-gray-600">
@@ -208,7 +208,7 @@ export default function AboutPage() {
         </div>
 
         {/* Thank You Message */}
-        <div className="bg-linear-to-r from-[#003366] via-[#174978] to-[#2F5F8A] rounded-2xl p-6 md:p-8 text-white text-center shadow-md">
+        <div className="bg-linear-to-r from-[#003366] via-[#174978] to-brand-marine rounded-2xl p-6 md:p-8 text-white text-center shadow-md">
           <p className="text-base md:text-lg leading-relaxed italic font-medium">
             Chúng tôi xin chân thành cảm ơn Quý khách hàng đã tin tưởng và ủng
             hộ chúng tôi trong thời gian qua và mong sẽ tiếp tục được là người
@@ -223,7 +223,7 @@ export default function AboutPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="flex items-start gap-3">
-              <div className="bg-[#EAF2F8] p-3 rounded-xl">
+              <div className="bg-brand-light p-3 rounded-xl">
                 <Phone className="text-[#174978]" size={24} />
               </div>
               <div>

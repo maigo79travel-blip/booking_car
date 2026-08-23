@@ -72,7 +72,7 @@ export default async function PostsPage() {
                         className="object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-[#EAF2F8] text-[#174978] font-bold text-sm">
+                      <div className="w-full h-full flex items-center justify-center bg-brand-light text-[#174978] font-bold text-sm">
                         maigo79.com
                       </div>
                     )}

@@ -150,7 +150,7 @@ export default async function PostPage({
         </div>
 
         {/* CTA Box */}
-        <div className="mt-8 bg-linear-to-r from-[#003366] via-[#174978] to-[#2F5F8A] rounded-2xl p-6 md:p-8 text-white shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="mt-8 bg-linear-to-r from-[#003366] via-[#174978] to-brand-marine rounded-2xl p-6 md:p-8 text-white shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <h2 className="text-xl md:text-2xl font-bold mb-2">
               Cần Đặt Xe Sân Bay Cam Ranh – Nha Trang Đón Trả Tận Nơi?
@@ -162,7 +162,7 @@ export default async function PostPage({
           <div className="flex flex-wrap items-center gap-3">
             <a
               href="tel:0928015280"
-              className="bg-white text-[#003366] font-extrabold px-5 py-3 rounded-xl shadow-xs hover:bg-[#EAF2F8] transition-colors inline-flex items-center gap-2 text-sm"
+              className="bg-white text-[#003366] font-extrabold px-5 py-3 rounded-xl shadow-xs hover:bg-brand-light transition-colors inline-flex items-center gap-2 text-sm"
             >
               <PhoneCall size={18} className="text-[#174978]" />
               0928.015.280

@@ -77,11 +77,14 @@ export default function ContentManager({
   const [saveSuccess, setSaveSuccess] = useState(false);
 
   // Find or initialize content items by key
-  const getContent = (key: string, defaultValue: Record<string, unknown> = {}): Record<string, any> => {
+  const getContent = (
+    key: string,
+    defaultValue: Record<string, unknown> = {}
+  ): Record<string, unknown> => {
     const item = content.find((c) => c.content_key === key);
-    return (item && typeof item.value === "object" && item.value !== null
-      ? item.value
-      : defaultValue) as Record<string, any>;
+    return item && typeof item.value === "object" && item.value !== null
+      ? (item.value as Record<string, unknown>)
+      : defaultValue;
   };
 
   const getContentArray = <T,>(key: string, defaultValue: T[]): T[] => {
@@ -97,21 +100,21 @@ export default function ContentManager({
   const [heroData, setHeroData] = useState(() => {
     const raw = getContent("hero_section", {});
     return {
-      title1: raw.title1 || {
+      title1: (raw.title1 as Record<string, string>) || {
         vi: "ĐẶT XE TAXI SÂN BAY CAM RANH – NHA TRANG",
         en: "CAM RANH AIRPORT – NHA TRANG TAXI SERVICE",
         ko: "깜란 국제공항 – 나트랑 시내 프라이빗 픽업 & 샌딩",
-        ru: "ТРАНСФЕР АЭРОПОРТ КАМРАНЬ – НЯЧАНГ ПОД КЛЮCH",
+        ru: "ТРАНСФЕР АЭРОПОРТ КАМРАНЬ – НЯЧАНГ ПОД КЛЮЧ",
         zh: "芽庄金兰国际机场 – 市区专车接送服务",
       },
-      title2: raw.title2 || {
+      title2: (raw.title2 as Record<string, string>) || {
         vi: "ĐÓN TIỄN ĐÚNG GIỜ • GIÁ RẺ TRỌN GÓI CHỈ TỪ 250K",
         en: "PUNCTUAL PICKUP • ALL-INCLUSIVE FIXED FARE FROM 250K",
         ko: "정시 픽업 • 올인클루시브 정액 요금 25만동부터",
         ru: "ПОДАЧА ВОВРЕМЯ • ФИКСИРОВАННАЯ ЦЕНА ОТ 250К",
         zh: "准时接送 • 全包一口价仅25万起",
       },
-      subtitle: raw.subtitle || {
+      subtitle: (raw.subtitle as Record<string, string>) || {
         vi: "Dịch vụ xe riêng 5 - 7 - 16 chỗ đời mới, đưa đón tận nơi Sân bay Cam Ranh ⇄ TP. Nha Trang, Resort Bãi Dài, Đà Lạt 24/7 không lo phụ phí",
         en: "Private 5-7-16 seater modern cars, 24/7 door-to-door transfer Cam Ranh Airport ⇄ Nha Trang, Bai Dai Resorts, Da Lat with zero hidden fees",
         ko: "최신 5-7-16인승 프라이빗 차량, 깜란 공항 ↔ 나트랑 시내, 바이 다이 리조트, 달랏 24시간 도어투도어 서비스",
@@ -123,7 +126,7 @@ export default function ContentManager({
         "/images/Hero2.jpg",
         "/images/Hero22.jpg",
       ],
-      badgeText: raw.badgeText || {
+      badgeText: (raw.badgeText as Record<string, string>) || {
         vi: "HỆ THỐNG XE SÂN BAY CAM RANH & TOUR NHA TRANG HÀNG ĐẦU",
         en: "CAM RANH AIRPORT & NHA TRANG'S LEADING TRANSFER SERVICE",
         ko: "나트랑 & 깜란 공항 최고의 프리미엄 픽업 서비스",
@@ -136,15 +139,15 @@ export default function ContentManager({
   const [contactData, setContactData] = useState(() => {
     const raw = getContent("contact_info", {});
     return {
-      brand_name: raw.brand_name || "maigo79.com",
-      hotline: raw.hotline || "0928015280",
-      hotline_display: raw.hotline_display || "0928.015.280",
-      zalo: raw.zalo || "0905876231",
-      telegram: raw.telegram || "https://t.me/maigo79_vn",
-      email: raw.email || "contact@maigo79.com",
-      address: raw.address || "Cột số 3 & 4 - Sảnh Đến Ga Quốc Nội & Quốc Tế, Sân bay Quốc tế Cam Ranh, Khánh Hòa",
-      logo_url: raw.logo_url || "/images/Brand.jpg",
-      working_hours: raw.working_hours || "24/7 (Phục vụ cả ngày lễ & Tết)",
+      brand_name: (raw.brand_name as string) || "maigo79.com",
+      hotline: (raw.hotline as string) || "0928015280",
+      hotline_display: (raw.hotline_display as string) || "0928.015.280",
+      zalo: (raw.zalo as string) || "0905876231",
+      telegram: (raw.telegram as string) || "https://t.me/maigo79_vn",
+      email: (raw.email as string) || "contact@maigo79.com",
+      address: (raw.address as string) || "Cột số 3 & 4 - Sảnh Đến Ga Quốc Nội & Quốc Tế, Sân bay Quốc tế Cam Ranh, Khánh Hòa",
+      logo_url: (raw.logo_url as string) || "/images/Brand.jpg",
+      working_hours: (raw.working_hours as string) || "24/7 (Phục vụ cả ngày lễ & Tết)",
     };
   });
 

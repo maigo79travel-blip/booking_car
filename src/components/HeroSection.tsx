@@ -98,7 +98,7 @@ const HeroSection = () => {
                   onClick={() => setCurrentIndex(index)}
                   className={`h-2 rounded-full transition-all duration-300 shadow-xs ${
                     index === currentIndex
-                      ? "bg-[#75A2BF] w-6"
+                      ? "bg-brand-coastal w-6"
                       : "bg-white/70 w-2"
                   }`}
                   aria-label={`Slide ${index + 1}`}
@@ -110,7 +110,7 @@ const HeroSection = () => {
           {/* Bottom: Live Bookings List (50%) - Slide Up Animation */}
           <div className="rounded-2xl overflow-hidden shadow-sm bg-linear-to-br from-white to-gray-50 flex-1 w-full min-h-70 border border-gray-100 flex flex-col relative">
             {/* Header */}
-            <div className="bg-linear-to-r from-[#003366] via-[#174978] to-[#2F5F8A] px-4 py-3 flex items-center justify-between">
+            <div className="bg-linear-to-r from-[#003366] via-[#174978] to-brand-marine px-4 py-3 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="bg-white/20 rounded-full p-1">
                   <svg

@@ -62,7 +62,7 @@ export default function PopularRoutes() {
                     <h4 className="font-bold text-gray-900 text-base group-hover:text-[#003366] transition-colors">
                       {route.name}
                     </h4>
-                    <span className="font-black text-[#003366] whitespace-nowrap text-sm bg-[#EAF2F8] px-2.5 py-1 rounded-lg">
+                    <span className="font-black text-[#003366] whitespace-nowrap text-sm bg-brand-light px-2.5 py-1 rounded-lg">
                       {route.price}
                     </span>
                   </div>

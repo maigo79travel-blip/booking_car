@@ -143,7 +143,7 @@ export default function PrivacyPolicyPage() {
         </div>
 
         {/* Contact */}
-        <div className="bg-linear-to-r from-[#003366] via-[#174978] to-[#2F5F8A] rounded-2xl p-6 md:p-8 text-white shadow-md">
+        <div className="bg-linear-to-r from-[#003366] via-[#174978] to-brand-marine rounded-2xl p-6 md:p-8 text-white shadow-md">
           <h2 className="text-xl md:text-2xl font-bold mb-3">Thông Tin Liên Hệ Bảo Mật</h2>
           <p className="text-sm md:text-base leading-relaxed">
             Nếu Quý khách có bất kỳ câu hỏi hoặc góp ý nào cho chúng tôi về

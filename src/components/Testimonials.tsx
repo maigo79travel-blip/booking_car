@@ -137,7 +137,7 @@ const Testimonials = () => {
 
                   {/* Service Badge */}
                   <div className="mt-3">
-                    <span className="inline-block bg-[#EAF2F8] text-[#003366] text-xs font-bold px-3 py-1 rounded-full">
+                    <span className="inline-block bg-brand-light text-[#003366] text-xs font-bold px-3 py-1 rounded-full">
                       {testimonial.service || testimonial.role || "Dịch vụ đưa đón sân bay"}
                     </span>
                   </div>

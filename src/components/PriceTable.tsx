@@ -106,7 +106,7 @@ const PriceTable = () => {
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="bg-linear-to-r from-[#003366] via-[#174978] to-[#2F5F8A]">
+                <tr className="bg-linear-to-r from-[#003366] via-[#174978] to-brand-marine">
                   <th className="px-6 py-4 text-left text-white font-bold text-base lg:text-lg border-r border-white/10">
                     {t.priceTable.carTypeCol}
                   </th>
@@ -123,7 +123,7 @@ const PriceTable = () => {
               </thead>
               <tbody>
                 {/* Xe 5 chỗ */}
-                <tr className="border-b border-gray-100 hover:bg-[#EAF2F8]/60 transition-colors">
+                <tr className="border-b border-gray-100 hover:bg-brand-light/60 transition-colors">
                   <td className="px-6 py-4.5 font-bold text-gray-800 text-base lg:text-lg border-r border-gray-100">
                     {t.priceTable.car5}
                   </td>
@@ -139,7 +139,7 @@ const PriceTable = () => {
                 </tr>
 
                 {/* Xe 7 chỗ */}
-                <tr className="border-b border-gray-100 hover:bg-[#EAF2F8]/60 transition-colors">
+                <tr className="border-b border-gray-100 hover:bg-brand-light/60 transition-colors">
                   <td className="px-6 py-4.5 font-bold text-gray-800 text-base lg:text-lg border-r border-gray-100">
                     {t.priceTable.car7}
                   </td>
@@ -155,7 +155,7 @@ const PriceTable = () => {
                 </tr>
 
                 {/* Xe 16 chỗ */}
-                <tr className="hover:bg-[#EAF2F8]/60 transition-colors bg-gray-50/50">
+                <tr className="hover:bg-brand-light/60 transition-colors bg-gray-50/50">
                   <td className="px-6 py-4.5 font-bold text-gray-800 text-base lg:text-lg border-r border-gray-100">
                     {t.priceTable.car16}
                   </td>

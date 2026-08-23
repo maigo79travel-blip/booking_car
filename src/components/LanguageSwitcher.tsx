@@ -50,7 +50,7 @@ export default function LanguageSwitcher({
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 isSelected
                   ? "bg-white text-[#003366] shadow-sm font-bold"
-                  : "bg-[#174978] text-white hover:bg-[#2F5F8A]"
+                  : "bg-[#174978] text-white hover:bg-brand-marine"
               }`}
             >
               <span>{lang.flag}</span>
@@ -66,7 +66,7 @@ export default function LanguageSwitcher({
     <div className="relative inline-block text-left" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 hover:border-[#46769B] bg-white text-gray-700 text-xs md:text-sm font-semibold shadow-xs hover:text-[#003366] transition-all cursor-pointer"
+        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 hover:border-brand-steel bg-white text-gray-700 text-xs md:text-sm font-semibold shadow-xs hover:text-[#003366] transition-all cursor-pointer"
         aria-label="Chọn ngôn ngữ / Select Language"
         aria-expanded={isOpen}
       >
@@ -94,7 +94,7 @@ export default function LanguageSwitcher({
                 onClick={() => handleSelect(lang.code)}
                 className={`w-full text-left px-3 py-2 flex items-center justify-between text-xs md:text-sm transition-colors cursor-pointer ${
                   isSelected
-                    ? "bg-[#EAF2F8] text-[#003366] font-bold"
+                    ? "bg-brand-light text-[#003366] font-bold"
                     : "text-gray-700 hover:bg-gray-50"
                 }`}
               >

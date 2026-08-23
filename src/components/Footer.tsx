@@ -41,7 +41,7 @@ const Footer = () => {
                 />
               </Link>
               <div>
-                <span className="text-xl font-extrabold text-[#75A2BF] block leading-tight">
+                <span className="text-xl font-extrabold text-brand-coastal block leading-tight">
                   {contact.brand_name || t.common.brandName}
                 </span>
                 <p className="text-xs text-slate-400 mt-0.5">
@@ -60,14 +60,14 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-base font-bold mb-4 text-[#75A2BF] uppercase tracking-wider">
+            <h4 className="text-base font-bold mb-4 text-brand-coastal uppercase tracking-wider">
               {t.footer.quickLinks}
             </h4>
             <ul className="space-y-2.5">
               <li>
                 <Link
                   href="/"
-                  className="text-slate-400 hover:text-[#75A2BF] transition-colors text-sm font-medium"
+                  className="text-slate-400 hover:text-brand-coastal transition-colors text-sm font-medium"
                 >
                   {t.nav.home}
                 </Link>
@@ -75,7 +75,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/loai-xe"
-                  className="text-slate-400 hover:text-[#75A2BF] transition-colors text-sm font-medium"
+                  className="text-slate-400 hover:text-brand-coastal transition-colors text-sm font-medium"
                 >
                   {t.nav.vehicles}
                 </Link>
@@ -83,7 +83,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/bang-gia"
-                  className="text-slate-400 hover:text-[#75A2BF] transition-colors text-sm font-medium"
+                  className="text-slate-400 hover:text-brand-coastal transition-colors text-sm font-medium"
                 >
                   {t.nav.pricing}
                 </Link>
@@ -91,7 +91,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/bai-viet"
-                  className="text-slate-400 hover:text-[#75A2BF] transition-colors text-sm font-medium"
+                  className="text-slate-400 hover:text-brand-coastal transition-colors text-sm font-medium"
                 >
                   {t.nav.articles}
                 </Link>
@@ -99,7 +99,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/ve-chung-toi"
-                  className="text-slate-400 hover:text-[#75A2BF] transition-colors text-sm font-medium"
+                  className="text-slate-400 hover:text-brand-coastal transition-colors text-sm font-medium"
                 >
                   {t.nav.about}
                 </Link>
@@ -107,7 +107,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/chinh-sach"
-                  className="text-slate-400 hover:text-[#75A2BF] transition-colors text-sm font-medium"
+                  className="text-slate-400 hover:text-brand-coastal transition-colors text-sm font-medium"
                 >
                   {t.nav.policies}
                 </Link>
@@ -117,14 +117,14 @@ const Footer = () => {
 
           {/* Services */}
           <div>
-            <h4 className="text-base font-bold mb-4 text-[#75A2BF] uppercase tracking-wider">
+            <h4 className="text-base font-bold mb-4 text-brand-coastal uppercase tracking-wider">
               {t.footer.services}
             </h4>
             <ul className="space-y-2.5">
               <li>
                 <Link
                   href="/bang-gia"
-                  className="text-slate-400 hover:text-[#75A2BF] transition-colors text-sm block font-medium"
+                  className="text-slate-400 hover:text-brand-coastal transition-colors text-sm block font-medium"
                 >
                   {t.footer.serviceItem1}
                 </Link>
@@ -132,7 +132,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/loai-xe"
-                  className="text-slate-400 hover:text-[#75A2BF] transition-colors text-sm block font-medium"
+                  className="text-slate-400 hover:text-brand-coastal transition-colors text-sm block font-medium"
                 >
                   {t.footer.serviceItem2}
                 </Link>
@@ -140,7 +140,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/bang-gia"
-                  className="text-slate-400 hover:text-[#75A2BF] transition-colors text-sm block font-medium"
+                  className="text-slate-400 hover:text-brand-coastal transition-colors text-sm block font-medium"
                 >
                   {t.footer.serviceItem3}
                 </Link>
@@ -148,7 +148,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/ve-chung-toi"
-                  className="text-slate-400 hover:text-[#75A2BF] transition-colors text-sm block font-medium"
+                  className="text-slate-400 hover:text-brand-coastal transition-colors text-sm block font-medium"
                 >
                   {t.footer.serviceItem4}
                 </Link>
@@ -156,7 +156,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/bang-gia"
-                  className="text-slate-400 hover:text-[#75A2BF] transition-colors text-sm block font-medium"
+                  className="text-slate-400 hover:text-brand-coastal transition-colors text-sm block font-medium"
                 >
                   {t.footer.serviceItem5}
                 </Link>
@@ -166,20 +166,20 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-base font-bold mb-4 text-[#75A2BF] uppercase tracking-wider">
+            <h4 className="text-base font-bold mb-4 text-brand-coastal uppercase tracking-wider">
               {t.footer.contact}
             </h4>
             <ul className="space-y-3">
               <li className="flex items-start gap-2.5">
                 <Phone
                   size={18}
-                  className="text-[#75A2BF] mt-0.5 shrink-0"
+                  className="text-brand-coastal mt-0.5 shrink-0"
                 />
                 <div>
                   <p className="text-xs text-slate-400 font-semibold">{t.footer.hotlineTitle}</p>
                   <a
                     href={`tel:${hotlineNum.replace(/[^0-9+]/g, "")}`}
-                    className="text-white hover:text-[#75A2BF] font-extrabold text-base transition-colors"
+                    className="text-white hover:text-brand-coastal font-extrabold text-base transition-colors"
                   >
                     {hotlineDisplay}
                   </a>
@@ -188,13 +188,13 @@ const Footer = () => {
               <li className="flex items-start gap-2.5">
                 <Mail
                   size={18}
-                  className="text-[#75A2BF] mt-0.5 shrink-0"
+                  className="text-brand-coastal mt-0.5 shrink-0"
                 />
                 <div>
                   <p className="text-xs text-slate-400 font-semibold">{t.footer.emailTitle}</p>
                   <a
                     href={`mailto:${contact.email || "contact@maigo79.com"}`}
-                    className="text-slate-300 hover:text-[#75A2BF] text-sm transition-colors"
+                    className="text-slate-300 hover:text-brand-coastal text-sm transition-colors"
                   >
                     {contact.email || "contact@maigo79.com"}
                   </a>
@@ -203,7 +203,7 @@ const Footer = () => {
               <li className="flex items-start gap-2.5">
                 <MapPin
                   size={18}
-                  className="text-[#75A2BF] mt-0.5 shrink-0"
+                  className="text-brand-coastal mt-0.5 shrink-0"
                 />
                 <div>
                   <p className="text-xs text-slate-400 font-semibold">{t.footer.addressTitle}</p>
@@ -230,14 +230,14 @@ const Footer = () => {
             </a>
             <a
               href="#"
-              className="bg-[#2F5F8A] hover:bg-[#174978] p-2.5 rounded-full transition-colors text-white"
+              className="bg-brand-marine hover:bg-[#174978] p-2.5 rounded-full transition-colors text-white"
               aria-label="Twitter maigo79.com"
             >
               <Twitter size={18} />
             </a>
             <a
               href="#"
-              className="bg-[#46769B] hover:bg-[#2F5F8A] p-2.5 rounded-full transition-colors text-white"
+              className="bg-brand-steel hover:bg-brand-marine p-2.5 rounded-full transition-colors text-white"
               aria-label="Instagram maigo79.com"
             >
               <Instagram size={18} />
@@ -264,19 +264,19 @@ const Footer = () => {
             <div className="flex gap-4">
               <Link
                 href="/chinh-sach/bao-ve-quyen-rieng-tu"
-                className="hover:text-[#75A2BF] transition-colors"
+                className="hover:text-brand-coastal transition-colors"
               >
                 {t.footer.privacyPolicy}
               </Link>
               <Link
                 href="/chinh-sach/van-chuyen-hanh-khach"
-                className="hover:text-[#75A2BF] transition-colors"
+                className="hover:text-brand-coastal transition-colors"
               >
                 {t.footer.transportPolicy}
               </Link>
               <Link
                 href="/chinh-sach"
-                className="hover:text-[#75A2BF] transition-colors"
+                className="hover:text-brand-coastal transition-colors"
               >
                 {t.footer.termsOfService}
               </Link>

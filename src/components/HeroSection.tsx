@@ -69,15 +69,15 @@ const HeroSection = () => {
         {/* Left: Booking Form */}
         <div
           id="formbooking"
-          className="w-full md:w-1/2 flex justify-center md:justify-start slide-in-left"
+          className="w-full md:w-1/2 flex flex-col slide-in-left"
         >
           <BookingForm />
         </div>
 
         {/* Right: Split Column */}
-        <div className="w-full md:w-1/2 hidden md:flex flex-col gap-4 h-full slide-in-right">
+        <div className="w-full md:w-1/2 hidden md:flex flex-col gap-4 slide-in-right">
           {/* Top: Image Carousel (50%) */}
-          <div className="overflow-hidden shadow-sm relative flex-1 w-full min-h-60 bg-gray-200 border border-white/10">
+          <div className="overflow-hidden shadow-sm relative flex-1 w-full min-h-55 bg-gray-200 border border-white/10">
             {/* Images with Fade Transition */}
             {images.map((src, index) => (
               <div

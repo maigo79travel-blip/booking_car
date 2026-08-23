@@ -265,10 +265,10 @@ const BookingForm = () => {
   };
 
   return (
-    <div className="w-full max-w-lg mx-auto">
-      <div className="bg-linear-to-br from-[#003366] via-[#174978] to-brand-marine shadow-sm overflow-hidden border border-white/10">
+    <div className="w-full max-w-lg mx-auto h-full flex flex-col">
+      <div className="bg-linear-to-br from-[#003366] via-[#174978] to-brand-marine shadow-sm overflow-hidden border border-white/10 h-full flex flex-col justify-between">
         {/* Header Tabs */}
-        <div className="flex border-b border-white/10 text-sm md:text-base font-bold">
+        <div className="flex border-b border-white/10 text-sm md:text-base font-bold shrink-0">
           <button
             onClick={() => handleTabChange("airport")}
             className={`flex-1 py-3 flex items-center justify-center gap-2 transition-colors cursor-pointer ${
@@ -294,7 +294,7 @@ const BookingForm = () => {
         </div>
 
         {/* Form Content */}
-        <div className="p-4 md:p-5 space-y-3.5">
+        <div className="p-4 md:p-5 space-y-3 flex-1 flex flex-col justify-between">
           {/* Route Inputs */}
           <div className="relative space-y-2">
             <LocationInput

@@ -122,7 +122,7 @@ export default async function PostPage({
 
           {post.published_at && (
             <div className="flex items-center gap-2 text-sm text-gray-500">
-              <Calendar size={15} className="text-orange-500" />
+              <Calendar size={15} className="text-[#174978]" />
               <time dateTime={post.published_at}>
                 {new Intl.DateTimeFormat("vi-VN", {
                   dateStyle: "full",
@@ -150,26 +150,26 @@ export default async function PostPage({
         </div>
 
         {/* CTA Box */}
-        <div className="mt-8 bg-linear-to-r from-orange-500 to-orange-600 rounded-2xl p-6 md:p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="mt-8 bg-linear-to-r from-[#003366] via-[#174978] to-[#2F5F8A] rounded-2xl p-6 md:p-8 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
-            <h2 className="text-xl md:text-2xl font-bold mb-3">
+            <h2 className="text-xl md:text-2xl font-bold mb-2">
               Cần Đặt Xe Sân Bay Cam Ranh – Nha Trang Đón Trả Tận Nơi?
             </h2>
-            <p className="text-orange-100 text-sm md:text-base">
+            <p className="text-blue-100 text-sm md:text-base">
               Xe 5 - 7 - 16 chỗ đón đúng giờ, giá trọn gói chỉ từ 250k. Phục vụ 24/7.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <a
               href="tel:0928015280"
-              className="bg-white text-orange-600 font-bold px-5 py-3 rounded-xl shadow hover:bg-orange-50 transition-colors inline-flex items-center gap-2 text-sm"
+              className="bg-white text-[#003366] font-extrabold px-5 py-3 rounded-xl shadow-md hover:bg-[#EAF2F8] transition-colors inline-flex items-center gap-2 text-sm"
             >
-              <PhoneCall size={18} />
+              <PhoneCall size={18} className="text-[#174978]" />
               0928.015.280
             </a>
             <Link
               href="/#formbooking"
-              className="bg-blue-900 hover:bg-blue-950 text-white font-bold px-6 py-3 rounded-xl transition-colors text-sm shadow"
+              className="bg-[#002244] hover:bg-[#00172e] text-white font-extrabold px-6 py-3 rounded-xl transition-all text-sm shadow-md"
             >
               Đặt xe ngay
             </Link>

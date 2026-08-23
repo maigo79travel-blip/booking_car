@@ -107,7 +107,7 @@ export default function AdminSidebar({
           </div>
           <div className="flex flex-col">
             <span className="font-extrabold text-base tracking-wide flex items-center gap-1.5">
-              inoibai<span className="text-orange-300 font-semibold text-xs px-1.5 py-0.5 rounded bg-white/20">Admin</span>
+              inhatrang<span className="text-blue-200 font-semibold text-xs px-1.5 py-0.5 rounded bg-white/20">Admin</span>
             </span>
             <span className="text-[11px] text-blue-100/80">Quản trị hệ thống đặt xe</span>
           </div>

@@ -13,7 +13,7 @@ const inter = Inter({
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://inhatrang.vn";
 
 export const viewport: Viewport = {
-  themeColor: "#f97316",
+  themeColor: "#003366",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,

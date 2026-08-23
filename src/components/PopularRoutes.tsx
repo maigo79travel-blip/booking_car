@@ -31,13 +31,13 @@ export default function PopularRoutes() {
     <section className="py-12 md:py-16 bg-gray-50">
       <div className="container mx-auto px-4 md:px-12 lg:px-24">
         <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
-          <span className="text-orange-500 font-bold uppercase tracking-wider text-xs md:text-sm">
+          <span className="text-[#174978] font-bold uppercase tracking-wider text-xs md:text-sm">
             {t.popularRoutes.tag}
           </span>
           <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">
             {t.popularRoutes.title}
           </h2>
-          <div className="w-24 h-1 bg-orange-500 mx-auto mb-4"></div>
+          <div className="w-24 h-1 bg-[#174978] mx-auto mb-4 rounded-full"></div>
           <p className="text-gray-600 text-sm md:text-base">
             {t.popularRoutes.subtitle}
           </p>
@@ -45,9 +45,9 @@ export default function PopularRoutes() {
 
         {/* Airport routes */}
         <div className="mb-10">
-          <div className="flex items-center gap-2 mb-4">
-            <PlaneTakeoff className="text-orange-500" size={24} />
-            <h3 className="text-xl font-bold text-gray-800">
+          <div className="flex items-center gap-2.5 mb-4">
+            <PlaneTakeoff className="text-[#174978]" size={24} />
+            <h3 className="text-xl font-bold text-gray-900">
               {t.popularRoutes.airportSection}
             </h3>
           </div>
@@ -55,24 +55,24 @@ export default function PopularRoutes() {
             {airportRoutes.map((route, idx) => (
               <div
                 key={idx}
-                className="bg-white rounded-xl p-5 border border-gray-200 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between"
+                className="bg-white rounded-2xl p-5 border border-gray-200 shadow-xs hover:shadow-lg hover:border-[#75A2BF] transition-all flex flex-col justify-between group"
               >
                 <div>
-                  <div className="flex justify-between items-start mb-2">
-                    <h4 className="font-bold text-gray-800 text-base">
+                  <div className="flex justify-between items-start mb-2 gap-2">
+                    <h4 className="font-bold text-gray-900 text-base group-hover:text-[#003366] transition-colors">
                       {route.name}
                     </h4>
-                    <span className="font-bold text-orange-600 whitespace-nowrap text-sm bg-orange-50 px-2.5 py-1 rounded-md">
+                    <span className="font-black text-[#003366] whitespace-nowrap text-sm bg-[#EAF2F8] px-2.5 py-1 rounded-lg">
                       {route.price}
                     </span>
                   </div>
-                  <p className="text-xs text-gray-500 mb-4">{route.note}</p>
+                  <p className="text-xs text-gray-500 mb-4 font-medium leading-relaxed">{route.note}</p>
                 </div>
                 <Link
                   href="/#formbooking"
-                  className="text-xs font-semibold text-blue-900 hover:text-orange-500 inline-flex items-center gap-1 transition-colors pt-2 border-t border-gray-100"
+                  className="text-xs font-bold text-[#174978] hover:text-[#003366] inline-flex items-center gap-1 transition-colors pt-2.5 border-t border-gray-100"
                 >
-                  {t.popularRoutes.bookRouteNow} <ArrowRight size={14} />
+                  {t.popularRoutes.bookRouteNow} <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
             ))}
@@ -81,9 +81,9 @@ export default function PopularRoutes() {
 
         {/* Inter-province routes */}
         <div>
-          <div className="flex items-center gap-2 mb-4">
-            <Navigation className="text-blue-900" size={24} />
-            <h3 className="text-xl font-bold text-gray-800">
+          <div className="flex items-center gap-2.5 mb-4">
+            <Navigation className="text-[#174978]" size={24} />
+            <h3 className="text-xl font-bold text-gray-900">
               {t.popularRoutes.provinceSection}
             </h3>
           </div>
@@ -91,11 +91,11 @@ export default function PopularRoutes() {
             {provinceRoutes.map((prov, idx) => (
               <div
                 key={idx}
-                className="bg-white rounded-xl p-4 border border-gray-200 shadow-sm hover:border-orange-300 transition-all text-center"
+                className="bg-white rounded-2xl p-4 border border-gray-200 shadow-xs hover:border-[#75A2BF] hover:shadow-md transition-all text-center group"
               >
-                <p className="font-bold text-gray-800 text-sm mb-1">{prov.name}</p>
-                <p className="text-xs text-gray-400 mb-2">{prov.distance}</p>
-                <p className="font-bold text-orange-600 text-sm">{prov.price}</p>
+                <p className="font-bold text-gray-900 text-sm mb-1 group-hover:text-[#003366] transition-colors">{prov.name}</p>
+                <p className="text-xs text-gray-400 font-medium mb-2">{prov.distance}</p>
+                <p className="font-black text-[#003366] text-sm">{prov.price}</p>
               </div>
             ))}
           </div>

@@ -43,7 +43,7 @@ export default function TransportPolicyPage() {
         <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
           Quy Định Vận Chuyển Hành Khách
         </h1>
-        <div className="w-24 h-1 bg-orange-500"></div>
+        <div className="w-24 h-1 bg-[#174978] rounded-full"></div>
       </div>
 
       <div className="container mx-auto px-4 md:px-12 lg:px-24 py-6 md:py-10">

@@ -43,7 +43,7 @@ export default function VehiclesView() {
         <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
           {t.vehicles.pageTitle}
         </h1>
-        <div className="w-24 h-1 bg-orange-500 mb-3"></div>
+        <div className="w-24 h-1 bg-[#174978] mb-3 rounded-full"></div>
         <p className="text-gray-600 text-sm md:text-base max-w-3xl">
           {t.vehicles.pageDesc}
         </p>
@@ -61,7 +61,7 @@ export default function VehiclesView() {
           return (
             <div key={categoryIndex} className="mb-10 md:mb-14">
               <div className="mb-6 md:mb-8">
-                <h2 className="text-xl md:text-2xl font-bold text-blue-900 mb-4">
+                <h2 className="text-xl md:text-2xl font-bold text-[#003366] mb-4">
                   {category.title}
                 </h2>
 
@@ -72,7 +72,7 @@ export default function VehiclesView() {
                       {visibleVehicles.map((vehicle) => (
                         <div
                           key={vehicle.id}
-                          className="bg-white rounded-xl p-3 flex flex-col items-center shadow-sm border border-gray-100"
+                          className="bg-white rounded-xl p-3 flex flex-col items-center shadow-xs border border-gray-100"
                         >
                           <div className="w-full h-24 relative mb-2">
                             <Image
@@ -94,7 +94,7 @@ export default function VehiclesView() {
                         <button
                           onClick={() => handlePrev(categoryIndex)}
                           disabled={currentPage === 0}
-                          className="bg-blue-900 text-white p-2 rounded-full disabled:opacity-30 disabled:cursor-not-allowed hover:bg-blue-800 transition-colors"
+                          className="bg-[#174978] text-white p-2 rounded-full disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#003366] transition-colors"
                           aria-label="Previous"
                         >
                           <ChevronLeft size={18} />
@@ -105,7 +105,7 @@ export default function VehiclesView() {
                             <div
                               key={idx}
                               className={`w-2 h-2 rounded-full transition-all ${
-                                idx === currentPage ? "bg-blue-900 w-6" : "bg-gray-300"
+                                idx === currentPage ? "bg-[#003366] w-6" : "bg-gray-300"
                               }`}
                             />
                           ))}
@@ -116,7 +116,7 @@ export default function VehiclesView() {
                             handleNext(categoryIndex, category.vehicles.length)
                           }
                           disabled={currentPage === totalPages - 1}
-                          className="bg-blue-900 text-white p-2 rounded-full disabled:opacity-30 disabled:cursor-not-allowed hover:bg-blue-800 transition-colors"
+                          className="bg-[#174978] text-white p-2 rounded-full disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#003366] transition-colors"
                           aria-label="Next"
                         >
                           <ChevronRight size={18} />
@@ -131,7 +131,7 @@ export default function VehiclesView() {
                   {category.vehicles.map((vehicle) => (
                     <div
                       key={vehicle.id}
-                      className="bg-white rounded-xl p-4 flex flex-col items-center shadow-sm border border-gray-100 hover:shadow-md hover:border-orange-200 transition-all"
+                      className="bg-white rounded-2xl p-4 flex flex-col items-center shadow-xs border border-gray-100 hover:shadow-md hover:border-[#75A2BF] transition-all"
                     >
                       <div className="w-full h-32 relative mb-3">
                         <Image
@@ -149,15 +149,15 @@ export default function VehiclesView() {
                 </div>
 
                 {/* Info Card */}
-                <div className="bg-white rounded-xl shadow-sm p-5 md:p-6 border-l-4 border-orange-500 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div className="bg-white rounded-2xl shadow-xs p-5 md:p-6 border-l-4 border-[#174978] flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                   <div className="space-y-2">
-                    <div className="flex flex-wrap items-center gap-4 text-blue-950 font-semibold text-sm md:text-base">
+                    <div className="flex flex-wrap items-center gap-4 text-[#003366] font-bold text-sm md:text-base">
                       <div className="flex items-center gap-1.5">
-                        <Users size={18} className="text-orange-500" />
+                        <Users size={18} className="text-[#174978]" />
                         <span>{category.maxPassengers}</span>
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <Briefcase size={18} className="text-orange-500" />
+                        <Briefcase size={18} className="text-[#174978]" />
                         <span>{category.luggage}</span>
                       </div>
                     </div>
@@ -169,13 +169,13 @@ export default function VehiclesView() {
                   <div className="flex items-center gap-3 w-full md:w-auto">
                     <Link
                       href="/bang-gia"
-                      className="text-xs md:text-sm font-semibold text-blue-900 hover:text-orange-600 px-4 py-2.5 rounded-lg border border-blue-900/20 hover:border-orange-500 transition-colors inline-flex items-center gap-1 whitespace-nowrap"
+                      className="text-xs md:text-sm font-bold text-[#174978] hover:text-[#003366] px-4 py-2.5 rounded-xl border border-[#174978]/25 hover:border-[#174978] transition-colors inline-flex items-center gap-1 whitespace-nowrap"
                     >
                       {t.common.viewPricing} <ArrowRight size={14} />
                     </Link>
                     <Link
                       href="/#formbooking"
-                      className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-6 py-2.5 rounded-lg transition-colors text-xs md:text-sm whitespace-nowrap text-center flex-1 md:flex-initial shadow-sm"
+                      className="bg-linear-to-r from-[#003366] to-[#174978] hover:from-[#002244] hover:to-[#174978] text-white font-extrabold px-6 py-2.5 rounded-xl transition-all text-xs md:text-sm whitespace-nowrap text-center flex-1 md:flex-initial shadow-md shadow-blue-950/20"
                     >
                       {t.common.bookNow}
                     </Link>

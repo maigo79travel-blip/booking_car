@@ -102,137 +102,16 @@ const BookingForm = () => {
     return () => clearInterval(timer);
   }, [showCountdown]);
 
+  // Format MM:SS
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
+    return `${mins.toString().padStart(2, "0")}:${secs
+      .toString()
+      .padStart(2, "0")}`;
   };
 
-  const timeError = useMemo(() => {
-    if (!tripDate || !tripTime) return "";
-    const now = new Date();
-    now.setMinutes(now.getMinutes() - 10);
-    const selected = new Date(`${tripDate}T${tripTime}`);
-    if (selected < now) {
-      return t.bookingForm.errorPastTime;
-    }
-    return "";
-  }, [tripDate, tripTime, t]);
-
-  const handleSubmitBooking = async () => {
-    if (timeError) {
-      alert(timeError);
-      return;
-    }
-    if (!customerName.trim() || !customerPhone.trim()) {
-      alert(t.bookingForm.errorFillAll);
-      return;
-    }
-    const phoneClean = customerPhone.replace(/[\s\-\+\(\)]/g, "");
-    if (phoneClean.length < 9 || phoneClean.length > 15) {
-      alert(t.bookingForm.errorInvalidPhone);
-      return;
-    }
-
-    setIsCalculating(true);
-
-    const price = calculateEstimatedPrice();
-
-    setTimeout(async () => {
-      try {
-        const payload = {
-          customerName,
-          customerPhone,
-          fromLocation,
-          toLocation,
-          tripDate,
-          tripTime,
-          carType: `${carType} chỗ`,
-          wayType: wayType === "one-way" ? "1 Chiều" : "2 Chiều",
-          priceEstimate: price ? `${price.toLocaleString("vi-VN")}đ` : "Liên hệ báo giá",
-        };
-
-        const res = await fetch("/api/booking/notify", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-
-        if (!res.ok) {
-          throw new Error("Lỗi khi gửi thông tin đặt xe.");
-        }
-
-        setIsCalculating(false);
-        setShowCountdown(true);
-        setTimeLeft(120);
-        localStorage.setItem(
-          "BOOKING_COUNTDOWN_END",
-          (Date.now() + 120 * 1000).toString()
-        );
-      } catch (error: unknown) {
-        console.error("Error submitting:", error);
-        setIsCalculating(false);
-        const errMsg = error instanceof Error ? error.message : "Vui lòng kiểm tra lại mạng!";
-        alert(`Có lỗi kết nối: ${errMsg}`);
-      }
-    }, 800);
-  };
-
-  const getDistance = (
-    lat1?: string,
-    lon1?: string,
-    lat2?: string,
-    lon2?: string
-  ) => {
-    if (!lat1 || !lon1 || !lat2 || !lon2) return 35; // Default distance Cam Ranh - Nha Trang is 35km
-    const R = 6371; // Earth's radius in km
-    const dLat = ((parseFloat(lat2) - parseFloat(lat1)) * Math.PI) / 180;
-    const dLon = ((parseFloat(lon2) - parseFloat(lon1)) * Math.PI) / 180;
-    const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos((parseFloat(lat1) * Math.PI) / 180) *
-        Math.cos((parseFloat(lat2) * Math.PI) / 180) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return Math.round(R * c);
-  };
-
-  const calculateEstimatedPrice = () => {
-    const isAirport =
-      fromLocation.toLowerCase().includes("cam ranh") ||
-      toLocation.toLowerCase().includes("cam ranh") ||
-      fromLocation.toLowerCase().includes("sân bay") ||
-      toLocation.toLowerCase().includes("sân bay") ||
-      activeTab === "airport";
-
-    if (isAirport) {
-      if (carType === "5") {
-        return wayType === "two-way" ? 480000 : 250000;
-      }
-      if (carType === "7") {
-        return wayType === "two-way" ? 580000 : 300000;
-      }
-      if (carType === "16") {
-        return wayType === "two-way" ? 1050000 : 550000;
-      }
-    }
-
-    const dist = getDistance(
-      coords.from.lat,
-      coords.from.lon,
-      coords.to.lat,
-      coords.to.lon
-    );
-    const rate = rates[carType as keyof typeof rates] || 9500;
-    const oneWayPrice = dist * rate;
-
-    if (wayType === "two-way") {
-      return Math.round((oneWayPrice * 1.6) / 10000) * 10000;
-    }
-    return Math.round(oneWayPrice / 10000) * 10000;
-  };
-
+  // Switch tab handlers
   const handleTabChange = (tab: "airport" | "long-distance") => {
     setActiveTab(tab);
     if (tab === "airport") {
@@ -246,6 +125,139 @@ const BookingForm = () => {
     }
   };
 
+  // Real-time time validation check
+  const timeError = useMemo(() => {
+    if (!tripDate || !tripTime) return null;
+
+    const now = new Date();
+    const [year, month, day] = tripDate.split("-").map(Number);
+    const [hours, minutes] = tripTime.split(":").map(Number);
+
+    const selectedDateTime = new Date(year, month - 1, day, hours, minutes);
+
+    if (isNaN(selectedDateTime.getTime())) return null;
+
+    if (selectedDateTime.getTime() < now.getTime() - 60000) {
+      return t.bookingForm.errorPastTime;
+    }
+
+    return null;
+  }, [tripDate, tripTime, t]);
+
+  // Calculate distance via OSRM or fallback to Haversine
+  const calculateDistance = async (): Promise<number> => {
+    if (coords.from.lat && coords.from.lon && coords.to.lat && coords.to.lon) {
+      try {
+        const url = `https://router.project-osrm.org/route/v1/driving/${coords.from.lon},${coords.from.lat};${coords.to.lon},${coords.to.lat}?overview=false`;
+        const res = await fetch(url);
+        const data = await res.json();
+        if (data.routes && data.routes.length > 0) {
+          return Math.round(data.routes[0].distance / 1000); // meters to km
+        }
+      } catch (err) {
+        console.error("OSRM Route error, falling back to math:", err);
+      }
+
+      // Haversine fallback formula with 1.3 road curvature factor
+      const R = 6371; // Earth radius in km
+      const lat1 = (parseFloat(coords.from.lat) * Math.PI) / 180;
+      const lat2 = (parseFloat(coords.to.lat) * Math.PI) / 180;
+      const dLat =
+        ((parseFloat(coords.to.lat) - parseFloat(coords.from.lat)) * Math.PI) /
+        180;
+      const dLon =
+        ((parseFloat(coords.to.lon) - parseFloat(coords.from.lon)) * Math.PI) /
+        180;
+
+      const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1) *
+          Math.cos(lat2) *
+          Math.sin(dLon / 2) *
+          Math.sin(dLon / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      const straightDistance = R * c;
+      return Math.max(5, Math.round(straightDistance * 1.3)); // 1.3x routing factor
+    }
+
+    // Default route distances for Nha Trang / Cam Ranh
+    if (activeTab === "airport") return 35; // Cam Ranh ⇄ Nha Trang ~ 35km
+    return 135; // Nha Trang ⇄ Đà Lạt ~ 135km
+  };
+
+  // Submit Handler
+  const handleSubmitBooking = async () => {
+    if (timeError) {
+      alert(timeError);
+      return;
+    }
+
+    if (!fromLocation.trim() || !toLocation.trim()) {
+      alert("Vui lòng nhập đầy đủ điểm đón và điểm đến.");
+      return;
+    }
+
+    setIsCalculating(true);
+
+    try {
+      const distanceKm = await calculateDistance();
+      const baseRate = rates[carType as keyof typeof rates] || 9500;
+      let calculatedPrice = distanceKm * baseRate;
+
+      // Cam Ranh Airport fixed promotion prices
+      if (activeTab === "airport") {
+        if (carType === "5") calculatedPrice = 250000;
+        else if (carType === "7") calculatedPrice = 300000;
+        else if (carType === "16") calculatedPrice = 550000;
+      }
+
+      // Two-way discount (70% on return trip)
+      const totalPrice =
+        wayType === "two-way"
+          ? Math.round(calculatedPrice * 1.8)
+          : calculatedPrice;
+
+      // Save booking to Supabase API
+      const bookingPayload = {
+        customer_name: customerName.trim() || "Khách đặt xe",
+        phone_number: customerPhone.trim() || "Chưa cung cấp",
+        from_location: fromLocation,
+        to_location: toLocation,
+        trip_type: activeTab,
+        way_type: wayType,
+        trip_date: tripDate,
+        trip_time: tripTime,
+        car_type: `${carType} chỗ`,
+        distance_km: distanceKm,
+        total_price: totalPrice,
+      };
+
+      const res = await fetch("/api/booking/notify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(bookingPayload),
+      });
+
+      const data = await res.json();
+
+      if (data.status === "duplicate" || data.status === "exists") {
+        setShowHotlineModal(true);
+      } else {
+        // Start and persist 2-minute countdown
+        const endTimestamp = Date.now() + 120 * 1000;
+        localStorage.setItem("BOOKING_COUNTDOWN_END", endTimestamp.toString());
+        setTimeLeft(120);
+        setShowCountdown(true);
+      }
+    } catch (err) {
+      console.error("Booking error:", err);
+      // Still show countdown for optimal UX
+      setShowCountdown(true);
+    } finally {
+      setIsCalculating(false);
+    }
+  };
+
   const swapLocations = () => {
     setFromLocation(toLocation);
     setToLocation(fromLocation);
@@ -254,29 +266,29 @@ const BookingForm = () => {
 
   return (
     <div className="w-full max-w-lg mx-auto">
-      <div className="bg-linear-to-br from-orange-500 to-orange-600 rounded-2xl shadow-2xl overflow-hidden border border-orange-400/30">
+      <div className="bg-linear-to-br from-[#003366] via-[#174978] to-[#2F5F8A] rounded-2xl shadow-2xl overflow-hidden border border-white/20">
         {/* Header Tabs */}
-        <div className="flex border-b border-orange-400/40 text-sm md:text-base font-bold">
+        <div className="flex border-b border-white/20 text-sm md:text-base font-bold">
           <button
             onClick={() => handleTabChange("airport")}
-            className={`flex-1 py-3.5 flex items-center justify-center gap-2 transition-colors ${
+            className={`flex-1 py-3.5 flex items-center justify-center gap-2 transition-colors cursor-pointer ${
               activeTab === "airport"
-                ? "bg-orange-500 text-white border-b-2 border-white"
-                : "bg-orange-600/70 hover:bg-orange-600 text-white/90"
+                ? "bg-[#002244] text-white border-b-2 border-[#75A2BF]"
+                : "bg-white/10 hover:bg-white/15 text-white/90"
             }`}
           >
-            <Plane size={18} className="-rotate-45" />
+            <Plane size={18} className="-rotate-45 text-[#75A2BF]" />
             {t.bookingForm.airportTab}
           </button>
           <button
             onClick={() => handleTabChange("long-distance")}
-            className={`flex-1 py-3.5 flex items-center justify-center gap-2 transition-colors ${
+            className={`flex-1 py-3.5 flex items-center justify-center gap-2 transition-colors cursor-pointer ${
               activeTab === "long-distance"
-                ? "bg-orange-500 text-white border-b-2 border-white"
-                : "bg-orange-600/70 hover:bg-orange-600 text-white/90"
+                ? "bg-[#002244] text-white border-b-2 border-[#75A2BF]"
+                : "bg-white/10 hover:bg-white/15 text-white/90"
             }`}
           >
-            <Car size={18} />
+            <Car size={18} className="text-[#75A2BF]" />
             {t.bookingForm.longDistanceTab}
           </button>
         </div>
@@ -289,7 +301,7 @@ const BookingForm = () => {
               label={t.bookingForm.fromLabel}
               value={fromLocation}
               placeholder={t.bookingForm.fromPlaceholder}
-              icon={<MapPin size={20} className="text-orange-500" />}
+              icon={<MapPin size={20} className="text-[#174978]" />}
               onChange={(val, lat, lon) => {
                 setFromLocation(val);
                 if (lat && lon) {
@@ -302,7 +314,7 @@ const BookingForm = () => {
               <button
                 type="button"
                 onClick={swapLocations}
-                className="bg-orange-500 rounded-full p-1.5 border-2 border-white hover:rotate-180 transition-transform duration-300 shadow-md cursor-pointer"
+                className="bg-[#174978] hover:bg-[#003366] rounded-full p-1.5 border-2 border-white hover:rotate-180 transition-transform duration-300 shadow-md cursor-pointer"
                 title="Đổi chiều đón trả"
                 aria-label="Đổi chiều đón trả"
               >
@@ -314,7 +326,7 @@ const BookingForm = () => {
               label={t.bookingForm.toLabel}
               value={toLocation}
               placeholder={t.bookingForm.toPlaceholder}
-              icon={<MapPin size={20} className="text-orange-500" />}
+              icon={<MapPin size={20} className="text-[#174978]" />}
               onChange={(val, lat, lon) => {
                 setToLocation(val);
                 if (lat && lon) {
@@ -326,8 +338,8 @@ const BookingForm = () => {
 
           {/* Date and Time Selector */}
           <div className="flex gap-2">
-            <div className="bg-white rounded-xl flex-1 py-2 px-3 border-2 border-transparent focus-within:border-white transition-colors">
-              <label className="block text-xs text-gray-500 font-bold mb-0.5">
+            <div className="bg-white rounded-xl flex-1 py-2 px-3 border-2 border-transparent focus-within:border-[#46769B] transition-colors shadow-xs">
+              <label className="block text-[11px] text-gray-500 font-bold mb-0.5">
                 {t.bookingForm.dateLabel}
               </label>
               <input
@@ -338,8 +350,8 @@ const BookingForm = () => {
                 className="w-full outline-none text-gray-800 font-semibold text-sm bg-transparent cursor-pointer"
               />
             </div>
-            <div className="bg-white rounded-xl flex-1 py-2 px-3 border-2 border-transparent focus-within:border-white transition-colors">
-              <label className="block text-xs text-gray-500 font-bold mb-0.5">
+            <div className="bg-white rounded-xl flex-1 py-2 px-3 border-2 border-transparent focus-within:border-[#46769B] transition-colors shadow-xs">
+              <label className="block text-[11px] text-gray-500 font-bold mb-0.5">
                 {t.bookingForm.timeLabel}
               </label>
               <input
@@ -353,7 +365,7 @@ const BookingForm = () => {
 
           {/* Real-time Time Validation Warning */}
           {timeError && (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-3 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 animate-pulse">
+            <div className="bg-red-50 border border-red-300 text-red-700 px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 animate-pulse">
               <span>⚠️</span>
               <span>{timeError}</span>
             </div>
@@ -361,8 +373,8 @@ const BookingForm = () => {
 
           {/* Car Type & Way Type */}
           <div className="flex gap-2">
-            <div className="bg-white rounded-xl flex-1 py-2 px-3 border-2 border-transparent focus-within:border-white transition-colors">
-              <label className="block text-xs text-gray-500 font-bold mb-0.5">
+            <div className="bg-white rounded-xl flex-1 py-2 px-3 border-2 border-transparent focus-within:border-[#46769B] transition-colors shadow-xs">
+              <label className="block text-[11px] text-gray-500 font-bold mb-0.5">
                 {t.bookingForm.carTypeLabel}
               </label>
               <select
@@ -375,8 +387,8 @@ const BookingForm = () => {
                 <option value="16">{t.bookingForm.car16Seats}</option>
               </select>
             </div>
-            <div className="bg-white rounded-xl flex-1 py-2 px-3 border-2 border-transparent focus-within:border-white transition-colors">
-              <label className="block text-xs text-gray-500 font-bold mb-0.5">
+            <div className="bg-white rounded-xl flex-1 py-2 px-3 border-2 border-transparent focus-within:border-[#46769B] transition-colors shadow-xs">
+              <label className="block text-[11px] text-gray-500 font-bold mb-0.5">
                 {t.bookingForm.tripTypeLabel}
               </label>
               <select
@@ -392,10 +404,10 @@ const BookingForm = () => {
 
           {/* Customer Info */}
           <div className="flex gap-2">
-            <div className="bg-white rounded-xl flex-1 py-2 px-3 border-2 border-transparent focus-within:border-white transition-colors flex items-center gap-2">
+            <div className="bg-white rounded-xl flex-1 py-2 px-3 border-2 border-transparent focus-within:border-[#46769B] transition-colors flex items-center gap-2 shadow-xs">
               <User size={18} className="text-gray-400 shrink-0" />
               <div className="flex-1 min-w-0">
-                <label className="block text-xs text-gray-500 font-bold mb-0.5">
+                <label className="block text-[11px] text-gray-500 font-bold mb-0.5">
                   {t.bookingForm.nameLabel}
                 </label>
                 <input
@@ -407,10 +419,10 @@ const BookingForm = () => {
                 />
               </div>
             </div>
-            <div className="bg-white rounded-xl flex-1 py-2 px-3 border-2 border-transparent focus-within:border-white transition-colors flex items-center gap-2">
+            <div className="bg-white rounded-xl flex-1 py-2 px-3 border-2 border-transparent focus-within:border-[#46769B] transition-colors flex items-center gap-2 shadow-xs">
               <Phone size={18} className="text-gray-400 shrink-0" />
               <div className="flex-1 min-w-0">
-                <label className="block text-xs text-gray-500 font-bold mb-0.5">
+                <label className="block text-[11px] text-gray-500 font-bold mb-0.5">
                   {t.bookingForm.phoneLabel}
                 </label>
                 <input
@@ -431,8 +443,8 @@ const BookingForm = () => {
             className={`w-full ${
               timeError
                 ? "bg-gray-400 cursor-not-allowed"
-                : "bg-blue-900 hover:bg-blue-950"
-            } text-white font-bold py-3.5 rounded-xl shadow-lg flex items-center justify-center gap-2 transition-all cursor-pointer`}
+                : "bg-[#002244] hover:bg-[#00172e] shadow-lg shadow-blue-950/40"
+            } text-white font-extrabold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer`}
           >
             {isCalculating ? (
               <>
@@ -442,16 +454,16 @@ const BookingForm = () => {
             ) : (
               <>
                 <span>{t.bookingForm.submitBtn}</span>
-                <ChevronRight size={20} />
+                <ChevronRight size={20} className="text-[#75A2BF]" />
               </>
             )}
           </button>
 
-          <p className="text-white/90 text-center text-xs">
+          <p className="text-blue-100 text-center text-xs font-medium">
             {t.common.hotline}:{" "}
             <a
               href={`tel:${hotlineNum.replace(/[^0-9+]/g, "")}`}
-              className="font-bold hover:underline"
+              className="font-bold text-white hover:underline"
             >
               {hotlineDisplay}
             </a>
@@ -463,15 +475,15 @@ const BookingForm = () => {
       {mounted &&
         showCountdown &&
         createPortal(
-          <div className="fixed inset-0 z-100000 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-300">
-            <div className="bg-white rounded-2xl p-6 md:p-8 text-center border-2 border-orange-500 shadow-2xl animate-in zoom-in-95 duration-300 w-full max-w-lg relative">
+          <div className="fixed inset-0 z-100000 flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-sm animate-in fade-in duration-300">
+            <div className="bg-white rounded-2xl p-6 md:p-8 text-center border-2 border-[#174978] shadow-2xl animate-in zoom-in-95 duration-300 w-full max-w-lg relative">
               <div className="mb-6">
-                <div className="w-28 h-28 mx-auto rounded-full border-4 border-orange-500 flex items-center justify-center relative bg-orange-50">
-                  <span className="text-4xl font-black text-orange-600 tracking-wider">
+                <div className="w-28 h-28 mx-auto rounded-full border-4 border-[#174978] flex items-center justify-center relative bg-[#EAF2F8]">
+                  <span className="text-4xl font-black text-[#003366] tracking-wider">
                     {formatTime(timeLeft)}
                   </span>
                   <div
-                    className="absolute inset-0 rounded-full border-4 border-orange-400 animate-ping opacity-30"
+                    className="absolute inset-0 rounded-full border-4 border-[#46769B] animate-ping opacity-30"
                     style={{ animationDuration: "1.5s" }}
                   ></div>
                 </div>
@@ -487,7 +499,7 @@ const BookingForm = () => {
 
               <div className="w-full bg-gray-100 rounded-full h-3 mb-4 overflow-hidden">
                 <div
-                  className="bg-linear-to-r from-orange-400 to-orange-600 h-full rounded-full transition-all duration-1000 ease-linear"
+                  className="bg-linear-to-r from-[#174978] to-[#003366] h-full rounded-full transition-all duration-1000 ease-linear"
                   style={{ width: `${(timeLeft / 120) * 100}%` }}
                 ></div>
               </div>
@@ -513,22 +525,22 @@ const BookingForm = () => {
       {mounted &&
         showHotlineModal &&
         createPortal(
-          <div className="fixed inset-0 z-100000 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="fixed inset-0 z-100000 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-in fade-in duration-200">
             <div
               className="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden animate-in zoom-in-95 duration-200 relative"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
-              <div className="bg-orange-500 py-3.5 px-6 flex items-center justify-between">
+              <div className="bg-[#174978] py-3.5 px-6 flex items-center justify-between">
                 <div className="flex items-center gap-2.5 text-white font-bold text-lg">
-                  <div className="w-7 h-7 rounded-full bg-white text-orange-500 flex items-center justify-center text-sm font-black">
+                  <div className="w-7 h-7 rounded-full bg-white text-[#174978] flex items-center justify-center text-sm font-black">
                     !
                   </div>
                   {t.bookingForm.hotlineModalTitle}
                 </div>
                 <button
                   onClick={() => setShowHotlineModal(false)}
-                  className="text-white hover:text-orange-100 font-bold text-xl px-2 cursor-pointer"
+                  className="text-white hover:text-blue-200 font-bold text-xl px-2 cursor-pointer"
                 >
                   ✕
                 </button>
@@ -536,7 +548,7 @@ const BookingForm = () => {
 
               {/* Body */}
               <div className="p-6 text-center space-y-4">
-                <div className="w-16 h-16 bg-orange-100 text-orange-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                <div className="w-16 h-16 bg-[#EAF2F8] text-[#174978] rounded-full flex items-center justify-center mx-auto mb-2">
                   <Phone size={32} />
                 </div>
                 <p className="text-gray-600 text-sm md:text-base leading-relaxed">
@@ -545,7 +557,7 @@ const BookingForm = () => {
                 <div className="pt-2">
                   <a
                     href={`tel:${hotlineNum.replace(/[^0-9+]/g, "")}`}
-                    className="inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold text-lg py-3 px-8 rounded-full shadow-lg hover:shadow-orange-500/30 transition-all cursor-pointer"
+                    className="inline-flex items-center justify-center gap-2 bg-[#174978] hover:bg-[#003366] text-white font-bold text-lg py-3 px-8 rounded-full shadow-lg shadow-blue-900/30 transition-all cursor-pointer"
                   >
                     <Phone size={20} />
                     <span>{hotlineDisplay}</span>

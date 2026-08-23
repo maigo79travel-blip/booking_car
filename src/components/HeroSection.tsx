@@ -56,7 +56,7 @@ const HeroSection = () => {
         }}
       >
         {/* Dark overlay for better readability */}
-        <div className="absolute inset-0 bg-black/50 backdrop-blur-[1px]"></div>
+        <div className="absolute inset-0 bg-slate-950/55 backdrop-blur-[1px]"></div>
       </div>
 
       <div className="container mx-auto px-4 md:px-12 lg:px-24 relative z-10 flex flex-col md:flex-row items-stretch gap-4 md:gap-8 py-6 md:py-10">
@@ -98,7 +98,7 @@ const HeroSection = () => {
                   onClick={() => setCurrentIndex(index)}
                   className={`h-2 rounded-full transition-all duration-300 shadow-sm ${
                     index === currentIndex
-                      ? "bg-yellow-400 w-6"
+                      ? "bg-[#75A2BF] w-6"
                       : "bg-white/70 w-2"
                   }`}
                   aria-label={`Slide ${index + 1}`}
@@ -110,7 +110,7 @@ const HeroSection = () => {
           {/* Bottom: Live Bookings List (50%) - Slide Up Animation */}
           <div className="rounded-2xl overflow-hidden shadow-xl bg-linear-to-br from-white to-gray-50 flex-1 w-full min-h-70 border border-gray-200 flex flex-col relative">
             {/* Header */}
-            <div className="bg-linear-to-r from-orange-500 to-orange-400 px-4 py-2.5 flex items-center justify-between">
+            <div className="bg-linear-to-r from-[#003366] via-[#174978] to-[#2F5F8A] px-4 py-3 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="bg-white/20 rounded-full p-1">
                   <svg
@@ -131,8 +131,8 @@ const HeroSection = () => {
                   {t.hero.recentBookings}
                 </span>
               </div>
-              <div className="bg-white/20 rounded-full px-2 py-0.5">
-                <span className="text-white text-xs font-semibold">
+              <div className="bg-white/20 rounded-full px-2.5 py-0.5">
+                <span className="text-white text-xs font-bold tracking-wider">
                   {t.hero.live}
                 </span>
               </div>
@@ -160,11 +160,11 @@ const HeroSection = () => {
                   className="booking-item flex items-center justify-between text-sm border-b border-dashed border-gray-200 pb-2.5 mb-2.5 last:border-0 last:pb-0 last:mb-0"
                 >
                   <div className="flex items-center gap-2">
-                    <span className="text-orange-500 font-bold">●</span>
+                    <span className="text-[#174978] font-bold">●</span>
                     <div className="flex flex-col">
-                      <div className="text-gray-700 text-xs">
+                      <div className="text-gray-700 text-xs font-medium">
                         {t.hero.customer}:{" "}
-                        <span className="font-bold text-blue-900">
+                        <span className="font-bold text-[#003366]">
                           {booking.name}
                         </span>
                       </div>
@@ -174,7 +174,7 @@ const HeroSection = () => {
                       </div>
                     </div>
                   </div>
-                  <span className="font-bold text-orange-600 text-xs whitespace-nowrap">
+                  <span className="font-extrabold text-[#174978] text-xs whitespace-nowrap">
                     {booking.price}
                   </span>
                 </div>

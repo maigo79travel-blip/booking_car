@@ -49,14 +49,14 @@ export default function FAQSection() {
       <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto px-4 md:px-12 lg:px-24">
           <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
-            <div className="inline-flex items-center gap-2 text-orange-500 font-bold uppercase tracking-wider text-xs md:text-sm">
+            <div className="inline-flex items-center gap-2 text-[#174978] font-bold uppercase tracking-wider text-xs md:text-sm">
               <HelpCircle size={18} />
               <span>{t.faq.tag}</span>
             </div>
             <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">
               {t.faq.title}
             </h2>
-            <div className="w-24 h-1 bg-orange-500 mx-auto mb-4"></div>
+            <div className="w-24 h-1 bg-[#174978] mx-auto mb-4 rounded-full"></div>
             <p className="text-gray-600 text-sm md:text-base">
               {t.faq.subtitle}
             </p>
@@ -68,20 +68,24 @@ export default function FAQSection() {
               return (
                 <div
                   key={index}
-                  className="border border-gray-200 rounded-2xl overflow-hidden transition-colors shadow-sm"
+                  className={`border rounded-2xl overflow-hidden transition-all shadow-xs ${
+                    isOpen ? "border-[#75A2BF] shadow-md" : "border-gray-200"
+                  }`}
                 >
                   <button
                     onClick={() => toggle(index)}
-                    className="w-full text-left p-4 md:p-5 bg-gray-50 hover:bg-orange-50/50 flex justify-between items-center transition-colors gap-4 cursor-pointer"
+                    className="w-full text-left p-4 md:p-5 bg-gray-50 hover:bg-[#EAF2F8]/60 flex justify-between items-center transition-colors gap-4 cursor-pointer"
                     aria-expanded={isOpen}
                   >
-                    <span className="font-bold text-gray-800 text-base md:text-lg">
+                    <span className={`font-bold text-base md:text-lg transition-colors ${
+                      isOpen ? "text-[#003366]" : "text-gray-800"
+                    }`}>
                       {faq.q}
                     </span>
                     <ChevronDown
                       size={20}
-                      className={`text-orange-500 shrink-0 transition-transform duration-300 ${
-                        isOpen ? "rotate-180" : ""
+                      className={`text-[#174978] shrink-0 transition-transform duration-300 ${
+                        isOpen ? "rotate-180 text-[#003366]" : ""
                       }`}
                     />
                   </button>

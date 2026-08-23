@@ -42,14 +42,14 @@ export default async function PostsPage() {
 
       <section className="container mx-auto px-4 md:px-12 lg:px-24 py-4 md:py-8">
         <div className="mb-8">
-          <div className="inline-flex items-center gap-2 text-orange-500 font-bold uppercase tracking-wider text-xs md:text-sm">
+          <div className="inline-flex items-center gap-2 text-[#174978] font-bold uppercase tracking-wider text-xs md:text-sm">
             <BookOpen size={18} />
             <span>Kinh nghiệm di chuyển</span>
           </div>
           <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mt-1 mb-2">
             Cẩm Nang & Bài Viết Hướng Dẫn Đi Sân Bay Cam Ranh – Nha Trang
           </h1>
-          <div className="w-24 h-1 bg-orange-500 mb-3"></div>
+          <div className="w-24 h-1 bg-[#174978] mb-3 rounded-full"></div>
           <p className="text-gray-600 text-sm md:text-base max-w-3xl">
             Cập nhật các thông tin hữu ích về giá vé, lộ trình, kinh nghiệm đón tiễn và các lưu ý quan trọng khi di chuyển tới sân bay Cam Ranh và các tour du lịch Nha Trang.
           </p>
@@ -60,7 +60,7 @@ export default async function PostsPage() {
             {posts.map((post) => (
               <article
                 key={post.id}
-                className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-gray-100 flex flex-col justify-between group"
+                className="bg-white rounded-2xl overflow-hidden shadow-xs hover:shadow-xl transition-all border border-gray-100 flex flex-col justify-between group"
               >
                 <div>
                   <div className="relative h-48 bg-gray-100 overflow-hidden">
@@ -72,7 +72,7 @@ export default async function PostsPage() {
                         className="object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-orange-50 text-orange-500 font-semibold text-sm">
+                      <div className="w-full h-full flex items-center justify-center bg-[#EAF2F8] text-[#174978] font-bold text-sm">
                         inhatrang.vn
                       </div>
                     )}
@@ -88,7 +88,7 @@ export default async function PostsPage() {
                         }).format(new Date(post.published_at))}
                       </time>
                     )}
-                    <h2 className="font-bold text-lg md:text-xl text-gray-900 mb-2 leading-snug group-hover:text-orange-600 transition-colors line-clamp-2">
+                    <h2 className="font-bold text-lg md:text-xl text-gray-900 mb-2 leading-snug group-hover:text-[#003366] transition-colors line-clamp-2">
                       <Link href={`/bai-viet/${post.slug}`}>
                         {text(post.title)}
                       </Link>
@@ -101,7 +101,7 @@ export default async function PostsPage() {
 
                 <div className="p-5 pt-0">
                   <Link
-                    className="inline-flex items-center gap-1 text-sm font-bold text-orange-500 hover:text-orange-600 group-hover:translate-x-1 transition-transform"
+                    className="inline-flex items-center gap-1 text-sm font-bold text-[#174978] hover:text-[#003366] group-hover:translate-x-1 transition-transform"
                     href={`/bai-viet/${post.slug}`}
                   >
                     Xem chi tiết <ArrowRight size={15} />

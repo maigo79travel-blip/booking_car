@@ -49,7 +49,7 @@ const PriceTable = () => {
         {/* Header */}
         <div className="text-center mb-8 md:mb-12">
           <div className="inline-flex items-center gap-3 mb-3">
-            <div className="bg-orange-500 p-2 rounded-xl text-white">
+            <div className="bg-[#174978] p-2.5 rounded-xl text-white shadow-md shadow-blue-950/20">
               <svg
                 className="w-6 h-6 md:w-8 md:h-8"
                 fill="none"
@@ -65,10 +65,10 @@ const PriceTable = () => {
               </svg>
             </div>
           </div>
-          <h2 className="text-2xl md:text-4xl font-bold text-gray-800 mb-2">
+          <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-2">
             {t.priceTable.heading}
           </h2>
-          <div className="w-24 h-1 bg-orange-500 mx-auto"></div>
+          <div className="w-24 h-1 bg-[#174978] mx-auto rounded-full"></div>
         </div>
 
         {/* Mobile Card Layout */}
@@ -79,7 +79,7 @@ const PriceTable = () => {
               className="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200"
             >
               {/* Card Header */}
-              <div className="bg-orange-500 text-white text-center py-3 font-bold text-base">
+              <div className="bg-linear-to-r from-[#003366] to-[#174978] text-white text-center py-3 font-bold text-base">
                 {vehicle.title}
               </div>
 
@@ -90,8 +90,8 @@ const PriceTable = () => {
                     key={idx}
                     className="flex justify-between items-center py-2.5 border-b border-gray-100 last:border-0"
                   >
-                    <span className="text-gray-700 text-sm">{route.from}</span>
-                    <span className="text-orange-600 font-bold text-sm">
+                    <span className="text-gray-700 text-sm font-medium">{route.from}</span>
+                    <span className="text-[#003366] font-black text-sm">
                       {route.price}
                     </span>
                   </div>
@@ -106,14 +106,14 @@ const PriceTable = () => {
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="bg-linear-to-r from-orange-500 to-orange-400">
-                  <th className="px-6 py-4 text-left text-white font-bold text-base lg:text-lg border-r border-orange-300">
+                <tr className="bg-linear-to-r from-[#003366] via-[#174978] to-[#2F5F8A]">
+                  <th className="px-6 py-4 text-left text-white font-bold text-base lg:text-lg border-r border-white/15">
                     {t.priceTable.carTypeCol}
                   </th>
-                  <th className="px-6 py-4 text-center text-white font-bold text-base lg:text-lg border-r border-orange-300">
+                  <th className="px-6 py-4 text-center text-white font-bold text-base lg:text-lg border-r border-white/15">
                     {t.priceTable.hanoiToAirportCol}
                   </th>
-                  <th className="px-6 py-4 text-center text-white font-bold text-base lg:text-lg border-r border-orange-300">
+                  <th className="px-6 py-4 text-center text-white font-bold text-base lg:text-lg border-r border-white/15">
                     {t.priceTable.airportToHanoiCol}
                   </th>
                   <th className="px-6 py-4 text-center text-white font-bold text-base lg:text-lg">
@@ -123,50 +123,50 @@ const PriceTable = () => {
               </thead>
               <tbody>
                 {/* Xe 5 chỗ */}
-                <tr className="border-b border-gray-200 hover:bg-orange-50/60 transition-colors">
+                <tr className="border-b border-gray-200 hover:bg-[#EAF2F8]/60 transition-colors">
                   <td className="px-6 py-5 font-bold text-gray-800 text-base lg:text-lg border-r border-gray-200">
                     {t.priceTable.car5}
                   </td>
-                  <td className="px-6 py-5 text-center font-bold text-orange-600 text-base lg:text-lg border-r border-gray-200">
-                    {t.common.fromPrice} 200.000{t.common.vnd}
-                  </td>
-                  <td className="px-6 py-5 text-center font-bold text-orange-600 text-base lg:text-lg border-r border-gray-200">
+                  <td className="px-6 py-5 text-center font-black text-[#003366] text-base lg:text-lg border-r border-gray-200">
                     {t.common.fromPrice} 250.000{t.common.vnd}
                   </td>
-                  <td className="px-6 py-5 text-center font-bold text-orange-600 text-base lg:text-lg">
-                    {t.common.fromPrice} 400.000{t.common.vnd}
+                  <td className="px-6 py-5 text-center font-black text-[#003366] text-base lg:text-lg border-r border-gray-200">
+                    {t.common.fromPrice} 250.000{t.common.vnd}
+                  </td>
+                  <td className="px-6 py-5 text-center font-black text-[#003366] text-base lg:text-lg">
+                    {t.common.fromPrice} 480.000{t.common.vnd}
                   </td>
                 </tr>
 
                 {/* Xe 7 chỗ */}
-                <tr className="border-b border-gray-200 hover:bg-orange-50/60 transition-colors">
+                <tr className="border-b border-gray-200 hover:bg-[#EAF2F8]/60 transition-colors">
                   <td className="px-6 py-5 font-bold text-gray-800 text-base lg:text-lg border-r border-gray-200">
                     {t.priceTable.car7}
                   </td>
-                  <td className="px-6 py-5 text-center font-bold text-orange-600 text-base lg:text-lg border-r border-gray-200">
-                    {t.common.fromPrice} 250.000{t.common.vnd}
-                  </td>
-                  <td className="px-6 py-5 text-center font-bold text-orange-600 text-base lg:text-lg border-r border-gray-200">
+                  <td className="px-6 py-5 text-center font-black text-[#003366] text-base lg:text-lg border-r border-gray-200">
                     {t.common.fromPrice} 300.000{t.common.vnd}
                   </td>
-                  <td className="px-6 py-5 text-center font-bold text-orange-600 text-base lg:text-lg">
-                    {t.common.fromPrice} 500.000{t.common.vnd}
+                  <td className="px-6 py-5 text-center font-black text-[#003366] text-base lg:text-lg border-r border-gray-200">
+                    {t.common.fromPrice} 300.000{t.common.vnd}
+                  </td>
+                  <td className="px-6 py-5 text-center font-black text-[#003366] text-base lg:text-lg">
+                    {t.common.fromPrice} 580.000{t.common.vnd}
                   </td>
                 </tr>
 
                 {/* Xe 16 chỗ */}
-                <tr className="hover:bg-orange-50/60 transition-colors bg-gray-50/50">
+                <tr className="hover:bg-[#EAF2F8]/60 transition-colors bg-gray-50/50">
                   <td className="px-6 py-5 font-bold text-gray-800 text-base lg:text-lg border-r border-gray-200">
                     {t.priceTable.car16}
                   </td>
-                  <td className="px-6 py-5 text-center font-bold text-orange-600 text-base lg:text-lg border-r border-gray-200">
-                    {t.common.fromPrice} 450.000{t.common.vnd}
-                  </td>
-                  <td className="px-6 py-5 text-center font-bold text-orange-600 text-base lg:text-lg border-r border-gray-200">
+                  <td className="px-6 py-5 text-center font-black text-[#003366] text-base lg:text-lg border-r border-gray-200">
                     {t.common.fromPrice} 550.000{t.common.vnd}
                   </td>
-                  <td className="px-6 py-5 text-center font-bold text-orange-600 text-base lg:text-lg">
-                    {t.common.fromPrice} 900.000{t.common.vnd}
+                  <td className="px-6 py-5 text-center font-black text-[#003366] text-base lg:text-lg border-r border-gray-200">
+                    {t.common.fromPrice} 550.000{t.common.vnd}
+                  </td>
+                  <td className="px-6 py-5 text-center font-black text-[#003366] text-base lg:text-lg">
+                    {t.common.fromPrice} 1.050.000{t.common.vnd}
                   </td>
                 </tr>
               </tbody>
@@ -176,10 +176,10 @@ const PriceTable = () => {
 
         {/* Informational Message */}
         <div className="mt-6 bg-white/90 backdrop-blur rounded-2xl p-5 md:p-6 shadow-sm border border-gray-200 space-y-2">
-          <p className="text-gray-800 text-sm md:text-base leading-relaxed">
+          <p className="text-gray-800 text-sm md:text-base leading-relaxed font-medium">
             ✓ {t.priceTable.note1}
           </p>
-          <p className="text-gray-800 text-sm md:text-base leading-relaxed">
+          <p className="text-gray-800 text-sm md:text-base leading-relaxed font-medium">
             ✓ {t.priceTable.note2}
           </p>
         </div>

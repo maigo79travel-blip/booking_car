@@ -32,13 +32,13 @@ export default function BookingSteps() {
     <section className="py-12 md:py-16 bg-linear-to-b from-gray-50 to-white">
       <div className="container mx-auto px-4 md:px-12 lg:px-24">
         <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
-          <span className="text-orange-500 font-bold uppercase tracking-wider text-xs md:text-sm">
+          <span className="text-[#174978] font-bold uppercase tracking-wider text-xs md:text-sm">
             {t.bookingSteps.tag}
           </span>
           <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">
             {t.bookingSteps.title}
           </h2>
-          <div className="w-24 h-1 bg-orange-500 mx-auto mb-4"></div>
+          <div className="w-24 h-1 bg-[#174978] mx-auto mb-4 rounded-full"></div>
           <p className="text-gray-600 text-sm md:text-base">
             {t.bookingSteps.subtitle}
           </p>
@@ -50,15 +50,15 @@ export default function BookingSteps() {
             return (
               <div
                 key={idx}
-                className="bg-white rounded-2xl p-6 md:p-8 border border-gray-200 shadow-md hover:shadow-xl transition-all relative flex flex-col items-center text-center"
+                className="bg-white rounded-2xl p-6 md:p-8 border border-gray-200 shadow-md hover:shadow-xl transition-all relative flex flex-col items-center text-center group"
               >
-                <div className="absolute -top-4 bg-linear-to-r from-orange-500 to-orange-600 text-white text-xs font-black px-3 py-1 rounded-full shadow uppercase">
+                <div className="absolute -top-4 bg-linear-to-r from-[#003366] to-[#174978] text-white text-xs font-black px-3.5 py-1 rounded-full shadow-md uppercase tracking-wider">
                   {t.bookingSteps.stepBadge} {step.number}
                 </div>
-                <div className="w-16 h-16 rounded-2xl bg-orange-50 flex items-center justify-center text-orange-500 my-4">
+                <div className="w-16 h-16 rounded-2xl bg-[#EAF2F8] flex items-center justify-center text-[#174978] my-4 group-hover:scale-110 transition-transform">
                   <Icon size={32} />
                 </div>
-                <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-3">
+                <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-3 group-hover:text-[#003366] transition-colors">
                   {step.title}
                 </h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
@@ -72,7 +72,7 @@ export default function BookingSteps() {
         <div className="mt-10 text-center">
           <Link
             href="/#formbooking"
-            className="inline-block bg-linear-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold px-8 py-3.5 rounded-xl shadow-lg hover:shadow-orange-200 transition-all text-sm md:text-base"
+            className="inline-block bg-linear-to-r from-[#003366] via-[#174978] to-[#2F5F8A] hover:from-[#002244] hover:to-[#174978] text-white font-extrabold px-8 py-3.5 rounded-xl shadow-lg shadow-blue-950/25 transition-all text-sm md:text-base"
           >
             {t.common.bookNow}
           </Link>

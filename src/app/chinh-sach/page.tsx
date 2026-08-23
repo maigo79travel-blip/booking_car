@@ -59,7 +59,7 @@ export default function PolicyPage() {
         <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
           Chính Sách & Điều Khoản Dịch Vụ
         </h1>
-        <div className="w-24 h-1 bg-orange-500"></div>
+        <div className="w-24 h-1 bg-[#174978] rounded-full"></div>
       </div>
 
       <div className="container mx-auto px-4 md:px-12 lg:px-24 py-6 md:py-10">
@@ -75,14 +75,9 @@ export default function PolicyPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           {policyPages.map((policy, index) => {
             const Icon = policy.icon;
-            const bgColor =
-              policy.color === "blue" ? "bg-blue-100" : "bg-purple-100";
-            const textColor =
-              policy.color === "blue" ? "text-blue-900" : "text-purple-900";
-            const hoverBorder =
-              policy.color === "blue"
-                ? "hover:border-blue-300"
-                : "hover:border-purple-300";
+            const bgColor = "bg-[#EAF2F8]";
+            const textColor = "text-[#174978]";
+            const hoverBorder = "hover:border-[#75A2BF]";
 
             return (
               <Link
@@ -95,13 +90,13 @@ export default function PolicyPage() {
                     <Icon className={textColor} size={32} />
                   </div>
                   <div className="flex-1">
-                    <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-2 group-hover:text-orange-600 transition-colors">
+                    <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-2 group-hover:text-[#003366] transition-colors">
                       {policy.title}
                     </h2>
                     <p className="text-gray-600 text-sm md:text-base mb-4 leading-relaxed">
                       {policy.description}
                     </p>
-                    <div className="flex items-center text-orange-600 font-semibold text-sm">
+                    <div className="flex items-center text-[#174978] group-hover:text-[#003366] font-bold text-sm">
                       Xem chi tiết quy định
                       <ChevronRight
                         size={18}

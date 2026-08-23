@@ -49,13 +49,13 @@ export default function AboutPage() {
         <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
           Về Chúng Tôi - inhatrang.vn (Xe Sân Bay Cam Ranh & Tour Nha Trang)
         </h1>
-        <div className="w-24 h-1 bg-orange-500"></div>
+        <div className="w-24 h-1 bg-[#174978] rounded-full"></div>
       </div>
 
       {/* Company Introduction */}
       <div className="container mx-auto px-4 md:px-12 lg:px-24 py-6 md:py-10">
         <div className="bg-white rounded-2xl p-6 md:p-10 mb-8 shadow-sm border border-gray-100">
-          <h2 className="text-xl md:text-2xl font-bold text-blue-900 mb-6">
+          <h2 className="text-xl md:text-2xl font-bold text-[#003366] mb-6">
             Giới Thiệu Đơn Vị Đưa Đón Sân Bay Cam Ranh & Tour Nha Trang Uy Tín
           </h2>
           <div className="prose max-w-none text-gray-700 space-y-4">
@@ -208,7 +208,7 @@ export default function AboutPage() {
         </div>
 
         {/* Thank You Message */}
-        <div className="bg-linear-to-r from-orange-500 to-orange-600 rounded-2xl p-6 md:p-8 text-white text-center shadow-md">
+        <div className="bg-linear-to-r from-[#003366] via-[#174978] to-[#2F5F8A] rounded-2xl p-6 md:p-8 text-white text-center shadow-md">
           <p className="text-base md:text-lg leading-relaxed italic font-medium">
             Chúng tôi xin chân thành cảm ơn Quý khách hàng đã tin tưởng và ủng
             hộ chúng tôi trong thời gian qua và mong sẽ tiếp tục được là người
@@ -218,19 +218,19 @@ export default function AboutPage() {
 
         {/* Contact Info */}
         <div className="bg-white rounded-2xl p-6 md:p-8 mt-8 shadow-sm border border-gray-100">
-          <h2 className="text-xl md:text-2xl font-bold text-blue-900 mb-6">
+          <h2 className="text-xl md:text-2xl font-bold text-[#003366] mb-6">
             Thông Tin Liên Hệ Trực Tiếp
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="flex items-start gap-3">
-              <div className="bg-orange-100 p-3 rounded-xl">
-                <Phone className="text-orange-600" size={24} />
+              <div className="bg-[#EAF2F8] p-3 rounded-xl">
+                <Phone className="text-[#174978]" size={24} />
               </div>
               <div>
                 <h3 className="font-bold text-gray-800 mb-1">Hotline 24/7</h3>
                 <a
                   href="tel:0928015280"
-                  className="text-base text-orange-600 font-bold hover:underline"
+                  className="text-base text-[#174978] font-bold hover:underline"
                 >
                   0928.015.280
                 </a>

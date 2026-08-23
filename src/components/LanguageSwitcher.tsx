@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { SUPPORTED_LANGUAGES, Language } from "@/lib/i18n/types";
-import { Globe, ChevronDown, Check } from "lucide-react";
+import { ChevronDown, Check } from "lucide-react";
 
 interface LanguageSwitcherProps {
   variant?: "header" | "mobile" | "footer";
@@ -49,8 +49,8 @@ export default function LanguageSwitcher({
               onClick={() => handleSelect(lang.code)}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 isSelected
-                  ? "bg-white text-orange-600 shadow-sm"
-                  : "bg-orange-600 text-white hover:bg-orange-700"
+                  ? "bg-white text-[#003366] shadow-sm font-bold"
+                  : "bg-[#174978] text-white hover:bg-[#2F5F8A]"
               }`}
             >
               <span>{lang.flag}</span>
@@ -66,7 +66,7 @@ export default function LanguageSwitcher({
     <div className="relative inline-block text-left" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 hover:border-orange-500 bg-white text-gray-700 text-xs md:text-sm font-semibold shadow-sm hover:text-orange-600 transition-all cursor-pointer"
+        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 hover:border-[#46769B] bg-white text-gray-700 text-xs md:text-sm font-semibold shadow-xs hover:text-[#003366] transition-all cursor-pointer"
         aria-label="Chọn ngôn ngữ / Select Language"
         aria-expanded={isOpen}
       >
@@ -76,7 +76,7 @@ export default function LanguageSwitcher({
         <ChevronDown
           size={14}
           className={`text-gray-400 transition-transform duration-200 ${
-            isOpen ? "rotate-180 text-orange-500" : ""
+            isOpen ? "rotate-180 text-[#174978]" : ""
           }`}
         />
       </button>
@@ -92,9 +92,9 @@ export default function LanguageSwitcher({
               <button
                 key={lang.code}
                 onClick={() => handleSelect(lang.code)}
-                className={`w-full text-left px-3 py-2 flex items-center justify-between text-xs md:text-sm transition-colors ${
+                className={`w-full text-left px-3 py-2 flex items-center justify-between text-xs md:text-sm transition-colors cursor-pointer ${
                   isSelected
-                    ? "bg-orange-50 text-orange-600 font-bold"
+                    ? "bg-[#EAF2F8] text-[#003366] font-bold"
                     : "text-gray-700 hover:bg-gray-50"
                 }`}
               >
@@ -102,7 +102,7 @@ export default function LanguageSwitcher({
                   <span className="text-base leading-none">{lang.flag}</span>
                   <span>{lang.name}</span>
                 </div>
-                {isSelected && <Check size={14} className="text-orange-500" />}
+                {isSelected && <Check size={14} className="text-[#174978]" />}
               </button>
             );
           })}

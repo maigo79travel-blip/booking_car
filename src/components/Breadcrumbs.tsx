@@ -41,15 +41,15 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
             const isLast = index === allItems.length - 1;
             return (
               <li key={index} className="flex items-center gap-1 md:gap-2">
-                {index === 0 && <Home size={14} className="text-orange-500" />}
+                {index === 0 && <Home size={14} className="text-[#174978]" />}
                 {isLast || !item.href ? (
-                  <span className="font-medium text-gray-800" aria-current="page">
+                  <span className="font-semibold text-[#003366]" aria-current="page">
                     {item.name}
                   </span>
                 ) : (
                   <Link
                     href={item.href}
-                    className="hover:text-orange-500 transition-colors"
+                    className="hover:text-[#174978] font-medium transition-colors"
                   >
                     {item.name}
                   </Link>

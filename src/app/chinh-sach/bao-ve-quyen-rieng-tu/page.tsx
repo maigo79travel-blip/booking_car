@@ -43,7 +43,7 @@ export default function PrivacyPolicyPage() {
         <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
           Chính Sách Bảo Vệ Quyền Riêng Tư
         </h1>
-        <div className="w-24 h-1 bg-orange-500"></div>
+        <div className="w-24 h-1 bg-[#174978] rounded-full"></div>
       </div>
 
       <div className="container mx-auto px-4 md:px-12 lg:px-24 py-6 md:py-10">
@@ -69,7 +69,7 @@ export default function PrivacyPolicyPage() {
 
         {/* Commitment */}
         <div className="bg-white rounded-2xl p-6 md:p-8 mb-6 shadow-sm border border-gray-100">
-          <h2 className="text-xl md:text-2xl font-bold text-blue-900 mb-4">
+          <h2 className="text-xl md:text-2xl font-bold text-[#003366] mb-4">
             1. Cam kết sử dụng thông tin
           </h2>
           <div
@@ -89,7 +89,7 @@ export default function PrivacyPolicyPage() {
 
         {/* Information Sharing */}
         <div className="bg-white rounded-2xl p-6 md:p-8 mb-6 shadow-sm border border-gray-100">
-          <h2 className="text-xl md:text-2xl font-bold text-blue-900 mb-4">
+          <h2 className="text-xl md:text-2xl font-bold text-[#003366] mb-4">
             2. Chia sẻ thông tin cá nhân
           </h2>
           <div
@@ -113,7 +113,7 @@ export default function PrivacyPolicyPage() {
 
         {/* Security */}
         <div className="bg-white rounded-2xl p-6 md:p-8 mb-6 shadow-sm border border-gray-100">
-          <h2 className="text-xl md:text-2xl font-bold text-blue-900 mb-4">
+          <h2 className="text-xl md:text-2xl font-bold text-[#003366] mb-4">
             3. Bảo mật thông tin
           </h2>
           <div
@@ -130,7 +130,7 @@ export default function PrivacyPolicyPage() {
 
         {/* Policy Changes */}
         <div className="bg-white rounded-2xl p-6 md:p-8 mb-6 shadow-sm border border-gray-100">
-          <h2 className="text-xl md:text-2xl font-bold text-blue-900 mb-4">
+          <h2 className="text-xl md:text-2xl font-bold text-[#003366] mb-4">
             4. Những thay đổi về Quy định bảo vệ Quyền riêng tư
           </h2>
           <div
@@ -143,7 +143,7 @@ export default function PrivacyPolicyPage() {
         </div>
 
         {/* Contact */}
-        <div className="bg-linear-to-r from-blue-900 to-blue-800 rounded-2xl p-6 md:p-8 text-white shadow-md">
+        <div className="bg-linear-to-r from-[#003366] via-[#174978] to-[#2F5F8A] rounded-2xl p-6 md:p-8 text-white shadow-md">
           <h2 className="text-xl md:text-2xl font-bold mb-3">Thông Tin Liên Hệ Bảo Mật</h2>
           <p className="text-sm md:text-base leading-relaxed">
             Nếu Quý khách có bất kỳ câu hỏi hoặc góp ý nào cho chúng tôi về

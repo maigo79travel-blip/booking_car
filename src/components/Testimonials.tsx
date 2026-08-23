@@ -67,13 +67,13 @@ const Testimonials = () => {
       <div className="container mx-auto px-4 md:px-12 lg:px-24">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
-          <span className="text-orange-500 font-bold uppercase tracking-wider text-xs md:text-sm">
+          <span className="text-[#174978] font-bold uppercase tracking-wider text-xs md:text-sm">
             {t.testimonials.tag}
           </span>
           <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">
             {t.testimonials.title}
           </h2>
-          <div className="w-24 h-1 bg-orange-500 mx-auto mb-4"></div>
+          <div className="w-24 h-1 bg-[#174978] mx-auto mb-4 rounded-full"></div>
           <p className="text-gray-600 text-sm md:text-base">
             {t.testimonials.subtitle}
           </p>
@@ -90,25 +90,25 @@ const Testimonials = () => {
             return (
               <div
                 key={testimonial.id || `${testimonial.name}-${idx}`}
-                className="bg-white rounded-2xl shadow-md hover:shadow-xl p-6 md:p-8 transition-shadow border border-gray-100 flex flex-col justify-between"
+                className="bg-white rounded-2xl shadow-xs hover:shadow-xl p-6 md:p-8 transition-all border border-gray-100 flex flex-col justify-between"
               >
                 <div>
                   {/* Header */}
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-orange-500 shrink-0 bg-gray-100">
+                    <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-[#174978] shrink-0 bg-gray-100 shadow-xs">
                       <Image
                         src={avatarUrl}
-                        alt={`Khách hàng ${testimonial.name} đánh giá dịch vụ inoibai.vn`}
+                        alt={`Khách hàng ${testimonial.name} đánh giá dịch vụ inhatrang.vn`}
                         fill
                         className="object-cover"
                         unoptimized={avatarUrl.startsWith("data:") || avatarUrl.startsWith("http")}
                       />
                     </div>
                     <div className="flex-1">
-                      <h3 className="font-bold text-gray-800 text-base md:text-lg">
+                      <h3 className="font-bold text-gray-900 text-base md:text-lg">
                         {testimonial.name}
                       </h3>
-                      <div className="flex items-center gap-1 text-yellow-400 mt-1">
+                      <div className="flex items-center gap-1 text-amber-400 mt-1">
                         {[...Array(starsCount)].map((_, i) => (
                           <Star key={i} size={15} fill="currentColor" />
                         ))}
@@ -125,8 +125,8 @@ const Testimonials = () => {
                 <div>
                   {/* Footer */}
                   <div className="flex items-center justify-between text-xs text-gray-500 pt-4 border-t border-gray-100">
-                    <div className="flex items-center gap-1">
-                      <MapPin size={13} className="text-orange-500" />
+                    <div className="flex items-center gap-1 font-medium">
+                      <MapPin size={13} className="text-[#174978]" />
                       <span>{locationText}</span>
                     </div>
                     <div className="flex items-center gap-1">
@@ -137,7 +137,7 @@ const Testimonials = () => {
 
                   {/* Service Badge */}
                   <div className="mt-3">
-                    <span className="inline-block bg-orange-50 text-orange-600 text-xs font-semibold px-3 py-1 rounded-full border border-orange-100">
+                    <span className="inline-block bg-[#EAF2F8] text-[#003366] text-xs font-bold px-3 py-1 rounded-full border border-[#75A2BF]/30">
                       {testimonial.service || testimonial.role || "Dịch vụ đưa đón sân bay"}
                     </span>
                   </div>
@@ -151,7 +151,7 @@ const Testimonials = () => {
         <div className="flex items-center justify-center gap-4">
           <button
             onClick={prevPage}
-            className="bg-orange-500 hover:bg-orange-600 text-white p-2.5 rounded-full transition-colors shadow-sm cursor-pointer"
+            className="bg-[#174978] hover:bg-[#003366] text-white p-2.5 rounded-full transition-colors shadow-sm cursor-pointer"
             aria-label="Xem đánh giá trước"
           >
             <ChevronLeft size={20} />
@@ -162,8 +162,8 @@ const Testimonials = () => {
               <button
                 key={idx}
                 onClick={() => setCurrentPage(idx)}
-                className={`w-2.5 h-2.5 rounded-full transition-all cursor-pointer ${
-                  idx === currentPage ? "bg-orange-500 w-8" : "bg-gray-300"
+                className={`h-2.5 rounded-full transition-all cursor-pointer ${
+                  idx === currentPage ? "bg-[#003366] w-8" : "bg-gray-300 w-2.5"
                 }`}
                 aria-label={`Trang ${idx + 1}`}
               />
@@ -172,7 +172,7 @@ const Testimonials = () => {
 
           <button
             onClick={nextPage}
-            className="bg-orange-500 hover:bg-orange-600 text-white p-2.5 rounded-full transition-colors shadow-sm cursor-pointer"
+            className="bg-[#174978] hover:bg-[#003366] text-white p-2.5 rounded-full transition-colors shadow-sm cursor-pointer"
             aria-label="Xem đánh giá tiếp"
           >
             <ChevronRight size={20} />

@@ -58,7 +58,7 @@ export default function RoutesManager({
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold text-gray-800">
+          <h1 className="text-2xl font-bold text-gray-800">
             Quản Lý Bảng Giá Tuyến Xe ({routes.length})
           </h1>
           <p className="text-xs md:text-sm text-gray-500">
@@ -67,7 +67,7 @@ export default function RoutesManager({
         </div>
         <button
           onClick={() => setIsCreating(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-linear-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white rounded-md text-xs md:text-sm font-bold shadow-sm transition-all cursor-pointer"
+          className="flex items-center gap-2 px-4 py-2 bg-linear-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white rounded-md text-xs md:text-sm font-semibold shadow-sm transition-all cursor-pointer"
         >
           <Plus size={16} />
           <span>Thêm Tuyến Xe Mới</span>
@@ -91,7 +91,7 @@ export default function RoutesManager({
           <select
             value={vehicleFilter}
             onChange={(e) => setVehicleFilter(e.target.value)}
-            className="px-3 py-2 rounded-md border border-gray-200 text-xs font-semibold text-gray-700 outline-none bg-white"
+            className="px-3 py-2 rounded-md border border-gray-200 text-xs font-medium text-gray-700 outline-none bg-white"
           >
             <option value="all">Tất cả loại xe</option>
             <option value="5">Xe 5 chỗ</option>
@@ -106,7 +106,7 @@ export default function RoutesManager({
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead>
-              <tr className="border-b border-gray-100 text-[11px] font-bold text-gray-400 uppercase tracking-wider bg-gray-50/50">
+              <tr className="border-b border-gray-100 text-[11px] font-semibold text-gray-400 uppercase tracking-wider bg-gray-50/50">
                 <th className="py-3.5 px-4">Tuyến Đường</th>
                 <th className="py-3.5 px-3">Loại Xe</th>
                 <th className="py-3.5 px-3">Loại Chuyến</th>
@@ -128,7 +128,7 @@ export default function RoutesManager({
                       key={r.id}
                       className="hover:bg-blue-50/40 transition-colors group"
                     >
-                      <td className="py-3.5 px-4 font-bold text-gray-800">
+                      <td className="py-3.5 px-4 font-semibold text-gray-800">
                         <div className="flex items-center gap-2">
                           <MapPin size={15} className="text-orange-500 shrink-0" />
                           <span>{routeName}</span>
@@ -136,7 +136,7 @@ export default function RoutesManager({
                       </td>
 
                       <td className="py-3.5 px-3">
-                        <span className="bg-blue-50 text-blue-700 font-bold text-xs px-2.5 py-1 rounded-md border border-blue-100 whitespace-nowrap">
+                        <span className="bg-blue-50 text-blue-700 font-medium text-xs px-2.5 py-1 rounded-md border border-blue-100 whitespace-nowrap">
                           {r.vehicle_type} chỗ
                         </span>
                       </td>
@@ -145,7 +145,7 @@ export default function RoutesManager({
                         {r.trip_type === "round_trip" ? "Hai chiều" : "Một chiều"}
                       </td>
 
-                      <td className="py-3.5 px-3 font-extrabold text-emerald-600 text-sm">
+                      <td className="py-3.5 px-3 font-semibold text-emerald-600 text-sm">
                         {Number(r.price || 0).toLocaleString("vi-VN")}đ
                       </td>
 
@@ -155,7 +155,7 @@ export default function RoutesManager({
 
                       <td className="py-3.5 px-3">
                         <span
-                          className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${
+                          className={`text-[11px] font-semibold px-2 py-0.5 rounded-full ${
                             r.is_active !== false
                               ? "bg-green-100 text-green-700"
                               : "bg-gray-100 text-gray-500"

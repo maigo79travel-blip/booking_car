@@ -87,10 +87,10 @@ export default function ImageUploadField({
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
-        <label className="block text-xs font-extrabold text-slate-800">
+        <label className="block text-xs font-semibold text-slate-800">
           {label}
         </label>
-        <div className="flex items-center gap-1 bg-slate-100 p-0.5 rounded-md text-[11px] font-bold">
+        <div className="flex items-center gap-1 bg-slate-100 p-0.5 rounded-md text-[11px] font-semibold">
           <button
             type="button"
             onClick={() => setMode("upload")}

@@ -302,14 +302,14 @@ export default function ContentManager({
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-white p-5 md:p-6 rounded-xl border border-slate-200 shadow-sm">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-xs font-black uppercase tracking-wider mb-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-xs font-semibold uppercase tracking-wider mb-2">
             <Sparkles size={14} />
             <span>Visual CMS System</span>
           </div>
-          <h1 className="text-2xl lg:text-3xl font-black text-slate-900 tracking-tight">
+          <h1 className="text-2xl lg:text-3xl font-bold text-slate-900 tracking-tight">
             Quản Trị Nội Dung & Hình Ảnh Website
           </h1>
-          <p className="text-xs md:text-sm text-slate-500 font-medium mt-1">
+          <p className="text-xs md:text-sm text-slate-500 font-normal mt-1">
             Chỉnh sửa toàn bộ thông tin hiển thị, logo, hotline, banner và hình ảnh xe trực tiếp trên giao diện
           </p>
         </div>
@@ -317,14 +317,14 @@ export default function ContentManager({
         {/* Global Language Selector */}
         <div className="flex items-center gap-2 bg-slate-100 p-1.5 rounded-lg">
           <Globe size={16} className="text-slate-500 ml-2" />
-          <span className="text-xs font-extrabold text-slate-700 mr-1">Ngôn ngữ soạn thảo:</span>
+          <span className="text-xs font-semibold text-slate-700 mr-1">Ngôn ngữ soạn thảo:</span>
           <div className="flex gap-1">
             {SUPPORTED_LANGUAGES.map((lang) => (
               <button
                 key={lang.code}
                 type="button"
                 onClick={() => setSelectedLang(lang.code)}
-                className={`px-3 py-1.5 rounded-md text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer ${
+                className={`px-3 py-1.5 rounded-md text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
                   selectedLang === lang.code
                     ? "bg-white text-blue-600 shadow-xs"
                     : "text-slate-600 hover:text-slate-900"
@@ -339,7 +339,7 @@ export default function ContentManager({
       </div>
 
       {/* Main Tabs Navigation */}
-      <div className="flex gap-2 overflow-x-auto pb-2 border-b border-slate-200 text-xs font-bold scrollbar-none">
+      <div className="flex gap-2 overflow-x-auto pb-2 border-b border-slate-200 text-xs font-semibold scrollbar-none">
         {[
           { id: "hero", label: "Hero & Banner", icon: Sparkles },
           { id: "brand", label: "Thương hiệu & Hotline", icon: Phone },
@@ -356,7 +356,7 @@ export default function ContentManager({
               key={tab.id}
               type="button"
               onClick={() => setActiveTab(tab.id as CMSTab)}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-lg whitespace-nowrap transition-all cursor-pointer font-extrabold ${
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-lg whitespace-nowrap transition-all cursor-pointer font-semibold ${
                 isActive
                   ? "bg-blue-600 text-white shadow-sm shadow-blue-200"
                   : "bg-white text-slate-600 hover:text-slate-900 border border-slate-200"
@@ -370,7 +370,7 @@ export default function ContentManager({
       </div>
 
       {saveSuccess && (
-        <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-lg text-xs font-extrabold text-emerald-800 flex items-center gap-2 animate-in fade-in">
+        <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-lg text-xs font-semibold text-emerald-800 flex items-center gap-2 animate-in fade-in">
           <Check size={18} className="text-emerald-600 shrink-0" />
           <span>Đã lưu nội dung thành công và cập nhật ngay lên website!</span>
         </div>
@@ -383,10 +383,10 @@ export default function ContentManager({
         <div className="bg-white rounded-xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
           <div className="flex items-center justify-between border-b border-slate-100 pb-4">
             <div>
-              <h2 className="text-lg font-black text-slate-900">
+              <h2 className="text-lg font-bold text-slate-900">
                 Khối Hero Section & Banner Trình Chiếu ({selectedLang.toUpperCase()})
               </h2>
-              <p className="text-xs text-slate-500 font-medium">
+              <p className="text-xs text-slate-500 font-normal">
                 Khối tiêu đề chính và 3 hình ảnh banner chạy slide tự động ở trang chủ
               </p>
             </div>
@@ -394,7 +394,7 @@ export default function ContentManager({
               type="button"
               disabled={isSaving}
               onClick={() => handleSaveSection("hero_section", heroData)}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-xs font-black shadow-sm transition-all cursor-pointer"
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-xs font-semibold shadow-sm transition-all cursor-pointer"
             >
               <Save size={15} />
               <span>{isSaving ? "Đang lưu..." : "Lưu Khối Hero"}</span>
@@ -404,7 +404,7 @@ export default function ContentManager({
           <div className="grid grid-cols-1 gap-5">
             {/* Title 1 */}
             <div>
-              <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
+              <label className="block text-xs font-semibold text-slate-800 mb-1.5">
                 Dòng Tiêu Đề 1 ({selectedLang.toUpperCase()})
               </label>
               <input
@@ -416,13 +416,13 @@ export default function ContentManager({
                     title1: { ...heroData.title1, [selectedLang]: e.target.value },
                   })
                 }
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-semibold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>
 
             {/* Title 2 */}
             <div>
-              <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
+              <label className="block text-xs font-semibold text-slate-800 mb-1.5">
                 Dòng Tiêu Đề 2 (Màu cam nổi bật) ({selectedLang.toUpperCase()})
               </label>
               <input
@@ -434,13 +434,13 @@ export default function ContentManager({
                     title2: { ...heroData.title2, [selectedLang]: e.target.value },
                   })
                 }
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-bold text-orange-600 outline-none focus:bg-white focus:border-blue-600"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-semibold text-orange-600 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>
 
             {/* Subtitle */}
             <div>
-              <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
+              <label className="block text-xs font-semibold text-slate-800 mb-1.5">
                 Mô tả phụ Hero ({selectedLang.toUpperCase()})
               </label>
               <textarea
@@ -458,7 +458,7 @@ export default function ContentManager({
 
             {/* Badge Text */}
             <div>
-              <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
+              <label className="block text-xs font-semibold text-slate-800 mb-1.5">
                 Khẩu hiệu trên cùng (Top Badge) ({selectedLang.toUpperCase()})
               </label>
               <input
@@ -470,13 +470,13 @@ export default function ContentManager({
                     badgeText: { ...heroData.badgeText, [selectedLang]: e.target.value },
                   })
                 }
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-semibold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>
 
             {/* 3 Banner Images */}
             <div className="border-t border-slate-100 pt-6 space-y-4">
-              <h3 className="text-sm font-extrabold text-slate-900 flex items-center gap-2">
+              <h3 className="text-sm font-semibold text-slate-900 flex items-center gap-2">
                 <span>🖼️ 3 Hình Ảnh Banner Trình Chiếu (Slide Show Hero)</span>
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -503,16 +503,17 @@ export default function ContentManager({
       )}
 
       {/* ========================================================================= */}
+      {/* ========================================================================= */}
       {/* TAB 2: BRAND & CONTACT */}
       {/* ========================================================================= */}
       {activeTab === "brand" && (
         <div className="bg-white rounded-xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
           <div className="flex items-center justify-between border-b border-slate-100 pb-4">
             <div>
-              <h2 className="text-lg font-black text-slate-900">
+              <h2 className="text-lg font-bold text-slate-900">
                 Thương Hiệu, Hotline & Thông Tin Liên Hệ Toàn Website
               </h2>
-              <p className="text-xs text-slate-500 font-medium">
+              <p className="text-xs text-slate-500 font-normal">
                 Cấu hình logo, số điện thoại hotline, zalo, email và địa chỉ đón trả
               </p>
             </div>
@@ -520,7 +521,7 @@ export default function ContentManager({
               type="button"
               disabled={isSaving}
               onClick={() => handleSaveSection("contact_info", contactData)}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-xs font-black shadow-sm transition-all cursor-pointer"
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-xs font-semibold shadow-sm transition-all cursor-pointer"
             >
               <Save size={15} />
               <span>{isSaving ? "Đang lưu..." : "Lưu Thông Tin Liên Hệ"}</span>
@@ -540,19 +541,19 @@ export default function ContentManager({
             </div>
 
             <div>
-              <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
+              <label className="block text-xs font-semibold text-slate-800 mb-1.5">
                 Tên thương hiệu (Brand Name)
               </label>
               <input
                 type="text"
                 value={contactData.brand_name}
                 onChange={(e) => setContactData({ ...contactData, brand_name: e.target.value })}
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-semibold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
+              <label className="block text-xs font-semibold text-slate-800 mb-1.5">
                 Số Hotline (Quay số trực tiếp khi bấm gọi)
               </label>
               <input
@@ -560,12 +561,12 @@ export default function ContentManager({
                 value={contactData.hotline}
                 onChange={(e) => setContactData({ ...contactData, hotline: e.target.value })}
                 placeholder="0928015280"
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-semibold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
+              <label className="block text-xs font-semibold text-slate-800 mb-1.5">
                 Số Hotline hiển thị trên giao diện
               </label>
               <input
@@ -575,12 +576,12 @@ export default function ContentManager({
                   setContactData({ ...contactData, hotline_display: e.target.value })
                 }
                 placeholder="0928.015.280"
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-semibold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
+              <label className="block text-xs font-semibold text-slate-800 mb-1.5">
                 Số điện thoại Zalo hoặc Link Zalo
               </label>
               <input
@@ -588,12 +589,12 @@ export default function ContentManager({
                 value={contactData.zalo}
                 onChange={(e) => setContactData({ ...contactData, zalo: e.target.value })}
                 placeholder="0905876231 hoặc https://zalo.me/..."
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-semibold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
+              <label className="block text-xs font-semibold text-slate-800 mb-1.5">
                 Link Telegram hỗ trợ
               </label>
               <input
@@ -601,12 +602,12 @@ export default function ContentManager({
                 value={contactData.telegram}
                 onChange={(e) => setContactData({ ...contactData, telegram: e.target.value })}
                 placeholder="https://t.me/maigo79_vn"
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-semibold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
+              <label className="block text-xs font-semibold text-slate-800 mb-1.5">
                 Email liên hệ hỗ trợ
               </label>
               <input
@@ -614,19 +615,19 @@ export default function ContentManager({
                 value={contactData.email}
                 onChange={(e) => setContactData({ ...contactData, email: e.target.value })}
                 placeholder="contact@maigo79.com"
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-semibold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>
 
             <div className="md:col-span-2">
-              <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
+              <label className="block text-xs font-semibold text-slate-800 mb-1.5">
                 Địa chỉ văn phòng / Sảnh đón Sân bay Cam Ranh
               </label>
               <input
                 type="text"
                 value={contactData.address}
                 onChange={(e) => setContactData({ ...contactData, address: e.target.value })}
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-semibold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>
           </div>
@@ -640,10 +641,10 @@ export default function ContentManager({
         <div className="bg-white rounded-xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
           <div className="flex items-center justify-between border-b border-slate-100 pb-4">
             <div>
-              <h2 className="text-lg font-black text-slate-900">
+              <h2 className="text-lg font-bold text-slate-900">
                 Đội Xe & Hình Ảnh Xe Đưa Đón (5 chỗ, 7 chỗ, 16 chỗ)
               </h2>
-              <p className="text-xs text-slate-500 font-medium">
+              <p className="text-xs text-slate-500 font-normal">
                 Thay đổi hình ảnh xe, tên dòng xe, số ghế ngồi, số vali và các tiện nghi đi kèm
               </p>
             </div>
@@ -651,7 +652,7 @@ export default function ContentManager({
               type="button"
               disabled={isSaving}
               onClick={() => handleSaveSection("vehicles_fleet", vehiclesData)}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-xs font-black shadow-sm transition-all cursor-pointer"
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-xs font-semibold shadow-sm transition-all cursor-pointer"
             >
               <Save size={15} />
               <span>{isSaving ? "Đang lưu..." : "Lưu Thông Tin Đội Xe"}</span>
@@ -665,11 +666,11 @@ export default function ContentManager({
                 className="p-5 bg-slate-50 rounded-lg border border-slate-200 space-y-4"
               >
                 <div className="flex items-center justify-between">
-                  <span className="px-3 py-1 bg-blue-600 text-white rounded-md text-xs font-black">
+                  <span className="px-3 py-1 bg-blue-600 text-white rounded-md text-xs font-semibold">
                     Xe {v.type} Chỗ
                   </span>
-                  <span className="text-xs font-bold text-slate-500">
-                    Giá từ: <span className="text-orange-600 font-extrabold">{v.price}</span>
+                  <span className="text-xs font-medium text-slate-500">
+                    Giá từ: <span className="text-orange-600 font-bold">{v.price}</span>
                   </span>
                 </div>
 
@@ -694,7 +695,7 @@ export default function ContentManager({
                   <div className="md:col-span-2 space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-xs font-bold text-slate-700 mb-1">
+                        <label className="block text-xs font-semibold text-slate-700 mb-1">
                           Tên hiển thị
                         </label>
                         <input
@@ -705,12 +706,12 @@ export default function ContentManager({
                             updated[index].name = e.target.value;
                             setVehiclesData(updated);
                           }}
-                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm font-bold text-slate-900 outline-none focus:border-blue-600"
+                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm font-semibold text-slate-900 outline-none focus:border-blue-600"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-xs font-bold text-slate-700 mb-1">
+                        <label className="block text-xs font-semibold text-slate-700 mb-1">
                           Các dòng xe đại diện
                         </label>
                         <input
@@ -726,7 +727,7 @@ export default function ContentManager({
                       </div>
 
                       <div>
-                        <label className="block text-xs font-bold text-slate-700 mb-1">
+                        <label className="block text-xs font-semibold text-slate-700 mb-1">
                           Số lượng hành khách
                         </label>
                         <input
@@ -742,7 +743,7 @@ export default function ContentManager({
                       </div>
 
                       <div>
-                        <label className="block text-xs font-bold text-slate-700 mb-1">
+                        <label className="block text-xs font-semibold text-slate-700 mb-1">
                           Sức chứa hành lý
                         </label>
                         <input
@@ -758,7 +759,7 @@ export default function ContentManager({
                       </div>
 
                       <div className="md:col-span-2">
-                        <label className="block text-xs font-bold text-slate-700 mb-1">
+                        <label className="block text-xs font-semibold text-slate-700 mb-1">
                           Giá khởi điểm hiển thị
                         </label>
                         <input
@@ -769,7 +770,7 @@ export default function ContentManager({
                             updated[index].price = e.target.value;
                             setVehiclesData(updated);
                           }}
-                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm font-bold text-orange-600 outline-none focus:border-blue-600"
+                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm font-semibold text-orange-600 outline-none focus:border-blue-600"
                         />
                       </div>
                     </div>
@@ -788,10 +789,10 @@ export default function ContentManager({
         <div className="bg-white rounded-xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
           <div className="flex items-center justify-between border-b border-slate-100 pb-4">
             <div>
-              <h2 className="text-lg font-black text-slate-900">
+              <h2 className="text-lg font-bold text-slate-900">
                 Đánh Giá Khách Hàng (Testimonials) ({testimonialsData.length})
               </h2>
-              <p className="text-xs text-slate-500 font-medium">
+              <p className="text-xs text-slate-500 font-normal">
                 Quản lý phản hồi, avatar, tên khách hàng và lời nhận xét hiển thị trang chủ
               </p>
             </div>
@@ -849,7 +850,7 @@ export default function ContentManager({
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-[11px] font-bold text-slate-700 mb-1">
+                    <label className="block text-[11px] font-semibold text-slate-700 mb-1">
                       Tên khách hàng
                     </label>
                     <input
@@ -860,12 +861,12 @@ export default function ContentManager({
                         updated[idx].name = e.target.value;
                         setTestimonialsData(updated);
                       }}
-                      className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-xs font-bold text-slate-900 outline-none"
+                      className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-xs font-semibold text-slate-900 outline-none"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-[11px] font-bold text-slate-700 mb-1">
+                    <label className="block text-[11px] font-semibold text-slate-700 mb-1">
                       Chức danh / Nghề nghiệp
                     </label>
                     <input
@@ -883,7 +884,7 @@ export default function ContentManager({
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-[11px] font-bold text-slate-700 mb-1">
+                    <label className="block text-[11px] font-semibold text-slate-700 mb-1">
                       Chặng đường đã đi
                     </label>
                     <input
@@ -899,7 +900,7 @@ export default function ContentManager({
                   </div>
 
                   <div>
-                    <label className="block text-[11px] font-bold text-slate-700 mb-1">
+                    <label className="block text-[11px] font-semibold text-slate-700 mb-1">
                       Số sao (1 - 5 ⭐)
                     </label>
                     <select
@@ -909,7 +910,7 @@ export default function ContentManager({
                         updated[idx].stars = Number(e.target.value);
                         setTestimonialsData(updated);
                       }}
-                      className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-xs font-bold text-amber-600 outline-none"
+                      className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-xs font-semibold text-amber-600 outline-none"
                     >
                       <option value={5}>⭐⭐⭐⭐⭐ (5 sao - Xuất sắc)</option>
                       <option value={4}>⭐⭐⭐⭐ (4 sao - Tốt)</option>
@@ -931,7 +932,7 @@ export default function ContentManager({
                 />
 
                 <div>
-                  <label className="block text-[11px] font-bold text-slate-700 mb-1">
+                  <label className="block text-[11px] font-semibold text-slate-700 mb-1">
                     Lời nhận xét của khách
                   </label>
                   <textarea
@@ -958,10 +959,10 @@ export default function ContentManager({
         <div className="bg-white rounded-xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
           <div className="flex items-center justify-between border-b border-slate-100 pb-4">
             <div>
-              <h2 className="text-lg font-black text-slate-900">
+              <h2 className="text-lg font-bold text-slate-900">
                 Câu Hỏi Thường Gặp (FAQ) ({selectedLang.toUpperCase()})
               </h2>
-              <p className="text-xs text-slate-500 font-medium">
+              <p className="text-xs text-slate-500 font-normal">
                 Tối ưu SEO FAQPage Schema.org và giải đáp thắc mắc cho hành khách
               </p>
             </div>
@@ -977,7 +978,7 @@ export default function ContentManager({
                     },
                   ])
                 }
-                className="flex items-center gap-1.5 px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-md text-xs font-bold transition-colors cursor-pointer"
+                className="flex items-center gap-1.5 px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-md text-xs font-semibold transition-colors cursor-pointer"
               >
                 <Plus size={14} />
                 <span>Thêm Câu Hỏi</span>
@@ -987,7 +988,7 @@ export default function ContentManager({
                 type="button"
                 disabled={isSaving}
                 onClick={() => handleSaveSection("faq_list", faqData)}
-                className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-xs font-black shadow-sm transition-all cursor-pointer"
+                className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-xs font-semibold shadow-sm transition-all cursor-pointer"
               >
                 <Save size={15} />
                 <span>{isSaving ? "Đang lưu..." : "Lưu Danh Sách FAQ"}</span>
@@ -1014,7 +1015,7 @@ export default function ContentManager({
                 </button>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-800 mb-1">
+                  <label className="block text-xs font-semibold text-slate-800 mb-1">
                     Câu hỏi #{idx + 1} ({selectedLang.toUpperCase()})
                   </label>
                   <input
@@ -1029,12 +1030,12 @@ export default function ContentManager({
                       setFaqData(updated);
                     }}
                     placeholder="Nhập câu hỏi..."
-                    className="w-full px-3.5 py-2 bg-white border border-slate-300 rounded-md text-xs font-bold text-slate-900 outline-none focus:border-blue-600"
+                    className="w-full px-3.5 py-2 bg-white border border-slate-300 rounded-md text-xs font-semibold text-slate-900 outline-none focus:border-blue-600"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-800 mb-1">
+                  <label className="block text-xs font-semibold text-slate-800 mb-1">
                     Câu trả lời ({selectedLang.toUpperCase()})
                   </label>
                   <textarea
@@ -1065,11 +1066,11 @@ export default function ContentManager({
         <div className="bg-white rounded-xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
           <div className="flex items-center justify-between border-b border-slate-100 pb-4">
             <div>
-              <h2 className="text-lg font-black text-slate-900 flex items-center gap-2">
+              <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
                 <Cloud className="text-blue-600" size={22} />
                 <span>Cấu Hình Lưu Trữ Ảnh Đám Mây Cloudinary</span>
               </h2>
-              <p className="text-xs text-slate-500 font-medium">
+              <p className="text-xs text-slate-500 font-normal">
                 Kết nối tài khoản Cloudinary để toàn bộ ảnh tải lên tự động lưu trữ vĩnh viễn và tối ưu tốc độ CDN toàn cầu
               </p>
             </div>
@@ -1077,7 +1078,7 @@ export default function ContentManager({
               type="button"
               disabled={isSaving}
               onClick={() => handleSaveSection("cloudinary_config", cloudinaryConfig)}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-xs font-black shadow-sm transition-all cursor-pointer"
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-xs font-semibold shadow-sm transition-all cursor-pointer"
             >
               <Save size={15} />
               <span>{isSaving ? "Đang lưu..." : "Lưu Cấu Hình Cloudinary"}</span>
@@ -1085,7 +1086,7 @@ export default function ContentManager({
           </div>
 
           <div className="p-4 bg-blue-50/60 border border-blue-200 rounded-lg text-xs text-blue-900 font-medium space-y-2">
-            <p className="font-extrabold flex items-center gap-1.5 text-blue-700">
+            <p className="font-semibold flex items-center gap-1.5 text-blue-700">
               <span>💡 Cách lấy thông tin Cloudinary (Miễn phí 100%):</span>
             </p>
             <ol className="list-decimal list-inside space-y-1 text-slate-700">
@@ -1095,7 +1096,7 @@ export default function ContentManager({
                   href="https://cloudinary.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="text-blue-600 font-bold underline inline-flex items-center gap-0.5"
+                  className="text-blue-600 font-semibold underline inline-flex items-center gap-0.5"
                 >
                   cloudinary.com <ExternalLink size={12} />
                 </a>
@@ -1107,7 +1108,7 @@ export default function ContentManager({
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
+              <label className="block text-xs font-semibold text-slate-800 mb-1.5">
                 Cloud Name *
               </label>
               <input
@@ -1117,12 +1118,12 @@ export default function ContentManager({
                   setCloudinaryConfig({ ...cloudinaryConfig, cloud_name: e.target.value })
                 }
                 placeholder="ví dụ: maigo79 hoặc dx9xyz..."
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600 font-mono"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-semibold text-slate-900 outline-none focus:bg-white focus:border-blue-600 font-mono"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
+              <label className="block text-xs font-semibold text-slate-800 mb-1.5">
                 Upload Preset (Tùy chọn - Unsigned)
               </label>
               <input
@@ -1137,7 +1138,7 @@ export default function ContentManager({
             </div>
 
             <div>
-              <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
+              <label className="block text-xs font-semibold text-slate-800 mb-1.5">
                 API Key
               </label>
               <input
@@ -1152,7 +1153,7 @@ export default function ContentManager({
             </div>
 
             <div>
-              <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
+              <label className="block text-xs font-semibold text-slate-800 mb-1.5">
                 API Secret
               </label>
               <input
@@ -1175,10 +1176,10 @@ export default function ContentManager({
       {activeTab === "raw_json" && (
         <div className="bg-white rounded-xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
           <div>
-            <h2 className="text-lg font-black text-slate-900">
+            <h2 className="text-lg font-bold text-slate-900">
               Quản Trị Nâng Cao - Dữ Liệu Thô (Raw JSON Database)
             </h2>
-            <p className="text-xs text-slate-500 font-medium">
+            <p className="text-xs text-slate-500 font-normal">
               Chỉnh sửa trực tiếp cấu trúc JSON của từng khóa dữ liệu trong bảng <code>site_content</code>
             </p>
           </div>
@@ -1190,7 +1191,7 @@ export default function ContentManager({
                 className="p-5 bg-slate-50 rounded-lg border border-slate-200 space-y-3"
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs font-extrabold text-blue-600">
+                  <span className="font-mono text-xs font-semibold text-blue-600">
                     {item.content_key}
                   </span>
                   <button
@@ -1208,7 +1209,7 @@ export default function ContentManager({
                         alert("Lỗi cú pháp JSON: " + msg);
                       }
                     }}
-                    className="flex items-center gap-1 px-3 py-1.5 bg-blue-600 text-white rounded-md text-xs font-bold cursor-pointer"
+                    className="flex items-center gap-1 px-3 py-1.5 bg-blue-600 text-white rounded-md text-xs font-semibold cursor-pointer"
                   >
                     <Save size={12} />
                     <span>Lưu</span>

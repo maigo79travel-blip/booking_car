@@ -233,19 +233,19 @@ export default function AdminPage() {
       <main className="min-h-screen grid place-items-center bg-linear-to-br from-blue-50 via-slate-100 to-indigo-50 p-4">
         <div className="w-full max-w-md bg-white rounded-xl p-6 md:p-8 shadow-lg border border-gray-200 animate-in zoom-in-95 duration-200">
           <div className="text-center mb-6">
-            <div className="w-14 h-14 rounded-lg bg-linear-to-tr from-blue-600 to-indigo-700 text-white flex items-center justify-center font-black text-xl mx-auto shadow-md shadow-blue-200 mb-3.5">
-              IA
+            <div className="w-14 h-14 rounded-lg bg-linear-to-tr from-blue-600 to-indigo-700 text-white flex items-center justify-center font-bold text-xl mx-auto shadow-md shadow-blue-200 mb-3.5">
+              MG
             </div>
-            <h1 className="text-2xl font-black text-gray-950 tracking-tight">
-              inhatrang<span className="text-blue-600">Admin</span>
+            <h1 className="text-2xl font-bold text-gray-950 tracking-tight">
+              maigo79<span className="text-blue-600 font-semibold">Admin</span>
             </h1>
-            <p className="text-xs md:text-sm text-gray-600 font-medium mt-1.5">
+            <p className="text-xs md:text-sm text-gray-600 font-normal mt-1.5">
               Đăng nhập tài khoản quản trị hệ thống
             </p>
           </div>
 
           {message && (
-            <div className="mb-4 p-3 bg-red-50 border border-red-300 rounded-md text-xs text-red-800 font-bold flex items-center gap-2">
+            <div className="mb-4 p-3 bg-red-50 border border-red-300 rounded-md text-xs text-red-800 font-medium flex items-center gap-2">
               <AlertCircle size={16} className="text-red-600 shrink-0" />
               <span>{message}</span>
             </div>
@@ -253,7 +253,7 @@ export default function AdminPage() {
 
           <form onSubmit={login} className="space-y-4">
             <div>
-              <label className="block text-xs font-extrabold text-gray-900 mb-1.5">
+              <label className="block text-xs font-semibold text-gray-900 mb-1.5">
                 Email Quản Trị
               </label>
               <div className="relative flex items-center">
@@ -266,13 +266,13 @@ export default function AdminPage() {
                     setCredentials({ ...credentials, email: e.target.value })
                   }
                   required
-                  className="w-full pl-10 pr-4 py-2.5 rounded-md border border-gray-300 bg-white text-gray-950 text-sm font-semibold outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-100 transition-all placeholder:text-gray-400"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-md border border-gray-300 bg-white text-gray-950 text-sm font-medium outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-100 transition-all placeholder:text-gray-400"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-extrabold text-gray-900 mb-1.5">
+              <label className="block text-xs font-semibold text-gray-900 mb-1.5">
                 Mật Khẩu
               </label>
               <div className="relative flex items-center">
@@ -285,12 +285,12 @@ export default function AdminPage() {
                     setCredentials({ ...credentials, password: e.target.value })
                   }
                   required
-                  className="w-full pl-10 pr-12 py-2.5 rounded-md border border-gray-300 bg-white text-gray-950 text-sm font-semibold outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-100 transition-all placeholder:text-gray-400"
+                  className="w-full pl-10 pr-12 py-2.5 rounded-md border border-gray-300 bg-white text-gray-950 text-sm font-medium outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-100 transition-all placeholder:text-gray-400"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3.5 text-gray-500 hover:text-gray-800 text-xs font-bold p-1 cursor-pointer"
+                  className="absolute right-3.5 text-gray-500 hover:text-gray-800 text-xs font-semibold p-1 cursor-pointer"
                 >
                   {showPassword ? "Ẩn" : "Hiện"}
                 </button>
@@ -300,7 +300,7 @@ export default function AdminPage() {
             <button
               type="submit"
               disabled={isLoggingIn}
-              className="w-full mt-2 bg-linear-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-3 rounded-md shadow-md shadow-blue-200 transition-all flex items-center justify-center gap-2 text-sm cursor-pointer"
+              className="w-full mt-2 bg-linear-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-semibold py-3 rounded-md shadow-md shadow-blue-200 transition-all flex items-center justify-center gap-2 text-sm cursor-pointer"
             >
               {isLoggingIn ? (
                 <>

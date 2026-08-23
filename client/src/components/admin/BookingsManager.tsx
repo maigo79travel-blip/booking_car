@@ -81,7 +81,7 @@ export default function BookingsManager({
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold text-gray-800">
+          <h1 className="text-2xl font-bold text-gray-800">
             Quản Lý Đơn Đặt Xe ({bookings.length})
           </h1>
           <p className="text-xs md:text-sm text-gray-500">
@@ -98,7 +98,7 @@ export default function BookingsManager({
           </button>
           <button
             onClick={exportCSV}
-            className="flex items-center gap-1.5 px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-md text-xs font-bold shadow-xs transition-all cursor-pointer"
+            className="flex items-center gap-1.5 px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-md text-xs font-semibold shadow-xs transition-all cursor-pointer"
           >
             <Download size={15} />
             <span>Xuất file Excel/CSV</span>
@@ -123,7 +123,7 @@ export default function BookingsManager({
           <select
             value={filterCar}
             onChange={(e) => setFilterCar(e.target.value)}
-            className="px-3 py-2 rounded-md border border-gray-200 text-xs font-semibold text-gray-700 outline-none bg-white flex-1 md:flex-initial"
+            className="px-3 py-2 rounded-md border border-gray-200 text-xs font-medium text-gray-700 outline-none bg-white flex-1 md:flex-initial"
           >
             <option value="all">Tất cả loại xe</option>
             <option value="5">Xe 5 chỗ</option>
@@ -134,7 +134,7 @@ export default function BookingsManager({
           <select
             value={filterWay}
             onChange={(e) => setFilterWay(e.target.value)}
-            className="px-3 py-2 rounded-md border border-gray-200 text-xs font-semibold text-gray-700 outline-none bg-white flex-1 md:flex-initial"
+            className="px-3 py-2 rounded-md border border-gray-200 text-xs font-medium text-gray-700 outline-none bg-white flex-1 md:flex-initial"
           >
             <option value="all">Tất cả loại vé</option>
             <option value="one-way">Một chiều</option>
@@ -148,7 +148,7 @@ export default function BookingsManager({
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead>
-              <tr className="border-b border-gray-100 text-[11px] font-bold text-gray-400 uppercase tracking-wider bg-gray-50/50">
+              <tr className="border-b border-gray-100 text-[11px] font-semibold text-gray-400 uppercase tracking-wider bg-gray-50/50">
                 <th className="py-3.5 px-4">Khách Hàng</th>
                 <th className="py-3.5 px-3">Điện Thoại</th>
                 <th className="py-3.5 px-4">Lộ Trình Đón & Trả</th>
@@ -165,13 +165,13 @@ export default function BookingsManager({
                     key={b.id || idx}
                     className="hover:bg-blue-50/40 transition-colors group"
                   >
-                    <td className="py-3.5 px-4 font-bold text-gray-800">
+                    <td className="py-3.5 px-4 text-gray-800">
                       <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-800 font-extrabold text-xs flex items-center justify-center shrink-0">
+                        <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-800 font-bold text-xs flex items-center justify-center shrink-0">
                           {b.customer_name ? b.customer_name[0].toUpperCase() : "K"}
                         </div>
                         <div>
-                          <div className="font-bold text-gray-900 text-sm">
+                          <div className="font-semibold text-gray-900 text-sm">
                             {b.customer_name}
                           </div>
                           <div className="text-[10px] text-gray-400 font-mono">
@@ -183,41 +183,41 @@ export default function BookingsManager({
                     <td className="py-3.5 px-3">
                       <a
                         href={`tel:${b.phone_number}`}
-                        className="text-blue-600 font-bold hover:underline inline-flex items-center gap-1.5 bg-blue-50 px-2.5 py-1 rounded-lg text-xs"
+                        className="text-blue-600 font-semibold hover:underline inline-flex items-center gap-1.5 bg-blue-50 px-2.5 py-1 rounded-md text-xs"
                       >
                         <Phone size={12} />
                         {b.phone_number}
                       </a>
                     </td>
                     <td className="py-3.5 px-4 text-xs">
-                      <div className="flex items-center gap-1 font-semibold text-gray-800">
+                      <div className="flex items-center gap-1 font-medium text-gray-800">
                         <MapPin size={13} className="text-orange-500 shrink-0" />
                         <span className="truncate max-w-60">{b.from_location}</span>
                       </div>
-                      <div className="flex items-center gap-1 font-semibold text-gray-600 mt-1">
+                      <div className="flex items-center gap-1 font-medium text-gray-600 mt-1">
                         <MapPin size={13} className="text-red-500 shrink-0" />
                         <span className="truncate max-w-60">{b.to_location}</span>
                       </div>
                     </td>
                     <td className="py-3.5 px-3 text-xs text-gray-700 font-mono">
-                      <div className="font-bold text-gray-900">{b.trip_date}</div>
+                      <div className="font-semibold text-gray-900">{b.trip_date}</div>
                       <div className="text-[11px] text-gray-400">{b.trip_time}</div>
                     </td>
                     <td className="py-3.5 px-3">
-                      <span className="bg-orange-50 text-orange-600 font-bold text-xs px-2.5 py-1 rounded-lg border border-orange-100 whitespace-nowrap">
+                      <span className="bg-orange-50 text-orange-600 font-medium text-xs px-2.5 py-1 rounded-md border border-orange-100 whitespace-nowrap">
                         {b.car_type} chỗ
                       </span>
                       <div className="text-[10px] text-gray-400 mt-0.5">
                         {b.way_type === "two-way" ? "Hai chiều" : "Một chiều"}
                       </div>
                     </td>
-                    <td className="py-3.5 px-3 font-extrabold text-emerald-600 text-sm">
+                    <td className="py-3.5 px-3 font-semibold text-emerald-600 text-sm">
                       {Number(b.total_price || 0).toLocaleString("vi-VN")}đ
                     </td>
                     <td className="py-3.5 px-4 text-right">
                       <a
                         href={`tel:${b.phone_number}`}
-                        className="bg-green-500 hover:bg-green-600 text-white font-bold px-3 py-1.5 rounded-lg text-xs transition-colors inline-flex items-center gap-1 shadow-xs"
+                        className="bg-green-500 hover:bg-green-600 text-white font-semibold px-3 py-1.5 rounded-md text-xs transition-colors inline-flex items-center gap-1 shadow-xs"
                       >
                         <Phone size={13} />
                         <span>Gọi ngay</span>

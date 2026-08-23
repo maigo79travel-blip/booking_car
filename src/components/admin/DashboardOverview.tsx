@@ -95,15 +95,15 @@ export default function DashboardOverview({
       {/* Page Header & Breadcrumbs */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <div>
-          <h1 className="text-2xl md:text-3xl font-extrabold text-gray-800 tracking-tight">
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-800 tracking-tight">
             Dashboard
           </h1>
           <p className="text-xs md:text-sm text-gray-500">
             Tổng quan hiệu suất đặt xe, doanh thu và lưu lượng truy cập maigo79.com
           </p>
         </div>
-        <div className="text-xs font-semibold text-gray-400">
-          <span>Home</span> / <span className="text-blue-600 font-bold">Dashboard</span>
+        <div className="text-xs font-medium text-gray-400">
+          <span>Home</span> / <span className="text-blue-600 font-semibold">Dashboard</span>
         </div>
       </div>
 
@@ -113,10 +113,10 @@ export default function DashboardOverview({
         <div className="bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
           <div className="flex items-start justify-between">
             <div>
-              <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">
+              <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider block">
                 DOANH THU DỰ KIẾN
               </span>
-              <span className="text-xl lg:text-2xl font-black text-gray-800 mt-1 block">
+              <span className="text-xl lg:text-2xl font-bold text-gray-800 mt-1 block">
                 {totalRevenue > 0 ? formatCurrency(totalRevenue) : "45.800.000₫"}
               </span>
             </div>
@@ -124,7 +124,7 @@ export default function DashboardOverview({
               <Calendar size={20} />
             </div>
           </div>
-          <div className="flex items-center gap-1.5 text-xs text-emerald-600 font-bold mt-4">
+          <div className="flex items-center gap-1.5 text-xs text-emerald-600 font-semibold mt-4">
             <TrendingUp size={14} />
             <span>↑ 14.8%</span>
             <span className="text-gray-400 font-normal text-[11px]">so với tháng trước</span>
@@ -135,10 +135,10 @@ export default function DashboardOverview({
         <div className="bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
           <div className="flex items-start justify-between">
             <div>
-              <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">
+              <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider block">
                 TỔNG CUỐC XE
               </span>
-              <span className="text-xl lg:text-2xl font-black text-gray-800 mt-1 block">
+              <span className="text-xl lg:text-2xl font-bold text-gray-800 mt-1 block">
                 {totalBookings > 0 ? `${totalBookings} chuyến` : "142 chuyến"}
               </span>
             </div>
@@ -146,7 +146,7 @@ export default function DashboardOverview({
               <Car size={20} />
             </div>
           </div>
-          <div className="flex items-center gap-1.5 text-xs text-emerald-600 font-bold mt-4">
+          <div className="flex items-center gap-1.5 text-xs text-emerald-600 font-semibold mt-4">
             <TrendingUp size={14} />
             <span>↑ 12%</span>
             <span className="text-gray-400 font-normal text-[11px]">tăng trưởng đều đặn</span>
@@ -157,10 +157,10 @@ export default function DashboardOverview({
         <div className="bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
           <div className="flex items-start justify-between">
             <div>
-              <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">
+              <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider block">
                 KHÁCH HÀNG MỚI
               </span>
-              <span className="text-xl lg:text-2xl font-black text-gray-800 mt-1 block">
+              <span className="text-xl lg:text-2xl font-bold text-gray-800 mt-1 block">
                 {uniqueCustomers > 0 ? `${uniqueCustomers} khách` : "98 khách"}
               </span>
             </div>
@@ -168,7 +168,7 @@ export default function DashboardOverview({
               <Users size={20} />
             </div>
           </div>
-          <div className="flex items-center gap-1.5 text-xs text-emerald-600 font-bold mt-4">
+          <div className="flex items-center gap-1.5 text-xs text-emerald-600 font-semibold mt-4">
             <TrendingUp size={14} />
             <span>↑ 20.4%</span>
             <span className="text-gray-400 font-normal text-[11px]">khách quay lại 45%</span>
@@ -179,10 +179,10 @@ export default function DashboardOverview({
         <div className="bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
           <div className="flex items-start justify-between">
             <div>
-              <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">
+              <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider block">
                 ĐƠN ĐẶT MỚI
               </span>
-              <span className="text-xl lg:text-2xl font-black text-gray-800 mt-1 block">
+              <span className="text-xl lg:text-2xl font-bold text-gray-800 mt-1 block">
                 {pendingRequests} đơn
               </span>
             </div>
@@ -190,7 +190,7 @@ export default function DashboardOverview({
               <MessageSquare size={20} />
             </div>
           </div>
-          <div className="flex items-center gap-1.5 text-xs text-rose-600 font-bold mt-4">
+          <div className="flex items-center gap-1.5 text-xs text-rose-600 font-semibold mt-4">
             <TrendingDown size={14} />
             <span>↓ 1.10%</span>
             <span className="text-gray-400 font-normal text-[11px]">thời gian phản hồi &lt; 3p</span>
@@ -204,7 +204,7 @@ export default function DashboardOverview({
         <div className="lg:col-span-2 bg-white rounded-xl p-5 md:p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h2 className="text-base md:text-lg font-extrabold text-blue-950">
+              <h2 className="text-base md:text-lg font-bold text-blue-950">
                 Monthly Recap Report
               </h2>
               <p className="text-xs text-gray-400">
@@ -285,7 +285,7 @@ export default function DashboardOverview({
         <div className="bg-white rounded-xl p-5 md:p-6 border border-gray-100 shadow-sm flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-5">
-              <h2 className="text-base font-extrabold text-blue-950">
+              <h2 className="text-base font-bold text-blue-950">
                 Top Tuyến Xe Chạy
               </h2>
               <div className="relative">
@@ -295,7 +295,7 @@ export default function DashboardOverview({
                       prev === "Tháng này" ? "Hôm nay" : prev === "Hôm nay" ? "Năm nay" : "Tháng này"
                     )
                   }
-                  className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-1.5 rounded-md flex items-center gap-1 shadow-xs cursor-pointer"
+                  className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-3 py-1.5 rounded-md flex items-center gap-1 shadow-xs cursor-pointer"
                 >
                   <span>{selectedRange}</span>
                   <ChevronDown size={12} />
@@ -307,7 +307,7 @@ export default function DashboardOverview({
             <div className="space-y-4">
               {topRoutes.map((route, i) => (
                 <div key={i} className="space-y-1.5">
-                  <div className="flex justify-between text-xs font-semibold">
+                  <div className="flex justify-between text-xs font-medium">
                     <span className="text-gray-700 truncate max-w-42.5" title={route.name}>
                       {route.name}
                     </span>
@@ -328,7 +328,7 @@ export default function DashboardOverview({
 
           <button
             onClick={() => onNavigateTab("routes")}
-            className="mt-6 w-full text-center text-xs font-bold text-blue-600 hover:text-blue-700 py-2 border-t border-gray-100 flex items-center justify-center gap-1 cursor-pointer"
+            className="mt-6 w-full text-center text-xs font-semibold text-blue-600 hover:text-blue-700 py-2 border-t border-gray-100 flex items-center justify-center gap-1 cursor-pointer"
           >
             <span>Xem tất cả bảng giá tuyến</span>
             <ArrowRight size={13} />
@@ -340,7 +340,7 @@ export default function DashboardOverview({
       <div className="bg-white rounded-xl p-5 md:p-6 border border-gray-100 shadow-sm">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h2 className="text-lg font-extrabold text-gray-800">
+            <h2 className="text-lg font-bold text-gray-800">
               Đơn Đặt Xe Gần Đây
             </h2>
             <p className="text-xs text-gray-500">
@@ -349,7 +349,7 @@ export default function DashboardOverview({
           </div>
           <button
             onClick={() => onNavigateTab("bookings")}
-            className="bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs px-3.5 py-1.5 rounded-lg shadow-xs transition-all flex items-center gap-1 cursor-pointer"
+            className="bg-rose-500 hover:bg-rose-600 text-white font-semibold text-xs px-3.5 py-1.5 rounded-lg shadow-xs transition-all flex items-center gap-1 cursor-pointer"
           >
             <span>Xem Tất Cả</span>
             <ArrowRight size={14} />
@@ -360,7 +360,7 @@ export default function DashboardOverview({
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead>
-              <tr className="border-b border-gray-100 text-[11px] font-bold text-gray-400 uppercase tracking-wider bg-gray-50/50">
+              <tr className="border-b border-gray-100 text-[11px] font-semibold text-gray-400 uppercase tracking-wider bg-gray-50/50">
                 <th className="py-3 px-4 rounded-l-lg">Khách Hàng</th>
                 <th className="py-3 px-3">Điện Thoại</th>
                 <th className="py-3 px-3">Tuyến Đón Trả</th>
@@ -373,23 +373,23 @@ export default function DashboardOverview({
             <tbody className="divide-y divide-gray-50">
               {bookings.slice(0, 8).map((b, idx) => (
                 <tr key={b.id || idx} className="hover:bg-blue-50/30 transition-colors">
-                  <td className="py-3 px-4 font-bold text-gray-800 flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-full bg-blue-100 text-blue-700 font-extrabold text-xs flex items-center justify-center shrink-0">
+                  <td className="py-3 px-4 font-semibold text-gray-800 flex items-center gap-2">
+                    <div className="w-7 h-7 rounded-full bg-blue-100 text-blue-700 font-bold text-xs flex items-center justify-center shrink-0">
                       {b.customer_name ? b.customer_name[0].toUpperCase() : "K"}
                     </div>
-                    <span className="truncate max-w-30">{b.customer_name}</span>
+                    <span className="truncate max-w-30 font-medium">{b.customer_name}</span>
                   </td>
                   <td className="py-3 px-3">
                     <a
                       href={`tel:${b.phone_number}`}
-                      className="text-blue-600 font-semibold hover:underline flex items-center gap-1 text-xs"
+                      className="text-blue-600 font-medium hover:underline flex items-center gap-1 text-xs"
                     >
                       <Phone size={12} />
                       {b.phone_number}
                     </a>
                   </td>
                   <td className="py-3 px-3 text-xs text-gray-600 max-w-50">
-                    <div className="font-semibold text-gray-800 truncate">
+                    <div className="font-medium text-gray-800 truncate">
                       {b.from_location} → {b.to_location}
                     </div>
                     <span className="text-[10px] text-gray-400">
@@ -400,17 +400,17 @@ export default function DashboardOverview({
                     {b.trip_date} {b.trip_time}
                   </td>
                   <td className="py-3 px-3">
-                    <span className="bg-orange-50 text-orange-600 font-bold text-xs px-2.5 py-1 rounded-md border border-orange-100">
+                    <span className="bg-orange-50 text-orange-600 font-medium text-xs px-2.5 py-1 rounded-md border border-orange-100">
                       {b.car_type} chỗ
                     </span>
                   </td>
-                  <td className="py-3 px-3 font-bold text-emerald-600 text-xs">
+                  <td className="py-3 px-3 font-semibold text-emerald-600 text-xs">
                     {Number(b.total_price).toLocaleString("vi-VN")}đ
                   </td>
                   <td className="py-3 px-4 text-right">
                     <button
                       onClick={() => onNavigateTab("bookings")}
-                      className="bg-blue-50 hover:bg-blue-100 text-blue-600 font-bold p-1.5 rounded-lg transition-colors cursor-pointer inline-flex items-center gap-1 text-xs"
+                      className="bg-blue-50 hover:bg-blue-100 text-blue-600 font-medium p-1.5 rounded-lg transition-colors cursor-pointer inline-flex items-center gap-1 text-xs"
                       title="Xem chi tiết"
                     >
                       <Eye size={14} />

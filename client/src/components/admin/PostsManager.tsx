@@ -67,7 +67,7 @@ export default function PostsManager({
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold text-gray-800">
+          <h1 className="text-2xl font-bold text-gray-800">
             Quản Lý Bài Viết SEO ({posts.length})
           </h1>
           <p className="text-xs md:text-sm text-gray-500">
@@ -76,7 +76,7 @@ export default function PostsManager({
         </div>
         <button
           onClick={() => setIsCreating(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-linear-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white rounded-md text-xs md:text-sm font-bold shadow-sm transition-all cursor-pointer"
+          className="flex items-center gap-2 px-4 py-2 bg-linear-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white rounded-md text-xs md:text-sm font-semibold shadow-sm transition-all cursor-pointer"
         >
           <Plus size={16} />
           <span>Tạo Bài Viết Mới</span>
@@ -100,7 +100,7 @@ export default function PostsManager({
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-3 py-2 rounded-md border border-gray-200 text-xs font-semibold text-gray-700 outline-none bg-white"
+            className="px-3 py-2 rounded-md border border-gray-200 text-xs font-medium text-gray-700 outline-none bg-white"
           >
             <option value="all">Tất cả trạng thái</option>
             <option value="published">Đã công khai (Published)</option>
@@ -114,7 +114,7 @@ export default function PostsManager({
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead>
-              <tr className="border-b border-gray-100 text-[11px] font-bold text-gray-400 uppercase tracking-wider bg-gray-50/50">
+              <tr className="border-b border-gray-100 text-[11px] font-semibold text-gray-400 uppercase tracking-wider bg-gray-50/50">
                 <th className="py-3.5 px-4">Bài Viết</th>
                 <th className="py-3.5 px-3">Đường Dẫn (Slug)</th>
                 <th className="py-3.5 px-3">Đa Ngôn Ngữ</th>
@@ -150,7 +150,7 @@ export default function PostsManager({
                             )}
                           </div>
                           <div>
-                            <h3 className="font-bold text-gray-900 text-sm line-clamp-1 max-w-70">
+                            <h3 className="font-semibold text-gray-900 text-sm line-clamp-1 max-w-70">
                               {titleStr}
                             </h3>
                             <p className="text-[11px] text-gray-400 line-clamp-1 max-w-70">
@@ -171,7 +171,7 @@ export default function PostsManager({
                             return (
                               <span
                                 key={code}
-                                className={`text-[10px] uppercase font-bold px-1.5 py-0.5 rounded ${
+                                className={`text-[10px] uppercase font-medium px-1.5 py-0.5 rounded ${
                                   hasLang
                                     ? "bg-blue-100 text-blue-700"
                                     : "bg-gray-100 text-gray-400"
@@ -186,7 +186,7 @@ export default function PostsManager({
 
                       <td className="py-3.5 px-3">
                         <span
-                          className={`inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-full ${
+                          className={`inline-flex items-center gap-1 text-[11px] font-semibold px-2.5 py-1 rounded-full ${
                             p.status === "published"
                               ? "bg-green-100 text-green-700"
                               : "bg-amber-100 text-amber-700"

@@ -254,7 +254,7 @@ export default function AdminPage() {
                 <Mail size={18} className="absolute left-3.5 text-gray-500" />
                 <input
                   type="email"
-                  placeholder="admin@inhatrang.vn"
+                  placeholder="admin@maigo79.com"
                   value={credentials.email}
                   onChange={(e) =>
                     setCredentials({ ...credentials, email: e.target.value })
@@ -311,7 +311,7 @@ export default function AdminPage() {
           </form>
 
           <div className="mt-6 text-center text-xs font-medium text-gray-500">
-            inhatrang.vn • Hệ thống điều phối & quản lý xe chuyên nghiệp 24/7
+            maigo79.com • Hệ thống điều phối & quản lý xe chuyên nghiệp 24/7
           </div>
         </div>
       </main>

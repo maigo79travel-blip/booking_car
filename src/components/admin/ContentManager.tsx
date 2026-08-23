@@ -99,12 +99,12 @@ export default function ContentManager({
   }));
 
   const [contactData, setContactData] = useState(() => ({
-    brand_name: getContent("contact_info", {}).brand_name || "inhatrang.vn",
+    brand_name: getContent("contact_info", {}).brand_name || "maigo79.com",
     hotline: getContent("contact_info", {}).hotline || "0928015280",
     hotline_display: getContent("contact_info", {}).hotline_display || "0928.015.280",
     zalo: getContent("contact_info", {}).zalo || "0905876231",
-    telegram: getContent("contact_info", {}).telegram || "https://t.me/inoibai_vn",
-    email: getContent("contact_info", {}).email || "inhatrang.vn@gmail.com",
+    telegram: getContent("contact_info", {}).telegram || "https://t.me/maigo79_vn",
+    email: getContent("contact_info", {}).email || "contact@maigo79.com",
     address: getContent("contact_info", {}).address || "Cột số 3 & 4 - Sảnh Đến Ga Quốc Nội & Quốc Tế, Sân bay Quốc tế Cam Ranh, Khánh Hòa",
     logo_url: getContent("contact_info", {}).logo_url || "/images/Brand.jpg",
     working_hours: getContent("contact_info", {}).working_hours || "24/7 (Phục vụ cả ngày lễ & Tết)",
@@ -193,7 +193,7 @@ export default function ContentManager({
     getContent("faq_list", [
       {
         q: {
-          vi: "Giá xe sân bay Cam Ranh tại inhatrang.vn đã bao gồm các chi phí cầu đường và vé sân bay chưa?",
+          vi: "Giá xe sân bay Cam Ranh tại maigo79.com đã bao gồm các chi phí cầu đường và vé sân bay chưa?",
           en: "Does the price include all highway toll fees and Cam Ranh airport surcharges?",
         },
         a: {
@@ -217,8 +217,8 @@ export default function ContentManager({
           en: "If my flight to Cam Ranh is delayed, will I be charged extra waiting fees?",
         },
         a: {
-          vi: "inhatrang.vn MIỄN PHÍ 100% phí chờ khi chuyến bay bị hoãn. Tài xế sẽ theo dõi số hiệu chuyến bay của bạn và có mặt đón đúng lúc bạn hạ cánh.",
-          en: "inhatrang.vn provides 100% FREE waiting time for delayed flights. Our dispatchers track flight numbers and adjust pickup times accordingly.",
+          vi: "maigo79.com MIỄN PHÍ 100% phí chờ khi chuyến bay bị hoãn. Tài xế sẽ theo dõi số hiệu chuyến bay của bạn và có mặt đón đúng lúc bạn hạ cánh.",
+          en: "maigo79.com provides 100% FREE waiting time for delayed flights. Our dispatchers track flight numbers and adjust pickup times accordingly.",
         },
       },
     ])
@@ -560,7 +560,7 @@ export default function ContentManager({
                 type="text"
                 value={contactData.telegram}
                 onChange={(e) => setContactData({ ...contactData, telegram: e.target.value })}
-                placeholder="https://t.me/inoibai_vn"
+                placeholder="https://t.me/maigo79_vn"
                 className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>
@@ -573,7 +573,7 @@ export default function ContentManager({
                 type="email"
                 value={contactData.email}
                 onChange={(e) => setContactData({ ...contactData, email: e.target.value })}
-                placeholder="inhatrang.vn@gmail.com"
+                placeholder="contact@maigo79.com"
                 className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>
@@ -1076,7 +1076,7 @@ export default function ContentManager({
                 onChange={(e) =>
                   setCloudinaryConfig({ ...cloudinaryConfig, cloud_name: e.target.value })
                 }
-                placeholder="ví dụ: dinoibai hoặc dx9xyz..."
+                placeholder="ví dụ: maigo79 hoặc dx9xyz..."
                 className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600 font-mono"
               />
             </div>
@@ -1091,7 +1091,7 @@ export default function ContentManager({
                 onChange={(e) =>
                   setCloudinaryConfig({ ...cloudinaryConfig, upload_preset: e.target.value })
                 }
-                placeholder="ví dụ: ml_default hoặc inhatrang_preset"
+                placeholder="ví dụ: ml_default hoặc maigo79_preset"
                 className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-medium text-slate-900 outline-none focus:bg-white focus:border-blue-600 font-mono"
               />
             </div>

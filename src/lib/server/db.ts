@@ -30,7 +30,7 @@ export async function query<T = any>(text: string, params?: any[]): Promise<T[]>
 
 const SESSION_SECRET =
   process.env.SUPABASE_SERVICE_ROLE_KEY ||
-  "inoibai-secure-admin-secret-key-2026-super-safe";
+  "maigo79-secure-admin-secret-key-2026-super-safe";
 
 export function createSessionToken(userId: string, email: string): string {
   const payload = JSON.stringify({

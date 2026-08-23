@@ -41,7 +41,7 @@ export const testimonials: Testimonial[] = [
       "https://ui-avatars.com/api/?name=Le+Quang+Minh&background=f97316&color=fff",
     rating: 5,
     comment:
-      "Tôi thường xuyên công tác tại Nha Trang, luôn tin tưởng đặt xe đưa đón sân bay Cam Ranh tại inhatrang.vn. Tài xế lịch sự, hỗ trợ hành lý chu đáo.",
+      "Tôi thường xuyên công tác tại Nha Trang, luôn tin tưởng đặt xe đưa đón sân bay Cam Ranh tại maigo79.com. Tài xế lịch sự, hỗ trợ hành lý chu đáo.",
     date: "05/01/2026",
     location: "Nha Trang",
     service: "Xe sân bay Cam Ranh",

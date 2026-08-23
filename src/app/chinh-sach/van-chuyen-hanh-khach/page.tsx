@@ -5,14 +5,14 @@ import Footer from "@/components/Footer";
 import FloatingContacts from "@/components/FloatingContacts";
 
 export const metadata: Metadata = {
-  title: "Quy định vận chuyển hành khách",
+  title: "Quy định vận chuyển hành khách | maigo79.com",
   description:
-    "Chi tiết quy định về xác nhận lịch trình, thời gian tài xế chờ, hủy chuyến và chính sách xe đưa đón sân bay Cam Ranh tại inhatrang.vn.",
+    "Chi tiết quy định về xác nhận lịch trình, thời gian tài xế chờ, hủy chuyến và chính sách xe đưa đón sân bay Cam Ranh tại maigo79.com.",
   alternates: {
     canonical: "/chinh-sach/van-chuyen-hanh-khach",
   },
   openGraph: {
-    title: "Quy định vận chuyển hành khách | inhatrang.vn",
+    title: "Quy định vận chuyển hành khách | maigo79.com",
     description:
       "Chi tiết quy định về xác nhận lịch trình, thời gian tài xế chờ, hủy chuyến và chính sách dịch vụ xe sân bay Cam Ranh.",
     url: "/chinh-sach/van-chuyen-hanh-khach",
@@ -20,8 +20,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "Quy định vận chuyển hành khách | inhatrang.vn",
-    description: "Quy định đặt xe và đưa đón sân bay Cam Ranh tại inhatrang.vn.",
+    title: "Quy định vận chuyển hành khách | maigo79.com",
+    description: "Quy định đặt xe và đưa đón sân bay Cam Ranh tại maigo79.com.",
   },
 };
 

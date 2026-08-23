@@ -30,10 +30,10 @@ const Footer = () => {
           {/* Company Info */}
           <div className="col-span-1">
             <div className="flex items-center gap-3 mb-4">
-              <Link href="/" aria-label="Trang chủ inhatrang.vn">
+              <Link href="/" aria-label="Trang chủ maigo79.com">
                 <Image
                   src={contact.logo_url || "/images/Brand.jpg"}
-                  alt={`${contact.brand_name || "inhatrang.vn"} - Taxi đưa đón sân bay Cam Ranh giá rẻ`}
+                  alt={`${contact.brand_name || "maigo79.com"} - Taxi đưa đón sân bay Cam Ranh giá rẻ`}
                   width={60}
                   height={60}
                   className="rounded-xl hover:opacity-80 transition-opacity object-cover shadow-sm"
@@ -193,10 +193,10 @@ const Footer = () => {
                 <div>
                   <p className="text-xs text-slate-400 font-semibold">{t.footer.emailTitle}</p>
                   <a
-                    href={`mailto:${contact.email || "inhatrang.vn@gmail.com"}`}
+                    href={`mailto:${contact.email || "contact@maigo79.com"}`}
                     className="text-slate-300 hover:text-[#75A2BF] text-sm transition-colors"
                   >
-                    {contact.email || "inhatrang.vn@gmail.com"}
+                    {contact.email || "contact@maigo79.com"}
                   </a>
                 </div>
               </li>
@@ -224,28 +224,28 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="bg-[#174978] hover:bg-[#003366] p-2.5 rounded-full transition-colors text-white"
-              aria-label="Facebook inhatrang.vn"
+              aria-label="Facebook maigo79.com"
             >
               <Facebook size={18} />
             </a>
             <a
               href="#"
               className="bg-[#2F5F8A] hover:bg-[#174978] p-2.5 rounded-full transition-colors text-white"
-              aria-label="Twitter inhatrang.vn"
+              aria-label="Twitter maigo79.com"
             >
               <Twitter size={18} />
             </a>
             <a
               href="#"
               className="bg-[#46769B] hover:bg-[#2F5F8A] p-2.5 rounded-full transition-colors text-white"
-              aria-label="Instagram inhatrang.vn"
+              aria-label="Instagram maigo79.com"
             >
               <Instagram size={18} />
             </a>
             <a
               href="#"
               className="bg-[#003366] hover:bg-[#002244] p-2.5 rounded-full transition-colors text-white"
-              aria-label="Youtube inhatrang.vn"
+              aria-label="Youtube maigo79.com"
             >
               <Youtube size={18} />
             </a>

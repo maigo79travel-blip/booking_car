@@ -12,7 +12,7 @@ const FloatingContacts = () => {
   const zaloLink = zaloNumber.startsWith("http")
     ? zaloNumber
     : `https://zalo.me/${zaloNumber.replace(/[^0-9+]/g, "")}`;
-  const telegramLink = contact.telegram || "https://t.me/inoibai_vn";
+  const telegramLink = contact.telegram || "https://t.me/maigo79_vn";
 
   const contacts = [
     {

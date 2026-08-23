@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Quản trị hệ thống - inhatrang.vn",
+  title: "Quản trị hệ thống - maigo79.com",
   robots: {
     index: false,
     follow: false,

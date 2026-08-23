@@ -17,7 +17,7 @@ export default function ImageUploadField({
   label,
   value,
   onChange,
-  folder = "inhatrang",
+  folder = "maigo79",
   placeholder = "https://res.cloudinary.com/... hoặc /images/...",
   helperText,
 }: ImageUploadFieldProps) {

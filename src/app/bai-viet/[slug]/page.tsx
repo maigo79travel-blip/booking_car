@@ -25,7 +25,7 @@ export async function generateMetadata({
 
   const pageTitle = text(post.seo_title) || text(post.title);
   const pageDesc = text(post.seo_description) || text(post.excerpt);
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://inhatrang.vn";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://maigo79.com";
 
   return {
     title: pageTitle,
@@ -66,7 +66,7 @@ export default async function PostPage({
   const post = await getPost(slug);
   if (!post) notFound();
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://inhatrang.vn";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://maigo79.com";
   const postTitle = text(post.title);
   const postDesc = text(post.excerpt);
   const postDate = post.published_at || new Date().toISOString();
@@ -81,12 +81,12 @@ export default async function PostPage({
     "dateModified": postDate,
     "author": {
       "@type": "Organization",
-      "name": "inhatrang.vn",
+      "name": "maigo79.com",
       "url": siteUrl,
     },
     "publisher": {
       "@type": "Organization",
-      "name": "inhatrang.vn",
+      "name": "maigo79.com",
       "logo": {
         "@type": "ImageObject",
         "url": `${siteUrl}/images/Brand.jpg`,

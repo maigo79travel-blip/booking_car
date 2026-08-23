@@ -193,7 +193,7 @@ export default function AdminSidebar({
             <span>Đăng xuất hệ thống</span>
           </button>
           <div className="mt-2 text-center text-[11px] text-gray-400">
-            inhatrang.vn Admin • Phiên bản 2.4.0
+            maigo79.com Admin • Phiên bản 2.4.0
           </div>
         </div>
       </aside>

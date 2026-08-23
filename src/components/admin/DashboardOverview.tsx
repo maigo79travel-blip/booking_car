@@ -99,7 +99,7 @@ export default function DashboardOverview({
             Dashboard
           </h1>
           <p className="text-xs md:text-sm text-gray-500">
-            Tổng quan hiệu suất đặt xe, doanh thu và lưu lượng truy cập inhatrang.vn
+            Tổng quan hiệu suất đặt xe, doanh thu và lưu lượng truy cập maigo79.com
           </p>
         </div>
         <div className="text-xs font-semibold text-gray-400">

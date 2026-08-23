@@ -7,9 +7,9 @@ import Link from "next/link";
 import { Truck, Lock, ChevronRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Chính sách & Điều khoản dịch vụ đặt xe",
+  title: "Chính sách & Điều khoản dịch vụ đặt xe - maigo79.com",
   description:
-    "Chính sách vận chuyển hành khách, bảo vệ quyền riêng tư và các quy định về dịch vụ xe đưa đón sân bay Cam Ranh tại inhatrang.vn.",
+    "Chính sách vận chuyển hành khách, bảo vệ quyền riêng tư và các quy định về dịch vụ xe đưa đón sân bay Cam Ranh tại maigo79.com.",
   alternates: {
     canonical: "/chinh-sach",
   },
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Chính sách & Điều khoản dịch vụ đặt xe",
-    description: "Quy định vận chuyển và chính sách bảo mật tại inhatrang.vn.",
+    description: "Quy định vận chuyển và chính sách bảo mật tại maigo79.com.",
   },
 };
 
@@ -66,7 +66,7 @@ export default function PolicyPage() {
         {/* Introduction */}
         <div className="bg-white rounded-2xl p-6 md:p-8 mb-8 shadow-sm border border-gray-100">
           <p className="text-gray-700 text-base md:text-lg leading-relaxed">
-            Chào mừng quý khách đến với <strong>inhatrang.vn (Dịch vụ xe sân bay Cam Ranh & Nha Trang)</strong>. Dưới đây là các
+            Chào mừng quý khách đến với <strong>maigo79.com (Dịch vụ xe sân bay Cam Ranh & Nha Trang)</strong>. Dưới đây là các
             chính sách và điều khoản sử dụng dịch vụ của chúng tôi nhằm đảm bảo quyền lợi cao nhất cho khách hàng và tính minh bạch trong vận hành.
           </p>
         </div>

@@ -15,14 +15,14 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Về chúng tôi - Dịch vụ xe sân bay Cam Ranh & Nha Trang uy tín inhatrang.vn",
+  title: "Về chúng tôi - Dịch vụ xe sân bay Cam Ranh & Nha Trang uy tín maigo79.com",
   description:
-    "Giới thiệu dịch vụ xe đưa đón sân bay Cam Ranh và tour du lịch Nha Trang - inhatrang.vn. Đội xe đời mới, tài xế phục vụ 24/7, cam kết đúng giờ và giá cước tốt nhất.",
+    "Giới thiệu dịch vụ xe đưa đón sân bay Cam Ranh và tour du lịch Nha Trang - maigo79.com. Đội xe đời mới, tài xế phục vụ 24/7, cam kết đúng giờ và giá cước tốt nhất.",
   alternates: {
     canonical: "/ve-chung-toi",
   },
   openGraph: {
-    title: "Về chúng tôi - Dịch vụ xe sân bay Cam Ranh & Nha Trang uy tín inhatrang.vn",
+    title: "Về chúng tôi - Dịch vụ xe sân bay Cam Ranh & Nha Trang uy tín maigo79.com",
     description:
       "Giới thiệu dịch vụ xe đưa đón sân bay Cam Ranh và tour du lịch Nha Trang. Đội xe đời mới, tài xế chuyên nghiệp 24/7 đón trả tận nơi.",
     url: "/ve-chung-toi",
@@ -47,7 +47,7 @@ export default function AboutPage() {
       {/* Page Title */}
       <div className="container mx-auto px-4 md:px-12 lg:px-24 pt-4 md:pt-6 pb-2">
         <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-          Về Chúng Tôi - inhatrang.vn (Xe Sân Bay Cam Ranh & Tour Nha Trang)
+          Về Chúng Tôi - maigo79.com (Xe Sân Bay Cam Ranh & Tour Nha Trang)
         </h1>
         <div className="w-24 h-1 bg-[#174978] rounded-full"></div>
       </div>
@@ -61,7 +61,7 @@ export default function AboutPage() {
           <div className="prose max-w-none text-gray-700 space-y-4">
             <p className="text-base md:text-lg leading-relaxed">
               Thành lập từ năm 2020,{" "}
-              <strong>Dịch Vụ Xe Sân Bay Cam Ranh & Tour Du Lịch Nha Trang (inhatrang.vn)</strong> hiện nay
+              <strong>Dịch Vụ Xe Sân Bay Cam Ranh & Tour Du Lịch Nha Trang (maigo79.com)</strong> hiện nay
               là đơn vị hàng đầu cung cấp dịch vụ xe đưa đón tại Sân bay Quốc tế Cam Ranh (CXR),
               khu nghỉ dưỡng Bãi Dài, trung tâm thành phố Nha Trang và các tuyến liên tỉnh (Đà Lạt, Mũi Né, Ninh Thuận, Phú Yên).
             </p>
@@ -129,7 +129,7 @@ export default function AboutPage() {
         {/* Our Advantages */}
         <div className="bg-white rounded-2xl p-6 md:p-10 mb-8 shadow-xs border border-gray-100">
           <h2 className="text-xl md:text-2xl font-bold text-[#003366] mb-6">
-            Ưu Điểm Của Dịch Vụ Xe inhatrang.vn
+            Ưu Điểm Của Dịch Vụ Xe maigo79.com
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="flex items-start gap-3">

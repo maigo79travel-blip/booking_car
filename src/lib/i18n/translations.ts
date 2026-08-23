@@ -1,7 +1,7 @@
 export const translations = {
   vi: {
     common: {
-      brandName: "inhatrang.vn",
+      brandName: "maigo79.com",
       tagline: "Đặt xe dễ dàng – Đi lại an tâm",
       hotline: "Hotline",
       hotlineNumber: "0928.015.280",
@@ -84,7 +84,7 @@ export const translations = {
     },
     whyChooseUs: {
       tag: "Ưu thế vượt trội",
-      title: "Tại Sao Nên Chọn Đặt Xe Sân Bay Tại inhatrang.vn?",
+      title: "Tại Sao Nên Chọn Đặt Xe Sân Bay Tại maigo79.com?",
       subtitle: "Chúng tôi tự hào là đơn vị cung cấp giải pháp di chuyển sân bay Cam Ranh và tour du lịch Nha Trang uy tín hàng đầu, mang đến cho quý khách trải nghiệm an toàn, tiết kiệm và trọn vẹn nhất.",
       reasons: [
         {
@@ -136,10 +136,10 @@ export const translations = {
     faq: {
       tag: "Giải đáp thắc mắc",
       title: "Câu Hỏi Thường Gặp Về Đặt Xe Sân Bay Cam Ranh",
-      subtitle: "Tổng hợp những câu hỏi và thông tin cần biết khi sử dụng dịch vụ taxi đưa đón sân bay của inhatrang.vn.",
+      subtitle: "Tổng hợp những câu hỏi và thông tin cần biết khi sử dụng dịch vụ taxi đưa đón sân bay của maigo79.com.",
       items: [
         {
-          q: "Giá cước xe sân bay Cam Ranh tại inhatrang.vn đã bao gồm trọn gói những gì?",
+          q: "Giá cước xe sân bay Cam Ranh tại maigo79.com đã bao gồm trọn gói những gì?",
           a: "Mức giá niêm yết trên website là GIÁ TRỌN GÓI 100%, đã bao gồm: xăng dầu, lương tài xế, phí cầu đường (nếu có) và vé ra vào bãi đỗ sân bay Cam Ranh. Quý khách hoàn toàn yên tâm không phát sinh bất kỳ khoản phụ phí ẩn nào.",
         },
         {
@@ -151,8 +151,8 @@ export const translations = {
           a: "Để đảm bảo được phục vụ chu đáo nhất và chọn được dòng xe ưng ý, quý khách nên đặt xe trước 1 - 2 tiếng (vào ban ngày) hoặc trước 20h00 (đối với các chuyến bay sáng sớm/đêm muộn). Chúng tôi luôn có dàn xe túc trực 24/7 tại sân bay Cam Ranh và trung tâm Nha Trang.",
         },
         {
-          q: "Dịch vụ của inhatrang.vn có xuất hóa đơn VAT và phiếu thu không?",
-          a: "Có. inhatrang.vn hỗ trợ xuất hóa đơn điện tử VAT và phiếu thu hành trình nhanh chóng, đầy đủ theo yêu cầu cho các cơ quan, doanh nghiệp và đoàn du lịch.",
+          q: "Dịch vụ của maigo79.com có xuất hóa đơn VAT và phiếu thu không?",
+          a: "Có. maigo79.com hỗ trợ xuất hóa đơn điện tử VAT và phiếu thu hành trình nhanh chóng, đầy đủ theo yêu cầu cho các cơ quan, doanh nghiệp và đoàn du lịch.",
         },
         {
           q: "Điểm đón khách tại sân bay Cam Ranh ở khu vực nào?",
@@ -166,7 +166,7 @@ export const translations = {
     },
     testimonials: {
       tag: "Trải nghiệm thực tế",
-      title: "Khách Hàng Nói Gì Về inhatrang.vn?",
+      title: "Khách Hàng Nói Gì Về maigo79.com?",
       subtitle: "Hơn 10,000+ lượt khách hàng đã tin tưởng lựa chọn dịch vụ xe đưa đón sân bay Cam Ranh và tour du lịch Nha Trang của chúng tôi.",
     },
     vehicles: {
@@ -192,13 +192,13 @@ export const translations = {
       privacyPolicy: "Chính sách bảo mật",
       transportPolicy: "Quy định vận chuyển",
       termsOfService: "Điều khoản dịch vụ",
-      copyright: "© 2026 inhatrang.vn. Dịch vụ đặt xe sân bay Cam Ranh & Nha Trang uy tín giá rẻ.",
+      copyright: "© 2026 maigo79.com. Dịch vụ đặt xe sân bay Cam Ranh & Nha Trang uy tín giá rẻ.",
       workingHours: "Phục vụ 24/7 - Có mặt tại Sân bay Cam Ranh và TP. Nha Trang",
     },
   },
   en: {
     common: {
-      brandName: "inhatrang.vn",
+      brandName: "maigo79.com",
       tagline: "Easy Booking – Safe & Reliable Travel",
       hotline: "Hotline",
       hotlineNumber: "+84 928.015.280",
@@ -281,7 +281,7 @@ export const translations = {
     },
     whyChooseUs: {
       tag: "Our Advantages",
-      title: "Why Choose inhatrang.vn For Transfers?",
+      title: "Why Choose maigo79.com For Transfers?",
       subtitle: "We pride ourselves on providing high quality, punctual, and transparent private airport taxi and travel services in Nha Trang and Central Vietnam.",
       reasons: [
         {
@@ -336,7 +336,7 @@ export const translations = {
       subtitle: "Everything you need to know about our transfer services at Cam Ranh Airport and Nha Trang.",
       items: [
         {
-          q: "What is included in the fare at inhatrang.vn?",
+          q: "What is included in the fare at maigo79.com?",
           a: "All fares shown are 100% all-inclusive: vehicle, driver, fuel, tolls, and Cam Ranh airport entrance fees. No extra hidden charges.",
         },
         {
@@ -363,7 +363,7 @@ export const translations = {
     },
     testimonials: {
       tag: "Reviews",
-      title: "What Our Customers Say About inhatrang.vn",
+      title: "What Our Customers Say About maigo79.com",
       subtitle: "Over 10,000+ satisfied travelers have trusted our Cam Ranh airport and Nha Trang private transfer services.",
     },
     vehicles: {
@@ -389,13 +389,13 @@ export const translations = {
       privacyPolicy: "Privacy Policy",
       transportPolicy: "Passenger Regulations",
       termsOfService: "Terms of Service",
-      copyright: "© 2026 inhatrang.vn. Reliable Cam Ranh Airport & Nha Trang Transfer Service.",
+      copyright: "© 2026 maigo79.com. Reliable Cam Ranh Airport & Nha Trang Transfer Service.",
       workingHours: "Operating 24/7 across Cam Ranh Airport and Nha Trang City",
     },
   },
   ko: {
     common: {
-      brandName: "inhatrang.vn",
+      brandName: "maigo79.com",
       tagline: "간편한 예약 – 안심할 수 있는 나트랑 여행",
       hotline: "고객센터",
       hotlineNumber: "+84 928.015.280",
@@ -478,7 +478,7 @@ export const translations = {
     },
     whyChooseUs: {
       tag: "차별화된 서비스",
-      title: "왜 inhatrang.vn을 선택해야 할까요?",
+      title: "왜 maigo79.com을 선택해야 할까요?",
       subtitle: "나트랑 깜란 공항 및 근교 여행을 가장 안전하고 편안하게 모시는 베트남 현지 전문 차량 서비스입니다.",
       reasons: [
         {
@@ -552,7 +552,7 @@ export const translations = {
     },
     testimonials: {
       tag: "실제 이용 후기",
-      title: "inhatrang.vn 이용 고객 리얼 후기",
+      title: "maigo79.com 이용 고객 리얼 후기",
       subtitle: "10,000명 이상의 자유여행객 및 가족 단위 고객이 만족하신 나트랑 최고 평점 픽업 서비스.",
     },
     vehicles: {
@@ -578,13 +578,13 @@ export const translations = {
       privacyPolicy: "개인정보 처리방침",
       transportPolicy: "여객 운송 규정",
       termsOfService: "서비스 이용약관",
-      copyright: "© 2026 inhatrang.vn. 나트랑 깜란 공항 픽업 전문 서비스.",
+      copyright: "© 2026 maigo79.com. 나트랑 깜란 공항 픽업 전문 서비스.",
       workingHours: "24시간 연중무휴 운영 - 깜란 공항 및 나트랑 시내 상시 대기",
     },
   },
   ru: {
     common: {
-      brandName: "inhatrang.vn",
+      brandName: "maigo79.com",
       tagline: "Легкий заказ – Безопасные поездки",
       hotline: "Горячая линия",
       hotlineNumber: "+84 928.015.280",
@@ -667,7 +667,7 @@ export const translations = {
     },
     whyChooseUs: {
       tag: "Преимущества",
-      title: "Почему Выбирают inhatrang.vn?",
+      title: "Почему Выбирают maigo79.com?",
       subtitle: "Надежный сервис индивидуальных трансферов из аэропорта Камрань в Нячанг и междугородних поездок.",
       reasons: [
         {
@@ -741,7 +741,7 @@ export const translations = {
     },
     testimonials: {
       tag: "Отзывы",
-      title: "Отзывы Наших Пассажиров о inhatrang.vn",
+      title: "Отзывы Наших Пассажиров о maigo79.com",
       subtitle: "Более 10,000+ довольных туристов уже воспользовались нашими услугами в Нячанге.",
     },
     vehicles: {
@@ -767,13 +767,13 @@ export const translations = {
       privacyPolicy: "Политика конфиденциальности",
       transportPolicy: "Правила перевозки",
       termsOfService: "Условия использования",
-      copyright: "© 2026 inhatrang.vn. Трансфер в аэропорт Камрань и Нячанг по лучшей цене.",
+      copyright: "© 2026 maigo79.com. Трансфер в аэропорт Камрань и Нячанг по лучшей цене.",
       workingHours: "Работаем круглосуточно 24/7 в аэропорту Камрань и Нячанге",
     },
   },
   zh: {
     common: {
-      brandName: "inhatrang.vn",
+      brandName: "maigo79.com",
       tagline: "便捷预订 – 芽庄出行更安心",
       hotline: "服务热线",
       hotlineNumber: "+84 928.015.280",
@@ -856,7 +856,7 @@ export const translations = {
     },
     whyChooseUs: {
       tag: "核心优势",
-      title: "为什么选择 inhatrang.vn 专车服务？",
+      title: "为什么选择 maigo79.com 专车服务？",
       subtitle: "芽庄当地领先的专业机场专车及旅游包车服务商，为您提供安全、准时、高性价比的品质出行体验。",
       reasons: [
         {
@@ -908,10 +908,10 @@ export const translations = {
     faq: {
       tag: "常见问题",
       title: "金兰机场接送机常见疑问解答",
-      subtitle: "为您汇总预订 inhatrang.vn 专车服务时的常见问题与解答。",
+      subtitle: "为您汇总预订 maigo79.com 专车服务时的常见问题与解答。",
       items: [
         {
-          q: "inhatrang.vn 的费用包含哪些项目？",
+          q: "maigo79.com 的费用包含哪些项目？",
           a: "网站显示的价格为100%全包一口价，包含车辆使用费、司机服务费、燃油费、高速费及金兰机场停车费。",
         },
         {
@@ -930,7 +930,7 @@ export const translations = {
     },
     testimonials: {
       tag: "旅客评价",
-      title: "旅客对 inhatrang.vn 的真实评价",
+      title: "旅客对 maigo79.com 的真实评价",
       subtitle: "超过10,000+名海内外旅客信赖并选择了我们的金兰机场接送与芽庄包车服务。",
     },
     vehicles: {
@@ -956,7 +956,7 @@ export const translations = {
       privacyPolicy: "隐私政策",
       transportPolicy: "客运服务规范",
       termsOfService: "服务条款",
-      copyright: "© 2026 inhatrang.vn. 芽庄金兰机场专车及旅游包车领先品牌。",
+      copyright: "© 2026 maigo79.com. 芽庄金兰机场专车及旅游包车领先品牌。",
       workingHours: "24/7全天候运营 - 常驻金兰机场及芽庄市区",
     },
   },

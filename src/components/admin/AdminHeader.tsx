@@ -128,7 +128,7 @@ export default function AdminHeader({
             <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 py-1.5 text-gray-800 z-50 animate-in fade-in-50 zoom-in-95 duration-150">
               <div className="px-4 py-2 border-b border-gray-100">
                 <p className="text-xs font-bold text-gray-900">Quản trị viên</p>
-                <p className="text-[11px] text-gray-500 truncate">inhatrang.vn@gmail.com</p>
+                <p className="text-[11px] text-gray-500 truncate">admin@maigo79.com</p>
               </div>
               <button
                 onClick={onLogout}

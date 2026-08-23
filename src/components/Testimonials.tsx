@@ -98,7 +98,7 @@ const Testimonials = () => {
                     <div className="relative w-14 h-14 rounded-full overflow-hidden border border-[#174978] shrink-0 bg-gray-100">
                       <Image
                         src={avatarUrl}
-                        alt={`Khách hàng ${testimonial.name} đánh giá dịch vụ inhatrang.vn`}
+                        alt={`Khách hàng ${testimonial.name} đánh giá dịch vụ maigo79.com`}
                         fill
                         className="object-cover"
                         unoptimized={avatarUrl.startsWith("data:") || avatarUrl.startsWith("http")}

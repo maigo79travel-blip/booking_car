@@ -59,12 +59,12 @@ export interface SiteContentContextProps {
 }
 
 const defaultContact: ContactConfig = {
-  brand_name: "inhatrang.vn",
+  brand_name: "maigo79.com",
   hotline: "0928015280",
   hotline_display: "0928.015.280",
   zalo: "0905876231",
-  telegram: "https://t.me/inoibai_vn",
-  email: "inhatrang.vn@gmail.com",
+  telegram: "https://t.me/maigo79_vn",
+  email: "contact@maigo79.com",
   address: "Cột số 3 & 4 - Sảnh Đến Ga Quốc Nội & Quốc Tế, Sân bay Quốc tế Cam Ranh, Khánh Hòa",
   logo_url: "/images/Brand.jpg",
   working_hours: "24/7 (Phục vụ cả ngày lễ & Tết)",
@@ -171,7 +171,7 @@ const defaultTestimonials: TestimonialConfig[] = [
 const defaultFAQ: FAQConfig[] = [
   {
     q: {
-      vi: "Giá xe sân bay Cam Ranh tại inhatrang.vn đã bao gồm các chi phí cầu đường và vé sân bay chưa?",
+      vi: "Giá xe sân bay Cam Ranh tại maigo79.com đã bao gồm các chi phí cầu đường và vé sân bay chưa?",
       en: "Does the price include all highway toll fees and Cam Ranh airport surcharges?",
     },
     a: {
@@ -195,8 +195,8 @@ const defaultFAQ: FAQConfig[] = [
       en: "If my flight to Cam Ranh is delayed, will I be charged extra waiting fees?",
     },
     a: {
-      vi: "inhatrang.vn MIỄN PHÍ 100% phí chờ khi chuyến bay bị hoãn. Tài xế sẽ theo dõi số hiệu chuyến bay của bạn và có mặt đón đúng lúc bạn hạ cánh.",
-      en: "inhatrang.vn provides 100% FREE waiting time for delayed flights. Our dispatchers track flight numbers and adjust pickup times accordingly.",
+      vi: "maigo79.com MIỄN PHÍ 100% phí chờ khi chuyến bay bị hoãn. Tài xế sẽ theo dõi số hiệu chuyến bay của bạn và có mặt đón đúng lúc bạn hạ cánh.",
+      en: "maigo79.com provides 100% FREE waiting time for delayed flights. Our dispatchers track flight numbers and adjust pickup times accordingly.",
     },
   },
 ];

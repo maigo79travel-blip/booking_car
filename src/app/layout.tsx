@@ -10,7 +10,7 @@ const inter = Inter({
   weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://inhatrang.vn";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://maigo79.com";
 
 export const viewport: Viewport = {
   themeColor: "#003366",
@@ -22,8 +22,8 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Đặt xe sân bay Cam Ranh – Taxi Nha Trang giá rẻ 24/7 - inhatrang.vn",
-    template: "%s | inhatrang.vn",
+    default: "Đặt xe sân bay Cam Ranh – Taxi Nha Trang giá rẻ 24/7 - maigo79.com",
+    template: "%s | maigo79.com",
   },
   description:
     "Dịch vụ đặt xe taxi đưa đón Sân bay Quốc tế Cam Ranh (CXR) về TP. Nha Trang và các resort Bãi Dài giá rẻ trọn gói chỉ từ 250k. Xe 5-7-16 chỗ đời mới đón trả 24/7. Hotline: 0928 015 280 - 0905 876 231",
@@ -33,15 +33,16 @@ export const metadata: Metadata = {
     "xe đưa đón sân bay cam ranh",
     "taxi nha trang giá rẻ",
     "thuê xe nha trang đi đà lạt",
-    "inhatrang",
+    "maigo79",
+    "maigo79.com",
     "xe cam ranh về nha trang 250k",
     "xe 7 chỗ sân bay cam ranh",
     "xe 16 chỗ nha trang",
     "xe đưa đón resort bãi dài",
   ],
-  authors: [{ name: "inhatrang.vn", url: siteUrl }],
-  creator: "inhatrang.vn",
-  publisher: "inhatrang.vn",
+  authors: [{ name: "maigo79.com", url: siteUrl }],
+  creator: "maigo79.com",
+  publisher: "maigo79.com",
   formatDetection: {
     telephone: true,
     address: true,
@@ -69,22 +70,22 @@ export const metadata: Metadata = {
     type: "website",
     locale: "vi_VN",
     url: siteUrl,
-    title: "Đặt xe sân bay Cam Ranh – Taxi Nha Trang giá rẻ 24/7 - inhatrang.vn",
+    title: "Đặt xe sân bay Cam Ranh – Taxi Nha Trang giá rẻ 24/7 - maigo79.com",
     description:
       "Dịch vụ đặt xe taxi đưa đón Sân bay Cam Ranh về TP. Nha Trang và các resort Bãi Dài giá rẻ trọn gói. Xe 5-7-16 chỗ đời mới đón trả tận nơi 24/7.",
-    siteName: "inhatrang.vn",
+    siteName: "maigo79.com",
     images: [
       {
         url: "/images/Brand.jpg",
         width: 1200,
         height: 630,
-        alt: "inhatrang.vn - Đặt xe sân bay Cam Ranh Nha Trang",
+        alt: "maigo79.com - Đặt xe sân bay Cam Ranh Nha Trang",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Đặt xe sân bay Cam Ranh – Taxi Nha Trang giá rẻ 24/7 - inhatrang.vn",
+    title: "Đặt xe sân bay Cam Ranh – Taxi Nha Trang giá rẻ 24/7 - maigo79.com",
     description:
       "Dịch vụ đặt xe đưa đón sân bay Cam Ranh về Nha Trang và tour du lịch Đà Lạt, Mũi Né uy tín, giá rẻ trọn gói.",
     images: ["/images/Brand.jpg"],
@@ -98,7 +99,7 @@ const jsonLdGraph = {
       "@type": "WebSite",
       "@id": `${siteUrl}/#website`,
       "url": siteUrl,
-      "name": "inhatrang.vn",
+      "name": "maigo79.com",
       "description":
         "Dịch vụ đặt xe taxi đưa đón sân bay Cam Ranh về Nha Trang và tour du lịch giá rẻ, uy tín 24/7",
       "publisher": {
@@ -109,13 +110,13 @@ const jsonLdGraph = {
     {
       "@type": ["TaxiService", "LocalBusiness"],
       "@id": `${siteUrl}/#taxiservice`,
-      "name": "inhatrang.vn - Đặt xe sân bay Cam Ranh Nha Trang",
-      "alternateName": "Taxi Sân Bay Cam Ranh - inhatrang.vn",
+      "name": "maigo79.com - Đặt xe sân bay Cam Ranh Nha Trang",
+      "alternateName": "Taxi Sân Bay Cam Ranh - maigo79.com",
       "image": `${siteUrl}/images/Brand.jpg`,
       "logo": `${siteUrl}/images/Brand.jpg`,
       "url": siteUrl,
       "telephone": "+84928015280",
-      "email": "inhatrang.vn@gmail.com",
+      "email": "contact@maigo79.com",
       "priceRange": "250.000đ - 1.500.000đ",
       "currenciesAccepted": "VND",
       "paymentAccepted": "Tiền mặt, Chuyển khoản ngân hàng",

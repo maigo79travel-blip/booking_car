@@ -2,10 +2,10 @@ import { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "inhatrang.vn - Đặt xe sân bay Cam Ranh",
-    short_name: "inhatrang.vn",
+    name: "MaiGo79 - Đặt xe sân bay Cam Ranh Nha Trang",
+    short_name: "MaiGo79",
     description:
-      "Dịch vụ đặt xe taxi đưa đón sân bay Cam Ranh và Nha Trang giá rẻ, uy tín, trọn gói 24/7",
+      "Dịch vụ đặt xe taxi đưa đón sân bay Cam Ranh và Nha Trang giá rẻ, uy tín, trọn gói 24/7 - maigo79.com",
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",

@@ -5,14 +5,14 @@ import Footer from "@/components/Footer";
 import FloatingContacts from "@/components/FloatingContacts";
 
 export const metadata: Metadata = {
-  title: "Chính sách bảo vệ quyền riêng tư",
+  title: "Chính sách bảo vệ quyền riêng tư | maigo79.com",
   description:
-    "Chính sách thu thập, lưu trữ, sử dụng và bảo mật thông tin cá nhân của khách hàng khi đặt xe sân bay Cam Ranh và Nha Trang tại inhatrang.vn.",
+    "Chính sách thu thập, lưu trữ, sử dụng và bảo mật thông tin cá nhân của khách hàng khi đặt xe sân bay Cam Ranh và Nha Trang tại maigo79.com.",
   alternates: {
     canonical: "/chinh-sach/bao-ve-quyen-rieng-tu",
   },
   openGraph: {
-    title: "Chính sách bảo vệ quyền riêng tư | inhatrang.vn",
+    title: "Chính sách bảo vệ quyền riêng tư | maigo79.com",
     description:
       "Chính sách thu thập, lưu trữ, sử dụng và bảo mật thông tin cá nhân của khách hàng.",
     url: "/chinh-sach/bao-ve-quyen-rieng-tu",
@@ -20,8 +20,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "Chính sách bảo vệ quyền riêng tư | inhatrang.vn",
-    description: "Chính sách bảo mật thông tin khách hàng tại inhatrang.vn.",
+    title: "Chính sách bảo vệ quyền riêng tư | maigo79.com",
+    description: "Chính sách bảo mật thông tin khách hàng tại maigo79.com.",
   },
 };
 
@@ -55,7 +55,7 @@ export default function PrivacyPolicyPage() {
             <p>
               Phần Quy định bảo vệ Quyền riêng tư này trình bày về việc chúng
               tôi xử lý thông tin nhận dạng cá nhân mà chúng tôi thu thập được
-              khi Quý khách ở trong trang web inhatrang.vn, và khi Quý khách sử dụng các dịch vụ đặt xe sân bay của chúng tôi hoặc dịch
+              khi Quý khách ở trong trang web maigo79.com, và khi Quý khách sử dụng các dịch vụ đặt xe sân bay của chúng tôi hoặc dịch
               vụ của các đối tác nhưng có liên kết với dịch vụ của chúng tôi.
             </p>
             <p>
@@ -137,7 +137,7 @@ export default function PrivacyPolicyPage() {
             className="space-y-4 text-gray-700 text-sm md:text-base leading-relaxed"
           >
             <p>
-              Theo thực tiễn đôi khi chúng tôi có thể sửa đổi quy định này. Mọi thay đổi sẽ được cập nhật công khai trực tiếp trên website inhatrang.vn.
+              Theo thực tiễn đôi khi chúng tôi có thể sửa đổi quy định này. Mọi thay đổi sẽ được cập nhật công khai trực tiếp trên website maigo79.com.
             </p>
           </div>
         </div>
@@ -148,7 +148,7 @@ export default function PrivacyPolicyPage() {
           <p className="text-sm md:text-base leading-relaxed">
             Nếu Quý khách có bất kỳ câu hỏi hoặc góp ý nào cho chúng tôi về
             Quyền riêng tư, Quý khách có thể liên hệ qua Hotline 24/7:{" "}
-            <strong>0928.015.280</strong> hoặc email <strong>inhatrang.vn@gmail.com</strong>.
+            <strong>0928.015.280</strong> hoặc email <strong>contact@maigo79.com</strong>.
           </p>
         </div>
       </div>

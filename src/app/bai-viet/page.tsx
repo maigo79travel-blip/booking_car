@@ -11,14 +11,14 @@ import { ArrowRight, BookOpen } from "lucide-react";
 export const metadata: Metadata = {
   title: "Cẩm nang & Tin tức kinh nghiệm đặt xe sân bay Cam Ranh – Nha Trang",
   description:
-    "Tổng hợp tin tức, kinh nghiệm đi lại, mẹo đặt xe taxi sân bay Cam Ranh về Nha Trang giá rẻ, an toàn và đúng giờ từ inhatrang.vn.",
+    "Tổng hợp tin tức, kinh nghiệm đi lại, mẹo đặt xe taxi sân bay Cam Ranh về Nha Trang giá rẻ, an toàn và đúng giờ từ maigo79.com.",
   alternates: {
     canonical: "/bai-viet",
   },
   openGraph: {
     title: "Cẩm nang & Tin tức kinh nghiệm đặt xe sân bay Cam Ranh – Nha Trang",
     description:
-      "Tổng hợp kinh nghiệm đặt xe taxi sân bay Cam Ranh về Nha Trang giá rẻ, an toàn từ inhatrang.vn.",
+      "Tổng hợp kinh nghiệm đặt xe taxi sân bay Cam Ranh về Nha Trang giá rẻ, an toàn từ maigo79.com.",
     url: "/bai-viet",
     type: "website",
   },
@@ -73,7 +73,7 @@ export default async function PostsPage() {
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center bg-[#EAF2F8] text-[#174978] font-bold text-sm">
-                        inhatrang.vn
+                        maigo79.com
                       </div>
                     )}
                   </div>

@@ -222,7 +222,7 @@ export default function PostModal({ post, onClose, onSave }: PostModalProps) {
                 label="Ảnh bìa bài viết (Cover Image)"
                 value={coverImage}
                 onChange={setCoverImage}
-                folder="inoibai/posts"
+                folder="maigo79/posts"
                 placeholder="/images/Hero2.jpg hoặc https://res.cloudinary.com/..."
                 helperText="Ảnh bìa hiển thị nổi bật trên danh sách bài viết và thẻ xem trước mạng xã hội (OpenGraph / Facebook / Zalo)"
               />

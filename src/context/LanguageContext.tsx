@@ -14,7 +14,7 @@ const LanguageContext = createContext<LanguageContextProps | undefined>(
   undefined
 );
 
-const STORAGE_KEY = "inoibai_preferred_language";
+const STORAGE_KEY = "maigo79_preferred_language";
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({
   children,

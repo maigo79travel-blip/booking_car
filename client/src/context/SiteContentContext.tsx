@@ -249,6 +249,12 @@ export const SiteContentProvider: React.FC<{ children: React.ReactNode }> = ({
   const contact: ContactConfig = {
     ...defaultContact,
     ...((content.contact_info as Partial<ContactConfig>) || {}),
+    // Migrate the previous bundled logo automatically when old CMS content
+    // still points at Brand.jpg. Admin can still replace this with Cloudinary.
+    logo_url:
+      (content.contact_info as Partial<ContactConfig>)?.logo_url === "/images/Brand.jpg"
+        ? defaultContact.logo_url
+        : ((content.contact_info as Partial<ContactConfig>)?.logo_url || defaultContact.logo_url),
   };
 
   const hero: HeroConfig = {

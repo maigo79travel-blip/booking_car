@@ -102,7 +102,7 @@ const PriceTable = () => {
         </div>
 
         {/* Desktop Table Layout */}
-        <div className="hidden md:block bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+        <div className="hidden md:block bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
@@ -175,7 +175,7 @@ const PriceTable = () => {
         </div>
 
         {/* Informational Message */}
-        <div className="mt-6 bg-white/90 backdrop-blur-xs rounded-2xl p-5 md:p-6 shadow-xs border border-gray-100 space-y-2">
+        <div className="mt-6 bg-white/90 backdrop-blur-xs rounded-lg p-5 md:p-6 shadow-xs border border-gray-100 space-y-2">
           <p className="text-gray-800 text-sm md:text-base leading-relaxed font-medium">
             ✓ {t.priceTable.note1}
           </p>

@@ -90,7 +90,7 @@ const Testimonials = () => {
             return (
               <div
                 key={testimonial.id || `${testimonial.name}-${idx}`}
-                className="bg-white rounded-2xl shadow-xs hover:shadow-md p-6 md:p-8 transition-all border border-gray-100 flex flex-col justify-between"
+                className="bg-white rounded-xl shadow-xs hover:shadow-md p-6 md:p-8 transition-all border border-gray-100 flex flex-col justify-between"
               >
                 <div>
                   {/* Header */}
@@ -137,7 +137,7 @@ const Testimonials = () => {
 
                   {/* Service Badge */}
                   <div className="mt-3">
-                    <span className="inline-block bg-brand-light text-[#003366] text-xs font-bold px-3 py-1 rounded-full">
+                    <span className="inline-block bg-brand-light text-[#003366] text-xs font-bold px-3 py-1 rounded-md">
                       {testimonial.service || testimonial.role || "Dịch vụ đưa đón sân bay"}
                     </span>
                   </div>

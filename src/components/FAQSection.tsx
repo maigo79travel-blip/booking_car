@@ -68,7 +68,7 @@ export default function FAQSection() {
               return (
                 <div
                   key={index}
-                  className={`border rounded-2xl overflow-hidden transition-all shadow-none ${
+                  className={`border rounded-lg overflow-hidden transition-all shadow-none ${
                     isOpen ? "border-brand-coastal" : "border-gray-100"
                   }`}
                 >

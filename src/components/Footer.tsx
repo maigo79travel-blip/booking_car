@@ -36,7 +36,7 @@ const Footer = () => {
                   alt={`${contact.brand_name || "maigo79.com"} - Taxi đưa đón sân bay Cam Ranh giá rẻ`}
                   width={60}
                   height={60}
-                  className="rounded-xl hover:opacity-80 transition-opacity object-cover shadow-sm"
+                  className="rounded-lg hover:opacity-80 transition-opacity object-cover shadow-sm"
                   unoptimized={contact.logo_url?.startsWith("data:") || contact.logo_url?.startsWith("http")}
                 />
               </Link>
@@ -52,7 +52,7 @@ const Footer = () => {
             <p className="text-sm text-slate-400 leading-relaxed mb-4">
               {t.footer.companyDesc}
             </p>
-            <div className="flex items-center gap-2 text-xs text-emerald-400 bg-emerald-950/40 border border-emerald-800/50 rounded-xl p-2.5">
+            <div className="flex items-center gap-2 text-xs text-emerald-400 bg-emerald-950/40 border border-emerald-800/50 rounded-lg p-2.5">
               <ShieldCheck size={18} className="shrink-0" />
               <span className="font-semibold">{t.footer.commitBadge}</span>
             </div>

@@ -53,12 +53,12 @@ export default function WhyChooseUs() {
             return (
               <div
                 key={idx}
-                className="bg-gray-50/70 hover:bg-white rounded-2xl p-6 md:p-8 border border-gray-100 hover:border-gray-200 shadow-xs hover:shadow-md transition-all duration-300 group"
+                className="bg-gray-50/70 hover:bg-white rounded-xl p-6 md:p-8 border border-gray-100 hover:border-gray-200 shadow-xs hover:shadow-md transition-all duration-300 group"
               >
                 <div
-                  className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-5 ${colorClass} group-hover:scale-105 transition-transform`}
+                  className={`w-12 h-12 rounded-lg flex items-center justify-center mb-5 ${colorClass} group-hover:scale-105 transition-transform`}
                 >
-                  <Icon size={26} />
+                  <Icon size={24} />
                 </div>
                 <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-3 group-hover:text-[#003366] transition-colors">
                   {item.title}

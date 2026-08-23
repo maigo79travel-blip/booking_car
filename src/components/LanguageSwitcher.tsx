@@ -47,7 +47,7 @@ export default function LanguageSwitcher({
             <button
               key={lang.code}
               onClick={() => handleSelect(lang.code)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-all ${
                 isSelected
                   ? "bg-white text-[#003366] shadow-sm font-bold"
                   : "bg-[#174978] text-white hover:bg-brand-marine"
@@ -66,7 +66,7 @@ export default function LanguageSwitcher({
     <div className="relative inline-block text-left" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 hover:border-brand-steel bg-white text-gray-700 text-xs md:text-sm font-semibold shadow-xs hover:text-[#003366] transition-all cursor-pointer"
+        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-gray-200 hover:border-brand-steel bg-white text-gray-700 text-xs md:text-sm font-semibold shadow-xs hover:text-[#003366] transition-all cursor-pointer"
         aria-label="Chọn ngôn ngữ / Select Language"
         aria-expanded={isOpen}
       >
@@ -82,7 +82,7 @@ export default function LanguageSwitcher({
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-1.5 w-44 rounded-xl bg-white shadow-xl border border-gray-100 py-1.5 z-50 animate-in fade-in-50 zoom-in-95 duration-150">
+        <div className="absolute right-0 mt-1.5 w-44 rounded-lg bg-white shadow-xl border border-gray-100 py-1.5 z-50 animate-in fade-in-50 zoom-in-95 duration-150">
           <div className="px-3 py-1 text-[11px] font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100">
             Ngôn ngữ / Language
           </div>

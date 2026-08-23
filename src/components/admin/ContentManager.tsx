@@ -15,6 +15,9 @@ import {
   Trash2,
   ExternalLink,
   Check,
+  Send,
+  Bell,
+  Loader2,
 } from "lucide-react";
 import ImageUploadField from "./ImageUploadField";
 import { Language, SUPPORTED_LANGUAGES } from "@/lib/i18n/types";
@@ -65,6 +68,7 @@ type CMSTab =
   | "testimonials"
   | "faq"
   | "cloudinary"
+  | "telegram"
   | "raw_json";
 
 export default function ContentManager({
@@ -265,6 +269,46 @@ export default function ContentManager({
     };
   });
 
+  const [telegramConfig, setTelegramConfig] = useState(() => {
+    const raw = getContent("telegram_config", {});
+    return {
+      is_enabled: raw.is_enabled !== undefined ? Boolean(raw.is_enabled) : true,
+      bot_token: (raw.bot_token as string) || "",
+      chat_id: (raw.chat_id as string) || "",
+      topic_id: (raw.topic_id as string) || "",
+    };
+  });
+  const [isTestingTelegram, setIsTestingTelegram] = useState(false);
+  const [testTelegramResult, setTestTelegramResult] = useState<{ success: boolean; message: string } | null>(null);
+
+  const handleTestTelegram = async () => {
+    if (!telegramConfig.bot_token?.trim() || !telegramConfig.chat_id?.trim()) {
+      alert("Vui lòng nhập Bot Token và Chat ID trước khi gửi tin nhắn thử nghiệm!");
+      return;
+    }
+    setIsTestingTelegram(true);
+    setTestTelegramResult(null);
+    try {
+      const res = await fetch("/api/admin/test-telegram", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(telegramConfig),
+      });
+      const data = await res.json();
+      setTestTelegramResult({
+        success: Boolean(data.success),
+        message: data.message || (data.success ? "Gửi thành công!" : "Gửi thất bại!"),
+      });
+    } catch (err: unknown) {
+      setTestTelegramResult({
+        success: false,
+        message: err instanceof Error ? err.message : "Lỗi kết nối",
+      });
+    } finally {
+      setIsTestingTelegram(false);
+    }
+  };
+
   // Save specific section
   const handleSaveSection = async (key: string, value: unknown) => {
     setIsSaving(true);
@@ -349,6 +393,7 @@ export default function ContentManager({
           { id: "testimonials", label: "Đánh giá khách hàng", icon: MessageSquare },
           { id: "faq", label: "Câu hỏi thường gặp FAQ", icon: HelpCircle },
           { id: "cloudinary", label: "Cấu hình Cloudinary", icon: Cloud },
+          { id: "telegram", label: "Thông báo Telegram", icon: Send },
           { id: "raw_json", label: "Dữ liệu thô (Raw JSON)", icon: Code },
         ].map((tab) => {
           const Icon = tab.icon;
@@ -1216,6 +1261,160 @@ export default function ContentManager({
                 placeholder="••••••••••••••••••••••••••••"
                 className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-mono text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* TAB: TELEGRAM NOTIFICATIONS */}
+      {/* ========================================================================= */}
+      {activeTab === "telegram" && (
+        <div className="bg-white rounded-xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+            <div>
+              <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+                <Send className="text-sky-500" size={22} />
+                <span>Cấu Hình Thông Báo Đơn Đặt Xe Qua Telegram</span>
+              </h2>
+              <p className="text-xs text-slate-500 font-normal">
+                Tự động gửi thông tin chi tiết của khách hàng và chuyến đi về điện thoại / máy tính qua Telegram Bot ngay khi khách bấm đặt xe
+              </p>
+            </div>
+            <button
+              type="button"
+              disabled={isSaving}
+              onClick={() => handleSaveSection("telegram_config", telegramConfig)}
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-xs font-semibold shadow-sm transition-all cursor-pointer"
+            >
+              <Save size={15} />
+              <span>{isSaving ? "Đang lưu..." : "Lưu Cấu Hình Telegram"}</span>
+            </button>
+          </div>
+
+          {/* Guide Box */}
+          <div className="p-4 bg-sky-50/60 border border-sky-200 rounded-lg text-xs text-sky-950 font-medium space-y-2.5">
+            <p className="font-semibold flex items-center gap-1.5 text-sky-800 text-sm">
+              <span>💡 Hướng dẫn tạo Bot Telegram nhận thông báo (Chỉ mất 1 phút):</span>
+            </p>
+            <ol className="list-decimal list-inside space-y-1.5 text-slate-700 leading-relaxed">
+              <li>
+                Mở Telegram, tìm kiếm <b>@BotFather</b> (có tích xanh) ➔ Gửi lệnh <code>/newbot</code> ➔ Đặt tên và username cho bot (kết thúc bằng <code>_bot</code>).
+              </li>
+              <li>
+                BotFather sẽ gửi lại <b>HTTP API Token</b> (ví dụ: <code>7123456789:AAH...</code>) ➔ Dán vào ô <b>Bot Token</b> bên dưới.
+              </li>
+              <li>
+                <b>Lấy Chat ID cá nhân:</b> Nhắn tin bất kỳ cho bot bạn vừa tạo, sau đó tìm kiếm <b>@userinfobot</b> trên Telegram ➔ Bot sẽ trả về số <code>Id</code> của bạn (ví dụ: <code>123456789</code>) ➔ Dán vào ô <b>Chat ID</b>.
+              </li>
+              <li>
+                <b>Hoặc lấy Chat ID nhóm:</b> Thêm Bot vào Nhóm Telegram của bạn ➔ Gán quyền Admin cho bot ➔ Gửi 1 tin nhắn vào nhóm. Chat ID nhóm thường có dấu trừ ở đầu (ví dụ: <code>-1001234567890</code>).
+              </li>
+            </ol>
+          </div>
+
+          <div className="space-y-5">
+            {/* Status Switch */}
+            <div className="flex items-center justify-between p-4 bg-slate-50 border border-slate-200 rounded-lg">
+              <div>
+                <p className="text-xs font-bold text-slate-900">Bật thông báo Telegram</p>
+                <p className="text-[11px] text-slate-500 font-normal">
+                  Cho phép hệ thống gửi tin nhắn tự động khi có khách đặt xe trên website
+                </p>
+              </div>
+              <label className="relative inline-flex items-center cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={telegramConfig.is_enabled}
+                  onChange={(e) =>
+                    setTelegramConfig({ ...telegramConfig, is_enabled: e.target.checked })
+                  }
+                  className="sr-only peer"
+                />
+                <div className="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+              </label>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div>
+                <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                  Telegram Bot Token *
+                </label>
+                <input
+                  type="text"
+                  value={telegramConfig.bot_token || ""}
+                  onChange={(e) =>
+                    setTelegramConfig({ ...telegramConfig, bot_token: e.target.value })
+                  }
+                  placeholder="ví dụ: 7891234567:AAHxyz987abc_123456..."
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-mono text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                  Chat ID (Cá nhân hoặc ID Nhóm) *
+                </label>
+                <input
+                  type="text"
+                  value={telegramConfig.chat_id || ""}
+                  onChange={(e) =>
+                    setTelegramConfig({ ...telegramConfig, chat_id: e.target.value })
+                  }
+                  placeholder="ví dụ: 123456789 (cá nhân) hoặc -1001234567890 (nhóm)"
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-mono text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                Topic ID / Thread ID (Tùy chọn - Dành cho nhóm có phân chia Topic)
+              </label>
+              <input
+                type="text"
+                value={telegramConfig.topic_id || ""}
+                onChange={(e) =>
+                  setTelegramConfig({ ...telegramConfig, topic_id: e.target.value })
+                }
+                placeholder="ví dụ: 2 (để trống nếu không dùng Topic)"
+                className="w-full md:w-1/2 px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-mono text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+              />
+            </div>
+
+            {/* Test Button & Result Box */}
+            <div className="pt-2 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <button
+                type="button"
+                disabled={isTestingTelegram}
+                onClick={handleTestTelegram}
+                className="flex items-center gap-2 px-5 py-2.5 bg-slate-800 hover:bg-slate-900 text-white rounded-md text-xs font-semibold transition-all cursor-pointer shadow-xs disabled:opacity-50"
+              >
+                {isTestingTelegram ? (
+                  <>
+                    <Loader2 size={15} className="animate-spin text-sky-400" />
+                    <span>Đang gửi tin nhắn thử...</span>
+                  </>
+                ) : (
+                  <>
+                    <Bell size={15} className="text-sky-400" />
+                    <span>Gửi tin nhắn thử nghiệm (Test Message)</span>
+                  </>
+                )}
+              </button>
+
+              {testTelegramResult && (
+                <div
+                  className={`text-xs font-semibold px-3 py-2 rounded-md ${
+                    testTelegramResult.success
+                      ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                      : "bg-rose-50 text-rose-700 border border-rose-200"
+                  }`}
+                >
+                  {testTelegramResult.success ? "✅ " : "❌ "}
+                  {testTelegramResult.message}
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -2,28 +2,22 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0f172a;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: monospace;
 
   /* Orange Theme Palette */
   --color-brand-primary: #EA580C;
-  /* Orange 600 - Main Brand Color */
   --color-brand-light: #F97316;
-  /* Orange 500 - Lighter variation */
   --color-brand-dark: #C2410C;
-  /* Orange 700 - Darker hover state */
   --color-brand-accent: #FFFFFF;
-  /* White accent for contrast on orange */
   --color-brand-secondary: #1E293B;
-  /* Slate 800 - Text/Contrast */
   --color-brand-cta: #FACC15;
-  /* Yellow 400 - Call to Action buttons */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -40,7 +34,10 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* Booking List Animations */

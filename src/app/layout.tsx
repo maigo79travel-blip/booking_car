@@ -1,16 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const inter = Inter({
+  variable: "--font-sans",
+  subsets: ["latin", "vietnamese"],
+  display: "swap",
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://inoibai.vn";
@@ -231,7 +228,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} ${inter.className} font-sans antialiased text-slate-900 bg-white`}
       >
         {gaId && (
           <>

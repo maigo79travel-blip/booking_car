@@ -62,7 +62,7 @@ export default function RoutesManager({
             Quản Lý Bảng Giá Tuyến Xe ({routes.length})
           </h1>
           <p className="text-xs md:text-sm text-gray-500">
-            Cấu hình giá cước các tuyến xe sân bay và đi tỉnh miền Bắc
+            Cấu hình giá cước các tuyến xe sân bay Cam Ranh và các tuyến liên tỉnh
           </p>
         </div>
         <button

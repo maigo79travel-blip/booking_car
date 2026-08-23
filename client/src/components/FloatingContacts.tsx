@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { Phone } from "lucide-react";
 import { useSiteContent } from "@/context/SiteContentContext";
 
@@ -24,15 +25,7 @@ const FloatingContacts = () => {
     },
     {
       name: "Zalo 0905.876.231",
-      icon: (
-        <svg
-          viewBox="0 0 48 48"
-          className="w-6 h-6 fill-current"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M24 4C12.95 4 4 12.05 4 22c0 5.48 2.76 10.37 7.15 13.73-.34 3.03-1.63 6.94-1.72 7.21-.19.57.24 1.13.82.99 3.86-.94 7.74-2.82 9.77-3.93 1.29.35 2.65.54 4.05.54 11.05 0 20-8.05 20-18S35.05 4 24 4zm-7.75 22.5c-.69 0-1.25-.56-1.25-1.25v-8.5c0-.69.56-1.25 1.25-1.25s1.25.56 1.25 1.25v8.5c0 .69-.56 1.25-1.25 1.25zm9.5 0h-5c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25h3.75v-6H22c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25h4.5c.69 0 1.25.56 1.25 1.25v8.5c0 .69-.56 1.25-1.25 1.25zm9.5 0h-5c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25h3.75v-6H32c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25h4.5c.69 0 1.25.56 1.25 1.25v8.5c0 .69-.56 1.25-1.25 1.25z" />
-        </svg>
-      ),
+      icon: <Image src="/images/zalo-lumina.png" alt="" width={56} height={56} className="h-14 w-14 rounded-full object-cover" />,
       bgColor: "bg-blue-600",
       hoverColor: "hover:bg-blue-700",
       link: zaloLink,
@@ -58,7 +51,7 @@ const FloatingContacts = () => {
           href={c.link}
           target="_blank"
           rel="noopener noreferrer"
-          className={`${c.bgColor} ${c.hoverColor} text-white p-3 md:p-3.5 rounded-full shadow-md transform hover:scale-105 transition-all duration-200 flex items-center justify-center`}
+          className={`${index === 1 ? "bg-transparent hover:bg-transparent p-0" : `${c.bgColor} ${c.hoverColor} p-3 md:p-3.5`} text-white rounded-full shadow-md transform hover:scale-105 transition-all duration-200 flex items-center justify-center`}
           title={c.name}
           aria-label={c.name}
         >

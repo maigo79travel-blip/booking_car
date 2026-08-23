@@ -65,7 +65,7 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: "/favicon.ico",
-    apple: "/images/logo-maigo79.png",
+    apple: "/apple-icon.png",
   },
   openGraph: {
     type: "website",

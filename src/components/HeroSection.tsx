@@ -5,10 +5,12 @@ import Image from "next/image";
 import BookingForm from "./BookingForm";
 import { fakeBookings } from "@/data/fakeBookings";
 import { useLanguage } from "@/context/LanguageContext";
+import { useSiteContent } from "@/context/SiteContentContext";
 
 const HeroSection = () => {
-  const images = ["/images/Hero2.jpg"];
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const { hero } = useSiteContent();
+  const images = hero.banners && hero.banners.length > 0 ? hero.banners : ["/images/Hero1.jpg", "/images/Hero2.jpg", "/images/Hero22.jpg"];
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleBookings, setVisibleBookings] = useState(
@@ -39,20 +41,22 @@ const HeroSection = () => {
     return () => clearInterval(bookingInterval);
   }, []);
 
+  const bgImage = images[0] || "/images/Hero1.jpg";
+
   return (
     <section className="relative w-full bg-gray-100 min-h-[600px] flex items-center">
       {/* Background Image */}
       <div
         className="absolute inset-0 z-0"
         style={{
-          backgroundImage: "url(/images/Hero1.jpg)",
+          backgroundImage: `url(${bgImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
       >
         {/* Dark overlay for better readability */}
-        <div className="absolute inset-0 bg-black/45"></div>
+        <div className="absolute inset-0 bg-black/50 backdrop-blur-[1px]"></div>
       </div>
 
       <div className="container mx-auto px-4 md:px-12 lg:px-24 relative z-10 flex flex-col md:flex-row items-stretch gap-4 md:gap-8 py-6 md:py-10">

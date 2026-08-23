@@ -10,14 +10,18 @@ import {
   Calendar,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { useSiteContent } from "@/context/SiteContentContext";
 
 const Testimonials = () => {
   const { t } = useLanguage();
+  const { testimonials: dynamicTestimonials } = useSiteContent();
+  const list = dynamicTestimonials && dynamicTestimonials.length > 0 ? dynamicTestimonials : testimonials;
+
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 3;
-  const totalPages = Math.ceil(testimonials.length / itemsPerPage);
+  const totalPages = Math.ceil(list.length / itemsPerPage);
 
-  const currentTestimonials = testimonials.slice(
+  const currentTestimonials = list.slice(
     currentPage * itemsPerPage,
     (currentPage + 1) * itemsPerPage
   );
@@ -58,62 +62,70 @@ const Testimonials = () => {
 
         {/* Testimonials Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-          {currentTestimonials.map((testimonial) => (
-            <div
-              key={testimonial.id}
-              className="bg-white rounded-2xl shadow-md hover:shadow-xl p-6 md:p-8 transition-shadow border border-gray-100 flex flex-col justify-between"
-            >
-              <div>
-                {/* Header */}
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-orange-500 flex-shrink-0 bg-gray-100">
-                    <Image
-                      src={testimonial.avatar}
-                      alt={`Khách hàng ${testimonial.name} đánh giá dịch vụ inoibai.vn`}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-bold text-gray-800 text-base md:text-lg">
-                      {testimonial.name}
-                    </h3>
-                    <div className="flex items-center gap-1 text-yellow-400 mt-1">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} size={15} fill="currentColor" />
-                      ))}
+          {currentTestimonials.map((testimonial: any, idx: number) => {
+            const starsCount = testimonial.stars || testimonial.rating || 5;
+            const locationText = testimonial.route || testimonial.location || "Hà Nội ↔ Nội Bài";
+            const dateText = testimonial.date || "Đã trải nghiệm";
+            const avatarUrl = testimonial.avatar || "/images/Hero1.jpg";
+
+            return (
+              <div
+                key={testimonial.id || `${testimonial.name}-${idx}`}
+                className="bg-white rounded-2xl shadow-md hover:shadow-xl p-6 md:p-8 transition-shadow border border-gray-100 flex flex-col justify-between"
+              >
+                <div>
+                  {/* Header */}
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-orange-500 flex-shrink-0 bg-gray-100">
+                      <Image
+                        src={avatarUrl}
+                        alt={`Khách hàng ${testimonial.name} đánh giá dịch vụ inoibai.vn`}
+                        fill
+                        className="object-cover"
+                        unoptimized={avatarUrl.startsWith("data:") || avatarUrl.startsWith("http")}
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-bold text-gray-800 text-base md:text-lg">
+                        {testimonial.name}
+                      </h3>
+                      <div className="flex items-center gap-1 text-yellow-400 mt-1">
+                        {[...Array(starsCount)].map((_, i) => (
+                          <Star key={i} size={15} fill="currentColor" />
+                        ))}
+                      </div>
                     </div>
                   </div>
+
+                  {/* Comment */}
+                  <p className="text-gray-600 mb-6 leading-relaxed text-sm md:text-base italic">
+                    "{testimonial.comment}"
+                  </p>
                 </div>
 
-                {/* Comment */}
-                <p className="text-gray-600 mb-6 leading-relaxed text-sm md:text-base italic">
-                  "{testimonial.comment}"
-                </p>
-              </div>
-
-              <div>
-                {/* Footer */}
-                <div className="flex items-center justify-between text-xs text-gray-500 pt-4 border-t border-gray-100">
-                  <div className="flex items-center gap-1">
-                    <MapPin size={13} className="text-orange-500" />
-                    <span>{testimonial.location}</span>
+                <div>
+                  {/* Footer */}
+                  <div className="flex items-center justify-between text-xs text-gray-500 pt-4 border-t border-gray-100">
+                    <div className="flex items-center gap-1">
+                      <MapPin size={13} className="text-orange-500" />
+                      <span>{locationText}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Calendar size={13} className="text-gray-400" />
+                      <span>{dateText}</span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-1">
-                    <Calendar size={13} className="text-gray-400" />
-                    <span>{testimonial.date}</span>
+
+                  {/* Service Badge */}
+                  <div className="mt-3">
+                    <span className="inline-block bg-orange-50 text-orange-600 text-xs font-semibold px-3 py-1 rounded-full border border-orange-100">
+                      {testimonial.service || testimonial.role || "Dịch vụ đưa đón sân bay"}
+                    </span>
                   </div>
                 </div>
-
-                {/* Service Badge */}
-                <div className="mt-3">
-                  <span className="inline-block bg-orange-50 text-orange-600 text-xs font-semibold px-3 py-1 rounded-full border border-orange-100">
-                    {testimonial.service}
-                  </span>
-                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Pagination Controls */}

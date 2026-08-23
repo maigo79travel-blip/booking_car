@@ -5,12 +5,14 @@ import { Phone, Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
+import { useSiteContent } from "@/context/SiteContentContext";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const Header = () => {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { t } = useLanguage();
+  const { contact } = useSiteContent();
 
   const menuItems = [
     { name: t.nav.home, href: "/" },
@@ -21,6 +23,9 @@ const Header = () => {
     { name: t.nav.policies, href: "/chinh-sach" },
   ];
 
+  const hotlineNum = contact.hotline || t.common.hotlineNumber;
+  const hotlineDisplay = contact.hotline_display || hotlineNum;
+
   return (
     <header className="w-full sticky top-0 z-50 bg-white shadow-md">
       {/* Top Bar - White */}
@@ -30,17 +35,18 @@ const Header = () => {
             {/* Logo */}
             <Link href="/" aria-label="Trang chủ inoibai.vn">
               <Image
-                src="/images/Brand.jpg"
-                alt="inoibai.vn - Đặt xe sân bay Nội Bài"
+                src={contact.logo_url || "/images/Brand.jpg"}
+                alt={`${contact.brand_name || "inoibai.vn"} - Đặt xe sân bay Nội Bài`}
                 width={200}
                 height={60}
                 className="object-contain h-10 md:h-14 w-auto rounded"
                 priority
+                unoptimized={contact.logo_url?.startsWith("data:") || contact.logo_url?.startsWith("http")}
               />
             </Link>
             <div className="flex flex-col">
               <span className="text-orange-500 font-bold text-lg md:text-2xl leading-none">
-                {t.common.brandName}
+                {contact.brand_name || t.common.brandName}
               </span>
               <span className="text-[11px] md:text-xs text-gray-500 hidden sm:inline">
                 {t.common.tagline}
@@ -59,11 +65,11 @@ const Header = () => {
                   {t.common.hotline} 24/7
                 </span>
                 <a
-                  href={`tel:${t.common.hotlineNumber.replace(/[^0-9+]/g, "")}`}
+                  href={`tel:${hotlineNum.replace(/[^0-9+]/g, "")}`}
                   className="flex items-center text-orange-600 font-extrabold text-lg hover:text-orange-700 transition-colors"
                 >
                   <Phone size={18} className="mr-1.5 text-orange-500" />
-                  {t.common.hotlineNumber}
+                  {hotlineDisplay}
                 </a>
               </div>
             </div>

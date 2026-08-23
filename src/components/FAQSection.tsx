@@ -3,19 +3,29 @@
 import { useState } from "react";
 import { ChevronDown, HelpCircle } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { useSiteContent } from "@/context/SiteContentContext";
 
 export default function FAQSection() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const { faq: dynamicFaq } = useSiteContent();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggle = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  const faqItems =
+    dynamicFaq && dynamicFaq.length > 0
+      ? dynamicFaq.map((item) => ({
+          q: item.q?.[language] || item.q?.vi || "",
+          a: item.a?.[language] || item.a?.vi || "",
+        }))
+      : t.faq.items;
+
   const jsonLdFaq = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": t.faq.items.map((item) => ({
+    "mainEntity": faqItems.map((item) => ({
       "@type": "Question",
       "name": item.q,
       "acceptedAnswer": {
@@ -48,7 +58,7 @@ export default function FAQSection() {
           </div>
 
           <div className="max-w-4xl mx-auto space-y-4">
-            {t.faq.items.map((faq, index) => {
+            {faqItems.map((faq, index) => {
               const isOpen = openIndex === index;
               return (
                 <div

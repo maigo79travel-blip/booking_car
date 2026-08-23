@@ -13,9 +13,14 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
+import { useSiteContent } from "@/context/SiteContentContext";
 
 const Footer = () => {
   const { t } = useLanguage();
+  const { contact } = useSiteContent();
+
+  const hotlineNum = contact.hotline || t.common.hotlineNumber;
+  const hotlineDisplay = contact.hotline_display || hotlineNum;
 
   return (
     <footer className="bg-gradient-to-b from-gray-900 to-gray-950 text-white">
@@ -27,16 +32,17 @@ const Footer = () => {
             <div className="flex items-center gap-3 mb-4">
               <Link href="/" aria-label="Trang chủ inoibai.vn">
                 <Image
-                  src="/images/Brand.jpg"
-                  alt="inoibai.vn - Taxi đưa đón sân bay Nội Bài giá rẻ"
+                  src={contact.logo_url || "/images/Brand.jpg"}
+                  alt={`${contact.brand_name || "inoibai.vn"} - Taxi đưa đón sân bay Nội Bài giá rẻ`}
                   width={60}
                   height={60}
                   className="rounded-lg hover:opacity-80 transition-opacity object-cover"
+                  unoptimized={contact.logo_url?.startsWith("data:") || contact.logo_url?.startsWith("http")}
                 />
               </Link>
               <div>
                 <span className="text-xl font-bold text-orange-500 block leading-tight">
-                  {t.common.brandName}
+                  {contact.brand_name || t.common.brandName}
                 </span>
                 <p className="text-xs text-gray-400">
                   {t.common.tagline}
@@ -172,10 +178,10 @@ const Footer = () => {
                 <div>
                   <p className="text-xs text-gray-400 font-semibold">{t.footer.hotlineTitle}</p>
                   <a
-                    href={`tel:${t.common.hotlineNumber.replace(/[^0-9+]/g, "")}`}
+                    href={`tel:${hotlineNum.replace(/[^0-9+]/g, "")}`}
                     className="text-white hover:text-orange-500 font-bold text-base"
                   >
-                    {t.common.hotlineNumber}
+                    {hotlineDisplay}
                   </a>
                 </div>
               </li>
@@ -187,10 +193,10 @@ const Footer = () => {
                 <div>
                   <p className="text-xs text-gray-400 font-semibold">{t.footer.emailTitle}</p>
                   <a
-                    href="mailto:inoibai.vn@gmail.com"
+                    href={`mailto:${contact.email || "inoibai.vn@gmail.com"}`}
                     className="text-gray-300 hover:text-orange-500 text-sm"
                   >
-                    inoibai.vn@gmail.com
+                    {contact.email || "inoibai.vn@gmail.com"}
                   </a>
                 </div>
               </li>
@@ -202,7 +208,7 @@ const Footer = () => {
                 <div>
                   <p className="text-xs text-gray-400 font-semibold">{t.footer.addressTitle}</p>
                   <p className="text-sm text-gray-300">
-                    {t.footer.addressContent}
+                    {contact.address || t.footer.addressContent}
                   </p>
                 </div>
               </li>

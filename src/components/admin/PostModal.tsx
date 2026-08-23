@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { Language, SUPPORTED_LANGUAGES } from "@/lib/i18n/types";
 import { X, Save, Image as ImageIcon, Globe, FileText, CheckCircle } from "lucide-react";
+import ImageUploadField from "./ImageUploadField";
 
 interface PostModalProps {
   post: any | null;
@@ -171,16 +172,14 @@ export default function PostModal({ post, onClose, onSave }: PostModalProps) {
               </div>
             </div>
 
-            <div>
-              <label className="block text-xs font-bold text-gray-700 mb-1">
-                Link ảnh bìa (Cover Image URL)
-              </label>
-              <input
-                type="text"
+            <div className="md:col-span-2">
+              <ImageUploadField
+                label="Ảnh bìa bài viết (Cover Image)"
                 value={coverImage}
-                onChange={(e) => setCoverImage(e.target.value)}
-                placeholder="/images/Hero2.jpg hoặc https://..."
-                className="w-full px-3 py-2 text-sm bg-white rounded-lg border border-gray-300 outline-none focus:border-blue-500"
+                onChange={setCoverImage}
+                folder="inoibai/posts"
+                placeholder="/images/Hero2.jpg hoặc https://res.cloudinary.com/..."
+                helperText="Ảnh bìa hiển thị nổi bật trên danh sách bài viết và thẻ xem trước mạng xã hội (OpenGraph / Facebook / Zalo)"
               />
             </div>
 

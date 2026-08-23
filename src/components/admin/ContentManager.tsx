@@ -1,96 +1,1189 @@
 "use client";
 
 import React, { useState } from "react";
-import { Settings, Save, RefreshCw, Key, Code } from "lucide-react";
+import Image from "next/image";
+import {
+  Settings,
+  Save,
+  RefreshCw,
+  Sparkles,
+  Phone,
+  Car,
+  CheckCircle2,
+  ListOrdered,
+  MessageSquare,
+  HelpCircle,
+  Cloud,
+  Code,
+  Globe,
+  Plus,
+  Trash2,
+  ChevronDown,
+  ChevronUp,
+  ExternalLink,
+  Check,
+} from "lucide-react";
+import ImageUploadField from "./ImageUploadField";
+import { Language, SUPPORTED_LANGUAGES } from "@/lib/i18n/types";
 
 interface ContentManagerProps {
   content: any[];
   onSaveContent: (id: string, data: any) => Promise<void>;
 }
 
+type CMSTab =
+  | "hero"
+  | "brand"
+  | "vehicles"
+  | "why_us"
+  | "steps"
+  | "testimonials"
+  | "faq"
+  | "cloudinary"
+  | "raw_json";
+
 export default function ContentManager({
   content,
   onSaveContent,
 }: ContentManagerProps) {
-  const [editingId, setEditingId] = useState<string | null>(null);
-  const [draftValues, setDraftValues] = useState<Record<string, string>>({});
+  const [activeTab, setActiveTab] = useState<CMSTab>("hero");
+  const [selectedLang, setSelectedLang] = useState<Language>("vi");
   const [isSaving, setIsSaving] = useState(false);
+  const [saveSuccess, setSaveSuccess] = useState(false);
 
-  const handleTextChange = (id: string, val: string) => {
-    setDraftValues((prev) => ({ ...prev, [id]: val }));
+  // Find or initialize content items by key
+  const getContent = (key: string, defaultValue: any = {}) => {
+    const item = content.find((c) => c.content_key === key);
+    return item ? item.value : defaultValue;
   };
 
-  const handleSave = async (id: string, rawVal: string) => {
+  const getContentItem = (key: string) => {
+    return content.find((c) => c.content_key === key);
+  };
+
+  // State for all CMS sections
+  const [heroData, setHeroData] = useState(() => ({
+    title1: getContent("hero_section", {}).title1 || {
+      vi: "ĐẶT XE TAXI SÂN BAY NỘI BÀI",
+      en: "BOOK NOI BAI AIRPORT TAXI",
+      ko: "노이바이 공항 택시 예약",
+      ru: "ЗАКАЗ ТАКСИ В АЭРОПОРТ НОЙБАЙ",
+      zh: "预订内排机场出租车",
+    },
+    title2: getContent("hero_section", {}).title2 || {
+      vi: "ĐÓN TIỄN ĐÚNG GIỜ • GIÁ RẺ TRỌN GÓI CHỈ TỪ 200K",
+      en: "PUNCTUAL PICKUP • ALL-INCLUSIVE FIXED FARE FROM 200K",
+      ko: "정시 픽업 • 올인클루시브 정액 요금 20만동부터",
+      ru: "ПОДАЧА ВОВРЕМЯ • ФИКСИРОВАННАЯ ЦЕНА ОТ 200К",
+      zh: "准时接送 • 全包一口价仅20万起",
+    },
+    subtitle: getContent("hero_section", {}).subtitle || {
+      vi: "Dịch vụ xe riêng 5 - 7 - 16 chỗ đời mới, đưa đón tận nơi 24/7 không lo phụ phí",
+      en: "Private 5-7-16 seater modern cars, 24/7 door-to-door transfer with zero hidden fees",
+      ko: "최신 5-7-16인승 프라이빗 차량, 숨겨진 추가 요금 없는 24시간 도어투도어 서비스",
+      ru: "Новые авто 5-7-16 мест, круглосуточная доставка от двери до двери без скрытых доплат",
+      zh: "全新5座、7座、16座专车，24小时门到门接送，无任何隐藏费用",
+    },
+    banners: getContent("hero_section", {}).banners || [
+      "/images/Hero1.jpg",
+      "/images/Hero2.jpg",
+      "/images/Hero22.jpg",
+    ],
+    badgeText: getContent("hero_section", {}).badgeText || {
+      vi: "HỆ THỐNG TAXI SÂN BAY UY TÍN HÀNG ĐẦU HÀ NỘI",
+      en: "HANOI'S LEADING AIRPORT TRANSFER SYSTEM",
+      ko: "하노이 최고의 프리미엄 공항 택시",
+      ru: "ВЕДУЩАЯ СЛУЖБА ТАКСИ В АЭРОПОРТ ХАНОЯ",
+      zh: "河内顶尖河内内排机场专车接送系统",
+    },
+  }));
+
+  const [contactData, setContactData] = useState(() => ({
+    brand_name: getContent("contact_info", {}).brand_name || "inoibai.vn",
+    hotline: getContent("contact_info", {}).hotline || "0985.791.955",
+    hotline_display: getContent("contact_info", {}).hotline_display || "0985.791.955",
+    zalo: getContent("contact_info", {}).zalo || "0985791955",
+    telegram: getContent("contact_info", {}).telegram || "https://t.me/inoibai_vn",
+    email: getContent("contact_info", {}).email || "inoibai.vn@gmail.com",
+    address: getContent("contact_info", {}).address || "Sảnh A1, T1 - Sân bay Quốc tế Nội Bài, Sóc Sơn, Hà Nội",
+    logo_url: getContent("contact_info", {}).logo_url || "/images/logo.png",
+    working_hours: getContent("contact_info", {}).working_hours || "24/7 (Phục vụ cả ngày lễ & Tết)",
+  }));
+
+  const [vehiclesData, setVehiclesData] = useState(() =>
+    getContent("vehicles_fleet", [
+      {
+        id: "5-seater",
+        type: "5",
+        name: "Xe 5 Chỗ Sedan / Hatchback",
+        models: "Vios, Accent, City, Cerato đời mới",
+        seats: "4 hành khách",
+        luggage: "2 vali lớn + 2 balo",
+        price: "200.000đ",
+        image: "/images/51.png",
+        features: ["Điều hòa mát lạnh", "Ghế da êm ái", "Nước suối miễn phí", "Cốp rộng rãi"],
+      },
+      {
+        id: "7-seater",
+        type: "7",
+        name: "Xe 7 Chỗ SUV / MPV",
+        models: "Xpander, Innova, Veloz, Fortuner",
+        seats: "6 hành khách",
+        luggage: "4 vali lớn + 3 balo",
+        price: "250.000đ",
+        image: "/images/71.png",
+        features: ["Không gian rộng rãi", "Gầm cao êm ái", "Phù hợp gia đình", "Wifi tốc độ cao"],
+      },
+      {
+        id: "16-seater",
+        type: "16",
+        name: "Xe 16 Chỗ Du Lịch / Đoàn",
+        models: "Ford Transit, Hyundai Solati",
+        seats: "15 hành khách",
+        luggage: "10-12 vali hành lý",
+        price: "450.000đ",
+        image: "/images/big1.png",
+        features: ["Ghế ngả cao cấp", "Khoang hành lý siêu rộng", "Phù hợp đoàn du lịch & công tác"],
+      },
+    ])
+  );
+
+  const [cloudinaryConfig, setCloudinaryConfig] = useState(() =>
+    getContent("cloudinary_config", {
+      cloud_name: "",
+      api_key: "",
+      api_secret: "",
+      upload_preset: "",
+    })
+  );
+
+  const [testimonialsData, setTestimonialsData] = useState(() =>
+    getContent("testimonials", [
+      {
+        name: "Nguyễn Văn Hùng",
+        role: "Doanh nhân (Hà Nội)",
+        avatar: "/images/Hero1.jpg",
+        stars: 5,
+        route: "Hoàn Kiếm ↔ Sân bay Nội Bài",
+        comment:
+          "Dịch vụ rất tuyệt vời! Tài xế đón đúng giờ tại sảnh T1, xe Vios mới tinh thơm tho và chạy rất êm. Giá 200k trọn gói không phát sinh.",
+      },
+      {
+        name: "Kim Min-ji",
+        role: "Du khách Hàn Quốc",
+        avatar: "/images/Hero2.jpg",
+        stars: 5,
+        route: "Nội Bài ↔ Khách sạn Lotte Liễu Giai",
+        comment:
+          "Very friendly driver, clean car and on-time pickup. The driver was waiting with my nameplate at Terminal 2. Highly recommended!",
+      },
+      {
+        name: "Trần Mai Anh",
+        role: "Gia đình du lịch (Đà Nẵng)",
+        avatar: "/images/Hero22.jpg",
+        stars: 5,
+        route: "Nội Bài ↔ Cầu Giấy (Xe 7 chỗ Xpander)",
+        comment:
+          "Gia đình mình có con nhỏ và nhiều hành lý, đặt xe 7 chỗ rất rộng rãi. Bác tài hỗ trợ mang vác vali nhiệt tình, lái xe an toàn.",
+      },
+    ])
+  );
+
+  const [faqData, setFaqData] = useState(() =>
+    getContent("faq_list", [
+      {
+        q: {
+          vi: "Giá xe sân bay Nội Bài tại inoibai.vn đã bao gồm các chi phí cầu đường chưa?",
+          en: "Does the price include all highway toll fees and airport surcharges?",
+        },
+        a: {
+          vi: "Toàn bộ giá cước hiển thị trên website là giá TRỌN GÓI 100%, đã bao gồm vé vào sân bay, phí cầu đường cao tốc và tài xế chờ đón.",
+          en: "All rates displayed on our website are 100% all-inclusive, covering airport parking fees, highway tolls, and driver waiting time.",
+        },
+      },
+      {
+        q: {
+          vi: "Tôi cần đặt xe trước bao lâu để đảm bảo có xe đúng giờ?",
+          en: "How far in advance should I book my airport transfer?",
+        },
+        a: {
+          vi: "Để có xe phục vụ chu đáo nhất, bạn nên đặt trước từ 30 phút - 2 tiếng. Đối với các chuyến bay đêm hoặc sáng sớm, bạn nên đặt trước từ hôm trước.",
+          en: "We recommend booking at least 30 minutes to 2 hours before your flight. For early morning or late night flights, booking a day ahead is ideal.",
+        },
+      },
+      {
+        q: {
+          vi: "Nếu chuyến bay của tôi bị delay (hoãn chuyến) thì có bị tính thêm phí chờ không?",
+          en: "If my flight is delayed, will I be charged extra waiting fees?",
+        },
+        a: {
+          vi: "inoibai.vn MIỄN PHÍ 100% phí chờ khi chuyến bay bị hoãn. Tài xế sẽ theo dõi số hiệu chuyến bay của bạn và có mặt đón đúng lúc bạn hạ cánh.",
+          en: "inoibai.vn provides 100% FREE waiting time for delayed flights. Our dispatchers track flight numbers and adjust pickup times accordingly.",
+        },
+      },
+    ])
+  );
+
+  // Save specific section
+  const handleSaveSection = async (key: string, value: any) => {
     setIsSaving(true);
+    setSaveSuccess(false);
     try {
-      const parsed = JSON.parse(rawVal);
-      await onSaveContent(id, { value: parsed });
-      alert("Đã lưu cấu hình thành công!");
+      const existing = getContentItem(key);
+      if (existing?.id) {
+        await onSaveContent(existing.id, { value });
+      } else {
+        // Create new
+        const res = await fetch("/api/admin/data", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            table: "site_content",
+            data: {
+              content_key: key,
+              content_type: typeof value === "object" ? "json" : "text",
+              value,
+            },
+          }),
+        });
+        if (!res.ok) throw new Error("Không thể tạo cấu hình mới");
+      }
+      setSaveSuccess(true);
+      setTimeout(() => setSaveSuccess(false), 3000);
     } catch (err: any) {
-      alert("Dữ liệu JSON không hợp lệ: " + err.message);
+      alert("Lỗi khi lưu: " + err.message);
     } finally {
       setIsSaving(false);
     }
   };
 
   return (
-    <div className="space-y-6 pb-12">
+    <div className="space-y-6 pb-16">
       {/* Header */}
-      <div>
-        <h1 className="text-2xl font-extrabold text-gray-800">
-          Cấu Hình Nội Dung Website ({content.length})
-        </h1>
-        <p className="text-xs md:text-sm text-gray-500">
-          Quản lý các khối nội dung tĩnh, thanh điều hướng và thông tin liên hệ toàn website
-        </p>
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
+        <div>
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-xs font-black uppercase tracking-wider mb-2">
+            <Sparkles size={14} />
+            <span>Visual CMS System</span>
+          </div>
+          <h1 className="text-2xl lg:text-3xl font-black text-slate-900 tracking-tight">
+            Quản Trị Nội Dung & Hình Ảnh Website
+          </h1>
+          <p className="text-xs md:text-sm text-slate-500 font-medium mt-1">
+            Chỉnh sửa toàn bộ thông tin hiển thị, logo, hotline, banner và hình ảnh xe trực tiếp trên giao diện
+          </p>
+        </div>
+
+        {/* Global Language Selector */}
+        <div className="flex items-center gap-2 bg-slate-100 p-1.5 rounded-2xl">
+          <Globe size={16} className="text-slate-500 ml-2" />
+          <span className="text-xs font-extrabold text-slate-700 mr-1">Ngôn ngữ soạn thảo:</span>
+          <div className="flex gap-1">
+            {SUPPORTED_LANGUAGES.map((lang) => (
+              <button
+                key={lang.code}
+                type="button"
+                onClick={() => setSelectedLang(lang.code)}
+                className={`px-3 py-1.5 rounded-xl text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer ${
+                  selectedLang === lang.code
+                    ? "bg-white text-blue-600 shadow-sm"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <span>{lang.flag}</span>
+                <span>{lang.code.toUpperCase()}</span>
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
 
-      {/* Content list */}
-      <div className="space-y-4">
-        {content.map((item) => {
-          const currentStr =
-            draftValues[item.id] !== undefined
-              ? draftValues[item.id]
-              : JSON.stringify(item.value, null, 2);
-
+      {/* Main Tabs Navigation */}
+      <div className="flex gap-2 overflow-x-auto pb-2 border-b border-slate-200 text-xs font-bold scrollbar-none">
+        {[
+          { id: "hero", label: "Hero & Banner", icon: Sparkles },
+          { id: "brand", label: "Thương hiệu & Hotline", icon: Phone },
+          { id: "vehicles", label: "Đội xe & Ảnh xe", icon: Car },
+          { id: "testimonials", label: "Đánh giá khách hàng", icon: MessageSquare },
+          { id: "faq", label: "Câu hỏi thường gặp FAQ", icon: HelpCircle },
+          { id: "cloudinary", label: "Cấu hình Cloudinary", icon: Cloud },
+          { id: "raw_json", label: "Dữ liệu thô (Raw JSON)", icon: Code },
+        ].map((tab) => {
+          const Icon = tab.icon;
+          const isActive = activeTab === tab.id;
           return (
-            <div
-              key={item.id}
-              className="bg-white rounded-2xl p-5 border border-gray-200 shadow-sm space-y-3"
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => setActiveTab(tab.id as CMSTab)}
+              className={`flex items-center gap-2 px-4 py-3 rounded-2xl whitespace-nowrap transition-all cursor-pointer font-extrabold ${
+                isActive
+                  ? "bg-blue-600 text-white shadow-md shadow-blue-200"
+                  : "bg-white text-slate-600 hover:text-slate-900 border border-slate-200"
+              }`}
             >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Key size={16} className="text-blue-600" />
-                  <h3 className="font-extrabold text-gray-900 text-sm md:text-base font-mono">
-                    {item.content_key}
-                  </h3>
-                  <span className="text-[10px] uppercase font-bold bg-blue-50 text-blue-700 px-2 py-0.5 rounded">
-                    {item.content_type || "json"}
-                  </span>
-                </div>
-                <button
-                  type="button"
-                  disabled={isSaving}
-                  onClick={() => handleSave(item.id, currentStr)}
-                  className="flex items-center gap-1.5 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow-xs transition-colors cursor-pointer"
-                >
-                  <Save size={14} />
-                  <span>{isSaving ? "Đang lưu..." : "Lưu thay đổi"}</span>
-                </button>
-              </div>
-
-              <div>
-                <textarea
-                  rows={8}
-                  value={currentStr}
-                  onChange={(e) => handleTextChange(item.id, e.target.value)}
-                  className="w-full p-3.5 bg-gray-50 text-gray-800 font-mono text-xs rounded-xl border border-gray-200 outline-none focus:bg-white focus:border-blue-500 transition-colors leading-relaxed"
-                />
-              </div>
-            </div>
+              <Icon size={16} />
+              <span>{tab.label}</span>
+            </button>
           );
         })}
       </div>
+
+      {saveSuccess && (
+        <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl text-xs font-extrabold text-emerald-800 flex items-center gap-2 animate-in fade-in">
+          <Check size={18} className="text-emerald-600 flex-shrink-0" />
+          <span>Đã lưu nội dung thành công và cập nhật ngay lên website!</span>
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* TAB 1: HERO & BANNERS */}
+      {/* ========================================================================= */}
+      {activeTab === "hero" && (
+        <div className="bg-white rounded-3xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+            <div>
+              <h2 className="text-lg font-black text-slate-900">
+                Khối Hero Section & Banner Trình Chiếu ({selectedLang.toUpperCase()})
+              </h2>
+              <p className="text-xs text-slate-500 font-medium">
+                Khối tiêu đề chính và 3 hình ảnh banner chạy slide tự động ở trang chủ
+              </p>
+            </div>
+            <button
+              type="button"
+              disabled={isSaving}
+              onClick={() => handleSaveSection("hero_section", heroData)}
+              className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-black shadow-md shadow-blue-200 transition-all cursor-pointer"
+            >
+              <Save size={15} />
+              <span>{isSaving ? "Đang lưu..." : "Lưu Khối Hero"}</span>
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 gap-5">
+            {/* Title 1 */}
+            <div>
+              <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
+                Dòng Tiêu Đề 1 ({selectedLang.toUpperCase()})
+              </label>
+              <input
+                type="text"
+                value={heroData.title1[selectedLang] || ""}
+                onChange={(e) =>
+                  setHeroData({
+                    ...heroData,
+                    title1: { ...heroData.title1, [selectedLang]: e.target.value },
+                  })
+                }
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+              />
+            </div>
+
+            {/* Title 2 */}
+            <div>
+              <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
+                Dòng Tiêu Đề 2 (Màu cam nổi bật) ({selectedLang.toUpperCase()})
+              </label>
+              <input
+                type="text"
+                value={heroData.title2[selectedLang] || ""}
+                onChange={(e) =>
+                  setHeroData({
+                    ...heroData,
+                    title2: { ...heroData.title2, [selectedLang]: e.target.value },
+                  })
+                }
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-orange-600 outline-none focus:bg-white focus:border-blue-600"
+              />
+            </div>
+
+            {/* Subtitle */}
+            <div>
+              <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
+                Mô tả phụ Hero ({selectedLang.toUpperCase()})
+              </label>
+              <textarea
+                rows={2}
+                value={heroData.subtitle[selectedLang] || ""}
+                onChange={(e) =>
+                  setHeroData({
+                    ...heroData,
+                    subtitle: { ...heroData.subtitle, [selectedLang]: e.target.value },
+                  })
+                }
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-medium text-slate-800 outline-none focus:bg-white focus:border-blue-600"
+              />
+            </div>
+
+            {/* Badge Text */}
+            <div>
+              <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
+                Khẩu hiệu trên cùng (Top Badge) ({selectedLang.toUpperCase()})
+              </label>
+              <input
+                type="text"
+                value={heroData.badgeText[selectedLang] || ""}
+                onChange={(e) =>
+                  setHeroData({
+                    ...heroData,
+                    badgeText: { ...heroData.badgeText, [selectedLang]: e.target.value },
+                  })
+                }
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+              />
+            </div>
+
+            {/* 3 Banner Images */}
+            <div className="border-t border-slate-100 pt-6 space-y-4">
+              <h3 className="text-sm font-extrabold text-slate-900 flex items-center gap-2">
+                <span>🖼️ 3 Hình Ảnh Banner Trình Chiếu (Slide Show Hero)</span>
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {[0, 1, 2].map((idx) => (
+                  <div key={idx} className="p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                    <ImageUploadField
+                      label={`Banner ${idx + 1}`}
+                      value={heroData.banners[idx] || ""}
+                      onChange={(url) => {
+                        const newBanners = [...heroData.banners];
+                        newBanners[idx] = url;
+                        setHeroData({ ...heroData, banners: newBanners });
+                      }}
+                      folder="inoibai/banners"
+                      placeholder={`/images/Hero${idx + 1}.jpg`}
+                      helperText={`Ảnh hiển thị ở vị trí slide thứ ${idx + 1}`}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* TAB 2: BRAND & CONTACT */}
+      {/* ========================================================================= */}
+      {activeTab === "brand" && (
+        <div className="bg-white rounded-3xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+            <div>
+              <h2 className="text-lg font-black text-slate-900">
+                Thương Hiệu, Hotline & Thông Tin Liên Hệ Toàn Website
+              </h2>
+              <p className="text-xs text-slate-500 font-medium">
+                Cấu hình logo, số điện thoại hotline, zalo, email và địa chỉ đón trả
+              </p>
+            </div>
+            <button
+              type="button"
+              disabled={isSaving}
+              onClick={() => handleSaveSection("contact_info", contactData)}
+              className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-black shadow-md shadow-blue-200 transition-all cursor-pointer"
+            >
+              <Save size={15} />
+              <span>{isSaving ? "Đang lưu..." : "Lưu Thông Tin Liên Hệ"}</span>
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="md:col-span-2">
+              <ImageUploadField
+                label="Logo Thương Hiệu (Header & Footer)"
+                value={contactData.logo_url}
+                onChange={(url) => setContactData({ ...contactData, logo_url: url })}
+                folder="inoibai/branding"
+                placeholder="/images/logo.png hoặc https://res.cloudinary.com/..."
+                helperText="Ảnh logo hiển thị trên thanh điều hướng đầu trang và chân trang website"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
+                Tên thương hiệu (Brand Name)
+              </label>
+              <input
+                type="text"
+                value={contactData.brand_name}
+                onChange={(e) => setContactData({ ...contactData, brand_name: e.target.value })}
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
+                Số Hotline (Quay số trực tiếp khi bấm gọi)
+              </label>
+              <input
+                type="text"
+                value={contactData.hotline}
+                onChange={(e) => setContactData({ ...contactData, hotline: e.target.value })}
+                placeholder="0985791955"
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
+                Số Hotline hiển thị trên giao diện
+              </label>
+              <input
+                type="text"
+                value={contactData.hotline_display}
+                onChange={(e) =>
+                  setContactData({ ...contactData, hotline_display: e.target.value })
+                }
+                placeholder="0985.791.955"
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
+                Số điện thoại Zalo hoặc Link Zalo
+              </label>
+              <input
+                type="text"
+                value={contactData.zalo}
+                onChange={(e) => setContactData({ ...contactData, zalo: e.target.value })}
+                placeholder="0985791955 hoặc https://zalo.me/..."
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
+                Link Telegram hỗ trợ
+              </label>
+              <input
+                type="text"
+                value={contactData.telegram}
+                onChange={(e) => setContactData({ ...contactData, telegram: e.target.value })}
+                placeholder="https://t.me/inoibai_vn"
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
+                Email liên hệ hỗ trợ
+              </label>
+              <input
+                type="email"
+                value={contactData.email}
+                onChange={(e) => setContactData({ ...contactData, email: e.target.value })}
+                placeholder="inoibai.vn@gmail.com"
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+              />
+            </div>
+
+            <div className="md:col-span-2">
+              <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
+                Địa chỉ văn phòng / Sảnh đón Nội Bài
+              </label>
+              <input
+                type="text"
+                value={contactData.address}
+                onChange={(e) => setContactData({ ...contactData, address: e.target.value })}
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* TAB 3: VEHICLES & FLEET IMAGES */}
+      {/* ========================================================================= */}
+      {activeTab === "vehicles" && (
+        <div className="bg-white rounded-3xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+            <div>
+              <h2 className="text-lg font-black text-slate-900">
+                Đội Xe & Hình Ảnh Xe Đưa Đón (5 chỗ, 7 chỗ, 16 chỗ)
+              </h2>
+              <p className="text-xs text-slate-500 font-medium">
+                Thay đổi hình ảnh xe, tên dòng xe, số ghế ngồi, số vali và các tiện nghi đi kèm
+              </p>
+            </div>
+            <button
+              type="button"
+              disabled={isSaving}
+              onClick={() => handleSaveSection("vehicles_fleet", vehiclesData)}
+              className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-black shadow-md shadow-blue-200 transition-all cursor-pointer"
+            >
+              <Save size={15} />
+              <span>{isSaving ? "Đang lưu..." : "Lưu Thông Tin Đội Xe"}</span>
+            </button>
+          </div>
+
+          <div className="space-y-6">
+            {vehiclesData.map((v: any, index: number) => (
+              <div
+                key={v.id || index}
+                className="p-6 bg-slate-50 rounded-3xl border border-slate-200 space-y-4"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="px-3 py-1 bg-blue-600 text-white rounded-xl text-xs font-black">
+                    Xe {v.type} Chỗ
+                  </span>
+                  <span className="text-xs font-bold text-slate-500">
+                    Giá từ: <span className="text-orange-600 font-extrabold">{v.price}</span>
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {/* Image Upload for vehicle */}
+                  <div>
+                    <ImageUploadField
+                      label={`Hình ảnh xe ${v.type} chỗ`}
+                      value={v.image}
+                      onChange={(url) => {
+                        const updated = [...vehiclesData];
+                        updated[index].image = url;
+                        setVehiclesData(updated);
+                      }}
+                      folder="inoibai/vehicles"
+                      placeholder={`/images/${v.type}1.png`}
+                      helperText="Ảnh hiển thị trên trang danh sách loại xe và form chọn xe"
+                    />
+                  </div>
+
+                  {/* Vehicle Details */}
+                  <div className="md:col-span-2 space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1">
+                          Tên hiển thị
+                        </label>
+                        <input
+                          type="text"
+                          value={v.name}
+                          onChange={(e) => {
+                            const updated = [...vehiclesData];
+                            updated[index].name = e.target.value;
+                            setVehiclesData(updated);
+                          }}
+                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-sm font-bold text-slate-900 outline-none focus:border-blue-600"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1">
+                          Các dòng xe đại diện
+                        </label>
+                        <input
+                          type="text"
+                          value={v.models}
+                          onChange={(e) => {
+                            const updated = [...vehiclesData];
+                            updated[index].models = e.target.value;
+                            setVehiclesData(updated);
+                          }}
+                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-sm font-medium text-slate-800 outline-none focus:border-blue-600"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1">
+                          Số lượng hành khách
+                        </label>
+                        <input
+                          type="text"
+                          value={v.seats}
+                          onChange={(e) => {
+                            const updated = [...vehiclesData];
+                            updated[index].seats = e.target.value;
+                            setVehiclesData(updated);
+                          }}
+                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-sm font-medium text-slate-800 outline-none focus:border-blue-600"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1">
+                          Sức chứa hành lý
+                        </label>
+                        <input
+                          type="text"
+                          value={v.luggage}
+                          onChange={(e) => {
+                            const updated = [...vehiclesData];
+                            updated[index].luggage = e.target.value;
+                            setVehiclesData(updated);
+                          }}
+                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-sm font-medium text-slate-800 outline-none focus:border-blue-600"
+                        />
+                      </div>
+
+                      <div className="md:col-span-2">
+                        <label className="block text-xs font-bold text-slate-700 mb-1">
+                          Giá khởi điểm hiển thị
+                        </label>
+                        <input
+                          type="text"
+                          value={v.price}
+                          onChange={(e) => {
+                            const updated = [...vehiclesData];
+                            updated[index].price = e.target.value;
+                            setVehiclesData(updated);
+                          }}
+                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-sm font-bold text-orange-600 outline-none focus:border-blue-600"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* TAB 4: TESTIMONIALS */}
+      {/* ========================================================================= */}
+      {activeTab === "testimonials" && (
+        <div className="bg-white rounded-3xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+            <div>
+              <h2 className="text-lg font-black text-slate-900">
+                Đánh Giá Khách Hàng (Testimonials) ({testimonialsData.length})
+              </h2>
+              <p className="text-xs text-slate-500 font-medium">
+                Quản lý phản hồi, avatar, tên khách hàng và lời nhận xét hiển thị trang chủ
+              </p>
+            </div>
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() =>
+                  setTestimonialsData([
+                    ...testimonialsData,
+                    {
+                      name: "Khách hàng mới",
+                      role: "Hành khách Nội Bài",
+                      avatar: "/images/Hero1.jpg",
+                      stars: 5,
+                      route: "Hà Nội → Sân bay Nội Bài",
+                      comment: "Dịch vụ đón đúng giờ, tài xế lịch sự, xe sạch sẽ!",
+                    },
+                  ])
+                }
+                className="flex items-center gap-1.5 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold transition-colors cursor-pointer"
+              >
+                <Plus size={14} />
+                <span>Thêm Đánh Giá</span>
+              </button>
+
+              <button
+                type="button"
+                disabled={isSaving}
+                onClick={() => handleSaveSection("testimonials", testimonialsData)}
+                className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-black shadow-md shadow-blue-200 transition-all cursor-pointer"
+              >
+                <Save size={15} />
+                <span>{isSaving ? "Đang lưu..." : "Lưu Đánh Giá"}</span>
+              </button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {testimonialsData.map((item: any, idx: number) => (
+              <div
+                key={idx}
+                className="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-4 relative"
+              >
+                <button
+                  type="button"
+                  onClick={() => {
+                    const filtered = testimonialsData.filter((_: any, i: number) => i !== idx);
+                    setTestimonialsData(filtered);
+                  }}
+                  className="absolute top-4 right-4 text-slate-400 hover:text-rose-600 p-1 rounded-lg transition-colors cursor-pointer"
+                  title="Xóa đánh giá này"
+                >
+                  <Trash2 size={16} />
+                </button>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[11px] font-bold text-slate-700 mb-1">
+                      Tên khách hàng
+                    </label>
+                    <input
+                      type="text"
+                      value={item.name}
+                      onChange={(e) => {
+                        const updated = [...testimonialsData];
+                        updated[idx].name = e.target.value;
+                        setTestimonialsData(updated);
+                      }}
+                      className="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-bold text-slate-900 outline-none"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] font-bold text-slate-700 mb-1">
+                      Chức danh / Nghề nghiệp
+                    </label>
+                    <input
+                      type="text"
+                      value={item.role}
+                      onChange={(e) => {
+                        const updated = [...testimonialsData];
+                        updated[idx].role = e.target.value;
+                        setTestimonialsData(updated);
+                      }}
+                      className="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-medium text-slate-800 outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[11px] font-bold text-slate-700 mb-1">
+                      Chặng đường đã đi
+                    </label>
+                    <input
+                      type="text"
+                      value={item.route}
+                      onChange={(e) => {
+                        const updated = [...testimonialsData];
+                        updated[idx].route = e.target.value;
+                        setTestimonialsData(updated);
+                      }}
+                      className="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-medium text-slate-800 outline-none"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] font-bold text-slate-700 mb-1">
+                      Số sao (1 - 5 ⭐)
+                    </label>
+                    <select
+                      value={item.stars || 5}
+                      onChange={(e) => {
+                        const updated = [...testimonialsData];
+                        updated[idx].stars = Number(e.target.value);
+                        setTestimonialsData(updated);
+                      }}
+                      className="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-bold text-amber-600 outline-none"
+                    >
+                      <option value={5}>⭐⭐⭐⭐⭐ (5 sao - Xuất sắc)</option>
+                      <option value={4}>⭐⭐⭐⭐ (4 sao - Tốt)</option>
+                      <option value={3}>⭐⭐⭐ (3 sao - Trung bình)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <ImageUploadField
+                  label="Avatar khách hàng"
+                  value={item.avatar}
+                  onChange={(url) => {
+                    const updated = [...testimonialsData];
+                    updated[idx].avatar = url;
+                    setTestimonialsData(updated);
+                  }}
+                  folder="inoibai/testimonials"
+                  placeholder="/images/Hero1.jpg"
+                />
+
+                <div>
+                  <label className="block text-[11px] font-bold text-slate-700 mb-1">
+                    Lời nhận xét của khách
+                  </label>
+                  <textarea
+                    rows={3}
+                    value={item.comment}
+                    onChange={(e) => {
+                      const updated = [...testimonialsData];
+                      updated[idx].comment = e.target.value;
+                      setTestimonialsData(updated);
+                    }}
+                    className="w-full p-3 bg-white border border-slate-300 rounded-xl text-xs font-medium text-slate-800 outline-none"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* TAB 5: FAQ (CÂU HỎI THƯỜNG GẶP) */}
+      {/* ========================================================================= */}
+      {activeTab === "faq" && (
+        <div className="bg-white rounded-3xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+            <div>
+              <h2 className="text-lg font-black text-slate-900">
+                Câu Hỏi Thường Gặp (FAQ) ({selectedLang.toUpperCase()})
+              </h2>
+              <p className="text-xs text-slate-500 font-medium">
+                Tối ưu SEO FAQPage Schema.org và giải đáp thắc mắc cho hành khách
+              </p>
+            </div>
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() =>
+                  setFaqData([
+                    ...faqData,
+                    {
+                      q: { [selectedLang]: "Câu hỏi mới?" },
+                      a: { [selectedLang]: "Câu trả lời chi tiết..." },
+                    },
+                  ])
+                }
+                className="flex items-center gap-1.5 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold transition-colors cursor-pointer"
+              >
+                <Plus size={14} />
+                <span>Thêm Câu Hỏi</span>
+              </button>
+
+              <button
+                type="button"
+                disabled={isSaving}
+                onClick={() => handleSaveSection("faq_list", faqData)}
+                className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-black shadow-md shadow-blue-200 transition-all cursor-pointer"
+              >
+                <Save size={15} />
+                <span>{isSaving ? "Đang lưu..." : "Lưu Danh Sách FAQ"}</span>
+              </button>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            {faqData.map((item: any, idx: number) => (
+              <div
+                key={idx}
+                className="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3 relative"
+              >
+                <button
+                  type="button"
+                  onClick={() => {
+                    const filtered = faqData.filter((_: any, i: number) => i !== idx);
+                    setFaqData(filtered);
+                  }}
+                  className="absolute top-4 right-4 text-slate-400 hover:text-rose-600 p-1 rounded-lg transition-colors cursor-pointer"
+                  title="Xóa câu hỏi này"
+                >
+                  <Trash2 size={16} />
+                </button>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-800 mb-1">
+                    Câu hỏi #{idx + 1} ({selectedLang.toUpperCase()})
+                  </label>
+                  <input
+                    type="text"
+                    value={item.q?.[selectedLang] || ""}
+                    onChange={(e) => {
+                      const updated = [...faqData];
+                      updated[idx].q = {
+                        ...updated[idx].q,
+                        [selectedLang]: e.target.value,
+                      };
+                      setFaqData(updated);
+                    }}
+                    placeholder="Nhập câu hỏi..."
+                    className="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-xl text-xs font-bold text-slate-900 outline-none focus:border-blue-600"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-800 mb-1">
+                    Câu trả lời ({selectedLang.toUpperCase()})
+                  </label>
+                  <textarea
+                    rows={3}
+                    value={item.a?.[selectedLang] || ""}
+                    onChange={(e) => {
+                      const updated = [...faqData];
+                      updated[idx].a = {
+                        ...updated[idx].a,
+                        [selectedLang]: e.target.value,
+                      };
+                      setFaqData(updated);
+                    }}
+                    placeholder="Nhập câu trả lời..."
+                    className="w-full p-3 bg-white border border-slate-300 rounded-xl text-xs font-medium text-slate-800 outline-none focus:border-blue-600 leading-relaxed"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* TAB 6: CLOUDINARY CONFIG */}
+      {/* ========================================================================= */}
+      {activeTab === "cloudinary" && (
+        <div className="bg-white rounded-3xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+            <div>
+              <h2 className="text-lg font-black text-slate-900 flex items-center gap-2">
+                <Cloud className="text-blue-600" size={22} />
+                <span>Cấu Hình Lưu Trữ Ảnh Đám Mây Cloudinary</span>
+              </h2>
+              <p className="text-xs text-slate-500 font-medium">
+                Kết nối tài khoản Cloudinary để toàn bộ ảnh tải lên tự động lưu trữ vĩnh viễn và tối ưu tốc độ CDN toàn cầu
+              </p>
+            </div>
+            <button
+              type="button"
+              disabled={isSaving}
+              onClick={() => handleSaveSection("cloudinary_config", cloudinaryConfig)}
+              className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-black shadow-md shadow-blue-200 transition-all cursor-pointer"
+            >
+              <Save size={15} />
+              <span>{isSaving ? "Đang lưu..." : "Lưu Cấu Hình Cloudinary"}</span>
+            </button>
+          </div>
+
+          <div className="p-4 bg-blue-50/60 border border-blue-200 rounded-2xl text-xs text-blue-900 font-medium space-y-2">
+            <p className="font-extrabold flex items-center gap-1.5 text-blue-700">
+              <span>💡 Cách lấy thông tin Cloudinary (Miễn phí 100%):</span>
+            </p>
+            <ol className="list-decimal list-inside space-y-1 text-slate-700">
+              <li>
+                Đăng ký tài khoản miễn phí tại{" "}
+                <a
+                  href="https://cloudinary.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-blue-600 font-bold underline inline-flex items-center gap-0.5"
+                >
+                  cloudinary.com <ExternalLink size={12} />
+                </a>
+              </li>
+              <li>Tại Dashboard chính, bạn sẽ thấy <b>Cloud Name</b>, <b>API Key</b> và <b>API Secret</b>.</li>
+              <li>Dán các thông số vào 3 ô bên dưới và nhấn <b>Lưu Cấu Hình</b>.</li>
+            </ol>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
+                Cloud Name *
+              </label>
+              <input
+                type="text"
+                value={cloudinaryConfig.cloud_name || ""}
+                onChange={(e) =>
+                  setCloudinaryConfig({ ...cloudinaryConfig, cloud_name: e.target.value })
+                }
+                placeholder="ví dụ: dinoibai hoặc dx9xyz..."
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600 font-mono"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
+                Upload Preset (Tùy chọn - Unsigned)
+              </label>
+              <input
+                type="text"
+                value={cloudinaryConfig.upload_preset || ""}
+                onChange={(e) =>
+                  setCloudinaryConfig({ ...cloudinaryConfig, upload_preset: e.target.value })
+                }
+                placeholder="ví dụ: ml_default hoặc inoibai_preset"
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-medium text-slate-900 outline-none focus:bg-white focus:border-blue-600 font-mono"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
+                API Key
+              </label>
+              <input
+                type="text"
+                value={cloudinaryConfig.api_key || ""}
+                onChange={(e) =>
+                  setCloudinaryConfig({ ...cloudinaryConfig, api_key: e.target.value })
+                }
+                placeholder="ví dụ: 123456789012345"
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-mono text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
+                API Secret
+              </label>
+              <input
+                type="password"
+                value={cloudinaryConfig.api_secret || ""}
+                onChange={(e) =>
+                  setCloudinaryConfig({ ...cloudinaryConfig, api_secret: e.target.value })
+                }
+                placeholder="••••••••••••••••••••••••••••"
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-mono text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* TAB 7: RAW JSON (ADVANCED) */}
+      {/* ========================================================================= */}
+      {activeTab === "raw_json" && (
+        <div className="bg-white rounded-3xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
+          <div>
+            <h2 className="text-lg font-black text-slate-900">
+              Quản Trị Nâng Cao - Dữ Liệu Thô (Raw JSON Database)
+            </h2>
+            <p className="text-xs text-slate-500 font-medium">
+              Chỉnh sửa trực tiếp cấu trúc JSON của từng khóa dữ liệu trong bảng <code>site_content</code>
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {content.map((item) => (
+              <div
+                key={item.id}
+                className="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-xs font-extrabold text-blue-600">
+                    {item.content_key}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      try {
+                        const el = document.getElementById(`textarea-${item.id}`) as HTMLTextAreaElement;
+                        if (el) {
+                          const parsed = JSON.parse(el.value);
+                          await onSaveContent(item.id, { value: parsed });
+                          alert("Đã lưu thành công khóa: " + item.content_key);
+                        }
+                      } catch (e: any) {
+                        alert("Lỗi cú pháp JSON: " + e.message);
+                      }
+                    }}
+                    className="flex items-center gap-1 px-3 py-1.5 bg-blue-600 text-white rounded-lg text-xs font-bold cursor-pointer"
+                  >
+                    <Save size={12} />
+                    <span>Lưu</span>
+                  </button>
+                </div>
+                <textarea
+                  id={`textarea-${item.id}`}
+                  rows={6}
+                  defaultValue={JSON.stringify(item.value, null, 2)}
+                  className="w-full p-3 bg-white font-mono text-xs text-slate-800 rounded-xl border border-slate-300 outline-none focus:border-blue-600"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

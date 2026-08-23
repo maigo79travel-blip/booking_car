@@ -211,6 +211,7 @@ const jsonLdGraph = {
 };
 
 import { LanguageProvider } from "@/context/LanguageContext";
+import { SiteContentProvider } from "@/context/SiteContentContext";
 
 export default function RootLayout({
   children,
@@ -248,7 +249,9 @@ export default function RootLayout({
             </Script>
           </>
         )}
-        <LanguageProvider>{children}</LanguageProvider>
+        <SiteContentProvider>
+          <LanguageProvider>{children}</LanguageProvider>
+        </SiteContentProvider>
       </body>
     </html>
   );

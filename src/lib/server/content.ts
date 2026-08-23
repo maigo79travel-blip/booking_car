@@ -44,6 +44,22 @@ export async function getPost(slug: string): Promise<Post | null> {
   }
 }
 
+export async function getAllSiteContent(): Promise<Record<string, any>> {
+  try {
+    const rows = await query<{ content_key: string; value: any }>(
+      "SELECT content_key, value FROM public.site_content"
+    );
+    const map: Record<string, any> = {};
+    for (const r of rows) {
+      map[r.content_key] = r.value;
+    }
+    return map;
+  } catch (err) {
+    console.error("Error fetching all site content:", err);
+    return {};
+  }
+}
+
 export function text(value: LocalizedText | null | undefined, locale = "vi") {
   return value?.[locale as keyof LocalizedText] || value?.vi || "";
 }

@@ -1,26 +1,25 @@
 "use client";
-import { Phone, MessageCircle } from "lucide-react";
-import Image from "next/image";
+
+import React from "react";
+import { Phone } from "lucide-react";
+import { useSiteContent } from "@/context/SiteContentContext";
 
 const FloatingContacts = () => {
+  const { contact } = useSiteContent();
+  const phone = contact.hotline || "0985791955";
+  const zalo = contact.zalo || "0985791955";
+  const zaloLink = zalo.startsWith("http")
+    ? zalo
+    : `https://zalo.me/${zalo.replace(/[^0-9+]/g, "")}`;
+  const telegramLink = contact.telegram || "https://t.me/inoibai_vn";
+
   const contacts = [
     {
-      name: "Phone",
+      name: "Gọi điện ngay",
       icon: <Phone size={24} />,
       bgColor: "bg-green-500",
       hoverColor: "hover:bg-green-600",
-      link: "tel:0985791955",
-    },
-    {
-      name: "Messenger",
-      icon: (
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12 2C6.477 2 2 6.145 2 11.243c0 2.912 1.45 5.51 3.717 7.197V22l3.458-1.897c.923.255 1.903.397 2.925.397 5.523 0 10-4.145 10-9.257C22 6.145 17.523 2 12 2zm.993 12.478l-2.557-2.73-4.992 2.73 5.49-5.823 2.617 2.73 4.933-2.73-5.491 5.823z" />
-        </svg>
-      ),
-      bgColor: "bg-blue-500",
-      hoverColor: "hover:bg-blue-600",
-      link: "https://m.me/your-page-id",
+      link: `tel:${phone.replace(/[^0-9+]/g, "")}`,
     },
     {
       name: "Zalo",
@@ -33,7 +32,18 @@ const FloatingContacts = () => {
       ),
       bgColor: "bg-blue-600",
       hoverColor: "hover:bg-blue-700",
-      link: "https://zalo.me/0985791955",
+      link: zaloLink,
+    },
+    {
+      name: "Telegram",
+      icon: (
+        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.19-.08-.05-.19-.02-.27 0-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.05-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.75 4-.1.74 6.69-2.9 8.08-3.48 3.85-1.61 4.65-1.89 5.17-1.9.11 0 .37.03.54.17.14.12.18.28.2.45-.02.07-.02.14-.04.22z" />
+        </svg>
+      ),
+      bgColor: "bg-sky-500",
+      hoverColor: "hover:bg-sky-600",
+      link: telegramLink,
     },
     {
       name: "Facebook",
@@ -50,16 +60,16 @@ const FloatingContacts = () => {
 
   return (
     <div className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 flex flex-col gap-2 md:gap-3">
-      {contacts.map((contact, index) => (
+      {contacts.map((c, index) => (
         <a
           key={index}
-          href={contact.link}
+          href={c.link}
           target="_blank"
           rel="noopener noreferrer"
-          className={`${contact.bgColor} ${contact.hoverColor} text-white p-3 md:p-4 rounded-full shadow-lg transform hover:scale-110 transition-all duration-300 flex items-center justify-center`}
-          title={contact.name}
+          className={`${c.bgColor} ${c.hoverColor} text-white p-3 md:p-4 rounded-full shadow-lg transform hover:scale-110 transition-all duration-300 flex items-center justify-center`}
+          title={c.name}
         >
-          {contact.icon}
+          {c.icon}
         </a>
       ))}
     </div>

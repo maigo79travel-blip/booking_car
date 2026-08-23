@@ -138,12 +138,11 @@ export async function POST(request: Request) {
       ]
     );
 
-    // 1. Get Telegram Config from DB (site_content) or process.env with default fallback
+    // 1. Get Telegram Config from DB or environment. Do not embed credentials
+    // in source code: this route is deployed with the public application.
     let isEnabled = true;
-    let botToken =
-      process.env.TELEGRAM_BOT_TOKEN ||
-      "8618729009:AAFdooRLIgp4g1e0P9Vs7l9qATid-8cIPt4";
-    let chatId = process.env.TELEGRAM_CHAT_ID || "5728513036";
+    let botToken = process.env.TELEGRAM_BOT_TOKEN || "";
+    let chatId = process.env.TELEGRAM_CHAT_ID || "";
     let topicId = "";
 
     try {

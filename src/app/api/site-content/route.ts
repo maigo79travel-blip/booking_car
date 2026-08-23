@@ -6,10 +6,12 @@ export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
-    const rows = await query<{ content_key: string; value: any }>(
-      "SELECT content_key, value FROM public.site_content"
+    const rows = await query<{ content_key: string; value: unknown }>(
+      `SELECT content_key, value
+       FROM public.site_content
+       WHERE content_key NOT IN ('cloudinary_config', 'telegram_config')`
     );
-    const contentMap: Record<string, any> = {};
+    const contentMap: Record<string, unknown> = {};
     for (const row of rows) {
       contentMap[row.content_key] = row.value;
     }

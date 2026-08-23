@@ -2,16 +2,16 @@ import "server-only";
 import { Pool } from "pg";
 import crypto from "crypto";
 
-const connectionString =
-  process.env.DIRECT_URL ||
-  process.env.DATABASE_URL ||
-  "postgresql://postgres.qysxwmujksnqxppluxey:bW.Q%2165SEEpk%3FBu@aws-0-ap-southeast-1.pooler.supabase.com:5432/postgres";
+const connectionString = process.env.DIRECT_URL || process.env.DATABASE_URL;
 
 // Singleton pool instance for serverless / node runtime
 let pool: Pool | null = null;
 
 export function getDbPool(): Pool {
   if (!pool) {
+    if (!connectionString) {
+      throw new Error("DATABASE_URL or DIRECT_URL must be configured");
+    }
     pool = new Pool({
       connectionString,
       ssl: { rejectUnauthorized: false },
@@ -34,9 +34,14 @@ export async function query<T = Record<string, unknown>>(
   return res.rows as T[];
 }
 
-const SESSION_SECRET =
-  process.env.SUPABASE_SERVICE_ROLE_KEY ||
-  "maigo79-secure-admin-secret-key-2026-super-safe";
+const SESSION_SECRET = process.env.ADMIN_SESSION_SECRET || process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+function getSessionSecret() {
+  if (!SESSION_SECRET) {
+    throw new Error("ADMIN_SESSION_SECRET or SUPABASE_SERVICE_ROLE_KEY must be configured");
+  }
+  return SESSION_SECRET;
+}
 
 export function createSessionToken(userId: string, email: string): string {
   const payload = JSON.stringify({
@@ -46,7 +51,7 @@ export function createSessionToken(userId: string, email: string): string {
   });
   const encoded = Buffer.from(payload).toString("base64url");
   const signature = crypto
-    .createHmac("sha256", SESSION_SECRET)
+    .createHmac("sha256", getSessionSecret())
     .update(encoded)
     .digest("base64url");
   return `${encoded}.${signature}`;
@@ -57,7 +62,7 @@ export function verifySessionToken(token: string): { userId: string; email: stri
     const [encoded, signature] = token.split(".");
     if (!encoded || !signature) return null;
     const expectedSignature = crypto
-      .createHmac("sha256", SESSION_SECRET)
+      .createHmac("sha256", getSessionSecret())
       .update(encoded)
       .digest("base64url");
     if (signature !== expectedSignature) return null;

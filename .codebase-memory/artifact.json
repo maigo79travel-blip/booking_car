@@ -1,0 +1,11 @@
+{
+    "schema_version": 2,
+    "commit": "ed53ea59ecf1529f8e5744193c054bfa4117d132",
+    "indexed_at": "2026-08-23T15:18:00Z",
+    "project": "booking_car",
+    "nodes": 397,
+    "edges": 681,
+    "original_size": 1376256,
+    "compressed_size": 70364,
+    "compression_level": 9
+}

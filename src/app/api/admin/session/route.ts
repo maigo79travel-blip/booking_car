@@ -50,8 +50,9 @@ export async function POST(request: Request) {
     return response;
   } catch (error) {
     console.error("Admin login error:", error);
+    const errMsg = error instanceof Error ? error.message : String(error);
     return NextResponse.json(
-      { message: "Lỗi hệ thống khi đăng nhập. Vui lòng thử lại." },
+      { message: `Lỗi đăng nhập: ${errMsg}` },
       { status: 500 }
     );
   }

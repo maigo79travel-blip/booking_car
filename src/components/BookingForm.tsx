@@ -160,15 +160,7 @@ const BookingForm = () => {
           customerPhone,
         };
 
-        const isLocalhost =
-          typeof window !== "undefined" &&
-          (window.location.hostname === "localhost" ||
-            window.location.hostname === "127.0.0.1");
-        const endpoint = isLocalhost
-          ? "http://localhost:4000/api/booking/notify"
-          : "/api/booking/notify";
-
-        await fetch(endpoint, {
+        await fetch("/api/booking/notify", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

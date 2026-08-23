@@ -41,6 +41,7 @@ export default function AdminPage() {
 
   const [activeTab, setActiveTab] = useState<AdminTab>("dashboard");
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const load = async () => {
     try {
@@ -187,8 +188,6 @@ export default function AdminPage() {
   }
 
   // 2. Login Screen
-  const [showPassword, setShowPassword] = useState(false);
-
   if (!authorized) {
     return (
       <main className="min-h-screen grid place-items-center bg-gradient-to-br from-blue-50 via-slate-100 to-indigo-50 p-4">

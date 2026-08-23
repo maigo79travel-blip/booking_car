@@ -19,7 +19,13 @@ import ContentManager from "@/components/admin/ContentManager";
 
 export type PostItem = Record<string, unknown>;
 export type RouteItem = Record<string, unknown>;
-export type ContentItem = Record<string, unknown>;
+export type ContentItem = {
+  id: string;
+  content_key: string;
+  content_type?: string;
+  value: unknown;
+  [key: string]: unknown;
+};
 export type BookingItem = Record<string, unknown>;
 
 export type Data = {

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { Language, SUPPORTED_LANGUAGES } from "@/lib/i18n/types";
+import { Language } from "@/lib/i18n/types";
 import { translations, TranslationDictionary } from "@/lib/i18n/translations";
 
 interface LanguageContextProps {
@@ -15,25 +15,27 @@ const LanguageContext = createContext<LanguageContextProps | undefined>(
 );
 
 const STORAGE_KEY = "maigo79_preferred_language";
+const VALID_LANGS: Language[] = ["vi", "en", "ko", "ru", "zh"];
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [language, setLanguageState] = useState<Language>("vi");
+  const [language, setLanguageState] = useState<Language>(() => {
+    if (typeof window === "undefined") return "vi";
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY) as Language;
+      if (saved && VALID_LANGS.includes(saved)) return saved;
+      const browserLang = navigator.language.slice(0, 2) as Language;
+      if (VALID_LANGS.includes(browserLang)) return browserLang;
+    } catch {
+      // Fallback
+    }
+    return "vi";
+  });
 
   useEffect(() => {
-    // Load from localStorage or browser preferences
-    const saved = localStorage.getItem(STORAGE_KEY) as Language;
-    if (saved && ["vi", "en", "ko", "ru", "zh"].includes(saved)) {
-      setLanguageState(saved);
-    } else {
-      // Auto-detect browser language if available
-      const browserLang = navigator.language.slice(0, 2);
-      if (["en", "ko", "ru", "zh"].includes(browserLang)) {
-        setLanguageState(browserLang as Language);
-      }
-    }
-  }, []);
+    document.documentElement.lang = language;
+  }, [language]);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);

@@ -22,7 +22,10 @@ export function getDbPool(): Pool {
   return pool;
 }
 
-export async function query<T = any>(text: string, params?: any[]): Promise<T[]> {
+export async function query<T = Record<string, unknown>>(
+  text: string,
+  params?: unknown[]
+): Promise<T[]> {
   const client = getDbPool();
   const res = await client.query(text, params);
   return res.rows as T[];

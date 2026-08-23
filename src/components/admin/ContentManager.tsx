@@ -1,16 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
 import {
-  Settings,
   Save,
-  RefreshCw,
   Sparkles,
   Phone,
   Car,
-  CheckCircle2,
-  ListOrdered,
   MessageSquare,
   HelpCircle,
   Cloud,
@@ -18,17 +13,47 @@ import {
   Globe,
   Plus,
   Trash2,
-  ChevronDown,
-  ChevronUp,
   ExternalLink,
   Check,
 } from "lucide-react";
 import ImageUploadField from "./ImageUploadField";
 import { Language, SUPPORTED_LANGUAGES } from "@/lib/i18n/types";
 
+export interface SiteContentRow {
+  id: string;
+  content_key: string;
+  content_type?: string;
+  value: unknown;
+}
+
+interface VehicleItem {
+  id?: string;
+  type: string;
+  name: string;
+  models: string;
+  seats: string;
+  luggage: string;
+  price: string;
+  image: string;
+}
+
+interface TestimonialItem {
+  name: string;
+  role: string;
+  avatar: string;
+  stars: number;
+  route: string;
+  comment: string;
+}
+
+interface FAQItem {
+  q: Record<string, string>;
+  a: Record<string, string>;
+}
+
 interface ContentManagerProps {
-  content: any[];
-  onSaveContent: (id: string, data: any) => Promise<void>;
+  content: SiteContentRow[];
+  onSaveContent: (id: string, data: { value: unknown }) => Promise<void>;
 }
 
 type CMSTab =
@@ -52,9 +77,16 @@ export default function ContentManager({
   const [saveSuccess, setSaveSuccess] = useState(false);
 
   // Find or initialize content items by key
-  const getContent = (key: string, defaultValue: any = {}) => {
+  const getContent = (key: string, defaultValue: Record<string, unknown> = {}): Record<string, any> => {
     const item = content.find((c) => c.content_key === key);
-    return item ? item.value : defaultValue;
+    return (item && typeof item.value === "object" && item.value !== null
+      ? item.value
+      : defaultValue) as Record<string, any>;
+  };
+
+  const getContentArray = <T,>(key: string, defaultValue: T[]): T[] => {
+    const item = content.find((c) => c.content_key === key);
+    return (item && Array.isArray(item.value) ? item.value : defaultValue) as T[];
   };
 
   const getContentItem = (key: string) => {
@@ -62,135 +94,129 @@ export default function ContentManager({
   };
 
   // State for all CMS sections
-  const [heroData, setHeroData] = useState(() => ({
-    title1: getContent("hero_section", {}).title1 || {
-      vi: "ĐẶT XE TAXI SÂN BAY CAM RANH – NHA TRANG",
-      en: "CAM RANH AIRPORT – NHA TRANG TAXI SERVICE",
-      ko: "깜란 국제공항 – 나트랑 시내 프라이빗 픽업 & 샌딩",
-      ru: "ТРАНСФЕР АЭРОПОРТ КАМРАНЬ – НЯЧАНГ ПОД КЛЮЧ",
-      zh: "芽庄金兰国际机场 – 市区专车接送服务",
-    },
-    title2: getContent("hero_section", {}).title2 || {
-      vi: "ĐÓN TIỄN ĐÚNG GIỜ • GIÁ RẺ TRỌN GÓI CHỈ TỪ 250K",
-      en: "PUNCTUAL PICKUP • ALL-INCLUSIVE FIXED FARE FROM 250K",
-      ko: "정시 픽업 • 올인클루시브 정액 요금 25만동부터",
-      ru: "ПОДАЧА ВОВРЕМЯ • ФИКСИРОВАННАЯ ЦЕНА ОТ 250К",
-      zh: "准时接送 • 全包一口价仅25万起",
-    },
-    subtitle: getContent("hero_section", {}).subtitle || {
-      vi: "Dịch vụ xe riêng 5 - 7 - 16 chỗ đời mới, đưa đón tận nơi Sân bay Cam Ranh ⇄ TP. Nha Trang, Resort Bãi Dài, Đà Lạt 24/7 không lo phụ phí",
-      en: "Private 5-7-16 seater modern cars, 24/7 door-to-door transfer Cam Ranh Airport ⇄ Nha Trang, Bai Dai Resorts, Da Lat with zero hidden fees",
-      ko: "최신 5-7-16인승 프라이빗 차량, 깜란 공항 ↔ 나트랑 시내, 바이 다이 리조트, 달랏 24시간 도어투도어 서비스",
-      ru: "Новые авто 5-7-16 мест, круглосуточная доставка от двери до двери Аэропорт Камрань ⇄ Нячанг, курорты Бай Дай, Далат без скрытых доплат",
-      zh: "全新5座、7座、16座专车，24小时门到门金兰机场 ⇄ 芽庄市区、白代度假村、大叻接送，无任何隐藏费用",
-    },
-    banners: getContent("hero_section", {}).banners || [
-      "/images/Hero1.jpg",
-      "/images/Hero2.jpg",
-      "/images/Hero22.jpg",
-    ],
-    badgeText: getContent("hero_section", {}).badgeText || {
-      vi: "HỆ THỐNG XE SÂN BAY CAM RANH & TOUR NHA TRANG HÀNG ĐẦU",
-      en: "CAM RANH AIRPORT & NHA TRANG'S LEADING TRANSFER SERVICE",
-      ko: "나트랑 & 깜란 공항 최고의 프리미엄 픽업 서비스",
-      ru: "ВЕДУЩАЯ СЛУЖБА ТРАНСФЕРА В АЭРОПОРТ КАМРАНЬ И НЯЧАНГ",
-      zh: "芽庄金兰机场及芽庄周边旅游专车首选",
-    },
-  }));
+  const [heroData, setHeroData] = useState(() => {
+    const raw = getContent("hero_section", {});
+    return {
+      title1: raw.title1 || {
+        vi: "ĐẶT XE TAXI SÂN BAY CAM RANH – NHA TRANG",
+        en: "CAM RANH AIRPORT – NHA TRANG TAXI SERVICE",
+        ko: "깜란 국제공항 – 나트랑 시내 프라이빗 픽업 & 샌딩",
+        ru: "ТРАНСФЕР АЭРОПОРТ КАМРАНЬ – НЯЧАНГ ПОД КЛЮCH",
+        zh: "芽庄金兰国际机场 – 市区专车接送服务",
+      },
+      title2: raw.title2 || {
+        vi: "ĐÓN TIỄN ĐÚNG GIỜ • GIÁ RẺ TRỌN GÓI CHỈ TỪ 250K",
+        en: "PUNCTUAL PICKUP • ALL-INCLUSIVE FIXED FARE FROM 250K",
+        ko: "정시 픽업 • 올인클루시브 정액 요금 25만동부터",
+        ru: "ПОДАЧА ВОВРЕМЯ • ФИКСИРОВАННАЯ ЦЕНА ОТ 250К",
+        zh: "准时接送 • 全包一口价仅25万起",
+      },
+      subtitle: raw.subtitle || {
+        vi: "Dịch vụ xe riêng 5 - 7 - 16 chỗ đời mới, đưa đón tận nơi Sân bay Cam Ranh ⇄ TP. Nha Trang, Resort Bãi Dài, Đà Lạt 24/7 không lo phụ phí",
+        en: "Private 5-7-16 seater modern cars, 24/7 door-to-door transfer Cam Ranh Airport ⇄ Nha Trang, Bai Dai Resorts, Da Lat with zero hidden fees",
+        ko: "최신 5-7-16인승 프라이빗 차량, 깜란 공항 ↔ 나트랑 시내, 바이 다이 리조트, 달랏 24시간 도어투도어 서비스",
+        ru: "Новые авто 5-7-16 мест, круглосуточная доставка от двери до двери Аэропорт Камрань ⇄ Нячанг, курорты Бай Дай, Далат без скрытых доплат",
+        zh: "全新5座、7座、16座专车，24小时门到门金兰机场 ⇄ 芽庄市区、白代度假村、大叻接送，无任何隐藏费用",
+      },
+      banners: (raw.banners as string[]) || [
+        "/images/Hero1.jpg",
+        "/images/Hero2.jpg",
+        "/images/Hero22.jpg",
+      ],
+      badgeText: raw.badgeText || {
+        vi: "HỆ THỐNG XE SÂN BAY CAM RANH & TOUR NHA TRANG HÀNG ĐẦU",
+        en: "CAM RANH AIRPORT & NHA TRANG'S LEADING TRANSFER SERVICE",
+        ko: "나트랑 & 깜란 공항 최고의 프리미엄 픽업 서비스",
+        ru: "ВЕДУЩАЯ СЛУЖБА ТРАНСФЕРА В АЭРОПОРТ КАМРАНЬ И НЯЧАНГ",
+        zh: "芽庄金兰机场及芽庄周边旅游专车首选",
+      },
+    };
+  });
 
-  const [contactData, setContactData] = useState(() => ({
-    brand_name: getContent("contact_info", {}).brand_name || "maigo79.com",
-    hotline: getContent("contact_info", {}).hotline || "0928015280",
-    hotline_display: getContent("contact_info", {}).hotline_display || "0928.015.280",
-    zalo: getContent("contact_info", {}).zalo || "0905876231",
-    telegram: getContent("contact_info", {}).telegram || "https://t.me/maigo79_vn",
-    email: getContent("contact_info", {}).email || "contact@maigo79.com",
-    address: getContent("contact_info", {}).address || "Cột số 3 & 4 - Sảnh Đến Ga Quốc Nội & Quốc Tế, Sân bay Quốc tế Cam Ranh, Khánh Hòa",
-    logo_url: getContent("contact_info", {}).logo_url || "/images/Brand.jpg",
-    working_hours: getContent("contact_info", {}).working_hours || "24/7 (Phục vụ cả ngày lễ & Tết)",
-  }));
+  const [contactData, setContactData] = useState(() => {
+    const raw = getContent("contact_info", {});
+    return {
+      brand_name: raw.brand_name || "maigo79.com",
+      hotline: raw.hotline || "0928015280",
+      hotline_display: raw.hotline_display || "0928.015.280",
+      zalo: raw.zalo || "0905876231",
+      telegram: raw.telegram || "https://t.me/maigo79_vn",
+      email: raw.email || "contact@maigo79.com",
+      address: raw.address || "Cột số 3 & 4 - Sảnh Đến Ga Quốc Nội & Quốc Tế, Sân bay Quốc tế Cam Ranh, Khánh Hòa",
+      logo_url: raw.logo_url || "/images/Brand.jpg",
+      working_hours: raw.working_hours || "24/7 (Phục vụ cả ngày lễ & Tết)",
+    };
+  });
 
-  const [vehiclesData, setVehiclesData] = useState(() =>
-    getContent("vehicles_fleet", [
+  const [vehiclesData, setVehiclesData] = useState<VehicleItem[]>(() =>
+    getContentArray<VehicleItem>("vehicles_fleet", [
       {
         id: "5-seater",
         type: "5",
         name: "Xe 5 Chỗ Sedan / Hatchback",
         models: "Vios, Accent, City, Cerato đời mới",
         seats: "4 hành khách",
-        luggage: "2 vali lớn + 2 balo",
+        luggage: "2 vali lớn + 2 vali nhỏ",
         price: "250.000đ",
         image: "/images/51.png",
-        features: ["Điều hòa mát lạnh", "Ghế da êm ái", "Nước suối miễn phí", "Cốp rộng rãi"],
       },
       {
         id: "7-seater",
         type: "7",
         name: "Xe 7 Chỗ SUV / MPV",
-        models: "Xpander, Innova, Veloz, Fortuner",
+        models: "Innova, Xpander, Fortuner, Veloz đời mới",
         seats: "6 hành khách",
-        luggage: "4 vali lớn + 3 balo",
-        price: "300.000đ",
+        luggage: "4 vali lớn + 3 vali nhỏ",
+        price: "350.000đ",
         image: "/images/71.png",
-        features: ["Không gian rộng rãi", "Gầm cao êm ái", "Phù hợp gia đình", "Wifi tốc độ cao"],
       },
       {
         id: "16-seater",
         type: "16",
-        name: "Xe 16 Chỗ Du Lịch / Đoàn",
-        models: "Ford Transit, Hyundai Solati",
+        name: "Xe 16 Chỗ Du Lịch Cao Cấp",
+        models: "Ford Transit, Hyundai Solati đời mới",
         seats: "15 hành khách",
-        luggage: "10-12 vali hành lý",
-        price: "550.000đ",
-        image: "/images/big1.png",
-        features: ["Ghế ngả cao cấp", "Khoang hành lý siêu rộng", "Phù hợp đoàn du lịch & công tác"],
+        luggage: "8 - 10 vali các loại",
+        price: "650.000đ",
+        image: "/images/161.png",
       },
     ])
   );
 
-  const [cloudinaryConfig, setCloudinaryConfig] = useState(() =>
-    getContent("cloudinary_config", {
-      cloud_name: "",
-      api_key: "",
-      api_secret: "",
-      upload_preset: "",
-    })
-  );
-
-  const [testimonialsData, setTestimonialsData] = useState(() =>
-    getContent("testimonials", [
+  const [testimonialsData, setTestimonialsData] = useState<TestimonialItem[]>(() =>
+    getContentArray<TestimonialItem>("testimonials", [
       {
         name: "Nguyễn Hoàng Nam",
-        role: "Khách du lịch (Hà Nội)",
+        role: "Khách du lịch Hà Nội",
         avatar: "/images/Hero1.jpg",
         stars: 5,
-        route: "Sân bay Cam Ranh ↔ Khách sạn Sheraton Trần Phú",
+        route: "Sân bay Cam Ranh → Khách sạn InterContinental Nha Trang",
         comment:
-          "Dịch vụ rất tuyệt vời! Tài xế đón đúng giờ tại sảnh Ga Quốc Nội sân bay Cam Ranh, xe mới tinh thơm tho và chạy rất êm. Giá 250k trọn gói không phát sinh.",
+          "Dịch vụ đón tiễn Cam Ranh cực kỳ đúng giờ, tài xế hỗ trợ mang vác hành lý nhiệt tình. Giá rẻ hơn hẳn so với gọi taxi sân bay truyền thống.",
       },
       {
-        name: "Park Ji-hoon",
-        role: "Du khách Hàn Quốc (Seoul)",
+        name: "Trần Mai Anh",
+        role: "Gia đình du lịch TP.HCM",
         avatar: "/images/Hero2.jpg",
         stars: 5,
-        route: "Cam Ranh Airport ↔ Alma Resort Bãi Dài",
+        route: "Sân bay Cam Ranh → Resort Bãi Dài Cam Ranh",
         comment:
-          "Very friendly driver, clean car and on-time pickup. The driver was waiting with my nameplate at Cam Ranh Terminal 2. Highly recommended for family trips in Nha Trang!",
+          "Xe 7 chỗ Xpander rất mới và sạch sẽ, có ghế trẻ em. Tài xế lái xe cẩn thận, êm ái, rất an tâm.",
       },
       {
-        name: "Trần Thu Hà",
-        role: "Gia đình du lịch (TP.HCM)",
+        name: "Kim Min-soo",
+        role: "Du khách Hàn Quốc (Korean Tourist)",
         avatar: "/images/Hero22.jpg",
         stars: 5,
-        route: "Nha Trang ↔ Đà Lạt (Xe 7 chỗ Xpander)",
+        route: "Cam Ranh Airport Terminal 2 → Nha Trang Center",
         comment:
-          "Gia đình mình đi tour Nha Trang lên Đà Lạt qua đèo Khánh Lê, bác tài lái rất cẩn thận, êm ái không bị say xe. Xe sạch sẽ và nhiệt tình giới thiệu các điểm ăn uống.",
+          "Great service! Driver was waiting with a sign right outside the international gate. Very polite and English speaking driver.",
       },
     ])
   );
 
-  const [faqData, setFaqData] = useState(() =>
-    getContent("faq_list", [
+  const [faqData, setFaqData] = useState<FAQItem[]>(() =>
+    getContentArray<FAQItem>("faq_list", [
       {
         q: {
           vi: "Giá xe sân bay Cam Ranh tại maigo79.com đã bao gồm các chi phí cầu đường và vé sân bay chưa?",
@@ -224,8 +250,18 @@ export default function ContentManager({
     ])
   );
 
+  const [cloudinaryConfig, setCloudinaryConfig] = useState(() => {
+    const raw = getContent("cloudinary_config", {});
+    return {
+      cloud_name: (raw.cloud_name as string) || "",
+      api_key: (raw.api_key as string) || "",
+      api_secret: (raw.api_secret as string) || "",
+      upload_preset: (raw.upload_preset as string) || "",
+    };
+  });
+
   // Save specific section
-  const handleSaveSection = async (key: string, value: any) => {
+  const handleSaveSection = async (key: string, value: unknown) => {
     setIsSaving(true);
     setSaveSuccess(false);
     try {
@@ -250,8 +286,9 @@ export default function ContentManager({
       }
       setSaveSuccess(true);
       setTimeout(() => setSaveSuccess(false), 3000);
-    } catch (err: any) {
-      alert("Lỗi khi lưu: " + err.message);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "Lỗi không xác định";
+      alert("Lỗi khi lưu: " + msg);
     } finally {
       setIsSaving(false);
     }
@@ -619,7 +656,7 @@ export default function ContentManager({
           </div>
 
           <div className="space-y-6">
-            {vehiclesData.map((v: any, index: number) => (
+            {vehiclesData.map((v: VehicleItem, index: number) => (
               <div
                 key={v.id || index}
                 className="p-5 bg-slate-50 rounded-lg border border-slate-200 space-y-4"
@@ -790,7 +827,7 @@ export default function ContentManager({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {testimonialsData.map((item: any, idx: number) => (
+            {testimonialsData.map((item: TestimonialItem, idx: number) => (
               <div
                 key={idx}
                 className="p-5 bg-slate-50 rounded-lg border border-slate-200 space-y-4 relative"
@@ -798,7 +835,7 @@ export default function ContentManager({
                 <button
                   type="button"
                   onClick={() => {
-                    const filtered = testimonialsData.filter((_: any, i: number) => i !== idx);
+                    const filtered = testimonialsData.filter((_: TestimonialItem, i: number) => i !== idx);
                     setTestimonialsData(filtered);
                   }}
                   className="absolute top-4 right-4 text-slate-400 hover:text-rose-600 p-1 rounded-md transition-colors cursor-pointer"
@@ -956,7 +993,7 @@ export default function ContentManager({
           </div>
 
           <div className="space-y-4">
-            {faqData.map((item: any, idx: number) => (
+            {faqData.map((item: FAQItem, idx: number) => (
               <div
                 key={idx}
                 className="p-5 bg-slate-50 rounded-lg border border-slate-200 space-y-3 relative"
@@ -964,7 +1001,7 @@ export default function ContentManager({
                 <button
                   type="button"
                   onClick={() => {
-                    const filtered = faqData.filter((_: any, i: number) => i !== idx);
+                    const filtered = faqData.filter((_: FAQItem, i: number) => i !== idx);
                     setFaqData(filtered);
                   }}
                   className="absolute top-4 right-4 text-slate-400 hover:text-rose-600 p-1 rounded-md transition-colors cursor-pointer"
@@ -1163,8 +1200,9 @@ export default function ContentManager({
                           await onSaveContent(item.id, { value: parsed });
                           alert("Đã lưu thành công khóa: " + item.content_key);
                         }
-                      } catch (e: any) {
-                        alert("Lỗi cú pháp JSON: " + e.message);
+                      } catch (e: unknown) {
+                        const msg = e instanceof Error ? e.message : "Lỗi không xác định";
+                        alert("Lỗi cú pháp JSON: " + msg);
                       }
                     }}
                     className="flex items-center gap-1 px-3 py-1.5 bg-blue-600 text-white rounded-md text-xs font-bold cursor-pointer"

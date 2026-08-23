@@ -40,7 +40,7 @@ export async function POST(request: Request) {
         "SELECT value FROM public.site_content WHERE content_key = 'cloudinary_config' LIMIT 1"
       );
       if (configRows.length > 0 && configRows[0].value) {
-        const val = configRows[0].value;
+        const val = configRows[0].value as Record<string, string>;
         if (val.cloud_name) cloudName = val.cloud_name;
         if (val.api_key) apiKey = val.api_key;
         if (val.api_secret) apiSecret = val.api_secret;
@@ -103,10 +103,11 @@ export async function POST(request: Request) {
         ? "Vui lòng cấu hình Cloudinary trong trang Quản trị để lưu trữ ảnh vĩnh viễn trên đám mây!"
         : undefined,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Image upload error:", error);
+    const msg = error instanceof Error ? error.message : "Lỗi khi tải ảnh lên";
     return NextResponse.json(
-      { message: error.message || "Lỗi khi tải ảnh lên" },
+      { message: msg },
       { status: 500 }
     );
   }

@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from "react";
 import Image from "next/image";
-import { UploadCloud, Image as ImageIcon, X, Loader2, Link as LinkIcon, Check } from "lucide-react";
+import { UploadCloud, X, Loader2, Link as LinkIcon } from "lucide-react";
 
 interface ImageUploadFieldProps {
   label: string;
@@ -61,8 +61,9 @@ export default function ImageUploadField({
       if (data.warning) {
         console.warn(data.warning);
       }
-    } catch (err: any) {
-      setError(err.message || "Không thể tải ảnh lên");
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "Không thể tải ảnh lên";
+      setError(msg);
     } finally {
       setIsUploading(false);
     }

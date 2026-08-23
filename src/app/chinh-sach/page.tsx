@@ -83,7 +83,7 @@ export default function PolicyPage() {
               <Link
                 key={index}
                 href={policy.href}
-                className={`bg-white rounded-2xl p-6 md:p-8 border border-gray-100 hover:border-gray-200 shadow-xs hover:shadow-sm transition-all group`}
+                className={`bg-white rounded-2xl p-6 md:p-8 border border-gray-100 ${hoverBorder} shadow-xs hover:shadow-sm transition-all group`}
               >
                 <div className="flex items-start gap-4">
                   <div className={`${bgColor} p-4 rounded-xl shrink-0`}>

@@ -28,7 +28,7 @@ export default function AdminHeader({
   const [showNotifications, setShowNotifications] = useState(false);
 
   return (
-    <header className="sticky top-0 z-30 h-16 bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 text-white shadow-md flex items-center justify-between px-4 lg:px-6">
+    <header className="sticky top-0 z-30 h-16 bg-linear-to-r from-blue-600 via-blue-700 to-indigo-700 text-white shadow-md flex items-center justify-between px-4 lg:px-6">
       {/* Left side: Hamburger & Search */}
       <div className="flex items-center gap-3 md:gap-4">
         <button
@@ -112,7 +112,7 @@ export default function AdminHeader({
             onClick={() => setShowUserDropdown(!showUserDropdown)}
             className="flex items-center gap-2.5 pl-2 pr-3 py-1.5 rounded-full hover:bg-white/10 transition-colors cursor-pointer border border-white/20"
           >
-            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-orange-400 to-amber-300 border-2 border-white flex items-center justify-center font-bold text-xs text-white shadow-sm">
+            <div className="w-8 h-8 rounded-full bg-linear-to-tr from-orange-400 to-amber-300 border-2 border-white flex items-center justify-center font-bold text-xs text-white shadow-sm">
               <User size={16} />
             </div>
             <div className="hidden md:flex flex-col text-left">

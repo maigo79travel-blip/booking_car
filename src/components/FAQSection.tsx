@@ -75,7 +75,7 @@ export default function FAQSection() {
                     </span>
                     <ChevronDown
                       size={20}
-                      className={`text-orange-500 flex-shrink-0 transition-transform duration-300 ${
+                      className={`text-orange-500 shrink-0 transition-transform duration-300 ${
                         isOpen ? "rotate-180" : ""
                       }`}
                     />

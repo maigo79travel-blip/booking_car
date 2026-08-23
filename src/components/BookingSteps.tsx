@@ -29,7 +29,7 @@ export default function BookingSteps() {
   ];
 
   return (
-    <section className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white">
+    <section className="py-12 md:py-16 bg-linear-to-b from-gray-50 to-white">
       <div className="container mx-auto px-4 md:px-12 lg:px-24">
         <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
           <span className="text-orange-500 font-bold uppercase tracking-wider text-xs md:text-sm">
@@ -52,7 +52,7 @@ export default function BookingSteps() {
                 key={idx}
                 className="bg-white rounded-2xl p-6 md:p-8 border border-gray-200 shadow-md hover:shadow-xl transition-all relative flex flex-col items-center text-center"
               >
-                <div className="absolute -top-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white text-xs font-black px-3 py-1 rounded-full shadow uppercase">
+                <div className="absolute -top-4 bg-linear-to-r from-orange-500 to-orange-600 text-white text-xs font-black px-3 py-1 rounded-full shadow uppercase">
                   {t.bookingSteps.stepBadge} {step.number}
                 </div>
                 <div className="w-16 h-16 rounded-2xl bg-orange-50 flex items-center justify-center text-orange-500 my-4">
@@ -72,7 +72,7 @@ export default function BookingSteps() {
         <div className="mt-10 text-center">
           <Link
             href="/#formbooking"
-            className="inline-block bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold px-8 py-3.5 rounded-xl shadow-lg hover:shadow-orange-200 transition-all text-sm md:text-base"
+            className="inline-block bg-linear-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold px-8 py-3.5 rounded-xl shadow-lg hover:shadow-orange-200 transition-all text-sm md:text-base"
           >
             {t.common.bookNow}
           </Link>

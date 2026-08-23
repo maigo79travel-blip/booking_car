@@ -1,7 +1,8 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { testimonials } from "@/data/testimonials";
+import { testimonials as staticTestimonials } from "@/data/testimonials";
 import {
   Star,
   ChevronLeft,
@@ -10,12 +11,30 @@ import {
   Calendar,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
-import { useSiteContent } from "@/context/SiteContentContext";
+import { useSiteContent, TestimonialConfig } from "@/context/SiteContentContext";
+
+interface UnifiedTestimonial {
+  id?: string | number;
+  name: string;
+  role?: string;
+  service?: string;
+  avatar: string;
+  stars?: number;
+  rating?: number;
+  route?: string;
+  location?: string;
+  comment: string;
+  date?: string;
+}
 
 const Testimonials = () => {
   const { t } = useLanguage();
   const { testimonials: dynamicTestimonials } = useSiteContent();
-  const list = dynamicTestimonials && dynamicTestimonials.length > 0 ? dynamicTestimonials : testimonials;
+
+  const list: UnifiedTestimonial[] =
+    dynamicTestimonials && dynamicTestimonials.length > 0
+      ? (dynamicTestimonials as unknown as UnifiedTestimonial[])
+      : (staticTestimonials as unknown as UnifiedTestimonial[]);
 
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 3;
@@ -44,7 +63,7 @@ const Testimonials = () => {
   }, [totalPages]);
 
   return (
-    <section className="py-12 md:py-16 bg-gradient-to-b from-white to-gray-50">
+    <section className="py-12 md:py-16 bg-linear-to-b from-white to-gray-50">
       <div className="container mx-auto px-4 md:px-12 lg:px-24">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
@@ -62,7 +81,7 @@ const Testimonials = () => {
 
         {/* Testimonials Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-          {currentTestimonials.map((testimonial: any, idx: number) => {
+          {currentTestimonials.map((testimonial, idx) => {
             const starsCount = testimonial.stars || testimonial.rating || 5;
             const locationText = testimonial.route || testimonial.location || "Hà Nội ↔ Nội Bài";
             const dateText = testimonial.date || "Đã trải nghiệm";
@@ -76,7 +95,7 @@ const Testimonials = () => {
                 <div>
                   {/* Header */}
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-orange-500 flex-shrink-0 bg-gray-100">
+                    <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-orange-500 shrink-0 bg-gray-100">
                       <Image
                         src={avatarUrl}
                         alt={`Khách hàng ${testimonial.name} đánh giá dịch vụ inoibai.vn`}
@@ -99,7 +118,7 @@ const Testimonials = () => {
 
                   {/* Comment */}
                   <p className="text-gray-600 mb-6 leading-relaxed text-sm md:text-base italic">
-                    "{testimonial.comment}"
+                    &ldquo;{testimonial.comment}&rdquo;
                   </p>
                 </div>
 
@@ -139,14 +158,14 @@ const Testimonials = () => {
           </button>
 
           <div className="flex gap-2">
-            {[...Array(totalPages)].map((_, i) => (
+            {Array.from({ length: totalPages }).map((_, idx) => (
               <button
-                key={i}
-                onClick={() => setCurrentPage(i)}
-                className={`h-2 rounded-full transition-all cursor-pointer ${
-                  i === currentPage ? "bg-orange-500 w-8" : "bg-gray-300 w-2"
+                key={idx}
+                onClick={() => setCurrentPage(idx)}
+                className={`w-2.5 h-2.5 rounded-full transition-all cursor-pointer ${
+                  idx === currentPage ? "bg-orange-500 w-8" : "bg-gray-300"
                 }`}
-                aria-label={`Chuyển đến trang đánh giá ${i + 1}`}
+                aria-label={`Trang ${idx + 1}`}
               />
             ))}
           </div>
@@ -154,7 +173,7 @@ const Testimonials = () => {
           <button
             onClick={nextPage}
             className="bg-orange-500 hover:bg-orange-600 text-white p-2.5 rounded-full transition-colors shadow-sm cursor-pointer"
-            aria-label="Xem đánh giá tiếp theo"
+            aria-label="Xem đánh giá tiếp"
           >
             <ChevronRight size={20} />
           </button>

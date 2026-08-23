@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect, useTransition } from "react";
 
 export interface ContactConfig {
   brand_name: string;
@@ -49,7 +49,7 @@ export interface FAQConfig {
 }
 
 export interface SiteContentContextProps {
-  content: Record<string, any>;
+  content: Record<string, unknown>;
   contact: ContactConfig;
   hero: HeroConfig;
   vehicles: VehicleConfig[];
@@ -60,9 +60,9 @@ export interface SiteContentContextProps {
 
 const defaultContact: ContactConfig = {
   brand_name: "inoibai.vn",
-  hotline: "0985.791.955",
-  hotline_display: "0985.791.955",
-  zalo: "0985791955",
+  hotline: "0928015280",
+  hotline_display: "0928.015.280",
+  zalo: "0905876231",
   telegram: "https://t.me/inoibai_vn",
   email: "inoibai.vn@gmail.com",
   address: "Sảnh A1, T1 - Sân bay Quốc tế Nội Bài, Sóc Sơn, Hà Nội",
@@ -75,7 +75,7 @@ const defaultHero: HeroConfig = {
     vi: "ĐẶT XE TAXI SÂN BAY NỘI BÀI",
     en: "BOOK NOI BAI AIRPORT TAXI",
     ko: "노이바이 공항 택시 예약",
-    ru: "ЗАКАЗ ТАКСИ В АЭРОПОРТ НОЙБАЙ",
+    ru: "ЗАКАЗ ТАКСИ В АЭРОПОРT НОЙБАЙ",
     zh: "预订内排机场出租车",
   },
   title2: {
@@ -208,14 +208,17 @@ const SiteContentContext = createContext<SiteContentContextProps | undefined>(
 export const SiteContentProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [content, setContent] = useState<Record<string, any>>({});
+  const [content, setContent] = useState<Record<string, unknown>>({});
+  const [, startTransition] = useTransition();
 
   const reloadContent = async () => {
     try {
       const res = await fetch("/api/site-content", { cache: "no-store" });
       if (res.ok) {
         const data = await res.json();
-        setContent(data);
+        startTransition(() => {
+          setContent(data);
+        });
       }
     } catch {
       // fallback
@@ -223,32 +226,49 @@ export const SiteContentProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   useEffect(() => {
-    reloadContent();
+    let isMounted = true;
+    const fetchContent = async () => {
+      try {
+        const res = await fetch("/api/site-content", { cache: "no-store" });
+        if (res.ok && isMounted) {
+          const data = await res.json();
+          startTransition(() => {
+            setContent(data);
+          });
+        }
+      } catch {
+        // fallback
+      }
+    };
+    fetchContent();
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const contact: ContactConfig = {
     ...defaultContact,
-    ...(content.contact_info || {}),
+    ...((content.contact_info as Partial<ContactConfig>) || {}),
   };
 
   const hero: HeroConfig = {
     ...defaultHero,
-    ...(content.hero_section || {}),
+    ...((content.hero_section as Partial<HeroConfig>) || {}),
   };
 
   const vehicles: VehicleConfig[] =
     content.vehicles_fleet && Array.isArray(content.vehicles_fleet)
-      ? content.vehicles_fleet
+      ? (content.vehicles_fleet as VehicleConfig[])
       : defaultVehicles;
 
   const testimonials: TestimonialConfig[] =
     content.testimonials && Array.isArray(content.testimonials)
-      ? content.testimonials
+      ? (content.testimonials as TestimonialConfig[])
       : defaultTestimonials;
 
   const faq: FAQConfig[] =
     content.faq_list && Array.isArray(content.faq_list)
-      ? content.faq_list
+      ? (content.faq_list as FAQConfig[])
       : defaultFAQ;
 
   return (

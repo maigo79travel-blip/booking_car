@@ -66,7 +66,7 @@ export default function RoutesManager({
         </div>
         <button
           onClick={() => setIsCreating(true)}
-          className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white rounded-xl text-xs md:text-sm font-bold shadow-md transition-all cursor-pointer"
+          className="flex items-center gap-2 px-4 py-2.5 bg-linear-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white rounded-xl text-xs md:text-sm font-bold shadow-md transition-all cursor-pointer"
         >
           <Plus size={16} />
           <span>Thêm Tuyến Xe Mới</span>
@@ -129,7 +129,7 @@ export default function RoutesManager({
                     >
                       <td className="py-3.5 px-4 font-bold text-gray-800">
                         <div className="flex items-center gap-2">
-                          <MapPin size={15} className="text-orange-500 flex-shrink-0" />
+                          <MapPin size={15} className="text-orange-500 shrink-0" />
                           <span>{routeName}</span>
                         </div>
                       </td>

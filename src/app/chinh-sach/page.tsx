@@ -91,7 +91,7 @@ export default function PolicyPage() {
                 className={`bg-white rounded-2xl p-6 md:p-8 border border-gray-100 ${hoverBorder} shadow-sm hover:shadow-md transition-all group`}
               >
                 <div className="flex items-start gap-4">
-                  <div className={`${bgColor} p-4 rounded-xl flex-shrink-0`}>
+                  <div className={`${bgColor} p-4 rounded-xl shrink-0`}>
                     <Icon className={textColor} size={32} />
                   </div>
                   <div className="flex-1">

@@ -23,7 +23,7 @@ const Footer = () => {
   const hotlineDisplay = contact.hotline_display || hotlineNum;
 
   return (
-    <footer className="bg-gradient-to-b from-gray-900 to-gray-950 text-white">
+    <footer className="bg-linear-to-b from-gray-900 to-gray-950 text-white">
       {/* Main Footer */}
       <div className="container mx-auto px-4 md:px-12 lg:px-24 py-10 md:py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -53,7 +53,7 @@ const Footer = () => {
               {t.footer.companyDesc}
             </p>
             <div className="flex items-center gap-2 text-xs text-green-400 bg-green-950/40 border border-green-800/50 rounded-lg p-2.5">
-              <ShieldCheck size={18} className="flex-shrink-0" />
+              <ShieldCheck size={18} className="shrink-0" />
               <span>{t.footer.commitBadge}</span>
             </div>
           </div>
@@ -173,7 +173,7 @@ const Footer = () => {
               <li className="flex items-start gap-2.5">
                 <Phone
                   size={18}
-                  className="text-orange-500 mt-0.5 flex-shrink-0"
+                  className="text-orange-500 mt-0.5 shrink-0"
                 />
                 <div>
                   <p className="text-xs text-gray-400 font-semibold">{t.footer.hotlineTitle}</p>
@@ -188,7 +188,7 @@ const Footer = () => {
               <li className="flex items-start gap-2.5">
                 <Mail
                   size={18}
-                  className="text-orange-500 mt-0.5 flex-shrink-0"
+                  className="text-orange-500 mt-0.5 shrink-0"
                 />
                 <div>
                   <p className="text-xs text-gray-400 font-semibold">{t.footer.emailTitle}</p>
@@ -203,7 +203,7 @@ const Footer = () => {
               <li className="flex items-start gap-2.5">
                 <MapPin
                   size={18}
-                  className="text-orange-500 mt-0.5 flex-shrink-0"
+                  className="text-orange-500 mt-0.5 shrink-0"
                 />
                 <div>
                   <p className="text-xs text-gray-400 font-semibold">{t.footer.addressTitle}</p>

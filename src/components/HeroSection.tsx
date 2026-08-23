@@ -44,7 +44,7 @@ const HeroSection = () => {
   const bgImage = images[0] || "/images/Hero1.jpg";
 
   return (
-    <section className="relative w-full bg-gray-100 min-h-[600px] flex items-center">
+    <section className="relative w-full bg-gray-100 min-h-150 flex items-center">
       {/* Background Image */}
       <div
         className="absolute inset-0 z-0"
@@ -71,7 +71,7 @@ const HeroSection = () => {
         {/* Right: Split Column */}
         <div className="w-full md:w-1/2 hidden md:flex flex-col gap-4 h-full slide-in-right">
           {/* Top: Image Carousel (50%) */}
-          <div className="rounded-2xl overflow-hidden shadow-xl relative flex-1 w-full min-h-[240px] bg-gray-200">
+          <div className="rounded-2xl overflow-hidden shadow-xl relative flex-1 w-full min-h-60 bg-gray-200">
             {/* Images with Fade Transition */}
             {images.map((src, index) => (
               <div
@@ -108,9 +108,9 @@ const HeroSection = () => {
           </div>
 
           {/* Bottom: Live Bookings List (50%) - Slide Up Animation */}
-          <div className="rounded-2xl overflow-hidden shadow-xl bg-gradient-to-br from-white to-gray-50 flex-1 w-full min-h-[280px] border border-gray-200 flex flex-col relative">
+          <div className="rounded-2xl overflow-hidden shadow-xl bg-linear-to-br from-white to-gray-50 flex-1 w-full min-h-70 border border-gray-200 flex flex-col relative">
             {/* Header */}
-            <div className="bg-gradient-to-r from-orange-500 to-orange-400 px-4 py-2.5 flex items-center justify-between">
+            <div className="bg-linear-to-r from-orange-500 to-orange-400 px-4 py-2.5 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="bg-white/20 rounded-full p-1">
                   <svg

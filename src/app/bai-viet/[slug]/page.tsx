@@ -133,7 +133,7 @@ export default async function PostPage({
         </header>
 
         {post.cover_image && (
-          <div className="relative h-64 md:h-[420px] rounded-2xl overflow-hidden shadow-sm mb-8 bg-gray-100">
+          <div className="relative h-64 md:h-105 rounded-2xl overflow-hidden shadow-sm mb-8 bg-gray-100">
             <Image
               src={post.cover_image}
               alt={`Hình ảnh bài viết: ${postTitle}`}
@@ -150,7 +150,7 @@ export default async function PostPage({
         </div>
 
         {/* CTA Box */}
-        <div className="mt-8 bg-gradient-to-r from-orange-500 to-orange-600 rounded-2xl p-6 md:p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="mt-8 bg-linear-to-r from-orange-500 to-orange-600 rounded-2xl p-6 md:p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <h2 className="text-xl md:text-2xl font-bold mb-1">
               Cần Đặt Xe Sân Bay Nội Bài Đón Trả Tận Nơi?
@@ -161,11 +161,11 @@ export default async function PostPage({
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <a
-              href="tel:0985791955"
+              href="tel:0928015280"
               className="bg-white text-orange-600 font-bold px-5 py-3 rounded-xl shadow hover:bg-orange-50 transition-colors inline-flex items-center gap-2 text-sm"
             >
               <PhoneCall size={18} />
-              0985.791.955
+              0928.015.280
             </a>
             <Link
               href="/#formbooking"

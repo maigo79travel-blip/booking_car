@@ -142,7 +142,7 @@ export default function ImageUploadField({
               </div>
             ) : value ? (
               <div className="flex items-center gap-4">
-                <div className="relative w-20 h-16 rounded-xl overflow-hidden bg-slate-200 border border-slate-300 flex-shrink-0">
+                <div className="relative w-20 h-16 rounded-xl overflow-hidden bg-slate-200 border border-slate-300 shrink-0">
                   <Image
                     src={value}
                     alt="Preview"

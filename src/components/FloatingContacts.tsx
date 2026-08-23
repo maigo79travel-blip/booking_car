@@ -1,60 +1,52 @@
 "use client";
 
 import React from "react";
-import { Phone } from "lucide-react";
+import { Phone, MessageCircle } from "lucide-react";
 import { useSiteContent } from "@/context/SiteContentContext";
 
 const FloatingContacts = () => {
   const { contact } = useSiteContent();
-  const phone = contact.hotline || "0985791955";
-  const zalo = contact.zalo || "0985791955";
-  const zaloLink = zalo.startsWith("http")
-    ? zalo
-    : `https://zalo.me/${zalo.replace(/[^0-9+]/g, "")}`;
+
+  const phone1 = contact.hotline || "0928015280";
+  const zaloNumber = contact.zalo || "0905876231";
+  const zaloLink = zaloNumber.startsWith("http")
+    ? zaloNumber
+    : `https://zalo.me/${zaloNumber.replace(/[^0-9+]/g, "")}`;
   const telegramLink = contact.telegram || "https://t.me/inoibai_vn";
 
   const contacts = [
     {
-      name: "Gọi điện ngay",
-      icon: <Phone size={24} />,
+      name: "Hotline 0928.015.280",
+      icon: <Phone size={22} />,
       bgColor: "bg-green-500",
       hoverColor: "hover:bg-green-600",
-      link: `tel:${phone.replace(/[^0-9+]/g, "")}`,
+      link: `tel:${phone1.replace(/[^0-9+]/g, "")}`,
     },
     {
-      name: "Zalo",
+      name: "Zalo 0905.876.231",
       icon: (
-        <img
-          src="data:image/png;base64,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"
-          alt="Zalo"
-          className="w-6 h-6 object-contain"
-        />
+        <svg
+          viewBox="0 0 48 48"
+          className="w-6 h-6 fill-current"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M24 4C12.95 4 4 12.05 4 22c0 5.48 2.76 10.37 7.15 13.73-.34 3.03-1.63 6.94-1.72 7.21-.19.57.24 1.13.82.99 3.86-.94 7.74-2.82 9.77-3.93 1.29.35 2.65.54 4.05.54 11.05 0 20-8.05 20-18S35.05 4 24 4zm-7.75 22.5c-.69 0-1.25-.56-1.25-1.25v-8.5c0-.69.56-1.25 1.25-1.25s1.25.56 1.25 1.25v8.5c0 .69-.56 1.25-1.25 1.25zm9.5 0h-5c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25h3.75v-6H22c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25h4.5c.69 0 1.25.56 1.25 1.25v8.5c0 .69-.56 1.25-1.25 1.25zm9.5 0h-5c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25h3.75v-6H32c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25h4.5c.69 0 1.25.56 1.25 1.25v8.5c0 .69-.56 1.25-1.25 1.25z" />
+        </svg>
       ),
       bgColor: "bg-blue-600",
       hoverColor: "hover:bg-blue-700",
       link: zaloLink,
     },
     {
-      name: "Telegram",
+      name: "Telegram Hỗ Trợ",
       icon: (
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+        <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.19-.08-.05-.19-.02-.27 0-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.05-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.75 4-.1.74 6.69-2.9 8.08-3.48 3.85-1.61 4.65-1.89 5.17-1.9.11 0 .37.03.54.17.14.12.18.28.2.45-.02.07-.02.14-.04.22z" />
         </svg>
       ),
       bgColor: "bg-sky-500",
       hoverColor: "hover:bg-sky-600",
       link: telegramLink,
-    },
-    {
-      name: "Facebook",
-      icon: (
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-        </svg>
-      ),
-      bgColor: "bg-blue-600",
-      hoverColor: "hover:bg-blue-700",
-      link: "https://www.facebook.com/share/16B2aLsEtR/?mibextid=wwXIfr",
     },
   ];
 
@@ -66,8 +58,9 @@ const FloatingContacts = () => {
           href={c.link}
           target="_blank"
           rel="noopener noreferrer"
-          className={`${c.bgColor} ${c.hoverColor} text-white p-3 md:p-4 rounded-full shadow-lg transform hover:scale-110 transition-all duration-300 flex items-center justify-center`}
+          className={`${c.bgColor} ${c.hoverColor} text-white p-3 md:p-3.5 rounded-full shadow-xl transform hover:scale-110 transition-all duration-300 flex items-center justify-center`}
           title={c.name}
+          aria-label={c.name}
         >
           {c.icon}
         </a>

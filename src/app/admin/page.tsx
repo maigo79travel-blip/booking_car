@@ -190,10 +190,10 @@ export default function AdminPage() {
   // 2. Login Screen
   if (!authorized) {
     return (
-      <main className="min-h-screen grid place-items-center bg-gradient-to-br from-blue-50 via-slate-100 to-indigo-50 p-4">
+      <main className="min-h-screen grid place-items-center bg-linear-to-br from-blue-50 via-slate-100 to-indigo-50 p-4">
         <div className="w-full max-w-md bg-white rounded-3xl p-8 shadow-2xl border border-gray-200 animate-in zoom-in-95 duration-200">
           <div className="text-center mb-6">
-            <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-700 text-white flex items-center justify-center font-black text-2xl mx-auto shadow-lg shadow-blue-200 mb-4">
+            <div className="w-16 h-16 rounded-2xl bg-linear-to-tr from-blue-600 to-indigo-700 text-white flex items-center justify-center font-black text-2xl mx-auto shadow-lg shadow-blue-200 mb-4">
               IA
             </div>
             <h1 className="text-2xl font-black text-gray-950 tracking-tight">
@@ -206,7 +206,7 @@ export default function AdminPage() {
 
           {message && (
             <div className="mb-4 p-3.5 bg-red-50 border border-red-300 rounded-xl text-xs text-red-800 font-bold flex items-center gap-2">
-              <AlertCircle size={16} className="text-red-600 flex-shrink-0" />
+              <AlertCircle size={16} className="text-red-600 shrink-0" />
               <span>{message}</span>
             </div>
           )}
@@ -260,7 +260,7 @@ export default function AdminPage() {
             <button
               type="submit"
               disabled={isLoggingIn}
-              className="w-full mt-2 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-3.5 rounded-xl shadow-lg shadow-blue-200 transition-all flex items-center justify-center gap-2 text-sm cursor-pointer"
+              className="w-full mt-2 bg-linear-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-black py-3.5 rounded-xl shadow-lg shadow-blue-200 transition-all flex items-center justify-center gap-2 text-sm cursor-pointer"
             >
               {isLoggingIn ? (
                 <>

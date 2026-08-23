@@ -138,7 +138,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="flex items-start gap-3">
               <CheckCircle
-                className="text-green-500 flex-shrink-0 mt-1"
+                className="text-green-500 shrink-0 mt-1"
                 size={20}
               />
               <p className="text-gray-700 text-sm md:text-base">
@@ -147,7 +147,7 @@ export default function AboutPage() {
             </div>
             <div className="flex items-start gap-3">
               <CheckCircle
-                className="text-green-500 flex-shrink-0 mt-1"
+                className="text-green-500 shrink-0 mt-1"
                 size={20}
               />
               <p className="text-gray-700 text-sm md:text-base">
@@ -156,7 +156,7 @@ export default function AboutPage() {
             </div>
             <div className="flex items-start gap-3">
               <CheckCircle
-                className="text-green-500 flex-shrink-0 mt-1"
+                className="text-green-500 shrink-0 mt-1"
                 size={20}
               />
               <p className="text-gray-700 text-sm md:text-base">
@@ -165,7 +165,7 @@ export default function AboutPage() {
             </div>
             <div className="flex items-start gap-3">
               <CheckCircle
-                className="text-green-500 flex-shrink-0 mt-1"
+                className="text-green-500 shrink-0 mt-1"
                 size={20}
               />
               <p className="text-gray-700 text-sm md:text-base">
@@ -174,7 +174,7 @@ export default function AboutPage() {
             </div>
             <div className="flex items-start gap-3">
               <CheckCircle
-                className="text-green-500 flex-shrink-0 mt-1"
+                className="text-green-500 shrink-0 mt-1"
                 size={20}
               />
               <p className="text-gray-700 text-sm md:text-base">
@@ -183,7 +183,7 @@ export default function AboutPage() {
             </div>
             <div className="flex items-start gap-3">
               <CheckCircle
-                className="text-green-500 flex-shrink-0 mt-1"
+                className="text-green-500 shrink-0 mt-1"
                 size={20}
               />
               <p className="text-gray-700 text-sm md:text-base">
@@ -192,7 +192,7 @@ export default function AboutPage() {
             </div>
             <div className="flex items-start gap-3">
               <CheckCircle
-                className="text-green-500 flex-shrink-0 mt-1"
+                className="text-green-500 shrink-0 mt-1"
                 size={20}
               />
               <p className="text-gray-700 text-sm md:text-base">
@@ -201,7 +201,7 @@ export default function AboutPage() {
             </div>
             <div className="flex items-start gap-3">
               <CheckCircle
-                className="text-green-500 flex-shrink-0 mt-1"
+                className="text-green-500 shrink-0 mt-1"
                 size={20}
               />
               <p className="text-gray-700 text-sm md:text-base">
@@ -212,7 +212,7 @@ export default function AboutPage() {
         </div>
 
         {/* Thank You Message */}
-        <div className="bg-gradient-to-r from-orange-500 to-orange-600 rounded-2xl p-6 md:p-8 text-white text-center shadow-md">
+        <div className="bg-linear-to-r from-orange-500 to-orange-600 rounded-2xl p-6 md:p-8 text-white text-center shadow-md">
           <p className="text-base md:text-lg leading-relaxed italic font-medium">
             Chúng tôi xin chân thành cảm ơn Quý khách hàng đã tin tưởng và ủng
             hộ chúng tôi trong thời gian qua và mong sẽ tiếp tục được là người
@@ -233,10 +233,10 @@ export default function AboutPage() {
               <div>
                 <h3 className="font-bold text-gray-800 mb-1">Hotline 24/7</h3>
                 <a
-                  href="tel:0985791955"
+                  href="tel:0928015280"
                   className="text-base text-orange-600 font-bold hover:underline"
                 >
-                  0985.791.955
+                  0928.015.280
                 </a>
               </div>
             </div>

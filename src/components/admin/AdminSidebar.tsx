@@ -102,7 +102,7 @@ export default function AdminSidebar({
         }`}
       >
         {/* Brand Header */}
-        <div className="h-16 bg-gradient-to-r from-blue-600 to-indigo-700 flex items-center px-4 gap-3 text-white shadow-sm">
+        <div className="h-16 bg-linear-to-r from-blue-600 to-indigo-700 flex items-center px-4 gap-3 text-white shadow-sm">
           <div className="w-10 h-10 rounded-lg bg-white/20 backdrop-blur flex items-center justify-center font-black text-lg tracking-wider border border-white/30 shadow-inner">
             IA
           </div>

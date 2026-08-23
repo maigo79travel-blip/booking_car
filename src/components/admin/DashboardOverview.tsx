@@ -112,7 +112,7 @@ export default function DashboardOverview({
                 {totalRevenue > 0 ? formatCurrency(totalRevenue) : "45.800.000₫"}
               </span>
             </div>
-            <div className="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shadow-xs flex-shrink-0">
+            <div className="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shadow-xs shrink-0">
               <Calendar size={22} />
             </div>
           </div>
@@ -134,7 +134,7 @@ export default function DashboardOverview({
                 {totalBookings > 0 ? `${totalBookings} chuyến` : "142 chuyến"}
               </span>
             </div>
-            <div className="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shadow-xs flex-shrink-0">
+            <div className="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shadow-xs shrink-0">
               <Car size={22} />
             </div>
           </div>
@@ -156,7 +156,7 @@ export default function DashboardOverview({
                 {uniqueCustomers > 0 ? `${uniqueCustomers} khách` : "98 khách"}
               </span>
             </div>
-            <div className="w-11 h-11 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center shadow-xs flex-shrink-0">
+            <div className="w-11 h-11 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center shadow-xs shrink-0">
               <Users size={22} />
             </div>
           </div>
@@ -178,7 +178,7 @@ export default function DashboardOverview({
                 {pendingRequests} đơn
               </span>
             </div>
-            <div className="w-11 h-11 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shadow-xs flex-shrink-0">
+            <div className="w-11 h-11 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shadow-xs shrink-0">
               <MessageSquare size={22} />
             </div>
           </div>
@@ -256,7 +256,7 @@ export default function DashboardOverview({
                   cx={pt.cx}
                   cy={pt.cy}
                   r="5"
-                  className="fill-white stroke-blue-700 stroke-[3] transition-transform hover:scale-150"
+                  className="fill-white stroke-blue-700 stroke-3 transition-transform hover:scale-150"
                 />
               ))}
             </svg>
@@ -293,7 +293,7 @@ export default function DashboardOverview({
               {topRoutes.map((route, i) => (
                 <div key={i} className="space-y-1.5">
                   <div className="flex justify-between text-xs font-semibold">
-                    <span className="text-gray-700 truncate max-w-[170px]" title={route.name}>
+                    <span className="text-gray-700 truncate max-w-42.5" title={route.name}>
                       {route.name}
                     </span>
                     <span className="text-gray-400 text-[11px] font-mono">
@@ -359,10 +359,10 @@ export default function DashboardOverview({
               {bookings.slice(0, 8).map((b, idx) => (
                 <tr key={b.id || idx} className="hover:bg-blue-50/30 transition-colors">
                   <td className="py-3 px-4 font-bold text-gray-800 flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-full bg-blue-100 text-blue-700 font-extrabold text-xs flex items-center justify-center flex-shrink-0">
+                    <div className="w-7 h-7 rounded-full bg-blue-100 text-blue-700 font-extrabold text-xs flex items-center justify-center shrink-0">
                       {b.customer_name ? b.customer_name[0].toUpperCase() : "K"}
                     </div>
-                    <span className="truncate max-w-[120px]">{b.customer_name}</span>
+                    <span className="truncate max-w-30">{b.customer_name}</span>
                   </td>
                   <td className="py-3 px-3">
                     <a
@@ -373,7 +373,7 @@ export default function DashboardOverview({
                       {b.phone_number}
                     </a>
                   </td>
-                  <td className="py-3 px-3 text-xs text-gray-600 max-w-[200px]">
+                  <td className="py-3 px-3 text-xs text-gray-600 max-w-50">
                     <div className="font-semibold text-gray-800 truncate">
                       {b.from_location} → {b.to_location}
                     </div>

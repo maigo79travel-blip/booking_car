@@ -143,12 +143,12 @@ export default function PrivacyPolicyPage() {
         </div>
 
         {/* Contact */}
-        <div className="bg-gradient-to-r from-blue-900 to-blue-800 rounded-2xl p-6 md:p-8 text-white shadow-md">
+        <div className="bg-linear-to-r from-blue-900 to-blue-800 rounded-2xl p-6 md:p-8 text-white shadow-md">
           <h2 className="text-xl md:text-2xl font-bold mb-3">Thông Tin Liên Hệ Bảo Mật</h2>
           <p className="text-sm md:text-base leading-relaxed">
             Nếu Quý khách có bất kỳ câu hỏi hoặc góp ý nào cho chúng tôi về
             Quyền riêng tư, Quý khách có thể liên hệ qua Hotline 24/7:{" "}
-            <strong>0985.791.955</strong> hoặc email <strong>inoibai.vn@gmail.com</strong>.
+            <strong>0928.015.280</strong> hoặc email <strong>inoibai.vn@gmail.com</strong>.
           </p>
         </div>
       </div>

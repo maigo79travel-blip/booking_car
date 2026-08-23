@@ -105,7 +105,7 @@ export default function TransportPolicyPage() {
             className="space-y-4 text-gray-700 text-sm md:text-base leading-relaxed"
           >
             <p>
-              Quý khách có quyền hủy đặt xe hoặc thay đổi giờ đón <strong>HOÀN TOÀN MIỄN PHÍ</strong> bằng cách gọi điện hoặc nhắn tin tới Hotline <strong>0985.791.955</strong> trước giờ khởi hành ít nhất 30 - 60 phút để chúng tôi kịp thời điều phối lại xe.
+              Quý khách có quyền hủy đặt xe hoặc thay đổi giờ đón <strong>HOÀN TOÀN MIỄN PHÍ</strong> bằng cách gọi điện hoặc nhắn tin tới Hotline <strong>0928.015.280</strong> trước giờ khởi hành ít nhất 30 - 60 phút để chúng tôi kịp thời điều phối lại xe.
             </p>
           </div>
         </div>

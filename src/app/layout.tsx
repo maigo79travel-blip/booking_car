@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     template: "%s | inoibai.vn",
   },
   description:
-    "Dịch vụ đặt xe sân bay Nội Bài uy tín, giá rẻ trọn gói. Xe 4-7-16 chỗ đời mới. Đưa đón tận nơi 24/7, không phí ẩn. Hotline: 0985 791 955",
+    "Dịch vụ đặt xe sân bay Nội Bài uy tín, giá rẻ trọn gói. Xe 4-7-16 chỗ đời mới. Đưa đón tận nơi 24/7, không phí ẩn. Hotline: 0928 015 280 - 0905 876 231",
   keywords: [
     "đặt xe sân bay nội bài",
     "taxi nội bài giá rẻ",
@@ -110,11 +110,11 @@ const jsonLdGraph = {
       "@type": ["TaxiService", "LocalBusiness"],
       "@id": `${siteUrl}/#taxiservice`,
       "name": "inoibai.vn - Đặt xe sân bay Nội Bài",
-      "alternateName": "Hoàng Khôi Limousine - Taxi Sân Bay Nội Bài",
+      "alternateName": "Taxi Sân Bay Nội Bài - inoibai.vn",
       "image": `${siteUrl}/images/Brand.jpg`,
       "logo": `${siteUrl}/images/Brand.jpg`,
       "url": siteUrl,
-      "telephone": "+84985791955",
+      "telephone": "+84928015280",
       "email": "inoibai.vn@gmail.com",
       "priceRange": "200.000đ - 900.000đ",
       "currenciesAccepted": "VND",

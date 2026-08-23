@@ -55,7 +55,7 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
                   </Link>
                 )}
                 {!isLast && (
-                  <ChevronRight size={14} className="text-gray-400 flex-shrink-0" />
+                  <ChevronRight size={14} className="text-gray-400 shrink-0" />
                 )}
               </li>
             );

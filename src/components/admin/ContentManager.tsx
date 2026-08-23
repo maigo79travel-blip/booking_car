@@ -100,9 +100,9 @@ export default function ContentManager({
 
   const [contactData, setContactData] = useState(() => ({
     brand_name: getContent("contact_info", {}).brand_name || "inoibai.vn",
-    hotline: getContent("contact_info", {}).hotline || "0985.791.955",
-    hotline_display: getContent("contact_info", {}).hotline_display || "0985.791.955",
-    zalo: getContent("contact_info", {}).zalo || "0985791955",
+    hotline: getContent("contact_info", {}).hotline || "0928015280",
+    hotline_display: getContent("contact_info", {}).hotline_display || "0928.015.280",
+    zalo: getContent("contact_info", {}).zalo || "0905876231",
     telegram: getContent("contact_info", {}).telegram || "https://t.me/inoibai_vn",
     email: getContent("contact_info", {}).email || "inoibai.vn@gmail.com",
     address: getContent("contact_info", {}).address || "Sảnh A1, T1 - Sân bay Quốc tế Nội Bài, Sóc Sơn, Hà Nội",
@@ -331,7 +331,7 @@ export default function ContentManager({
 
       {saveSuccess && (
         <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl text-xs font-extrabold text-emerald-800 flex items-center gap-2 animate-in fade-in">
-          <Check size={18} className="text-emerald-600 flex-shrink-0" />
+          <Check size={18} className="text-emerald-600 shrink-0" />
           <span>Đã lưu nội dung thành công và cập nhật ngay lên website!</span>
         </div>
       )}
@@ -519,7 +519,7 @@ export default function ContentManager({
                 type="text"
                 value={contactData.hotline}
                 onChange={(e) => setContactData({ ...contactData, hotline: e.target.value })}
-                placeholder="0985791955"
+                placeholder="0928015280"
                 className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>
@@ -534,7 +534,7 @@ export default function ContentManager({
                 onChange={(e) =>
                   setContactData({ ...contactData, hotline_display: e.target.value })
                 }
-                placeholder="0985.791.955"
+                placeholder="0928.015.280"
                 className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>
@@ -547,7 +547,7 @@ export default function ContentManager({
                 type="text"
                 value={contactData.zalo}
                 onChange={(e) => setContactData({ ...contactData, zalo: e.target.value })}
-                placeholder="0985791955 hoặc https://zalo.me/..."
+                placeholder="0905876231 hoặc https://zalo.me/..."
                 className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>

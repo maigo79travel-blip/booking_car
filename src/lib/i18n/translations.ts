@@ -1,12 +1,10 @@
-import { Language } from "./types";
-
 export const translations = {
   vi: {
     common: {
       brandName: "inoibai.vn",
       tagline: "Đặt xe dễ dàng – Đi lại an tâm",
       hotline: "Hotline",
-      hotlineNumber: "0985.791.955",
+      hotlineNumber: "0928.015.280",
       bookNow: "ĐẶT XE NGAY",
       viewDetails: "Xem chi tiết",
       viewPricing: "Xem bảng giá",
@@ -36,6 +34,7 @@ export const translations = {
       dateLabel: "Ngày đi",
       timeLabel: "Giờ đón",
       carTypeLabel: "Loại xe",
+      tripTypeLabel: "Hình thức di chuyển",
       car5Seats: "Xe 5 chỗ (Sedan)",
       car7Seats: "Xe 7 chỗ (SUV/MPV)",
       car16Seats: "Xe 16 chỗ",
@@ -56,7 +55,7 @@ export const translations = {
       totalPrice: "Tổng cước",
       hotlineModalTitle: "Liên hệ Hotline đặt xe trực tiếp",
       hotlineModalDesc: "Tuyến đường dài hoặc yêu cầu đặc biệt vui lòng liên hệ tổng đài 24/7 để nhận báo giá ưu đãi nhất.",
-      callNow: "GỌI NGAY 0985.791.955",
+      callNow: "GỌI NGAY 0928.015.280",
       close: "Đóng",
       errorPastTime: "Thời gian chọn không được trong quá khứ",
       errorFillAll: "Vui lòng điền đầy đủ họ tên và số điện thoại hợp lệ",
@@ -161,7 +160,7 @@ export const translations = {
         },
         {
           q: "Tôi có thể hủy chuyến hoặc thay đổi giờ đón không? Có mất phí không?",
-          a: "Quý khách có thể hủy chuyến hoặc đổi lịch trình hoàn toàn MIỄN PHÍ. Vui lòng gọi điện hoặc nhắn tin cho hotline 0985.791.955 trước giờ khởi hành ít nhất 30 - 60 phút để chúng tôi kịp thời sắp xếp điều phối xe.",
+          a: "Quý khách có thể hủy chuyến hoặc đổi lịch trình hoàn toàn MIỄN PHÍ. Vui lòng gọi điện hoặc nhắn tin cho hotline 0928.015.280 trước giờ khởi hành ít nhất 30 - 60 phút để chúng tôi kịp thời sắp xếp điều phối xe.",
         },
       ],
     },
@@ -232,6 +231,7 @@ export const translations = {
       dateLabel: "Date",
       timeLabel: "Pick-up Time",
       carTypeLabel: "Vehicle Type",
+      tripTypeLabel: "Trip Type",
       car5Seats: "5-Seater Sedan",
       car7Seats: "7-Seater SUV/MPV",
       car16Seats: "16-Seater Van",
@@ -428,6 +428,7 @@ export const translations = {
       dateLabel: "탑승 날짜",
       timeLabel: "탑승 시간",
       carTypeLabel: "차종 선택",
+      tripTypeLabel: "이동 유형",
       car5Seats: "5인승 세단 (승용차)",
       car7Seats: "7인승 SUV/MPV",
       car16Seats: "16인승 밴",
@@ -624,6 +625,7 @@ export const translations = {
       dateLabel: "Дата поездки",
       timeLabel: "Время подачи",
       carTypeLabel: "Тип автомобиля",
+      tripTypeLabel: "Тип поездки",
       car5Seats: "5 мест (Седан)",
       car7Seats: "7 мест (SUV/Минивэн)",
       car16Seats: "16 мест (Микроавтобус)",
@@ -820,6 +822,7 @@ export const translations = {
       dateLabel: "出发日期",
       timeLabel: "出发时间",
       carTypeLabel: "选择车型",
+      tripTypeLabel: "行程类型",
       car5Seats: "5座轿车 (Sedan)",
       car7Seats: "7座商务车 (SUV/MPV)",
       car16Seats: "16座中巴车",

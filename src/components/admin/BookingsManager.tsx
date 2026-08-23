@@ -157,7 +157,7 @@ export default function BookingsManager({
                   >
                     <td className="py-3.5 px-4 font-bold text-gray-800">
                       <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-800 font-extrabold text-xs flex items-center justify-center flex-shrink-0">
+                        <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-800 font-extrabold text-xs flex items-center justify-center shrink-0">
                           {b.customer_name ? b.customer_name[0].toUpperCase() : "K"}
                         </div>
                         <div>
@@ -181,12 +181,12 @@ export default function BookingsManager({
                     </td>
                     <td className="py-3.5 px-4 text-xs">
                       <div className="flex items-center gap-1 font-semibold text-gray-800">
-                        <MapPin size={13} className="text-orange-500 flex-shrink-0" />
-                        <span className="truncate max-w-[240px]">{b.from_location}</span>
+                        <MapPin size={13} className="text-orange-500 shrink-0" />
+                        <span className="truncate max-w-60">{b.from_location}</span>
                       </div>
                       <div className="flex items-center gap-1 font-semibold text-gray-600 mt-1">
-                        <MapPin size={13} className="text-red-500 flex-shrink-0" />
-                        <span className="truncate max-w-[240px]">{b.to_location}</span>
+                        <MapPin size={13} className="text-red-500 shrink-0" />
+                        <span className="truncate max-w-60">{b.to_location}</span>
                       </div>
                     </td>
                     <td className="py-3.5 px-3 text-xs text-gray-700 font-mono">

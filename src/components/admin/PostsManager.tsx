@@ -77,7 +77,7 @@ export default function PostsManager({
         </div>
         <button
           onClick={() => setIsCreating(true)}
-          className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white rounded-xl text-xs md:text-sm font-bold shadow-md transition-all cursor-pointer"
+          className="flex items-center gap-2 px-4 py-2.5 bg-linear-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white rounded-xl text-xs md:text-sm font-bold shadow-md transition-all cursor-pointer"
         >
           <Plus size={16} />
           <span>Tạo Bài Viết Mới</span>
@@ -137,7 +137,7 @@ export default function PostsManager({
                     >
                       <td className="py-3.5 px-4">
                         <div className="flex items-center gap-3">
-                          <div className="relative w-12 h-12 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0 border border-gray-200">
+                          <div className="relative w-12 h-12 rounded-xl overflow-hidden bg-gray-100 shrink-0 border border-gray-200">
                             {p.cover_image ? (
                               <Image
                                 src={p.cover_image}
@@ -152,17 +152,17 @@ export default function PostsManager({
                             )}
                           </div>
                           <div>
-                            <h3 className="font-bold text-gray-900 text-sm line-clamp-1 max-w-[280px]">
+                            <h3 className="font-bold text-gray-900 text-sm line-clamp-1 max-w-70">
                               {titleStr}
                             </h3>
-                            <p className="text-[11px] text-gray-400 line-clamp-1 max-w-[280px]">
+                            <p className="text-[11px] text-gray-400 line-clamp-1 max-w-70">
                               {typeof p.excerpt === "object" ? p.excerpt?.vi : p.excerpt}
                             </p>
                           </div>
                         </div>
                       </td>
 
-                      <td className="py-3.5 px-3 text-xs font-mono text-gray-600 max-w-[160px] truncate">
+                      <td className="py-3.5 px-3 text-xs font-mono text-gray-600 max-w-40 truncate">
                         /{p.slug}
                       </td>
 

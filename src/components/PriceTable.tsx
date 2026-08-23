@@ -34,7 +34,7 @@ const PriceTable = () => {
 
   return (
     <section
-      className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white relative"
+      className="py-12 md:py-16 bg-linear-to-b from-gray-50 to-white relative"
       style={{
         backgroundImage: "url(/images/Hero2.jpg)",
         backgroundSize: "cover",
@@ -106,7 +106,7 @@ const PriceTable = () => {
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="bg-gradient-to-r from-orange-500 to-orange-400">
+                <tr className="bg-linear-to-r from-orange-500 to-orange-400">
                   <th className="px-6 py-4 text-left text-white font-bold text-base lg:text-lg border-r border-orange-300">
                     {t.priceTable.carTypeCol}
                   </th>

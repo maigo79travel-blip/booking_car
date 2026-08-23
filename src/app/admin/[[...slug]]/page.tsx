@@ -1,6 +1,7 @@
 "use client";
 
 import React, { FormEvent, useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import {
   Lock,
   Mail,
@@ -42,7 +43,10 @@ const emptyData: Data = {
   bookings: [],
 };
 
-export default function AdminPage() {
+export default function AdminAppPage() {
+  const pathname = usePathname() || "";
+  const router = useRouter();
+
   const [data, setData] = useState<Data>(emptyData);
   const [loading, setLoading] = useState(true);
   const [authorized, setAuthorized] = useState(false);
@@ -50,9 +54,25 @@ export default function AdminPage() {
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [credentials, setCredentials] = useState({ email: "", password: "" });
 
-  const [activeTab, setActiveTab] = useState<AdminTab>("dashboard");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  // Map URL pathname to AdminTab
+  const getTabFromPath = (path: string): AdminTab => {
+    const parts = path.split("/").filter(Boolean);
+    const segment = parts[1] || "";
+    if (segment === "bookings" || segment === "don-dat-xe") return "bookings";
+    if (segment === "routes" || segment === "bang-gia") return "routes";
+    if (segment === "posts" || segment === "bai-viet") return "posts";
+    if (segment === "content" || segment === "cau-hinh" || segment === "settings") return "content";
+    return "dashboard";
+  };
+
+  const activeTab = getTabFromPath(pathname);
+
+  const handleNavigateTab = (tab: AdminTab) => {
+    router.push(`/admin/${tab}`);
+  };
 
   const load = async () => {
     try {
@@ -144,7 +164,6 @@ export default function AdminPage() {
   // CRUD Handlers for Posts
   const handleSavePost = async (id: string | null, postData: Record<string, unknown>) => {
     if (id) {
-      // Update
       const res = await fetch("/api/admin/data", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -152,7 +171,6 @@ export default function AdminPage() {
       });
       if (!res.ok) throw new Error("Không thể cập nhật bài viết");
     } else {
-      // Create
       const res = await fetch("/api/admin/data", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -253,44 +271,50 @@ export default function AdminPage() {
 
           <form onSubmit={login} className="space-y-4">
             <div>
-              <label className="block text-xs font-semibold text-gray-900 mb-1.5">
-                Email Quản Trị
+              <label className="block text-xs font-semibold text-gray-700 mb-1">
+                Tài khoản Email
               </label>
-              <div className="relative flex items-center">
-                <Mail size={18} className="absolute left-3.5 text-gray-500" />
+              <div className="relative">
+                <Mail
+                  size={16}
+                  className="absolute left-3.5 top-3 text-gray-400"
+                />
                 <input
                   type="email"
-                  placeholder="admin@maigo79.com"
+                  required
+                  placeholder="admin@inoibai.vn hoặc admin@maigo79.com"
                   value={credentials.email}
                   onChange={(e) =>
                     setCredentials({ ...credentials, email: e.target.value })
                   }
-                  required
-                  className="w-full pl-10 pr-4 py-2.5 rounded-md border border-gray-300 bg-white text-gray-950 text-sm font-medium outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-100 transition-all placeholder:text-gray-400"
+                  className="w-full pl-10 pr-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-md text-sm text-gray-900 outline-none focus:bg-white focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition-all font-medium"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-gray-900 mb-1.5">
-                Mật Khẩu
+              <label className="block text-xs font-semibold text-gray-700 mb-1">
+                Mật khẩu quản trị
               </label>
-              <div className="relative flex items-center">
-                <Lock size={18} className="absolute left-3.5 text-gray-500" />
+              <div className="relative">
+                <Lock
+                  size={16}
+                  className="absolute left-3.5 top-3 text-gray-400"
+                />
                 <input
                   type={showPassword ? "text" : "password"}
-                  placeholder="Nhập mật khẩu..."
+                  required
+                  placeholder="••••••••••••"
                   value={credentials.password}
                   onChange={(e) =>
                     setCredentials({ ...credentials, password: e.target.value })
                   }
-                  required
-                  className="w-full pl-10 pr-12 py-2.5 rounded-md border border-gray-300 bg-white text-gray-950 text-sm font-medium outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-100 transition-all placeholder:text-gray-400"
+                  className="w-full pl-10 pr-12 py-2.5 bg-gray-50 border border-gray-300 rounded-md text-sm text-gray-900 outline-none focus:bg-white focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition-all font-medium"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3.5 text-gray-500 hover:text-gray-800 text-xs font-semibold p-1 cursor-pointer"
+                  className="absolute right-3.5 top-2.5 text-xs font-semibold text-gray-500 hover:text-blue-600 cursor-pointer"
                 >
                   {showPassword ? "Ẩn" : "Hiện"}
                 </button>
@@ -330,7 +354,7 @@ export default function AdminPage() {
       {/* Sidebar */}
       <AdminSidebar
         activeTab={activeTab}
-        setActiveTab={setActiveTab}
+        setActiveTab={handleNavigateTab}
         onLogout={logout}
         isOpen={sidebarOpen}
         setIsOpen={setSidebarOpen}
@@ -352,7 +376,7 @@ export default function AdminPage() {
           {activeTab === "dashboard" && (
             <DashboardOverview
               bookings={data.bookings}
-              onNavigateTab={setActiveTab}
+              onNavigateTab={handleNavigateTab}
             />
           )}
 

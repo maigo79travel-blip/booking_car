@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Save,
   Sparkles,
@@ -79,6 +79,37 @@ export default function ContentManager({
   const [selectedLang, setSelectedLang] = useState<Language>("vi");
   const [isSaving, setIsSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const tabParam = params.get("tab") as CMSTab;
+      if (
+        tabParam &&
+        [
+          "hero",
+          "brand",
+          "vehicles",
+          "testimonials",
+          "faq",
+          "cloudinary",
+          "telegram",
+          "raw_json",
+        ].includes(tabParam)
+      ) {
+        setActiveTab(tabParam);
+      }
+    }
+  }, []);
+
+  const handleTabChange = (tab: CMSTab) => {
+    setActiveTab(tab);
+    if (typeof window !== "undefined") {
+      const url = new URL(window.location.href);
+      url.searchParams.set("tab", tab);
+      window.history.replaceState(null, "", url.toString());
+    }
+  };
 
   // Find or initialize content items by key
   const getContent = (
@@ -402,7 +433,7 @@ export default function ContentManager({
             <button
               key={tab.id}
               type="button"
-              onClick={() => setActiveTab(tab.id as CMSTab)}
+              onClick={() => handleTabChange(tab.id as CMSTab)}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-lg whitespace-nowrap transition-all cursor-pointer font-semibold ${
                 isActive
                   ? "bg-blue-600 text-white shadow-sm shadow-blue-200"

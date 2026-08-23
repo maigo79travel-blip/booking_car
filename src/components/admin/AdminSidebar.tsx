@@ -41,6 +41,7 @@ export default function AdminSidebar({
         {
           id: "dashboard" as AdminTab,
           label: "Dashboard",
+          href: "/admin/dashboard",
           icon: LayoutDashboard,
           badge: null,
         },
@@ -52,6 +53,7 @@ export default function AdminSidebar({
         {
           id: "bookings" as AdminTab,
           label: "Đơn đặt xe",
+          href: "/admin/bookings",
           icon: Car,
           badge: bookingsCount > 0 ? bookingsCount : null,
           badgeColor: "bg-blue-500",
@@ -59,6 +61,7 @@ export default function AdminSidebar({
         {
           id: "routes" as AdminTab,
           label: "Bảng giá tuyến xe",
+          href: "/admin/routes",
           icon: DollarSign,
           badge: null,
         },
@@ -70,6 +73,7 @@ export default function AdminSidebar({
         {
           id: "posts" as AdminTab,
           label: "Bài viết SEO",
+          href: "/admin/posts",
           icon: FileText,
           badge: postsCount > 0 ? postsCount : null,
           badgeColor: "bg-green-500",
@@ -77,6 +81,7 @@ export default function AdminSidebar({
         {
           id: "content" as AdminTab,
           label: "Cấu hình website",
+          href: "/admin/content",
           icon: Settings,
           badge: null,
         },
@@ -124,13 +129,14 @@ export default function AdminSidebar({
                 const Icon = item.icon;
                 const isActive = activeTab === item.id;
                 return (
-                  <button
+                  <Link
                     key={item.id}
+                    href={item.href}
                     onClick={() => {
                       setActiveTab(item.id);
                       setIsOpen(false);
                     }}
-                    className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm transition-all cursor-pointer ${
+                    className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm transition-all ${
                       isActive
                         ? "bg-blue-50 text-blue-700 font-semibold shadow-xs"
                         : "text-gray-600 hover:bg-gray-100 hover:text-gray-900 font-medium"
@@ -159,7 +165,7 @@ export default function AdminSidebar({
                         }`}
                       />
                     )}
-                  </button>
+                  </Link>
                 );
               })}
             </div>

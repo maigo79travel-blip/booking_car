@@ -46,7 +46,7 @@ const HeroSection = () => {
     return () => clearInterval(bookingInterval);
   }, []);
 
-  const bgImage = images[0] || fallbackBanners[0];
+  const bgImage = hero?.bg_image || images[0] || fallbackBanners[0];
 
   return (
     <section className="relative w-full bg-gray-100 min-h-150 flex items-center">

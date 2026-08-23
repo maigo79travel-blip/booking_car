@@ -121,10 +121,12 @@ export default function ContentManager({
         ru: "Новые авто 5-7-16 мест, круглосуточная доставка от двери до двери Аэропорт Камрань ⇄ Нячанг, курорты Бай Дай, Далат без скрытых доплат",
         zh: "全新5座、7座、16座专车，24小时门到门金兰机场 ⇄ 芽庄市区、白代度假村、大叻接送，无任何隐藏费用",
       },
+      bg_image: (raw.bg_image as string) || "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1600&q=80",
+      pricing_bg_image: (raw.pricing_bg_image as string) || "",
       banners: (raw.banners as string[]) || [
-        "/images/Hero1.jpg",
-        "/images/Hero2.jpg",
-        "/images/Hero22.jpg",
+        "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1600&q=80",
+        "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=80",
+        "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80",
       ],
       badgeText: (raw.badgeText as Record<string, string>) || {
         vi: "HỆ THỐNG XE SÂN BAY CAM RANH & TOUR NHA TRANG HÀNG ĐẦU",
@@ -474,16 +476,43 @@ export default function ContentManager({
               />
             </div>
 
-            {/* 3 Banner Images */}
+            {/* Hero Main Background Image */}
             <div className="border-t border-slate-100 pt-6 space-y-4">
-              <h3 className="text-sm font-semibold text-slate-900 flex items-center gap-2">
-                <span>🖼️ 3 Hình Ảnh Banner Trình Chiếu (Slide Show Hero)</span>
-              </h3>
+              <div>
+                <h3 className="text-sm font-semibold text-slate-900 flex items-center gap-2">
+                  <span>🌄 Ảnh Nền Lớn Hero Section (Phía Sau Form Đặt Xe)</span>
+                </h3>
+                <p className="text-xs text-slate-500 font-normal mt-0.5">
+                  Ảnh nền chất lượng cao hiển thị mờ đằng sau form đặt xe và khu vực đầu trang chủ
+                </p>
+              </div>
+              <div className="p-4 bg-slate-50 rounded-lg border border-slate-200">
+                <ImageUploadField
+                  label="Ảnh Nền Lớn Hero"
+                  value={heroData.bg_image || ""}
+                  onChange={(url) => setHeroData({ ...heroData, bg_image: url })}
+                  folder="inhatrang/hero"
+                  placeholder="https://images.unsplash.com/... hoặc link ảnh nền mới"
+                  helperText="Ảnh hiển thị full màn hình phía sau toàn bộ khung đặt xe"
+                />
+              </div>
+            </div>
+
+            {/* 3 Banner Carousel Images */}
+            <div className="border-t border-slate-100 pt-6 space-y-4">
+              <div>
+                <h3 className="text-sm font-semibold text-slate-900 flex items-center gap-2">
+                  <span>🖼️ 3 Hình Ảnh Slide Trình Chiếu (Carousel Bên Phải)</span>
+                </h3>
+                <p className="text-xs text-slate-500 font-normal mt-0.5">
+                  Ba ảnh chạy tự động luân phiên ở khung trình chiếu bên cạnh form đặt xe
+                </p>
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {[0, 1, 2].map((idx) => (
                   <div key={idx} className="p-4 bg-slate-50 rounded-lg border border-slate-200">
                     <ImageUploadField
-                      label={`Banner ${idx + 1}`}
+                      label={`Slide Banner ${idx + 1}`}
                       value={heroData.banners[idx] || ""}
                       onChange={(url) => {
                         const newBanners = [...heroData.banners];
@@ -491,11 +520,33 @@ export default function ContentManager({
                         setHeroData({ ...heroData, banners: newBanners });
                       }}
                       folder="inhatrang/banners"
-                      placeholder={`/images/Hero${idx + 1}.jpg`}
+                      placeholder={`Slide ${idx + 1}`}
                       helperText={`Ảnh hiển thị ở vị trí slide thứ ${idx + 1}`}
                     />
                   </div>
                 ))}
+              </div>
+            </div>
+
+            {/* Price Table Background Image */}
+            <div className="border-t border-slate-100 pt-6 space-y-4">
+              <div>
+                <h3 className="text-sm font-semibold text-slate-900 flex items-center gap-2">
+                  <span>📊 Ảnh Nền Khối Bảng Giá (Tùy Chọn)</span>
+                </h3>
+                <p className="text-xs text-slate-500 font-normal mt-0.5">
+                  Ảnh nền hiển thị đằng sau bảng giá niêm yết (để trống nếu muốn dùng nền gradient tối giản thanh lịch)
+                </p>
+              </div>
+              <div className="p-4 bg-slate-50 rounded-lg border border-slate-200">
+                <ImageUploadField
+                  label="Ảnh Nền Bảng Giá"
+                  value={heroData.pricing_bg_image || ""}
+                  onChange={(url) => setHeroData({ ...heroData, pricing_bg_image: url })}
+                  folder="inhatrang/pricing"
+                  placeholder="Để trống nếu muốn dùng màu nền gradient sang trọng"
+                  helperText="Ảnh nền phía sau bảng giá xe 5, 7, 16 chỗ"
+                />
               </div>
             </div>
           </div>

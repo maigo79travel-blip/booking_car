@@ -18,6 +18,8 @@ export interface HeroConfig {
   title1: Record<string, string>;
   title2: Record<string, string>;
   subtitle: Record<string, string>;
+  bg_image?: string;
+  pricing_bg_image?: string;
   banners: string[];
   badgeText: Record<string, string>;
 }
@@ -92,6 +94,8 @@ const defaultHero: HeroConfig = {
     ru: "Новые авто 5-7-16 мест, круглосуточная доставка от двери до двери Аэропорт Камрань ⇄ Нячанг, курорты Бай Дай, Далат без скрытых доплат",
     zh: "全新5座、7座、16座专车，24小时门到门金兰机场 ⇄ 芽庄市区、白代度假村、大叻接送，无任何隐藏费用",
   },
+  bg_image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1600&q=80",
+  pricing_bg_image: "",
   banners: [
     "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1600&q=80",
     "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=80",

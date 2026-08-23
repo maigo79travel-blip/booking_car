@@ -1,9 +1,12 @@
 "use client";
 
 import { useLanguage } from "@/context/LanguageContext";
+import { useSiteContent } from "@/context/SiteContentContext";
 
 const PriceTable = () => {
   const { t } = useLanguage();
+  const { hero } = useSiteContent();
+  const hasCustomBg = !!hero?.pricing_bg_image;
 
   const priceData = [
     {
@@ -33,7 +36,21 @@ const PriceTable = () => {
   ];
 
   return (
-    <section className="py-12 md:py-16 bg-linear-to-b from-slate-50 via-blue-50/20 to-white relative border-y border-gray-100">
+    <section
+      className={`py-12 md:py-16 relative border-y border-gray-100 ${
+        hasCustomBg ? "" : "bg-linear-to-b from-slate-50 via-blue-50/20 to-white"
+      }`}
+      style={
+        hasCustomBg
+          ? {
+              backgroundImage: `url(${hero.pricing_bg_image})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }
+          : undefined
+      }
+    >
+      {hasCustomBg && <div className="absolute inset-0 bg-white/90"></div>}
       <div className="container mx-auto px-4 md:px-12 lg:px-24 relative z-10">
         {/* Header */}
         <div className="text-center mb-8 md:mb-12">

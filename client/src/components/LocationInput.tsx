@@ -97,7 +97,7 @@ const LocationInput = ({
 
   return (
     <div className="relative w-full" ref={dropdownRef}>
-      <div className="bg-white rounded-lg flex items-center overflow-hidden border border-transparent focus-within:border-brand-steel transition-colors">
+      <div className="bg-white flex items-center overflow-hidden border border-transparent focus-within:border-brand-steel transition-colors">
         <div className="w-10 flex justify-center text-gray-400">
           {icon || <MapPin size={18} className="text-[#174978]" />}
         </div>
@@ -125,7 +125,7 @@ const LocationInput = ({
       </div>
 
       {isOpen && suggestions.length > 0 && (
-        <div className="absolute left-0 right-0 mt-1 bg-white rounded-lg shadow-md border border-gray-100 z-100 max-h-60 overflow-y-auto animate-in slide-in-from-top-2 duration-200">
+        <div className="absolute left-0 right-0 mt-1 bg-white shadow-md border border-gray-100 z-100 max-h-60 overflow-y-auto animate-in slide-in-from-top-2 duration-200">
           {suggestions.map((loc, index) => (
             <button
               key={index}

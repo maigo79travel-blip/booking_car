@@ -55,7 +55,7 @@ const PriceTable = () => {
         {/* Header */}
         <div className="text-center mb-8 md:mb-12">
           <div className="inline-flex items-center gap-3 mb-3">
-            <div className="bg-[#174978] p-2.5 rounded-xl text-white shadow-xs">
+            <div className="bg-[#174978] p-2.5 text-white shadow-xs">
               <svg
                 className="w-6 h-6 md:w-8 md:h-8"
                 fill="none"
@@ -74,7 +74,7 @@ const PriceTable = () => {
           <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-2">
             {t.priceTable.heading}
           </h2>
-          <div className="w-24 h-1 bg-[#174978] mx-auto rounded-full"></div>
+          <div className="w-24 h-1 bg-[#174978] mx-auto"></div>
         </div>
 
         {/* Mobile Card Layout */}
@@ -82,7 +82,7 @@ const PriceTable = () => {
           {priceData.map((vehicle, index) => (
             <div
               key={index}
-              className="bg-white rounded-2xl shadow-xs overflow-hidden border border-gray-100"
+              className="bg-white shadow-xs overflow-hidden border border-gray-100"
             >
               {/* Card Header */}
               <div className="bg-linear-to-r from-[#003366] to-[#174978] text-white text-center py-2.5 font-bold text-base">
@@ -108,7 +108,7 @@ const PriceTable = () => {
         </div>
 
         {/* Desktop Table Layout */}
-        <div className="hidden md:block bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
+        <div className="hidden md:block bg-white shadow-sm overflow-hidden border border-gray-100">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
@@ -181,7 +181,7 @@ const PriceTable = () => {
         </div>
 
         {/* Informational Message */}
-        <div className="mt-6 bg-white/90 backdrop-blur-xs rounded-lg p-5 md:p-6 shadow-xs border border-gray-100 space-y-2">
+        <div className="mt-6 bg-white/90 backdrop-blur-xs p-5 md:p-6 shadow-xs border border-gray-100 space-y-2">
           <p className="text-gray-800 text-sm md:text-base leading-relaxed font-medium">
             ✓ {t.priceTable.note1}
           </p>

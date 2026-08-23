@@ -56,7 +56,7 @@ export default function FAQSection() {
             <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">
               {t.faq.title}
             </h2>
-            <div className="w-24 h-1 bg-[#174978] mx-auto mb-4 rounded-full"></div>
+            <div className="w-24 h-1 bg-[#174978] mx-auto mb-4"></div>
             <p className="text-gray-600 text-sm md:text-base">
               {t.faq.subtitle}
             </p>
@@ -68,7 +68,7 @@ export default function FAQSection() {
               return (
                 <div
                   key={index}
-                  className={`border rounded-lg overflow-hidden transition-all shadow-none ${
+                  className={`border overflow-hidden transition-all shadow-none ${
                     isOpen ? "border-brand-coastal" : "border-gray-100"
                   }`}
                 >

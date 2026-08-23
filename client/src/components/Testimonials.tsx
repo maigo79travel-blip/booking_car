@@ -73,7 +73,7 @@ const Testimonials = () => {
           <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">
             {t.testimonials.title}
           </h2>
-          <div className="w-24 h-1 bg-[#174978] mx-auto mb-4 rounded-full"></div>
+          <div className="w-24 h-1 bg-[#174978] mx-auto mb-4"></div>
           <p className="text-gray-600 text-sm md:text-base">
             {t.testimonials.subtitle}
           </p>
@@ -90,12 +90,12 @@ const Testimonials = () => {
             return (
               <div
                 key={testimonial.id || `${testimonial.name}-${idx}`}
-                className="bg-white rounded-xl shadow-xs hover:shadow-md p-6 md:p-8 transition-all border border-gray-100 flex flex-col justify-between"
+                className="bg-white shadow-xs hover:shadow-md p-6 md:p-8 transition-all border border-gray-100 flex flex-col justify-between"
               >
                 <div>
                   {/* Header */}
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="relative w-14 h-14 rounded-full overflow-hidden border border-[#174978] shrink-0 bg-gray-100">
+                    <div className="relative w-14 h-14 overflow-hidden border border-[#174978] shrink-0 bg-gray-100">
                       <Image
                         src={avatarUrl}
                         alt={`Khách hàng ${testimonial.name} đánh giá dịch vụ maigo79.com`}
@@ -137,7 +137,7 @@ const Testimonials = () => {
 
                   {/* Service Badge */}
                   <div className="mt-3">
-                    <span className="inline-block bg-brand-light text-[#003366] text-xs font-bold px-3 py-1 rounded-md">
+                    <span className="inline-block bg-brand-light text-[#003366] text-xs font-bold px-3 py-1">
                       {testimonial.service || testimonial.role || "Dịch vụ đưa đón sân bay"}
                     </span>
                   </div>
@@ -151,7 +151,7 @@ const Testimonials = () => {
         <div className="flex items-center justify-center gap-4">
           <button
             onClick={prevPage}
-            className="bg-[#174978] hover:bg-[#003366] text-white p-2 rounded-full transition-colors cursor-pointer"
+            className="bg-[#174978] hover:bg-[#003366] text-white p-2 transition-colors cursor-pointer"
             aria-label="Xem đánh giá trước"
           >
             <ChevronLeft size={18} />
@@ -162,7 +162,7 @@ const Testimonials = () => {
               <button
                 key={idx}
                 onClick={() => setCurrentPage(idx)}
-                className={`h-2 rounded-full transition-all cursor-pointer ${
+                className={`h-2 transition-all cursor-pointer ${
                   idx === currentPage ? "bg-[#003366] w-6" : "bg-gray-300 w-2"
                 }`}
                 aria-label={`Trang ${idx + 1}`}
@@ -172,7 +172,7 @@ const Testimonials = () => {
 
           <button
             onClick={nextPage}
-            className="bg-[#174978] hover:bg-[#003366] text-white p-2 rounded-full transition-colors cursor-pointer"
+            className="bg-[#174978] hover:bg-[#003366] text-white p-2 transition-colors cursor-pointer"
             aria-label="Xem đánh giá tiếp"
           >
             <ChevronRight size={18} />

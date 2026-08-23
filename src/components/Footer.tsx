@@ -47,7 +47,7 @@ const Footer = () => {
             <p className="text-sm text-slate-400 leading-relaxed mb-4">
               {t.footer.companyDesc}
             </p>
-            <div className="flex items-center gap-2 text-xs text-emerald-400 bg-emerald-950/40 border border-emerald-800/50 rounded-lg p-2.5">
+            <div className="flex items-center gap-2 text-xs text-emerald-400 bg-emerald-950/40 border border-emerald-800/50 p-2.5">
               <ShieldCheck size={18} className="shrink-0" />
               <span className="font-semibold">{t.footer.commitBadge}</span>
             </div>
@@ -218,28 +218,28 @@ const Footer = () => {
               href="https://www.facebook.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#174978] hover:bg-[#003366] p-2.5 rounded-full transition-colors text-white"
+              className="bg-[#174978] hover:bg-[#003366] p-2.5 transition-colors text-white"
               aria-label="Facebook maigo79.com"
             >
               <Facebook size={18} />
             </a>
             <a
               href="#"
-              className="bg-brand-marine hover:bg-[#174978] p-2.5 rounded-full transition-colors text-white"
+              className="bg-brand-marine hover:bg-[#174978] p-2.5 transition-colors text-white"
               aria-label="Twitter maigo79.com"
             >
               <Twitter size={18} />
             </a>
             <a
               href="#"
-              className="bg-brand-steel hover:bg-brand-marine p-2.5 rounded-full transition-colors text-white"
+              className="bg-brand-steel hover:bg-brand-marine p-2.5 transition-colors text-white"
               aria-label="Instagram maigo79.com"
             >
               <Instagram size={18} />
             </a>
             <a
               href="#"
-              className="bg-[#003366] hover:bg-[#002244] p-2.5 rounded-full transition-colors text-white"
+              className="bg-[#003366] hover:bg-[#002244] p-2.5 transition-colors text-white"
               aria-label="Youtube maigo79.com"
             >
               <Youtube size={18} />

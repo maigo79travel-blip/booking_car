@@ -73,7 +73,7 @@ const Header = () => {
 
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden p-2 hover:bg-slate-100 rounded-lg transition-colors text-[#174978]"
+              className="lg:hidden p-2 hover:bg-slate-100 transition-colors text-[#174978]"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -114,7 +114,7 @@ const Header = () => {
                 key={item.href}
                 href={item.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`px-4 py-2.5 rounded-xl transition-colors font-medium text-sm ${
+                className={`px-4 py-2.5 transition-colors font-medium text-sm ${
                   pathname === item.href ? "bg-[#174978] font-bold text-white shadow-xs" : "bg-white/5 hover:bg-white/10 text-white/90"
                 }`}
               >
@@ -138,7 +138,7 @@ const Header = () => {
                 </p>
                 <a
                   href={`tel:${t.common.hotlineNumber.replace(/[^0-9+]/g, "")}`}
-                  className="flex items-center text-base font-black bg-white text-[#003366] px-4 py-2.5 rounded-xl shadow-xs"
+                  className="flex items-center text-base font-black bg-white text-[#003366] px-4 py-2.5 shadow-xs"
                 >
                   <Phone size={18} className="mr-2 text-[#174978]" />
                   {t.common.hotlineNumber}

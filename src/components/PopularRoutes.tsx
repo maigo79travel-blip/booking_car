@@ -37,7 +37,7 @@ export default function PopularRoutes() {
           <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">
             {t.popularRoutes.title}
           </h2>
-          <div className="w-24 h-1 bg-[#174978] mx-auto mb-4 rounded-full"></div>
+          <div className="w-24 h-1 bg-[#174978] mx-auto mb-4"></div>
           <p className="text-gray-600 text-sm md:text-base">
             {t.popularRoutes.subtitle}
           </p>
@@ -55,14 +55,14 @@ export default function PopularRoutes() {
             {airportRoutes.map((route, idx) => (
               <div
                 key={idx}
-                className="bg-white rounded-xl p-5 border border-gray-100 shadow-xs hover:shadow-sm hover:border-gray-200 transition-all flex flex-col justify-between group"
+                className="bg-white p-5 border border-gray-100 shadow-xs hover:shadow-sm hover:border-gray-200 transition-all flex flex-col justify-between group"
               >
                 <div>
                   <div className="flex justify-between items-start mb-2 gap-2">
                     <h4 className="font-bold text-gray-900 text-base group-hover:text-[#003366] transition-colors">
                       {route.name}
                     </h4>
-                    <span className="font-black text-[#003366] whitespace-nowrap text-sm bg-brand-light px-2.5 py-1 rounded-md">
+                    <span className="font-black text-[#003366] whitespace-nowrap text-sm bg-brand-light px-2.5 py-1">
                       {route.price}
                     </span>
                   </div>
@@ -91,7 +91,7 @@ export default function PopularRoutes() {
             {provinceRoutes.map((prov, idx) => (
               <div
                 key={idx}
-                className="bg-white rounded-lg p-4 border border-gray-100 shadow-xs hover:border-gray-200 hover:shadow-sm transition-all text-center group"
+                className="bg-white p-4 border border-gray-100 shadow-xs hover:border-gray-200 hover:shadow-sm transition-all text-center group"
               >
                 <p className="font-bold text-gray-900 text-sm mb-1 group-hover:text-[#003366] transition-colors">{prov.name}</p>
                 <p className="text-xs text-gray-400 font-medium mb-2">{prov.distance}</p>

@@ -39,7 +39,7 @@ export default function WhyChooseUs() {
           <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">
             {t.whyChooseUs.title}
           </h2>
-          <div className="w-24 h-1 bg-[#174978] mx-auto mb-4 rounded-full"></div>
+          <div className="w-24 h-1 bg-[#174978] mx-auto mb-4"></div>
           <p className="text-gray-600 text-sm md:text-base leading-relaxed">
             {t.whyChooseUs.subtitle}
           </p>
@@ -53,10 +53,10 @@ export default function WhyChooseUs() {
             return (
               <div
                 key={idx}
-                className="bg-gray-50/70 hover:bg-white rounded-xl p-6 md:p-8 border border-gray-100 hover:border-gray-200 shadow-xs hover:shadow-md transition-all duration-300 group"
+                className="bg-gray-50/70 hover:bg-white p-6 md:p-8 border border-gray-100 hover:border-gray-200 shadow-xs hover:shadow-md transition-all duration-300 group"
               >
                 <div
-                  className={`w-12 h-12 rounded-lg flex items-center justify-center mb-5 ${colorClass} group-hover:scale-105 transition-transform`}
+                  className={`w-12 h-12 flex items-center justify-center mb-5 ${colorClass} group-hover:scale-105 transition-transform`}
                 >
                   <Icon size={24} />
                 </div>

@@ -38,7 +38,7 @@ export default function BookingSteps() {
           <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">
             {t.bookingSteps.title}
           </h2>
-          <div className="w-24 h-1 bg-[#174978] mx-auto mb-4 rounded-full"></div>
+          <div className="w-24 h-1 bg-[#174978] mx-auto mb-4"></div>
           <p className="text-gray-600 text-sm md:text-base">
             {t.bookingSteps.subtitle}
           </p>
@@ -50,12 +50,12 @@ export default function BookingSteps() {
             return (
               <div
                 key={idx}
-                className="bg-white rounded-xl p-6 md:p-8 border border-gray-100 shadow-xs hover:shadow-md transition-all relative flex flex-col items-center text-center group"
+                className="bg-white p-6 md:p-8 border border-gray-100 shadow-xs hover:shadow-md transition-all relative flex flex-col items-center text-center group"
               >
-                <div className="absolute -top-3.5 bg-linear-to-r from-[#003366] to-[#174978] text-white text-[11px] font-black px-3 py-0.5 rounded-full uppercase tracking-wider">
+                <div className="absolute -top-3.5 bg-linear-to-r from-[#003366] to-[#174978] text-white text-[11px] font-black px-3 py-0.5 uppercase tracking-wider">
                   {t.bookingSteps.stepBadge} {step.number}
                 </div>
-                <div className="w-12 h-12 rounded-lg bg-brand-light flex items-center justify-center text-[#174978] my-4 group-hover:scale-105 transition-transform">
+                <div className="w-12 h-12 bg-brand-light flex items-center justify-center text-[#174978] my-4 group-hover:scale-105 transition-transform">
                   <Icon size={24} />
                 </div>
                 <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-3 group-hover:text-[#003366] transition-colors">
@@ -72,7 +72,7 @@ export default function BookingSteps() {
         <div className="mt-10 text-center">
           <Link
             href="/#formbooking"
-            className="inline-block bg-linear-to-r from-[#003366] via-[#174978] to-brand-marine hover:from-[#002244] hover:to-[#174978] text-white font-extrabold px-8 py-3.5 rounded-lg shadow-xs hover:shadow-sm transition-all text-sm md:text-base"
+            className="inline-block bg-linear-to-r from-[#003366] via-[#174978] to-brand-marine hover:from-[#002244] hover:to-[#174978] text-white font-extrabold px-8 py-3.5 shadow-xs hover:shadow-sm transition-all text-sm md:text-base"
           >
             {t.common.bookNow}
           </Link>

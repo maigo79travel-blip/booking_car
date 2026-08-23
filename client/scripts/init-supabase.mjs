@@ -2,7 +2,7 @@ import { Client } from "pg";
 
 const client = new Client({
   connectionString:
-    "postgresql://postgres.zgpeyypmfskvqlfdanfd:bW.Q%2165SEEpk%3FBu@aws-0-ap-southeast-1.pooler.supabase.com:5432/postgres",
+    "postgresql://postgres.qysxwmujksnqxppluxey:bW.Q%2165SEEpk%3FBu@aws-0-ap-southeast-1.pooler.supabase.com:5432/postgres",
   ssl: { rejectUnauthorized: false },
 });
 

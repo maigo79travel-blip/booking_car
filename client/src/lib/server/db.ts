@@ -5,7 +5,7 @@ import crypto from "crypto";
 const connectionString =
   process.env.DIRECT_URL ||
   process.env.DATABASE_URL ||
-  "postgresql://postgres.zgpeyypmfskvqlfdanfd:bW.Q%2165SEEpk%3FBu@aws-0-ap-southeast-1.pooler.supabase.com:5432/postgres";
+  "postgresql://postgres.qysxwmujksnqxppluxey:bW.Q%2165SEEpk%3FBu@aws-0-ap-southeast-1.pooler.supabase.com:5432/postgres";
 
 // Singleton pool instance for serverless / node runtime
 let pool: Pool | null = null;

@@ -10,7 +10,12 @@ import { useSiteContent } from "@/context/SiteContentContext";
 const HeroSection = () => {
   const { t } = useLanguage();
   const { hero } = useSiteContent();
-  const images = hero.banners && hero.banners.length > 0 ? hero.banners : ["/images/Hero1.jpg", "/images/Hero2.jpg", "/images/Hero22.jpg"];
+  const fallbackBanners = [
+    "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80",
+  ];
+  const images = hero?.banners && hero.banners.length > 0 ? hero.banners : fallbackBanners;
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleBookings, setVisibleBookings] = useState(
@@ -41,7 +46,7 @@ const HeroSection = () => {
     return () => clearInterval(bookingInterval);
   }, []);
 
-  const bgImage = images[0] || "/images/Hero1.jpg";
+  const bgImage = images[0] || fallbackBanners[0];
 
   return (
     <section className="relative w-full bg-gray-100 min-h-150 flex items-center">

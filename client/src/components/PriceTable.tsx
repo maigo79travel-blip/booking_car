@@ -33,18 +33,7 @@ const PriceTable = () => {
   ];
 
   return (
-    <section
-      className="py-12 md:py-16 bg-linear-to-b from-gray-50 to-white relative"
-      style={{
-        backgroundImage: "url(/images/Hero2.jpg)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
-      {/* Overlay for better readability */}
-      <div className="absolute inset-0 bg-white/92"></div>
-
+    <section className="py-12 md:py-16 bg-linear-to-b from-slate-50 via-blue-50/20 to-white relative border-y border-gray-100">
       <div className="container mx-auto px-4 md:px-12 lg:px-24 relative z-10">
         {/* Header */}
         <div className="text-center mb-8 md:mb-12">

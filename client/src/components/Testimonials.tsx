@@ -67,7 +67,7 @@ const Testimonials = () => {
       <div className="container mx-auto px-4 md:px-12 lg:px-24">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
-          <span className="text-[#174978] font-bold uppercase tracking-wider text-xs md:text-sm">
+          <span className="text-[#174978] font-semibold uppercase tracking-wider text-xs md:text-sm">
             {t.testimonials.tag}
           </span>
           <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">
@@ -105,7 +105,7 @@ const Testimonials = () => {
                       />
                     </div>
                     <div className="flex-1">
-                      <h3 className="font-bold text-gray-900 text-base md:text-lg">
+                      <h3 className="font-semibold text-gray-900 text-base md:text-lg">
                         {testimonial.name}
                       </h3>
                       <div className="flex items-center gap-1 text-amber-400 mt-1">
@@ -137,7 +137,7 @@ const Testimonials = () => {
 
                   {/* Service Badge */}
                   <div className="mt-3">
-                    <span className="inline-block bg-brand-light text-[#003366] text-xs font-bold px-3 py-1">
+                    <span className="inline-block bg-brand-light text-[#003366] text-xs font-semibold px-3 py-1">
                       {testimonial.service || testimonial.role || "Dịch vụ đưa đón sân bay"}
                     </span>
                   </div>

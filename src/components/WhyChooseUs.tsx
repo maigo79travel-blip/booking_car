@@ -33,7 +33,7 @@ export default function WhyChooseUs() {
     <section className="py-12 md:py-16 bg-white">
       <div className="container mx-auto px-4 md:px-12 lg:px-24">
         <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
-          <span className="text-[#174978] font-bold uppercase tracking-wider text-xs md:text-sm">
+          <span className="text-[#174978] font-semibold uppercase tracking-wider text-xs md:text-sm">
             {t.whyChooseUs.tag}
           </span>
           <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">
@@ -60,7 +60,7 @@ export default function WhyChooseUs() {
                 >
                   <Icon size={24} />
                 </div>
-                <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-3 group-hover:text-[#003366] transition-colors">
+                <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-3 group-hover:text-[#003366] transition-colors">
                   {item.title}
                 </h3>
                 <p className="text-gray-600 text-sm leading-relaxed">

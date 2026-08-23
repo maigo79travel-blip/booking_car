@@ -268,7 +268,7 @@ const BookingForm = () => {
     <div className="w-full max-w-lg mx-auto h-full flex flex-col">
       <div className="bg-linear-to-br from-[#003366] via-[#174978] to-brand-marine shadow-sm overflow-hidden border border-white/10 h-full flex flex-col justify-between">
         {/* Header Tabs */}
-        <div className="flex border-b border-white/10 text-sm md:text-base font-bold shrink-0">
+        <div className="flex border-b border-white/10 text-sm md:text-base font-semibold shrink-0">
           <button
             onClick={() => handleTabChange("airport")}
             className={`flex-1 py-3 flex items-center justify-center gap-2 transition-colors cursor-pointer ${
@@ -339,7 +339,7 @@ const BookingForm = () => {
           {/* Date and Time Selector */}
           <div className="flex gap-2">
             <div className="bg-white flex-1 py-1.5 px-3 border border-transparent focus-within:border-brand-steel transition-colors">
-              <label className="block text-[11px] text-gray-500 font-bold mb-0.5">
+              <label className="block text-[11px] text-gray-500 font-semibold mb-0.5">
                 {t.bookingForm.dateLabel}
               </label>
               <input
@@ -347,25 +347,25 @@ const BookingForm = () => {
                 min={new Date().toISOString().slice(0, 10)}
                 value={tripDate}
                 onChange={(e) => setTripDate(e.target.value)}
-                className="w-full outline-none text-gray-800 font-semibold text-sm bg-transparent cursor-pointer"
+                className="w-full outline-none text-gray-800 font-medium text-sm bg-transparent cursor-pointer"
               />
             </div>
             <div className="bg-white flex-1 py-1.5 px-3 border border-transparent focus-within:border-brand-steel transition-colors">
-              <label className="block text-[11px] text-gray-500 font-bold mb-0.5">
+              <label className="block text-[11px] text-gray-500 font-semibold mb-0.5">
                 {t.bookingForm.timeLabel}
               </label>
               <input
                 type="time"
                 value={tripTime}
                 onChange={(e) => setTripTime(e.target.value)}
-                className="w-full outline-none text-gray-800 font-semibold text-sm bg-transparent cursor-pointer"
+                className="w-full outline-none text-gray-800 font-medium text-sm bg-transparent cursor-pointer"
               />
             </div>
           </div>
 
           {/* Real-time Time Validation Warning */}
           {timeError && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-3 py-2 text-xs font-semibold flex items-center gap-1.5">
+            <div className="bg-red-50 border border-red-200 text-red-700 px-3 py-2 text-xs font-medium flex items-center gap-1.5">
               <span>⚠️</span>
               <span>{timeError}</span>
             </div>
@@ -374,13 +374,13 @@ const BookingForm = () => {
           {/* Car Type & Way Type */}
           <div className="flex gap-2">
             <div className="bg-white flex-1 py-1.5 px-3 border border-transparent focus-within:border-brand-steel transition-colors">
-              <label className="block text-[11px] text-gray-500 font-bold mb-0.5">
+              <label className="block text-[11px] text-gray-500 font-semibold mb-0.5">
                 {t.bookingForm.carTypeLabel}
               </label>
               <select
                 value={carType}
                 onChange={(e) => setCarType(e.target.value)}
-                className="w-full outline-none text-gray-800 font-semibold text-sm bg-transparent cursor-pointer"
+                className="w-full outline-none text-gray-800 font-medium text-sm bg-transparent cursor-pointer"
               >
                 <option value="5">{t.bookingForm.car5Seats}</option>
                 <option value="7">{t.bookingForm.car7Seats}</option>
@@ -388,13 +388,13 @@ const BookingForm = () => {
               </select>
             </div>
             <div className="bg-white flex-1 py-1.5 px-3 border border-transparent focus-within:border-brand-steel transition-colors">
-              <label className="block text-[11px] text-gray-500 font-bold mb-0.5">
+              <label className="block text-[11px] text-gray-500 font-semibold mb-0.5">
                 {t.bookingForm.tripTypeLabel}
               </label>
               <select
                 value={wayType}
                 onChange={(e) => setWayType(e.target.value)}
-                className="w-full outline-none text-gray-800 font-semibold text-sm bg-transparent cursor-pointer"
+                className="w-full outline-none text-gray-800 font-medium text-sm bg-transparent cursor-pointer"
               >
                 <option value="one-way">{t.bookingForm.oneWay}</option>
                 <option value="two-way">{t.bookingForm.twoWay}</option>
@@ -407,13 +407,13 @@ const BookingForm = () => {
             <div className="bg-white flex-1 py-1.5 px-3 border border-transparent focus-within:border-brand-steel transition-colors flex items-center gap-2">
               <User size={16} className="text-gray-400 shrink-0" />
               <div className="flex-1 min-w-0">
-                <label className="block text-[11px] text-gray-500 font-bold mb-0.5">
+                <label className="block text-[11px] text-gray-500 font-semibold mb-0.5">
                   {t.bookingForm.nameLabel}
                 </label>
                 <input
                   type="text"
                   placeholder={t.bookingForm.namePlaceholder}
-                  className="w-full outline-none text-gray-800 font-semibold text-sm bg-transparent"
+                  className="w-full outline-none text-gray-800 font-medium text-sm bg-transparent"
                   value={customerName}
                   onChange={(e) => setCustomerName(e.target.value)}
                 />
@@ -422,13 +422,13 @@ const BookingForm = () => {
             <div className="bg-white flex-1 py-1.5 px-3 border border-transparent focus-within:border-brand-steel transition-colors flex items-center gap-2">
               <Phone size={16} className="text-gray-400 shrink-0" />
               <div className="flex-1 min-w-0">
-                <label className="block text-[11px] text-gray-500 font-bold mb-0.5">
+                <label className="block text-[11px] text-gray-500 font-semibold mb-0.5">
                   {t.bookingForm.phoneLabel}
                 </label>
                 <input
                   type="tel"
                   placeholder={t.bookingForm.phonePlaceholder}
-                  className="w-full outline-none text-gray-800 font-semibold text-sm bg-transparent"
+                  className="w-full outline-none text-gray-800 font-medium text-sm bg-transparent"
                   value={customerPhone}
                   onChange={(e) => setCustomerPhone(e.target.value)}
                 />
@@ -444,7 +444,7 @@ const BookingForm = () => {
               timeError
                 ? "bg-gray-400 cursor-not-allowed"
                 : "bg-[#002244] hover:bg-[#00172e]"
-            } text-white font-extrabold py-3.5 flex items-center justify-center gap-2 transition-all cursor-pointer shadow-xs hover:shadow-sm`}
+            } text-white font-semibold py-3.5 flex items-center justify-center gap-2 transition-all cursor-pointer shadow-xs hover:shadow-sm`}
           >
             {isCalculating ? (
               <>
@@ -463,7 +463,7 @@ const BookingForm = () => {
             {t.common.hotline}:{" "}
             <a
               href={`tel:${hotlineNum.replace(/[^0-9+]/g, "")}`}
-              className="font-bold text-white hover:underline"
+              className="font-semibold text-white hover:underline"
             >
               {hotlineDisplay}
             </a>
@@ -479,17 +479,17 @@ const BookingForm = () => {
             <div className="bg-white p-6 md:p-8 text-center border border-gray-100 shadow-lg animate-in zoom-in-95 duration-200 w-full max-w-lg relative">
               <div className="mb-5">
                 <div className="w-24 h-24 mx-auto border-2 border-[#174978] flex items-center justify-center relative bg-brand-light">
-                  <span className="text-3xl font-black text-[#003366] tracking-wider">
+                  <span className="text-3xl font-bold text-[#003366] tracking-wider">
                     {formatTime(timeLeft)}
                   </span>
                 </div>
               </div>
 
-              <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-2">
+              <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-2">
                 {t.bookingForm.countdownNotice}...
               </h3>
 
-              <p className="text-gray-600 mb-5 font-medium text-sm leading-relaxed px-2">
+              <p className="text-gray-600 mb-5 font-normal text-sm leading-relaxed px-2">
                 {t.bookingForm.successDesc}
               </p>
 
@@ -528,15 +528,15 @@ const BookingForm = () => {
             >
               {/* Header */}
               <div className="bg-[#174978] py-3 px-5 flex items-center justify-between">
-                <div className="flex items-center gap-2 text-white font-bold text-base">
-                  <div className="w-6 h-6 bg-white text-[#174978] flex items-center justify-center text-xs font-black">
+                <div className="flex items-center gap-2 text-white font-semibold text-base">
+                  <div className="w-6 h-6 bg-white text-[#174978] flex items-center justify-center text-xs font-bold">
                     !
                   </div>
                   {t.bookingForm.hotlineModalTitle}
                 </div>
                 <button
                   onClick={() => setShowHotlineModal(false)}
-                  className="text-white hover:text-blue-200 font-bold text-lg px-1.5 cursor-pointer"
+                  className="text-white hover:text-blue-200 font-semibold text-lg px-1.5 cursor-pointer"
                 >
                   ✕
                 </button>
@@ -553,7 +553,7 @@ const BookingForm = () => {
                 <div className="pt-1">
                   <a
                     href={`tel:${hotlineNum.replace(/[^0-9+]/g, "")}`}
-                    className="inline-flex items-center justify-center gap-2 bg-[#174978] hover:bg-[#003366] text-white font-bold text-base py-2.5 px-6 shadow-xs transition-all cursor-pointer"
+                    className="inline-flex items-center justify-center gap-2 bg-[#174978] hover:bg-[#003366] text-white font-semibold text-base py-2.5 px-6 shadow-xs transition-all cursor-pointer"
                   >
                     <Phone size={18} />
                     <span>{hotlineDisplay}</span>

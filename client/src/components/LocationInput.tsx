@@ -102,14 +102,14 @@ const LocationInput = ({
           {icon || <MapPin size={18} className="text-[#174978]" />}
         </div>
         <div className="flex-1 py-1.5 px-2 border-l border-gray-100 relative">
-          <label className="block text-[11px] text-gray-500 font-bold">
+          <label className="block text-[11px] text-gray-500 font-semibold">
             {label}
           </label>
           <div className="flex items-center">
             <input
               type="text"
               placeholder={placeholder}
-              className="w-full outline-none text-gray-800 font-semibold text-sm bg-transparent"
+              className="w-full outline-none text-gray-800 font-medium text-sm bg-transparent"
               value={query}
               onChange={handleInputChange}
               onFocus={() => query.length >= 3 && setIsOpen(true)}
@@ -137,7 +137,7 @@ const LocationInput = ({
                 className="text-[#174978] mt-1 shrink-0"
               />
               <div className="flex flex-col">
-                <span className="text-sm font-bold text-gray-800 line-clamp-1">
+                <span className="text-sm font-semibold text-gray-800 line-clamp-1">
                   {loc.display_name.split(",")[0]}
                 </span>
                 <span className="text-[11px] text-gray-500 line-clamp-1 font-medium">

@@ -85,7 +85,7 @@ const PriceTable = () => {
               className="bg-white shadow-xs overflow-hidden border border-gray-100"
             >
               {/* Card Header */}
-              <div className="bg-linear-to-r from-[#003366] to-[#174978] text-white text-center py-2.5 font-bold text-base">
+              <div className="bg-linear-to-r from-[#003366] to-[#174978] text-white text-center py-2.5 font-semibold text-base">
                 {vehicle.title}
               </div>
 
@@ -97,7 +97,7 @@ const PriceTable = () => {
                     className="flex justify-between items-center py-2.5 border-b border-gray-100 last:border-0"
                   >
                     <span className="text-gray-700 text-sm font-medium">{route.from}</span>
-                    <span className="text-[#003366] font-black text-sm">
+                    <span className="text-[#003366] font-semibold text-sm">
                       {route.price}
                     </span>
                   </div>
@@ -113,16 +113,16 @@ const PriceTable = () => {
             <table className="w-full">
               <thead>
                 <tr className="bg-linear-to-r from-[#003366] via-[#174978] to-brand-marine">
-                  <th className="px-6 py-4 text-left text-white font-bold text-base lg:text-lg border-r border-white/10">
+                  <th className="px-6 py-4 text-left text-white font-semibold text-base lg:text-lg border-r border-white/10">
                     {t.priceTable.carTypeCol}
                   </th>
-                  <th className="px-6 py-4 text-center text-white font-bold text-base lg:text-lg border-r border-white/10">
+                  <th className="px-6 py-4 text-center text-white font-semibold text-base lg:text-lg border-r border-white/10">
                     {t.priceTable.hanoiToAirportCol}
                   </th>
-                  <th className="px-6 py-4 text-center text-white font-bold text-base lg:text-lg border-r border-white/10">
+                  <th className="px-6 py-4 text-center text-white font-semibold text-base lg:text-lg border-r border-white/10">
                     {t.priceTable.airportToHanoiCol}
                   </th>
-                  <th className="px-6 py-4 text-center text-white font-bold text-base lg:text-lg">
+                  <th className="px-6 py-4 text-center text-white font-semibold text-base lg:text-lg">
                     {t.priceTable.roundTripCol}
                   </th>
                 </tr>
@@ -130,48 +130,48 @@ const PriceTable = () => {
               <tbody>
                 {/* Xe 5 chỗ */}
                 <tr className="border-b border-gray-100 hover:bg-brand-light/60 transition-colors">
-                  <td className="px-6 py-4.5 font-bold text-gray-800 text-base lg:text-lg border-r border-gray-100">
+                  <td className="px-6 py-4.5 font-semibold text-gray-800 text-base lg:text-lg border-r border-gray-100">
                     {t.priceTable.car5}
                   </td>
-                  <td className="px-6 py-4.5 text-center font-black text-[#003366] text-base lg:text-lg border-r border-gray-100">
+                  <td className="px-6 py-4.5 text-center font-bold text-[#003366] text-base lg:text-lg border-r border-gray-100">
                     {t.common.fromPrice} 250.000{t.common.vnd}
                   </td>
-                  <td className="px-6 py-4.5 text-center font-black text-[#003366] text-base lg:text-lg border-r border-gray-100">
+                  <td className="px-6 py-4.5 text-center font-bold text-[#003366] text-base lg:text-lg border-r border-gray-100">
                     {t.common.fromPrice} 250.000{t.common.vnd}
                   </td>
-                  <td className="px-6 py-4.5 text-center font-black text-[#003366] text-base lg:text-lg">
+                  <td className="px-6 py-4.5 text-center font-bold text-[#003366] text-base lg:text-lg">
                     {t.common.fromPrice} 480.000{t.common.vnd}
                   </td>
                 </tr>
 
                 {/* Xe 7 chỗ */}
                 <tr className="border-b border-gray-100 hover:bg-brand-light/60 transition-colors">
-                  <td className="px-6 py-4.5 font-bold text-gray-800 text-base lg:text-lg border-r border-gray-100">
+                  <td className="px-6 py-4.5 font-semibold text-gray-800 text-base lg:text-lg border-r border-gray-100">
                     {t.priceTable.car7}
                   </td>
-                  <td className="px-6 py-4.5 text-center font-black text-[#003366] text-base lg:text-lg border-r border-gray-100">
+                  <td className="px-6 py-4.5 text-center font-bold text-[#003366] text-base lg:text-lg border-r border-gray-100">
                     {t.common.fromPrice} 300.000{t.common.vnd}
                   </td>
-                  <td className="px-6 py-4.5 text-center font-black text-[#003366] text-base lg:text-lg border-r border-gray-100">
+                  <td className="px-6 py-4.5 text-center font-bold text-[#003366] text-base lg:text-lg border-r border-gray-100">
                     {t.common.fromPrice} 300.000{t.common.vnd}
                   </td>
-                  <td className="px-6 py-4.5 text-center font-black text-[#003366] text-base lg:text-lg">
+                  <td className="px-6 py-4.5 text-center font-bold text-[#003366] text-base lg:text-lg">
                     {t.common.fromPrice} 580.000{t.common.vnd}
                   </td>
                 </tr>
 
                 {/* Xe 16 chỗ */}
                 <tr className="hover:bg-brand-light/60 transition-colors bg-gray-50/50">
-                  <td className="px-6 py-4.5 font-bold text-gray-800 text-base lg:text-lg border-r border-gray-100">
+                  <td className="px-6 py-4.5 font-semibold text-gray-800 text-base lg:text-lg border-r border-gray-100">
                     {t.priceTable.car16}
                   </td>
-                  <td className="px-6 py-4.5 text-center font-black text-[#003366] text-base lg:text-lg border-r border-gray-100">
+                  <td className="px-6 py-4.5 text-center font-bold text-[#003366] text-base lg:text-lg border-r border-gray-100">
                     {t.common.fromPrice} 550.000{t.common.vnd}
                   </td>
-                  <td className="px-6 py-4.5 text-center font-black text-[#003366] text-base lg:text-lg border-r border-gray-100">
+                  <td className="px-6 py-4.5 text-center font-bold text-[#003366] text-base lg:text-lg border-r border-gray-100">
                     {t.common.fromPrice} 550.000{t.common.vnd}
                   </td>
-                  <td className="px-6 py-4.5 text-center font-black text-[#003366] text-base lg:text-lg">
+                  <td className="px-6 py-4.5 text-center font-bold text-[#003366] text-base lg:text-lg">
                     {t.common.fromPrice} 1.050.000{t.common.vnd}
                   </td>
                 </tr>

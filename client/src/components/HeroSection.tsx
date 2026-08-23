@@ -134,12 +134,12 @@ const HeroSection = () => {
                     />
                   </svg>
                 </div>
-                <span className="text-white font-bold text-sm">
+                <span className="text-white font-semibold text-sm">
                   {t.hero.recentBookings}
                 </span>
               </div>
               <div className="bg-white/20 px-2.5 py-0.5">
-                <span className="text-white text-xs font-bold tracking-wider">
+                <span className="text-white text-xs font-semibold tracking-wider">
                   {t.hero.live}
                 </span>
               </div>
@@ -171,7 +171,7 @@ const HeroSection = () => {
                     <div className="flex flex-col">
                       <div className="text-gray-700 text-xs font-medium">
                         {t.hero.customer}:{" "}
-                        <span className="font-bold text-[#003366]">
+                        <span className="font-semibold text-[#003366]">
                           {booking.name}
                         </span>
                       </div>
@@ -181,7 +181,7 @@ const HeroSection = () => {
                       </div>
                     </div>
                   </div>
-                  <span className="font-extrabold text-[#174978] text-xs whitespace-nowrap">
+                  <span className="font-semibold text-[#174978] text-xs whitespace-nowrap">
                     {booking.price}
                   </span>
                 </div>

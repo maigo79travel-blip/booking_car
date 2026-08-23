@@ -58,12 +58,12 @@ const Header = () => {
             {/* Hotline Call Button Desktop */}
             <div className="hidden lg:flex items-center space-x-3 pl-3 border-l border-gray-200">
               <div className="flex flex-col items-end">
-                <span className="text-[11px] text-gray-500 font-bold uppercase tracking-wider">
+                <span className="text-[11px] text-gray-500 font-semibold uppercase tracking-wider">
                   {t.common.hotline} 24/7
                 </span>
                 <a
                   href={`tel:${hotlineNum.replace(/[^0-9+]/g, "")}`}
-                  className="flex items-center text-[#174978] font-black text-lg hover:text-[#003366] transition-colors"
+                  className="flex items-center text-[#174978] font-bold text-lg hover:text-[#003366] transition-colors"
                 >
                   <Phone size={18} className="mr-1.5 text-brand-marine" />
                   {hotlineDisplay}
@@ -94,7 +94,7 @@ const Header = () => {
                   key={item.href}
                   href={item.href}
                   className={`px-4 flex items-center h-full hover:bg-white/15 transition-colors font-semibold text-sm ${
-                    pathname === item.href ? "bg-[#002244] font-extrabold" : ""
+                    pathname === item.href ? "bg-[#002244] font-bold" : ""
                   }`}
                 >
                   {item.name}
@@ -115,7 +115,7 @@ const Header = () => {
                 href={item.href}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className={`px-4 py-2.5 transition-colors font-medium text-sm ${
-                  pathname === item.href ? "bg-[#174978] font-bold text-white shadow-xs" : "bg-white/5 hover:bg-white/10 text-white/90"
+                  pathname === item.href ? "bg-[#174978] font-semibold text-white shadow-xs" : "bg-white/5 hover:bg-white/10 text-white/90"
                 }`}
               >
                 {item.name}
@@ -138,7 +138,7 @@ const Header = () => {
                 </p>
                 <a
                   href={`tel:${t.common.hotlineNumber.replace(/[^0-9+]/g, "")}`}
-                  className="flex items-center text-base font-black bg-white text-[#003366] px-4 py-2.5 shadow-xs"
+                  className="flex items-center text-base font-bold bg-white text-[#003366] px-4 py-2.5 shadow-xs"
                 >
                   <Phone size={18} className="mr-2 text-[#174978]" />
                   {t.common.hotlineNumber}

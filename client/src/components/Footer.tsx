@@ -55,7 +55,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-base font-bold mb-4 text-brand-coastal uppercase tracking-wider">
+            <h4 className="text-base font-semibold mb-4 text-brand-coastal uppercase tracking-wider">
               {t.footer.quickLinks}
             </h4>
             <ul className="space-y-2.5">
@@ -112,7 +112,7 @@ const Footer = () => {
 
           {/* Services */}
           <div>
-            <h4 className="text-base font-bold mb-4 text-brand-coastal uppercase tracking-wider">
+            <h4 className="text-base font-semibold mb-4 text-brand-coastal uppercase tracking-wider">
               {t.footer.services}
             </h4>
             <ul className="space-y-2.5">
@@ -161,7 +161,7 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-base font-bold mb-4 text-brand-coastal uppercase tracking-wider">
+            <h4 className="text-base font-semibold mb-4 text-brand-coastal uppercase tracking-wider">
               {t.footer.contact}
             </h4>
             <ul className="space-y-3">
@@ -174,7 +174,7 @@ const Footer = () => {
                   <p className="text-xs text-slate-400 font-semibold">{t.footer.hotlineTitle}</p>
                   <a
                     href={`tel:${hotlineNum.replace(/[^0-9+]/g, "")}`}
-                    className="text-white hover:text-brand-coastal font-extrabold text-base transition-colors"
+                    className="text-white hover:text-brand-coastal font-bold text-base transition-colors"
                   >
                     {hotlineDisplay}
                   </a>

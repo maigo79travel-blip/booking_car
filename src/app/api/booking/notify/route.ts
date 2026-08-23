@@ -138,10 +138,12 @@ export async function POST(request: Request) {
       ]
     );
 
-    // 1. Get Telegram Config from DB (site_content) or process.env
+    // 1. Get Telegram Config from DB (site_content) or process.env with default fallback
     let isEnabled = true;
-    let botToken = process.env.TELEGRAM_BOT_TOKEN || "";
-    let chatId = process.env.TELEGRAM_CHAT_ID || "";
+    let botToken =
+      process.env.TELEGRAM_BOT_TOKEN ||
+      "8618729009:AAFdooRLIgp4g1e0P9Vs7l9qATid-8cIPt4";
+    let chatId = process.env.TELEGRAM_CHAT_ID || "5728513036";
     let topicId = "";
 
     try {
@@ -162,11 +164,11 @@ export async function POST(request: Request) {
         if (val.chat_id) chatId = val.chat_id.trim();
         if (val.topic_id) topicId = val.topic_id.trim();
       }
-    } catch {
-      // ignore
+    } catch (e) {
+      console.error("Error reading telegram_config:", e);
     }
 
-    // 2. Send Telegram Message with FULL FORM DATA if configured
+    // 2. Send Telegram Message with FULL FORM DATA (Awaited to ensure delivery)
     if (isEnabled && botToken && chatId) {
       const messageText = formatTelegramMessage({
         customerName,
@@ -193,13 +195,24 @@ export async function POST(request: Request) {
         payload.message_thread_id = Number(topicId);
       }
 
-      fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      }).catch((err) => {
-        console.error("Async Telegram notification error:", err);
-      });
+      try {
+        const teleRes = await fetch(
+          `https://api.telegram.org/bot${botToken}/sendMessage`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          }
+        );
+        const teleData = await teleRes.json();
+        if (!teleRes.ok || !teleData.ok) {
+          console.error("Telegram send message failed:", teleData);
+        } else {
+          console.log("Telegram notification sent successfully to chat:", chatId);
+        }
+      } catch (teleErr) {
+        console.error("Failed to send Telegram message:", teleErr);
+      }
     }
 
     return NextResponse.json({ success: true });

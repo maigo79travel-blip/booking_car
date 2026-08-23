@@ -49,8 +49,7 @@ const BookingForm = () => {
   // Booking info states
   const [customerName, setCustomerName] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
-  const [showCountdown, setShowCountdown] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(120); // 120 seconds = 2 minutes
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   // Pricing rates (VND/km) derived from price table
@@ -68,49 +67,7 @@ const BookingForm = () => {
     startTransition(() => {
       setMounted(true);
     });
-
-    // Check for persisted countdown
-    const savedEndTime = localStorage.getItem("BOOKING_COUNTDOWN_END");
-    if (savedEndTime) {
-      const endTime = parseInt(savedEndTime, 10);
-      const now = Date.now();
-      if (endTime > now) {
-        const remainingSeconds = Math.round((endTime - now) / 1000);
-        setTimeLeft(remainingSeconds);
-        setShowCountdown(true);
-      } else {
-        localStorage.removeItem("BOOKING_COUNTDOWN_END");
-      }
-    }
   }, []);
-
-  // Countdown timer effect
-  useEffect(() => {
-    if (!showCountdown) return;
-
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
-          clearInterval(timer);
-          setShowCountdown(false);
-          localStorage.removeItem("BOOKING_COUNTDOWN_END");
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [showCountdown]);
-
-  // Format MM:SS
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins.toString().padStart(2, "0")}:${secs
-      .toString()
-      .padStart(2, "0")}`;
-  };
 
   // Switch tab handlers
   const handleTabChange = (tab: "airport" | "long-distance") => {
@@ -244,16 +201,11 @@ const BookingForm = () => {
       if (data.status === "duplicate" || data.status === "exists") {
         setShowHotlineModal(true);
       } else {
-        // Start and persist 2-minute countdown
-        const endTimestamp = Date.now() + 120 * 1000;
-        localStorage.setItem("BOOKING_COUNTDOWN_END", endTimestamp.toString());
-        setTimeLeft(120);
-        setShowCountdown(true);
+        setShowSuccessModal(true);
       }
     } catch (err) {
       console.error("Booking error:", err);
-      // Still show countdown for optimal UX
-      setShowCountdown(true);
+      setShowSuccessModal(true);
     } finally {
       setIsCalculating(false);
     }
@@ -474,7 +426,7 @@ const BookingForm = () => {
 
       {/* Booking Success Modal */}
       {mounted &&
-        showCountdown &&
+        showSuccessModal &&
         createPortal(
           <div className="fixed inset-0 z-100000 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xs animate-in fade-in duration-200">
             <div className="bg-white p-6 md:p-8 text-center border border-gray-100 shadow-xl animate-in zoom-in-95 duration-200 w-full max-w-lg relative">
@@ -502,7 +454,7 @@ const BookingForm = () => {
               <div className="flex flex-col sm:flex-row gap-2.5 justify-center">
                 <button
                   type="button"
-                  onClick={() => setShowCountdown(false)}
+                  onClick={() => setShowSuccessModal(false)}
                   className="flex-1 py-3 px-6 bg-[#174978] hover:bg-[#003366] text-white font-semibold text-sm transition-all cursor-pointer shadow-xs"
                 >
                   {t.bookingForm.close || "Xác nhận & Đóng"}
@@ -517,7 +469,7 @@ const BookingForm = () => {
               </div>
 
               <button
-                onClick={() => setShowCountdown(false)}
+                onClick={() => setShowSuccessModal(false)}
                 className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 p-1 cursor-pointer"
                 aria-label={t.bookingForm.close}
               >

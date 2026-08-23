@@ -1,0 +1,191 @@
+"use client";
+
+import { useLanguage } from "@/context/LanguageContext";
+
+const PriceTable = () => {
+  const { t } = useLanguage();
+
+  const priceData = [
+    {
+      title: t.priceTable.car5,
+      routes: [
+        { from: t.priceTable.hanoiToAirportCol, price: `${t.common.fromPrice} 200.000${t.common.vnd}` },
+        { from: t.priceTable.airportToHanoiCol, price: `${t.common.fromPrice} 250.000${t.common.vnd}` },
+        { from: t.priceTable.roundTripCol, price: `${t.common.fromPrice} 400.000${t.common.vnd}` },
+      ],
+    },
+    {
+      title: t.priceTable.car7,
+      routes: [
+        { from: t.priceTable.hanoiToAirportCol, price: `${t.common.fromPrice} 250.000${t.common.vnd}` },
+        { from: t.priceTable.airportToHanoiCol, price: `${t.common.fromPrice} 300.000${t.common.vnd}` },
+        { from: t.priceTable.roundTripCol, price: `${t.common.fromPrice} 500.000${t.common.vnd}` },
+      ],
+    },
+    {
+      title: t.priceTable.car16,
+      routes: [
+        { from: t.priceTable.hanoiToAirportCol, price: `${t.common.fromPrice} 450.000${t.common.vnd}` },
+        { from: t.priceTable.airportToHanoiCol, price: `${t.common.fromPrice} 550.000${t.common.vnd}` },
+        { from: t.priceTable.roundTripCol, price: `${t.common.fromPrice} 900.000${t.common.vnd}` },
+      ],
+    },
+  ];
+
+  return (
+    <section
+      className="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white relative"
+      style={{
+        backgroundImage: "url(/images/Hero2.jpg)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      {/* Overlay for better readability */}
+      <div className="absolute inset-0 bg-white/92"></div>
+
+      <div className="container mx-auto px-4 md:px-12 lg:px-24 relative z-10">
+        {/* Header */}
+        <div className="text-center mb-8 md:mb-12">
+          <div className="inline-flex items-center gap-3 mb-3">
+            <div className="bg-orange-500 p-2 rounded-xl text-white">
+              <svg
+                className="w-6 h-6 md:w-8 md:h-8"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+          </div>
+          <h2 className="text-2xl md:text-4xl font-bold text-gray-800 mb-2">
+            {t.priceTable.heading}
+          </h2>
+          <div className="w-24 h-1 bg-orange-500 mx-auto"></div>
+        </div>
+
+        {/* Mobile Card Layout */}
+        <div className="block md:hidden space-y-4">
+          {priceData.map((vehicle, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200"
+            >
+              {/* Card Header */}
+              <div className="bg-orange-500 text-white text-center py-3 font-bold text-base">
+                {vehicle.title}
+              </div>
+
+              {/* Card Body */}
+              <div className="p-4 space-y-2">
+                {vehicle.routes.map((route, idx) => (
+                  <div
+                    key={idx}
+                    className="flex justify-between items-center py-2.5 border-b border-gray-100 last:border-0"
+                  >
+                    <span className="text-gray-700 text-sm">{route.from}</span>
+                    <span className="text-orange-600 font-bold text-sm">
+                      {route.price}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop Table Layout */}
+        <div className="hidden md:block bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="bg-gradient-to-r from-orange-500 to-orange-400">
+                  <th className="px-6 py-4 text-left text-white font-bold text-base lg:text-lg border-r border-orange-300">
+                    {t.priceTable.carTypeCol}
+                  </th>
+                  <th className="px-6 py-4 text-center text-white font-bold text-base lg:text-lg border-r border-orange-300">
+                    {t.priceTable.hanoiToAirportCol}
+                  </th>
+                  <th className="px-6 py-4 text-center text-white font-bold text-base lg:text-lg border-r border-orange-300">
+                    {t.priceTable.airportToHanoiCol}
+                  </th>
+                  <th className="px-6 py-4 text-center text-white font-bold text-base lg:text-lg">
+                    {t.priceTable.roundTripCol}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* Xe 5 chỗ */}
+                <tr className="border-b border-gray-200 hover:bg-orange-50/60 transition-colors">
+                  <td className="px-6 py-5 font-bold text-gray-800 text-base lg:text-lg border-r border-gray-200">
+                    {t.priceTable.car5}
+                  </td>
+                  <td className="px-6 py-5 text-center font-bold text-orange-600 text-base lg:text-lg border-r border-gray-200">
+                    {t.common.fromPrice} 200.000{t.common.vnd}
+                  </td>
+                  <td className="px-6 py-5 text-center font-bold text-orange-600 text-base lg:text-lg border-r border-gray-200">
+                    {t.common.fromPrice} 250.000{t.common.vnd}
+                  </td>
+                  <td className="px-6 py-5 text-center font-bold text-orange-600 text-base lg:text-lg">
+                    {t.common.fromPrice} 400.000{t.common.vnd}
+                  </td>
+                </tr>
+
+                {/* Xe 7 chỗ */}
+                <tr className="border-b border-gray-200 hover:bg-orange-50/60 transition-colors">
+                  <td className="px-6 py-5 font-bold text-gray-800 text-base lg:text-lg border-r border-gray-200">
+                    {t.priceTable.car7}
+                  </td>
+                  <td className="px-6 py-5 text-center font-bold text-orange-600 text-base lg:text-lg border-r border-gray-200">
+                    {t.common.fromPrice} 250.000{t.common.vnd}
+                  </td>
+                  <td className="px-6 py-5 text-center font-bold text-orange-600 text-base lg:text-lg border-r border-gray-200">
+                    {t.common.fromPrice} 300.000{t.common.vnd}
+                  </td>
+                  <td className="px-6 py-5 text-center font-bold text-orange-600 text-base lg:text-lg">
+                    {t.common.fromPrice} 500.000{t.common.vnd}
+                  </td>
+                </tr>
+
+                {/* Xe 16 chỗ */}
+                <tr className="hover:bg-orange-50/60 transition-colors bg-gray-50/50">
+                  <td className="px-6 py-5 font-bold text-gray-800 text-base lg:text-lg border-r border-gray-200">
+                    {t.priceTable.car16}
+                  </td>
+                  <td className="px-6 py-5 text-center font-bold text-orange-600 text-base lg:text-lg border-r border-gray-200">
+                    {t.common.fromPrice} 450.000{t.common.vnd}
+                  </td>
+                  <td className="px-6 py-5 text-center font-bold text-orange-600 text-base lg:text-lg border-r border-gray-200">
+                    {t.common.fromPrice} 550.000{t.common.vnd}
+                  </td>
+                  <td className="px-6 py-5 text-center font-bold text-orange-600 text-base lg:text-lg">
+                    {t.common.fromPrice} 900.000{t.common.vnd}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Informational Message */}
+        <div className="mt-6 bg-white/90 backdrop-blur rounded-2xl p-5 md:p-6 shadow-sm border border-gray-200 space-y-2">
+          <p className="text-gray-800 text-sm md:text-base leading-relaxed">
+            ✓ {t.priceTable.note1}
+          </p>
+          <p className="text-gray-800 text-sm md:text-base leading-relaxed">
+            ✓ {t.priceTable.note2}
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default PriceTable;

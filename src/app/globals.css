@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* Orange Theme Palette */
+  --color-brand-primary: #EA580C;
+  /* Orange 600 - Main Brand Color */
+  --color-brand-light: #F97316;
+  /* Orange 500 - Lighter variation */
+  --color-brand-dark: #C2410C;
+  /* Orange 700 - Darker hover state */
+  --color-brand-accent: #FFFFFF;
+  /* White accent for contrast on orange */
+  --color-brand-secondary: #1E293B;
+  /* Slate 800 - Text/Contrast */
+  --color-brand-cta: #FACC15;
+  /* Yellow 400 - Call to Action buttons */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Booking List Animations */
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.booking-item-animate {
+  animation: slideUpFade 0.5s ease-out;
+}
+
+/* Hero Section Slide-in Animations */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.8s ease-out;
+}
+
+.slide-in-right {
+  animation: slideInRight 0.8s ease-out;
+}

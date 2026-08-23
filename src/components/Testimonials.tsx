@@ -1,0 +1,155 @@
+"use client";
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import { testimonials } from "@/data/testimonials";
+import {
+  Star,
+  ChevronLeft,
+  ChevronRight,
+  MapPin,
+  Calendar,
+} from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
+
+const Testimonials = () => {
+  const { t } = useLanguage();
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 3;
+  const totalPages = Math.ceil(testimonials.length / itemsPerPage);
+
+  const currentTestimonials = testimonials.slice(
+    currentPage * itemsPerPage,
+    (currentPage + 1) * itemsPerPage
+  );
+
+  const nextPage = () => {
+    setCurrentPage((prev) => (prev + 1) % totalPages);
+  };
+
+  const prevPage = () => {
+    setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
+  };
+
+  // Auto-scroll every 6 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentPage((prev) => (prev + 1) % totalPages);
+    }, 6000);
+
+    return () => clearInterval(interval);
+  }, [totalPages]);
+
+  return (
+    <section className="py-12 md:py-16 bg-gradient-to-b from-white to-gray-50">
+      <div className="container mx-auto px-4 md:px-12 lg:px-24">
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
+          <span className="text-orange-500 font-bold uppercase tracking-wider text-xs md:text-sm">
+            {t.testimonials.tag}
+          </span>
+          <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">
+            {t.testimonials.title}
+          </h2>
+          <div className="w-24 h-1 bg-orange-500 mx-auto mb-4"></div>
+          <p className="text-gray-600 text-sm md:text-base">
+            {t.testimonials.subtitle}
+          </p>
+        </div>
+
+        {/* Testimonials Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          {currentTestimonials.map((testimonial) => (
+            <div
+              key={testimonial.id}
+              className="bg-white rounded-2xl shadow-md hover:shadow-xl p-6 md:p-8 transition-shadow border border-gray-100 flex flex-col justify-between"
+            >
+              <div>
+                {/* Header */}
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-orange-500 flex-shrink-0 bg-gray-100">
+                    <Image
+                      src={testimonial.avatar}
+                      alt={`Khách hàng ${testimonial.name} đánh giá dịch vụ inoibai.vn`}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-bold text-gray-800 text-base md:text-lg">
+                      {testimonial.name}
+                    </h3>
+                    <div className="flex items-center gap-1 text-yellow-400 mt-1">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} size={15} fill="currentColor" />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Comment */}
+                <p className="text-gray-600 mb-6 leading-relaxed text-sm md:text-base italic">
+                  "{testimonial.comment}"
+                </p>
+              </div>
+
+              <div>
+                {/* Footer */}
+                <div className="flex items-center justify-between text-xs text-gray-500 pt-4 border-t border-gray-100">
+                  <div className="flex items-center gap-1">
+                    <MapPin size={13} className="text-orange-500" />
+                    <span>{testimonial.location}</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Calendar size={13} className="text-gray-400" />
+                    <span>{testimonial.date}</span>
+                  </div>
+                </div>
+
+                {/* Service Badge */}
+                <div className="mt-3">
+                  <span className="inline-block bg-orange-50 text-orange-600 text-xs font-semibold px-3 py-1 rounded-full border border-orange-100">
+                    {testimonial.service}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Pagination Controls */}
+        <div className="flex items-center justify-center gap-4">
+          <button
+            onClick={prevPage}
+            className="bg-orange-500 hover:bg-orange-600 text-white p-2.5 rounded-full transition-colors shadow-sm cursor-pointer"
+            aria-label="Xem đánh giá trước"
+          >
+            <ChevronLeft size={20} />
+          </button>
+
+          <div className="flex gap-2">
+            {[...Array(totalPages)].map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentPage(i)}
+                className={`h-2 rounded-full transition-all cursor-pointer ${
+                  i === currentPage ? "bg-orange-500 w-8" : "bg-gray-300 w-2"
+                }`}
+                aria-label={`Chuyển đến trang đánh giá ${i + 1}`}
+              />
+            ))}
+          </div>
+
+          <button
+            onClick={nextPage}
+            className="bg-orange-500 hover:bg-orange-600 text-white p-2.5 rounded-full transition-colors shadow-sm cursor-pointer"
+            aria-label="Xem đánh giá tiếp theo"
+          >
+            <ChevronRight size={20} />
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Testimonials;

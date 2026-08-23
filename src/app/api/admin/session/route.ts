@@ -1,5 +1,64 @@
 import { NextResponse } from "next/server";
-import { getSupabaseUser, supabaseRest } from "@/lib/server/supabase";
+import { query, createSessionToken } from "@/lib/server/db";
 
-export async function POST(request: Request) { try { const { email, password } = await request.json(); const baseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL; const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY; if (!baseUrl || !anonKey) throw new Error("Supabase is not configured"); const auth = await fetch(`${baseUrl}/auth/v1/token?grant_type=password`, { method: "POST", headers: { apikey: anonKey, "Content-Type": "application/json" }, body: JSON.stringify({ email, password }) }); if (!auth.ok) return NextResponse.json({ message: "Email hoặc mật khẩu không đúng" }, { status: 401 }); const { access_token } = await auth.json(); const user = await getSupabaseUser(access_token); const profile = user && (await supabaseRest<{ role: string }[]>(`profiles?id=eq.${user.id}&select=role`))[0]; if (profile?.role !== "admin") return NextResponse.json({ message: "Tài khoản không có quyền quản trị" }, { status: 403 }); const response = NextResponse.json({ ok: true }); response.cookies.set("booking-admin-session", access_token, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "lax", path: "/", maxAge: 60 * 60 * 8 }); return response; } catch { return NextResponse.json({ message: "Không thể đăng nhập" }, { status: 500 }); } }
-export async function DELETE() { const response = NextResponse.json({ ok: true }); response.cookies.delete("booking-admin-session"); return response; }
+export const runtime = "nodejs";
+
+export async function POST(request: Request) {
+  try {
+    const { email, password } = await request.json();
+    if (!email || !password) {
+      return NextResponse.json(
+        { message: "Vui lòng nhập đầy đủ email và mật khẩu" },
+        { status: 400 }
+      );
+    }
+
+    const rows = await query<{ id: string; email: string; role: string }>(
+      `SELECT u.id, u.email, p.role
+       FROM auth.users u
+       JOIN public.profiles p ON u.id = p.id
+       WHERE LOWER(u.email) = LOWER($1)
+         AND u.encrypted_password = extensions.crypt($2, u.encrypted_password)`,
+      [email.trim(), password]
+    );
+
+    if (rows.length === 0) {
+      return NextResponse.json(
+        { message: "Email hoặc mật khẩu không đúng" },
+        { status: 401 }
+      );
+    }
+
+    const user = rows[0];
+    if (user.role !== "admin") {
+      return NextResponse.json(
+        { message: "Tài khoản không có quyền quản trị" },
+        { status: 403 }
+      );
+    }
+
+    const token = createSessionToken(user.id, user.email);
+    const response = NextResponse.json({ ok: true, email: user.email });
+    response.cookies.set("booking-admin-session", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 60 * 8, // 8 hours
+    });
+
+    return response;
+  } catch (error) {
+    console.error("Admin login error:", error);
+    return NextResponse.json(
+      { message: "Lỗi hệ thống khi đăng nhập. Vui lòng thử lại." },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE() {
+  const response = NextResponse.json({ ok: true });
+  response.cookies.delete("booking-admin-session");
+  return response;
+}

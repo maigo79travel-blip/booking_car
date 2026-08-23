@@ -1,15 +1,17 @@
 import { NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/server/admin";
-import { supabaseRest } from "@/lib/server/supabase";
+import { query } from "@/lib/server/db";
+
+export const runtime = "nodejs";
 
 export async function GET() {
   try {
     await requireAdmin();
     const [posts, routes, content, bookings] = await Promise.all([
-      supabaseRest("posts?order=updated_at.desc"),
-      supabaseRest("price_routes?order=sort_order"),
-      supabaseRest("site_content?order=content_key"),
-      supabaseRest("bookings?order=created_at.desc&limit=200"),
+      query("SELECT * FROM public.posts ORDER BY updated_at DESC"),
+      query("SELECT * FROM public.price_routes ORDER BY sort_order ASC"),
+      query("SELECT * FROM public.site_content ORDER BY content_key ASC"),
+      query("SELECT * FROM public.bookings ORDER BY created_at DESC LIMIT 200"),
     ]);
     return NextResponse.json({ posts, routes, content, bookings });
   } catch (error) {
@@ -32,18 +34,31 @@ export async function PUT(request: Request) {
     ) {
       return NextResponse.json({ message: "Invalid request" }, { status: 400 });
     }
-    const rows = await supabaseRest<Record<string, unknown>[]>(
-      `${table}?id=eq.${id}`,
-      {
-        method: "PATCH",
-        body: JSON.stringify(data),
+
+    const keys = Object.keys(data);
+    if (keys.length === 0) {
+      return NextResponse.json({ message: "No data to update" }, { status: 400 });
+    }
+
+    const setClauses = keys.map((key, index) => `"${key}" = $${index + 1}`).join(", ");
+    const values = keys.map((key) => {
+      const val = data[key];
+      if (typeof val === "object" && val !== null) {
+        return JSON.stringify(val);
       }
-    );
+      return val;
+    });
+
+    values.push(id);
+    const sql = `UPDATE public.${table} SET ${setClauses}, updated_at = now() WHERE id = $${values.length} RETURNING *`;
+    const rows = await query(sql, values);
+
     return NextResponse.json(rows[0] || { success: true });
-  } catch {
+  } catch (error) {
+    console.error("PUT error:", error);
     return NextResponse.json(
       { message: "Không thể lưu dữ liệu" },
-      { status: 403 }
+      { status: 500 }
     );
   }
 }
@@ -55,15 +70,27 @@ export async function POST(request: Request) {
     if (!["posts", "price_routes", "site_content"].includes(table) || !data) {
       return NextResponse.json({ message: "Invalid request" }, { status: 400 });
     }
-    const rows = await supabaseRest<Record<string, unknown>[]>(table, {
-      method: "POST",
-      body: JSON.stringify(data),
+
+    const keys = Object.keys(data);
+    const columnNames = keys.map((k) => `"${k}"`).join(", ");
+    const valuePlaceholders = keys.map((_, i) => `$${i + 1}`).join(", ");
+    const values = keys.map((key) => {
+      const val = data[key];
+      if (typeof val === "object" && val !== null) {
+        return JSON.stringify(val);
+      }
+      return val;
     });
+
+    const sql = `INSERT INTO public.${table} (${columnNames}) VALUES (${valuePlaceholders}) RETURNING *`;
+    const rows = await query(sql, values);
+
     return NextResponse.json(rows[0] || { success: true });
-  } catch {
+  } catch (error) {
+    console.error("POST error:", error);
     return NextResponse.json(
       { message: "Không thể tạo dữ liệu" },
-      { status: 403 }
+      { status: 500 }
     );
   }
 }
@@ -83,14 +110,13 @@ export async function DELETE(request: Request) {
       return NextResponse.json({ message: "Invalid request" }, { status: 400 });
     }
 
-    await supabaseRest(`${table}?id=eq.${id}`, {
-      method: "DELETE",
-    });
+    await query(`DELETE FROM public.${table} WHERE id = $1`, [id]);
     return NextResponse.json({ success: true });
-  } catch {
+  } catch (error) {
+    console.error("DELETE error:", error);
     return NextResponse.json(
       { message: "Không thể xóa dữ liệu" },
-      { status: 403 }
+      { status: 500 }
     );
   }
 }

@@ -11,6 +11,7 @@ import {
   Phone,
   User,
   Loader2,
+  CheckCircle2,
 } from "lucide-react";
 import LocationInput from "./LocationInput";
 import { useLanguage } from "@/context/LanguageContext";
@@ -471,39 +472,49 @@ const BookingForm = () => {
         </div>
       </div>
 
-      {/* Countdown Timer Modal */}
+      {/* Booking Success Modal */}
       {mounted &&
         showCountdown &&
         createPortal(
           <div className="fixed inset-0 z-100000 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xs animate-in fade-in duration-200">
-            <div className="bg-white p-6 md:p-8 text-center border border-gray-100 shadow-lg animate-in zoom-in-95 duration-200 w-full max-w-lg relative">
-              <div className="mb-5">
-                <div className="w-24 h-24 mx-auto border-2 border-[#174978] flex items-center justify-center relative bg-brand-light">
-                  <span className="text-3xl font-bold text-[#003366] tracking-wider">
-                    {formatTime(timeLeft)}
-                  </span>
-                </div>
+            <div className="bg-white p-6 md:p-8 text-center border border-gray-100 shadow-xl animate-in zoom-in-95 duration-200 w-full max-w-lg relative">
+              {/* Success Checkmark Icon */}
+              <div className="w-16 h-16 bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center mx-auto mb-4">
+                <CheckCircle2 size={36} className="animate-in zoom-in duration-300" />
               </div>
 
-              <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-2">
-                {t.bookingForm.countdownNotice}...
+              {/* Title */}
+              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
+                {t.bookingForm.successTitle}
               </h3>
 
-              <p className="text-gray-600 mb-5 font-normal text-sm leading-relaxed px-2">
+              {/* Main Notice */}
+              <p className="text-base font-semibold text-[#174978] mb-2">
+                {t.bookingForm.driverContactNotice}
+              </p>
+
+              {/* Description */}
+              <p className="text-gray-600 mb-6 font-normal text-xs md:text-sm leading-relaxed px-2">
                 {t.bookingForm.successDesc}
               </p>
 
-              <div className="w-full bg-gray-100 h-2 mb-3 overflow-hidden">
-                <div
-                  className="bg-linear-to-r from-[#174978] to-[#003366] h-full transition-all duration-1000 ease-linear"
-                  style={{ width: `${(timeLeft / 120) * 100}%` }}
-                ></div>
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-2.5 justify-center">
+                <button
+                  type="button"
+                  onClick={() => setShowCountdown(false)}
+                  className="flex-1 py-3 px-6 bg-[#174978] hover:bg-[#003366] text-white font-semibold text-sm transition-all cursor-pointer shadow-xs"
+                >
+                  {t.bookingForm.close || "Xác nhận & Đóng"}
+                </button>
+                <a
+                  href={`tel:${hotlineNum.replace(/[^0-9+]/g, "")}`}
+                  className="flex-1 py-3 px-6 bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-sm transition-all flex items-center justify-center gap-2 border border-slate-200"
+                >
+                  <Phone size={15} className="text-[#174978]" />
+                  <span>{hotlineDisplay}</span>
+                </a>
               </div>
-
-              <p className="text-xs text-gray-400 italic">
-                {t.bookingForm.countdownNotice} ({timeLeft}{" "}
-                {t.bookingForm.countdownSeconds})
-              </p>
 
               <button
                 onClick={() => setShowCountdown(false)}

@@ -60,7 +60,7 @@ export default async function PostsPage() {
             {posts.map((post) => (
               <article
                 key={post.id}
-                className="bg-white rounded-2xl overflow-hidden shadow-xs hover:shadow-xl transition-all border border-gray-100 flex flex-col justify-between group"
+                className="bg-white rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all border border-gray-100 flex flex-col justify-between group"
               >
                 <div>
                   <div className="relative h-48 bg-gray-100 overflow-hidden">

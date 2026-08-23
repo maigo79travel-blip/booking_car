@@ -55,7 +55,7 @@ export default function PopularRoutes() {
             {airportRoutes.map((route, idx) => (
               <div
                 key={idx}
-                className="bg-white rounded-2xl p-5 border border-gray-200 shadow-xs hover:shadow-lg hover:border-[#75A2BF] transition-all flex flex-col justify-between group"
+                className="bg-white rounded-2xl p-5 border border-gray-100 shadow-xs hover:shadow-sm hover:border-gray-200 transition-all flex flex-col justify-between group"
               >
                 <div>
                   <div className="flex justify-between items-start mb-2 gap-2">
@@ -91,7 +91,7 @@ export default function PopularRoutes() {
             {provinceRoutes.map((prov, idx) => (
               <div
                 key={idx}
-                className="bg-white rounded-2xl p-4 border border-gray-200 shadow-xs hover:border-[#75A2BF] hover:shadow-md transition-all text-center group"
+                className="bg-white rounded-2xl p-4 border border-gray-100 shadow-xs hover:border-gray-200 hover:shadow-sm transition-all text-center group"
               >
                 <p className="font-bold text-gray-900 text-sm mb-1 group-hover:text-[#003366] transition-colors">{prov.name}</p>
                 <p className="text-xs text-gray-400 font-medium mb-2">{prov.distance}</p>

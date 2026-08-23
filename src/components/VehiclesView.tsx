@@ -131,7 +131,7 @@ export default function VehiclesView() {
                   {category.vehicles.map((vehicle) => (
                     <div
                       key={vehicle.id}
-                      className="bg-white rounded-2xl p-4 flex flex-col items-center shadow-xs border border-gray-100 hover:shadow-md hover:border-[#75A2BF] transition-all"
+                      className="bg-white rounded-2xl p-4 flex flex-col items-center shadow-xs border border-gray-100 hover:shadow-sm hover:border-gray-200 transition-all"
                     >
                       <div className="w-full h-32 relative mb-3">
                         <Image
@@ -149,7 +149,7 @@ export default function VehiclesView() {
                 </div>
 
                 {/* Info Card */}
-                <div className="bg-white rounded-2xl shadow-xs p-5 md:p-6 border-l-4 border-[#174978] flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div className="bg-white rounded-2xl shadow-xs p-5 md:p-6 border border-gray-100 border-l-2 border-l-[#174978] flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                   <div className="space-y-2">
                     <div className="flex flex-wrap items-center gap-4 text-[#003366] font-bold text-sm md:text-base">
                       <div className="flex items-center gap-1.5">
@@ -169,13 +169,13 @@ export default function VehiclesView() {
                   <div className="flex items-center gap-3 w-full md:w-auto">
                     <Link
                       href="/bang-gia"
-                      className="text-xs md:text-sm font-bold text-[#174978] hover:text-[#003366] px-4 py-2.5 rounded-xl border border-[#174978]/25 hover:border-[#174978] transition-colors inline-flex items-center gap-1 whitespace-nowrap"
+                      className="text-xs md:text-sm font-bold text-[#174978] hover:text-[#003366] px-4 py-2.5 rounded-xl border border-gray-200 hover:border-[#174978] transition-colors inline-flex items-center gap-1 whitespace-nowrap"
                     >
                       {t.common.viewPricing} <ArrowRight size={14} />
                     </Link>
                     <Link
                       href="/#formbooking"
-                      className="bg-linear-to-r from-[#003366] to-[#174978] hover:from-[#002244] hover:to-[#174978] text-white font-extrabold px-6 py-2.5 rounded-xl transition-all text-xs md:text-sm whitespace-nowrap text-center flex-1 md:flex-initial shadow-md shadow-blue-950/20"
+                      className="bg-linear-to-r from-[#003366] to-[#174978] hover:from-[#002244] hover:to-[#174978] text-white font-extrabold px-6 py-2.5 rounded-xl transition-all text-xs md:text-sm whitespace-nowrap text-center flex-1 md:flex-initial shadow-xs hover:shadow-sm"
                     >
                       {t.common.bookNow}
                     </Link>

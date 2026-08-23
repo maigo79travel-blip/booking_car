@@ -90,12 +90,12 @@ const Testimonials = () => {
             return (
               <div
                 key={testimonial.id || `${testimonial.name}-${idx}`}
-                className="bg-white rounded-2xl shadow-xs hover:shadow-xl p-6 md:p-8 transition-all border border-gray-100 flex flex-col justify-between"
+                className="bg-white rounded-2xl shadow-xs hover:shadow-md p-6 md:p-8 transition-all border border-gray-100 flex flex-col justify-between"
               >
                 <div>
                   {/* Header */}
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-[#174978] shrink-0 bg-gray-100 shadow-xs">
+                    <div className="relative w-14 h-14 rounded-full overflow-hidden border border-[#174978] shrink-0 bg-gray-100">
                       <Image
                         src={avatarUrl}
                         alt={`Khách hàng ${testimonial.name} đánh giá dịch vụ inhatrang.vn`}
@@ -137,7 +137,7 @@ const Testimonials = () => {
 
                   {/* Service Badge */}
                   <div className="mt-3">
-                    <span className="inline-block bg-[#EAF2F8] text-[#003366] text-xs font-bold px-3 py-1 rounded-full border border-[#75A2BF]/30">
+                    <span className="inline-block bg-[#EAF2F8] text-[#003366] text-xs font-bold px-3 py-1 rounded-full">
                       {testimonial.service || testimonial.role || "Dịch vụ đưa đón sân bay"}
                     </span>
                   </div>
@@ -151,10 +151,10 @@ const Testimonials = () => {
         <div className="flex items-center justify-center gap-4">
           <button
             onClick={prevPage}
-            className="bg-[#174978] hover:bg-[#003366] text-white p-2.5 rounded-full transition-colors shadow-sm cursor-pointer"
+            className="bg-[#174978] hover:bg-[#003366] text-white p-2 rounded-full transition-colors cursor-pointer"
             aria-label="Xem đánh giá trước"
           >
-            <ChevronLeft size={20} />
+            <ChevronLeft size={18} />
           </button>
 
           <div className="flex gap-2">
@@ -162,8 +162,8 @@ const Testimonials = () => {
               <button
                 key={idx}
                 onClick={() => setCurrentPage(idx)}
-                className={`h-2.5 rounded-full transition-all cursor-pointer ${
-                  idx === currentPage ? "bg-[#003366] w-8" : "bg-gray-300 w-2.5"
+                className={`h-2 rounded-full transition-all cursor-pointer ${
+                  idx === currentPage ? "bg-[#003366] w-6" : "bg-gray-300 w-2"
                 }`}
                 aria-label={`Trang ${idx + 1}`}
               />
@@ -172,10 +172,10 @@ const Testimonials = () => {
 
           <button
             onClick={nextPage}
-            className="bg-[#174978] hover:bg-[#003366] text-white p-2.5 rounded-full transition-colors shadow-sm cursor-pointer"
+            className="bg-[#174978] hover:bg-[#003366] text-white p-2 rounded-full transition-colors cursor-pointer"
             aria-label="Xem đánh giá tiếp"
           >
-            <ChevronRight size={20} />
+            <ChevronRight size={18} />
           </button>
         </div>
       </div>

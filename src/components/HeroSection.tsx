@@ -71,7 +71,7 @@ const HeroSection = () => {
         {/* Right: Split Column */}
         <div className="w-full md:w-1/2 hidden md:flex flex-col gap-4 h-full slide-in-right">
           {/* Top: Image Carousel (50%) */}
-          <div className="rounded-2xl overflow-hidden shadow-xl relative flex-1 w-full min-h-60 bg-gray-200">
+          <div className="rounded-2xl overflow-hidden shadow-sm relative flex-1 w-full min-h-60 bg-gray-200 border border-white/10">
             {/* Images with Fade Transition */}
             {images.map((src, index) => (
               <div
@@ -96,7 +96,7 @@ const HeroSection = () => {
                 <button
                   key={index}
                   onClick={() => setCurrentIndex(index)}
-                  className={`h-2 rounded-full transition-all duration-300 shadow-sm ${
+                  className={`h-2 rounded-full transition-all duration-300 shadow-xs ${
                     index === currentIndex
                       ? "bg-[#75A2BF] w-6"
                       : "bg-white/70 w-2"
@@ -108,7 +108,7 @@ const HeroSection = () => {
           </div>
 
           {/* Bottom: Live Bookings List (50%) - Slide Up Animation */}
-          <div className="rounded-2xl overflow-hidden shadow-xl bg-linear-to-br from-white to-gray-50 flex-1 w-full min-h-70 border border-gray-200 flex flex-col relative">
+          <div className="rounded-2xl overflow-hidden shadow-sm bg-linear-to-br from-white to-gray-50 flex-1 w-full min-h-70 border border-gray-100 flex flex-col relative">
             {/* Header */}
             <div className="bg-linear-to-r from-[#003366] via-[#174978] to-[#2F5F8A] px-4 py-3 flex items-center justify-between">
               <div className="flex items-center gap-2">

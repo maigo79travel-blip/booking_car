@@ -68,8 +68,8 @@ export default function FAQSection() {
               return (
                 <div
                   key={index}
-                  className={`border rounded-2xl overflow-hidden transition-all shadow-xs ${
-                    isOpen ? "border-[#75A2BF] shadow-md" : "border-gray-200"
+                  className={`border rounded-2xl overflow-hidden transition-all shadow-none ${
+                    isOpen ? "border-[#75A2BF]" : "border-gray-100"
                   }`}
                 >
                   <button

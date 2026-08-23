@@ -54,7 +54,7 @@ export default function AboutPage() {
 
       {/* Company Introduction */}
       <div className="container mx-auto px-4 md:px-12 lg:px-24 py-6 md:py-10">
-        <div className="bg-white rounded-2xl p-6 md:p-10 mb-8 shadow-sm border border-gray-100">
+        <div className="bg-white rounded-2xl p-6 md:p-10 mb-8 shadow-xs border border-gray-100">
           <h2 className="text-xl md:text-2xl font-bold text-[#003366] mb-6">
             Giới Thiệu Đơn Vị Đưa Đón Sân Bay Cam Ranh & Tour Nha Trang Uy Tín
           </h2>
@@ -83,31 +83,31 @@ export default function AboutPage() {
 
         {/* Core Values */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-2xl p-6 text-center border border-gray-100 shadow-sm hover:shadow-md transition-all">
-            <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Shield className="text-blue-900" size={32} />
+          <div className="bg-white rounded-2xl p-6 text-center border border-gray-100 shadow-xs hover:shadow-sm transition-all">
+            <div className="bg-[#EAF2F8] w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Shield className="text-[#003366]" size={28} />
             </div>
-            <h3 className="text-lg font-bold text-blue-900 mb-2">An Toàn Tuyệt Đối</h3>
+            <h3 className="text-lg font-bold text-[#003366] mb-2">An Toàn Tuyệt Đối</h3>
             <p className="text-sm text-gray-600">
               Xe đời mới, bảo dưỡng định kỳ, tài xế giàu kinh nghiệm điềm đạm
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl p-6 text-center border border-gray-100 shadow-sm hover:shadow-md transition-all">
-            <div className="bg-orange-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Clock className="text-orange-600" size={32} />
+          <div className="bg-white rounded-2xl p-6 text-center border border-gray-100 shadow-xs hover:shadow-sm transition-all">
+            <div className="bg-[#EAF2F8] w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Clock className="text-[#174978]" size={28} />
             </div>
-            <h3 className="text-lg font-bold text-blue-900 mb-2">Đón Đúng Giờ</h3>
+            <h3 className="text-lg font-bold text-[#003366] mb-2">Đón Đúng Giờ</h3>
             <p className="text-sm text-gray-600">
               Cam kết đón đúng giờ tại sảnh đến Cam Ranh, theo dõi sát sao giờ bay
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl p-6 text-center border border-gray-100 shadow-sm hover:shadow-md transition-all">
-            <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Award className="text-green-600" size={32} />
+          <div className="bg-white rounded-2xl p-6 text-center border border-gray-100 shadow-xs hover:shadow-sm transition-all">
+            <div className="bg-[#EAF2F8] w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Award className="text-[#2F5F8A]" size={28} />
             </div>
-            <h3 className="text-lg font-bold text-blue-900 mb-2">
+            <h3 className="text-lg font-bold text-[#003366] mb-2">
               Chuyên Nghiệp
             </h3>
             <p className="text-sm text-gray-600">
@@ -115,11 +115,11 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl p-6 text-center border border-gray-100 shadow-sm hover:shadow-md transition-all">
-            <div className="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Users className="text-purple-600" size={32} />
+          <div className="bg-white rounded-2xl p-6 text-center border border-gray-100 shadow-xs hover:shadow-sm transition-all">
+            <div className="bg-[#EAF2F8] w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Users className="text-[#46769B]" size={28} />
             </div>
-            <h3 className="text-lg font-bold text-blue-900 mb-2">Tận Tâm 24/7</h3>
+            <h3 className="text-lg font-bold text-[#003366] mb-2">Tận Tâm 24/7</h3>
             <p className="text-sm text-gray-600">
               Tổng đài luôn lắng nghe và điều phối xe nhanh chóng mọi thời điểm
             </p>
@@ -127,8 +127,8 @@ export default function AboutPage() {
         </div>
 
         {/* Our Advantages */}
-        <div className="bg-white rounded-2xl p-6 md:p-10 mb-8 shadow-sm border border-gray-100">
-          <h2 className="text-xl md:text-2xl font-bold text-blue-900 mb-6">
+        <div className="bg-white rounded-2xl p-6 md:p-10 mb-8 shadow-xs border border-gray-100">
+          <h2 className="text-xl md:text-2xl font-bold text-[#003366] mb-6">
             Ưu Điểm Của Dịch Vụ Xe inhatrang.vn
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

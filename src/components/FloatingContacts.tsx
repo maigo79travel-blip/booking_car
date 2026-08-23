@@ -58,7 +58,7 @@ const FloatingContacts = () => {
           href={c.link}
           target="_blank"
           rel="noopener noreferrer"
-          className={`${c.bgColor} ${c.hoverColor} text-white p-3 md:p-3.5 rounded-full shadow-xl transform hover:scale-110 transition-all duration-300 flex items-center justify-center`}
+          className={`${c.bgColor} ${c.hoverColor} text-white p-3 md:p-3.5 rounded-full shadow-md transform hover:scale-105 transition-all duration-200 flex items-center justify-center`}
           title={c.name}
           aria-label={c.name}
         >

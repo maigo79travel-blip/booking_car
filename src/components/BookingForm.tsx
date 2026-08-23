@@ -266,15 +266,15 @@ const BookingForm = () => {
 
   return (
     <div className="w-full max-w-lg mx-auto">
-      <div className="bg-linear-to-br from-[#003366] via-[#174978] to-[#2F5F8A] rounded-2xl shadow-2xl overflow-hidden border border-white/20">
+      <div className="bg-linear-to-br from-[#003366] via-[#174978] to-[#2F5F8A] rounded-2xl shadow-sm overflow-hidden border border-white/10">
         {/* Header Tabs */}
-        <div className="flex border-b border-white/20 text-sm md:text-base font-bold">
+        <div className="flex border-b border-white/10 text-sm md:text-base font-bold">
           <button
             onClick={() => handleTabChange("airport")}
-            className={`flex-1 py-3.5 flex items-center justify-center gap-2 transition-colors cursor-pointer ${
+            className={`flex-1 py-3 flex items-center justify-center gap-2 transition-colors cursor-pointer ${
               activeTab === "airport"
-                ? "bg-[#002244] text-white border-b-2 border-[#75A2BF]"
-                : "bg-white/10 hover:bg-white/15 text-white/90"
+                ? "bg-[#002244] text-white border-b border-[#75A2BF]"
+                : "bg-white/5 hover:bg-white/10 text-white/90"
             }`}
           >
             <Plane size={18} className="-rotate-45 text-[#75A2BF]" />
@@ -282,10 +282,10 @@ const BookingForm = () => {
           </button>
           <button
             onClick={() => handleTabChange("long-distance")}
-            className={`flex-1 py-3.5 flex items-center justify-center gap-2 transition-colors cursor-pointer ${
+            className={`flex-1 py-3 flex items-center justify-center gap-2 transition-colors cursor-pointer ${
               activeTab === "long-distance"
-                ? "bg-[#002244] text-white border-b-2 border-[#75A2BF]"
-                : "bg-white/10 hover:bg-white/15 text-white/90"
+                ? "bg-[#002244] text-white border-b border-[#75A2BF]"
+                : "bg-white/5 hover:bg-white/10 text-white/90"
             }`}
           >
             <Car size={18} className="text-[#75A2BF]" />
@@ -294,14 +294,14 @@ const BookingForm = () => {
         </div>
 
         {/* Form Content */}
-        <div className="p-5 md:p-6 space-y-4">
+        <div className="p-4 md:p-5 space-y-3.5">
           {/* Route Inputs */}
-          <div className="relative space-y-2.5">
+          <div className="relative space-y-2">
             <LocationInput
               label={t.bookingForm.fromLabel}
               value={fromLocation}
               placeholder={t.bookingForm.fromPlaceholder}
-              icon={<MapPin size={20} className="text-[#174978]" />}
+              icon={<MapPin size={18} className="text-[#174978]" />}
               onChange={(val, lat, lon) => {
                 setFromLocation(val);
                 if (lat && lon) {
@@ -314,11 +314,11 @@ const BookingForm = () => {
               <button
                 type="button"
                 onClick={swapLocations}
-                className="bg-[#174978] hover:bg-[#003366] rounded-full p-1.5 border-2 border-white hover:rotate-180 transition-transform duration-300 shadow-md cursor-pointer"
+                className="bg-[#174978] hover:bg-[#003366] rounded-full p-1.5 border border-white/80 hover:rotate-180 transition-transform duration-300 shadow-xs cursor-pointer"
                 title="Đổi chiều đón trả"
                 aria-label="Đổi chiều đón trả"
               >
-                <RefreshCw size={14} className="text-white" />
+                <RefreshCw size={13} className="text-white" />
               </button>
             </div>
 
@@ -326,7 +326,7 @@ const BookingForm = () => {
               label={t.bookingForm.toLabel}
               value={toLocation}
               placeholder={t.bookingForm.toPlaceholder}
-              icon={<MapPin size={20} className="text-[#174978]" />}
+              icon={<MapPin size={18} className="text-[#174978]" />}
               onChange={(val, lat, lon) => {
                 setToLocation(val);
                 if (lat && lon) {
@@ -338,7 +338,7 @@ const BookingForm = () => {
 
           {/* Date and Time Selector */}
           <div className="flex gap-2">
-            <div className="bg-white rounded-xl flex-1 py-2 px-3 border-2 border-transparent focus-within:border-[#46769B] transition-colors shadow-xs">
+            <div className="bg-white rounded-xl flex-1 py-1.5 px-3 border border-transparent focus-within:border-[#46769B] transition-colors">
               <label className="block text-[11px] text-gray-500 font-bold mb-0.5">
                 {t.bookingForm.dateLabel}
               </label>
@@ -350,7 +350,7 @@ const BookingForm = () => {
                 className="w-full outline-none text-gray-800 font-semibold text-sm bg-transparent cursor-pointer"
               />
             </div>
-            <div className="bg-white rounded-xl flex-1 py-2 px-3 border-2 border-transparent focus-within:border-[#46769B] transition-colors shadow-xs">
+            <div className="bg-white rounded-xl flex-1 py-1.5 px-3 border border-transparent focus-within:border-[#46769B] transition-colors">
               <label className="block text-[11px] text-gray-500 font-bold mb-0.5">
                 {t.bookingForm.timeLabel}
               </label>
@@ -365,7 +365,7 @@ const BookingForm = () => {
 
           {/* Real-time Time Validation Warning */}
           {timeError && (
-            <div className="bg-red-50 border border-red-300 text-red-700 px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 animate-pulse">
+            <div className="bg-red-50 border border-red-200 text-red-700 px-3 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5">
               <span>⚠️</span>
               <span>{timeError}</span>
             </div>
@@ -373,7 +373,7 @@ const BookingForm = () => {
 
           {/* Car Type & Way Type */}
           <div className="flex gap-2">
-            <div className="bg-white rounded-xl flex-1 py-2 px-3 border-2 border-transparent focus-within:border-[#46769B] transition-colors shadow-xs">
+            <div className="bg-white rounded-xl flex-1 py-1.5 px-3 border border-transparent focus-within:border-[#46769B] transition-colors">
               <label className="block text-[11px] text-gray-500 font-bold mb-0.5">
                 {t.bookingForm.carTypeLabel}
               </label>
@@ -387,7 +387,7 @@ const BookingForm = () => {
                 <option value="16">{t.bookingForm.car16Seats}</option>
               </select>
             </div>
-            <div className="bg-white rounded-xl flex-1 py-2 px-3 border-2 border-transparent focus-within:border-[#46769B] transition-colors shadow-xs">
+            <div className="bg-white rounded-xl flex-1 py-1.5 px-3 border border-transparent focus-within:border-[#46769B] transition-colors">
               <label className="block text-[11px] text-gray-500 font-bold mb-0.5">
                 {t.bookingForm.tripTypeLabel}
               </label>
@@ -404,8 +404,8 @@ const BookingForm = () => {
 
           {/* Customer Info */}
           <div className="flex gap-2">
-            <div className="bg-white rounded-xl flex-1 py-2 px-3 border-2 border-transparent focus-within:border-[#46769B] transition-colors flex items-center gap-2 shadow-xs">
-              <User size={18} className="text-gray-400 shrink-0" />
+            <div className="bg-white rounded-xl flex-1 py-1.5 px-3 border border-transparent focus-within:border-[#46769B] transition-colors flex items-center gap-2">
+              <User size={16} className="text-gray-400 shrink-0" />
               <div className="flex-1 min-w-0">
                 <label className="block text-[11px] text-gray-500 font-bold mb-0.5">
                   {t.bookingForm.nameLabel}
@@ -419,8 +419,8 @@ const BookingForm = () => {
                 />
               </div>
             </div>
-            <div className="bg-white rounded-xl flex-1 py-2 px-3 border-2 border-transparent focus-within:border-[#46769B] transition-colors flex items-center gap-2 shadow-xs">
-              <Phone size={18} className="text-gray-400 shrink-0" />
+            <div className="bg-white rounded-xl flex-1 py-1.5 px-3 border border-transparent focus-within:border-[#46769B] transition-colors flex items-center gap-2">
+              <Phone size={16} className="text-gray-400 shrink-0" />
               <div className="flex-1 min-w-0">
                 <label className="block text-[11px] text-gray-500 font-bold mb-0.5">
                   {t.bookingForm.phoneLabel}
@@ -443,18 +443,18 @@ const BookingForm = () => {
             className={`w-full ${
               timeError
                 ? "bg-gray-400 cursor-not-allowed"
-                : "bg-[#002244] hover:bg-[#00172e] shadow-lg shadow-blue-950/40"
-            } text-white font-extrabold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer`}
+                : "bg-[#002244] hover:bg-[#00172e]"
+            } text-white font-extrabold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer shadow-xs hover:shadow-sm`}
           >
             {isCalculating ? (
               <>
-                <Loader2 className="animate-spin" size={20} />
+                <Loader2 className="animate-spin" size={18} />
                 <span>{t.bookingForm.submittingBtn}</span>
               </>
             ) : (
               <>
                 <span>{t.bookingForm.submitBtn}</span>
-                <ChevronRight size={20} className="text-[#75A2BF]" />
+                <ChevronRight size={18} className="text-[#75A2BF]" />
               </>
             )}
           </button>
@@ -475,29 +475,25 @@ const BookingForm = () => {
       {mounted &&
         showCountdown &&
         createPortal(
-          <div className="fixed inset-0 z-100000 flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-sm animate-in fade-in duration-300">
-            <div className="bg-white rounded-2xl p-6 md:p-8 text-center border-2 border-[#174978] shadow-2xl animate-in zoom-in-95 duration-300 w-full max-w-lg relative">
-              <div className="mb-6">
-                <div className="w-28 h-28 mx-auto rounded-full border-4 border-[#174978] flex items-center justify-center relative bg-[#EAF2F8]">
-                  <span className="text-4xl font-black text-[#003366] tracking-wider">
+          <div className="fixed inset-0 z-100000 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xs animate-in fade-in duration-200">
+            <div className="bg-white rounded-2xl p-6 md:p-8 text-center border border-gray-100 shadow-lg animate-in zoom-in-95 duration-200 w-full max-w-lg relative">
+              <div className="mb-5">
+                <div className="w-24 h-24 mx-auto rounded-full border-2 border-[#174978] flex items-center justify-center relative bg-[#EAF2F8]">
+                  <span className="text-3xl font-black text-[#003366] tracking-wider">
                     {formatTime(timeLeft)}
                   </span>
-                  <div
-                    className="absolute inset-0 rounded-full border-4 border-[#46769B] animate-ping opacity-30"
-                    style={{ animationDuration: "1.5s" }}
-                  ></div>
                 </div>
               </div>
 
-              <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-3">
+              <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-2">
                 {t.bookingForm.countdownNotice}...
               </h3>
 
-              <p className="text-gray-600 mb-6 font-medium text-sm md:text-base leading-relaxed px-2">
+              <p className="text-gray-600 mb-5 font-medium text-sm leading-relaxed px-2">
                 {t.bookingForm.successDesc}
               </p>
 
-              <div className="w-full bg-gray-100 rounded-full h-3 mb-4 overflow-hidden">
+              <div className="w-full bg-gray-100 rounded-full h-2 mb-3 overflow-hidden">
                 <div
                   className="bg-linear-to-r from-[#174978] to-[#003366] h-full rounded-full transition-all duration-1000 ease-linear"
                   style={{ width: `${(timeLeft / 120) * 100}%` }}
@@ -525,41 +521,41 @@ const BookingForm = () => {
       {mounted &&
         showHotlineModal &&
         createPortal(
-          <div className="fixed inset-0 z-100000 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="fixed inset-0 z-100000 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xs animate-in fade-in duration-200">
             <div
-              className="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden animate-in zoom-in-95 duration-200 relative"
+              className="bg-white rounded-2xl shadow-lg w-full max-w-lg overflow-hidden border border-gray-100 animate-in zoom-in-95 duration-200 relative"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
-              <div className="bg-[#174978] py-3.5 px-6 flex items-center justify-between">
-                <div className="flex items-center gap-2.5 text-white font-bold text-lg">
-                  <div className="w-7 h-7 rounded-full bg-white text-[#174978] flex items-center justify-center text-sm font-black">
+              <div className="bg-[#174978] py-3 px-5 flex items-center justify-between">
+                <div className="flex items-center gap-2 text-white font-bold text-base">
+                  <div className="w-6 h-6 rounded-full bg-white text-[#174978] flex items-center justify-center text-xs font-black">
                     !
                   </div>
                   {t.bookingForm.hotlineModalTitle}
                 </div>
                 <button
                   onClick={() => setShowHotlineModal(false)}
-                  className="text-white hover:text-blue-200 font-bold text-xl px-2 cursor-pointer"
+                  className="text-white hover:text-blue-200 font-bold text-lg px-1.5 cursor-pointer"
                 >
                   ✕
                 </button>
               </div>
 
               {/* Body */}
-              <div className="p-6 text-center space-y-4">
-                <div className="w-16 h-16 bg-[#EAF2F8] text-[#174978] rounded-full flex items-center justify-center mx-auto mb-2">
-                  <Phone size={32} />
+              <div className="p-5 text-center space-y-3.5">
+                <div className="w-14 h-14 bg-[#EAF2F8] text-[#174978] rounded-full flex items-center justify-center mx-auto mb-1">
+                  <Phone size={26} />
                 </div>
-                <p className="text-gray-600 text-sm md:text-base leading-relaxed">
+                <p className="text-gray-600 text-sm leading-relaxed">
                   {t.bookingForm.hotlineModalDesc}
                 </p>
-                <div className="pt-2">
+                <div className="pt-1">
                   <a
                     href={`tel:${hotlineNum.replace(/[^0-9+]/g, "")}`}
-                    className="inline-flex items-center justify-center gap-2 bg-[#174978] hover:bg-[#003366] text-white font-bold text-lg py-3 px-8 rounded-full shadow-lg shadow-blue-900/30 transition-all cursor-pointer"
+                    className="inline-flex items-center justify-center gap-2 bg-[#174978] hover:bg-[#003366] text-white font-bold text-base py-2.5 px-6 rounded-xl shadow-xs transition-all cursor-pointer"
                   >
-                    <Phone size={20} />
+                    <Phone size={18} />
                     <span>{hotlineDisplay}</span>
                   </a>
                 </div>

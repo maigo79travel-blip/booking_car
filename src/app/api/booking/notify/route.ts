@@ -5,54 +5,115 @@ export const runtime = "nodejs";
 
 type BookingPayload = {
   customerName?: string;
+  customer_name?: string;
   customerPhone?: string;
+  phone_number?: string;
   fromLocation?: string;
+  from_location?: string;
   toLocation?: string;
+  to_location?: string;
   carType?: string;
+  car_type?: string;
   tripDate?: string;
+  trip_date?: string;
   tripTime?: string;
+  trip_time?: string;
   wayType?: string;
+  way_type?: string;
+  tripType?: string;
+  trip_type?: string;
+  distanceKm?: number;
+  distance_km?: number;
   price?: number;
+  total_price?: number;
 };
 
-function telegramMessage(
-  data: Required<Pick<BookingPayload, "customerName" | "customerPhone">> &
-    BookingPayload
-) {
-  const tripType =
+function formatTelegramMessage(data: {
+  customerName: string;
+  customerPhone: string;
+  fromLocation: string;
+  toLocation: string;
+  carType: string;
+  tripDate: string;
+  tripTime: string;
+  wayType: string;
+  tripType: string;
+  distanceKm: number;
+  totalPrice: number;
+}) {
+  const serviceType =
+    data.tripType === "airport"
+      ? "✈️ Xe đưa đón Sân bay Cam Ranh"
+      : "🛣️ Xe đường dài / Tour liên tỉnh";
+
+  const wayText =
     data.wayType === "two-way" || data.wayType === "round_trip"
-      ? "Khứ hồi (2 chiều)"
-      : "Một chiều";
+      ? "🔄 Khứ hồi (2 chiều)"
+      : "➡️ Một chiều";
+
   const formattedPrice =
-    Number(data.price || 0) > 0
-      ? `${Number(data.price).toLocaleString("vi-VN")} đ`
+    data.totalPrice > 0
+      ? `${data.totalPrice.toLocaleString("vi-VN")} đ`
       : "Liên hệ báo giá";
+
+  const distanceText =
+    data.distanceKm > 0 ? `~${data.distanceKm} km` : "Theo lộ trình";
+
+  const nowStr = new Date().toLocaleString("vi-VN", {
+    timeZone: "Asia/Ho_Chi_Minh",
+    hour: "2-digit",
+    minute: "2-digit",
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
 
   return [
     "🔔 <b>CÓ ĐƠN ĐẶT XE MỚI - MAIGO79.COM</b>",
-    "━━━━━━━━━━━━━━━━━━━━━━",
+    "━━━━━━━━━━━━━━━━━━━━━━━━━",
     "👤 <b>THÔNG TIN KHÁCH HÀNG:</b>",
-    `• Họ tên: <b>${data.customerName}</b>`,
-    `• Điện thoại: <b>${data.customerPhone}</b>`,
+    `• Họ và tên: <b>${data.customerName}</b>`,
+    `• Số điện thoại: <b><a href="tel:${data.customerPhone}">${data.customerPhone}</a></b>`,
     "",
-    "📍 <b>LỘ TRÌNH ĐẶT XE:</b>",
-    `• Điểm đón: <b>${data.fromLocation || "-"}</b>`,
-    `• Điểm đến: <b>${data.toLocation || "-"}</b>`,
+    "🚗 <b>DỊCH VỤ & LOẠI XE:</b>",
+    `• Loại dịch vụ: <b>${serviceType}</b>`,
+    `• Loại xe: <b>${data.carType}</b>`,
+    `• Hình thức di chuyển: <b>${wayText}</b>`,
     "",
-    "🕒 <b>CHI TIẾT CHUYẾN ĐI:</b>",
-    `• Thời gian đón: <b>${data.tripTime || "08:00"}</b> - Ngày: <b>${data.tripDate || "-"}</b>`,
-    `• Loại xe: <b>Xe ${data.carType || "5"} chỗ</b>`,
-    `• Hình thức: <b>${tripType}</b>`,
-    `• Giá dự kiến: <b>${formattedPrice}</b>`,
-    "━━━━━━━━━━━━━━━━━━━━━━",
-    "⚡ <i>Vui lòng liên hệ với khách hàng sớm nhất để xác nhận chuyến đi!</i>",
+    "📍 <b>LỘ TRÌNH DI CHUYỂN:</b>",
+    `• Điểm đón: <b>${data.fromLocation}</b>`,
+    `• Điểm đến: <b>${data.toLocation}</b>`,
+    `• Quãng đường dự kiến: <b>${distanceText}</b>`,
+    "",
+    "⏰ <b>THỜI GIAN ĐÓN:</b>",
+    `• Giờ đón: <b>${data.tripTime}</b>`,
+    `• Ngày đón: <b>${data.tripDate}</b>`,
+    "",
+    "💰 <b>CƯỚC PHÍ DỰ KIẾN:</b>",
+    `• Tổng tiền: <b>${formattedPrice}</b> (Trọn gói)`,
+    "━━━━━━━━━━━━━━━━━━━━━━━━━",
+    `⏱ <i>Thời gian đặt: ${nowStr}</i>`,
+    "⚡ <b>Vui lòng liên hệ với khách hàng sớm nhất để xác nhận chuyến đi!</b>",
   ].join("\n");
 }
 
 export async function POST(request: Request) {
   try {
-    const data = (await request.json()) as BookingPayload;
-    if (!data.customerName?.trim() || !data.customerPhone?.trim()) {
+    const raw = (await request.json()) as BookingPayload;
+
+    const customerName = (raw.customer_name || raw.customerName || "").trim();
+    const customerPhone = (raw.phone_number || raw.customerPhone || "").trim();
+    const fromLocation = (raw.from_location || raw.fromLocation || "").trim();
+    const toLocation = (raw.to_location || raw.toLocation || "").trim();
+    const carType = (raw.car_type || raw.carType || "5 chỗ").trim();
+    const tripDate = (raw.trip_date || raw.tripDate || new Date().toISOString().split("T")[0]).trim();
+    const tripTime = (raw.trip_time || raw.tripTime || "08:00").trim();
+    const wayType = (raw.way_type || raw.wayType || "one-way").trim();
+    const tripType = (raw.trip_type || raw.tripType || "airport").trim();
+    const distanceKm = Number(raw.distance_km || raw.distanceKm || 0);
+    const totalPrice = Number(raw.total_price || raw.price || 0);
+
+    if (!customerName || !customerPhone) {
       return NextResponse.json(
         { success: false, message: "Thiếu thông tin khách hàng" },
         { status: 400 }
@@ -65,15 +126,15 @@ export async function POST(request: Request) {
         (customer_name, phone_number, from_location, to_location, car_type, trip_date, trip_time, way_type, total_price)
        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
       [
-        data.customerName.trim(),
-        data.customerPhone.trim(),
-        data.fromLocation || "",
-        data.toLocation || "",
-        data.carType || "5",
-        data.tripDate || new Date().toISOString().split("T")[0],
-        data.tripTime || "08:00",
-        data.wayType || "one-way",
-        Number(data.price || 0),
+        customerName,
+        customerPhone,
+        fromLocation,
+        toLocation,
+        carType,
+        tripDate,
+        tripTime,
+        wayType,
+        totalPrice,
       ]
     );
 
@@ -105,16 +166,25 @@ export async function POST(request: Request) {
       // ignore
     }
 
-    // 2. Send Telegram Message if configured
+    // 2. Send Telegram Message with FULL FORM DATA if configured
     if (isEnabled && botToken && chatId) {
+      const messageText = formatTelegramMessage({
+        customerName,
+        customerPhone,
+        fromLocation: fromLocation || "Theo thỏa thuận",
+        toLocation: toLocation || "Theo thỏa thuận",
+        carType: carType.includes("chỗ") ? carType : `Xe ${carType} chỗ`,
+        tripDate,
+        tripTime,
+        wayType,
+        tripType,
+        distanceKm,
+        totalPrice,
+      });
+
       const payload: Record<string, unknown> = {
         chat_id: chatId,
-        text: telegramMessage(
-          data as Required<
-            Pick<BookingPayload, "customerName" | "customerPhone">
-          > &
-            BookingPayload
-        ),
+        text: messageText,
         parse_mode: "HTML",
         disable_web_page_preview: true,
       };

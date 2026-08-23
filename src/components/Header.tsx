@@ -34,10 +34,10 @@ const Header = () => {
       {/* Top Bar - White */}
       <div className="bg-white py-2.5 md:py-3.5 border-b border-gray-100">
         <div className="container mx-auto px-4 md:px-12 lg:px-24 flex justify-between items-center">
-          {/* Brand Logo & Tagline */}
+          {/* Brand Logo */}
           <Link
             href={localePrefix || "/"}
-            className="flex flex-col group py-0.5"
+            className="flex items-center group py-0.5"
             aria-label="Trang chủ maigo79.com"
           >
             <Image
@@ -45,13 +45,10 @@ const Header = () => {
               alt={`${contact.brand_name || "maigo79.com"} - Đặt xe sân bay Cam Ranh - Nha Trang`}
               width={220}
               height={56}
-              className="object-contain h-9 md:h-12 w-auto group-hover:opacity-90 transition-opacity"
+              className="object-contain h-10 md:h-13 w-auto group-hover:opacity-90 transition-opacity"
               priority
               unoptimized={contact.logo_url?.startsWith("data:") || contact.logo_url?.startsWith("http")}
             />
-            <span className="text-[10px] md:text-[11px] text-gray-500 font-semibold tracking-tight mt-0.5 group-hover:text-[#003366] transition-colors">
-              {t.common.tagline}
-            </span>
           </Link>
 
           <div className="flex items-center space-x-3 md:space-x-6">

@@ -34,28 +34,25 @@ const Header = () => {
       {/* Top Bar - White */}
       <div className="bg-white py-2.5 md:py-3.5 border-b border-gray-100">
         <div className="container mx-auto px-4 md:px-12 lg:px-24 flex justify-between items-center">
-          <div className="flex items-center space-x-3">
-            {/* Logo */}
-            <Link href={localePrefix || "/"} aria-label="Trang chủ maigo79.com">
-              <Image
-                src={contact.logo_url || "/images/logo-maigo79.png"}
-                alt={`${contact.brand_name || "maigo79.com"} - Đặt xe sân bay Cam Ranh - Nha Trang`}
-                width={200}
-                height={60}
-                className="object-contain h-10 md:h-14 w-auto rounded"
-                priority
-                unoptimized={contact.logo_url?.startsWith("data:") || contact.logo_url?.startsWith("http")}
-              />
-            </Link>
-            <div className="flex flex-col">
-              <span className="text-[#003366] font-black text-lg md:text-2xl leading-none tracking-tight">
-                {contact.brand_name || t.common.brandName}
-              </span>
-              <span className="text-[11px] md:text-xs text-gray-500 font-medium hidden sm:inline mt-1">
-                {t.common.tagline}
-              </span>
-            </div>
-          </div>
+          {/* Brand Logo & Tagline */}
+          <Link
+            href={localePrefix || "/"}
+            className="flex flex-col group py-0.5"
+            aria-label="Trang chủ maigo79.com"
+          >
+            <Image
+              src={contact.logo_url || "/images/logo-maigo79.png"}
+              alt={`${contact.brand_name || "maigo79.com"} - Đặt xe sân bay Cam Ranh - Nha Trang`}
+              width={220}
+              height={56}
+              className="object-contain h-9 md:h-12 w-auto group-hover:opacity-90 transition-opacity"
+              priority
+              unoptimized={contact.logo_url?.startsWith("data:") || contact.logo_url?.startsWith("http")}
+            />
+            <span className="text-[10px] md:text-[11px] text-gray-500 font-semibold tracking-tight mt-0.5 group-hover:text-[#003366] transition-colors">
+              {t.common.tagline}
+            </span>
+          </Link>
 
           <div className="flex items-center space-x-3 md:space-x-6">
             {/* Language Switcher */}

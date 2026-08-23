@@ -29,25 +29,20 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="col-span-1">
-            <div className="flex items-center gap-3 mb-4">
-              <Link href="/" aria-label="Trang chủ maigo79.com">
+            <div className="mb-4">
+              <Link href="/" aria-label="Trang chủ maigo79.com" className="inline-block mb-1.5">
                 <Image
                   src={contact.logo_url || "/images/logo-maigo79.png"}
                   alt={`${contact.brand_name || "maigo79.com"} - Taxi đưa đón sân bay Cam Ranh giá rẻ`}
-                  width={60}
-                  height={60}
-                  className="rounded-lg hover:opacity-80 transition-opacity object-cover shadow-sm"
+                  width={200}
+                  height={50}
+                  className="h-10 md:h-12 w-auto hover:opacity-80 transition-opacity object-contain"
                   unoptimized={contact.logo_url?.startsWith("data:") || contact.logo_url?.startsWith("http")}
                 />
               </Link>
-              <div>
-                <span className="text-xl font-extrabold text-brand-coastal block leading-tight">
-                  {contact.brand_name || t.common.brandName}
-                </span>
-                <p className="text-xs text-slate-400 mt-0.5">
-                  {t.common.tagline}
-                </p>
-              </div>
+              <p className="text-xs text-slate-400 font-medium">
+                {t.common.tagline}
+              </p>
             </div>
             <p className="text-sm text-slate-400 leading-relaxed mb-4">
               {t.footer.companyDesc}

@@ -33,10 +33,10 @@ const Header = () => {
         <div className="container mx-auto px-4 md:px-12 lg:px-24 flex justify-between items-center">
           <div className="flex items-center space-x-2">
             {/* Logo */}
-            <Link href="/" aria-label="Trang chủ inoibai.vn">
+            <Link href="/" aria-label="Trang chủ inhatrang.vn">
               <Image
                 src={contact.logo_url || "/images/Brand.jpg"}
-                alt={`${contact.brand_name || "inoibai.vn"} - Đặt xe sân bay Nội Bài`}
+                alt={`${contact.brand_name || "inhatrang.vn"} - Đặt xe sân bay Cam Ranh - Nha Trang`}
                 width={200}
                 height={60}
                 className="object-contain h-10 md:h-14 w-auto rounded"

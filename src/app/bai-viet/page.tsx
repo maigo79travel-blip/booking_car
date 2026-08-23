@@ -9,24 +9,24 @@ import { getPublishedPosts, text } from "@/lib/server/content";
 import { ArrowRight, BookOpen } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Cẩm nang & Tin tức kinh nghiệm đặt xe sân bay Nội Bài",
+  title: "Cẩm nang & Tin tức kinh nghiệm đặt xe sân bay Cam Ranh – Nha Trang",
   description:
-    "Tổng hợp tin tức, kinh nghiệm đi lại, mẹo đặt xe taxi sân bay Nội Bài giá rẻ, an toàn và đúng giờ từ inoibai.vn.",
+    "Tổng hợp tin tức, kinh nghiệm đi lại, mẹo đặt xe taxi sân bay Cam Ranh về Nha Trang giá rẻ, an toàn và đúng giờ từ inhatrang.vn.",
   alternates: {
     canonical: "/bai-viet",
   },
   openGraph: {
-    title: "Cẩm nang & Tin tức kinh nghiệm đặt xe sân bay Nội Bài",
+    title: "Cẩm nang & Tin tức kinh nghiệm đặt xe sân bay Cam Ranh – Nha Trang",
     description:
-      "Tổng hợp kinh nghiệm đặt xe taxi sân bay Nội Bài giá rẻ, an toàn từ inoibai.vn.",
+      "Tổng hợp kinh nghiệm đặt xe taxi sân bay Cam Ranh về Nha Trang giá rẻ, an toàn từ inhatrang.vn.",
     url: "/bai-viet",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cẩm nang & Tin tức kinh nghiệm đặt xe sân bay Nội Bài",
+    title: "Cẩm nang & Tin tức kinh nghiệm đặt xe sân bay Cam Ranh – Nha Trang",
     description:
-      "Kinh nghiệm di chuyển sân bay Nội Bài nhanh chóng, tiết kiệm chi phí.",
+      "Kinh nghiệm di chuyển sân bay Cam Ranh về Nha Trang nhanh chóng, tiết kiệm chi phí.",
   },
 };
 
@@ -47,11 +47,11 @@ export default async function PostsPage() {
             <span>Kinh nghiệm di chuyển</span>
           </div>
           <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mt-1 mb-2">
-            Cẩm Nang & Bài Viết Hướng Dẫn Đi Sân Bay Nội Bài
+            Cẩm Nang & Bài Viết Hướng Dẫn Đi Sân Bay Cam Ranh – Nha Trang
           </h1>
           <div className="w-24 h-1 bg-orange-500 mb-3"></div>
           <p className="text-gray-600 text-sm md:text-base max-w-3xl">
-            Cập nhật các thông tin hữu ích về giá vé, lộ trình, kinh nghiệm đón tiễn và các lưu ý quan trọng khi di chuyển tới sân bay Nội Bài.
+            Cập nhật các thông tin hữu ích về giá vé, lộ trình, kinh nghiệm đón tiễn và các lưu ý quan trọng khi di chuyển tới sân bay Cam Ranh và các tour du lịch Nha Trang.
           </p>
         </div>
 
@@ -73,7 +73,7 @@ export default async function PostsPage() {
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center bg-orange-50 text-orange-500 font-semibold text-sm">
-                        inoibai.vn
+                        inhatrang.vn
                       </div>
                     )}
                   </div>

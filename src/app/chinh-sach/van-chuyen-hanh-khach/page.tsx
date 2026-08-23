@@ -7,21 +7,21 @@ import FloatingContacts from "@/components/FloatingContacts";
 export const metadata: Metadata = {
   title: "Quy định vận chuyển hành khách",
   description:
-    "Chi tiết quy định về xác nhận lịch trình, thời gian tài xế chờ, hủy chuyến và chính sách xe đưa đón sân bay Nội Bài tại inoibai.vn.",
+    "Chi tiết quy định về xác nhận lịch trình, thời gian tài xế chờ, hủy chuyến và chính sách xe đưa đón sân bay Cam Ranh tại inhatrang.vn.",
   alternates: {
     canonical: "/chinh-sach/van-chuyen-hanh-khach",
   },
   openGraph: {
-    title: "Quy định vận chuyển hành khách | inoibai.vn",
+    title: "Quy định vận chuyển hành khách | inhatrang.vn",
     description:
-      "Chi tiết quy định về xác nhận lịch trình, thời gian tài xế chờ, hủy chuyến và chính sách dịch vụ xe sân bay Nội Bài.",
+      "Chi tiết quy định về xác nhận lịch trình, thời gian tài xế chờ, hủy chuyến và chính sách dịch vụ xe sân bay Cam Ranh.",
     url: "/chinh-sach/van-chuyen-hanh-khach",
     type: "website",
   },
   twitter: {
     card: "summary",
-    title: "Quy định vận chuyển hành khách | inoibai.vn",
-    description: "Quy định đặt xe và đưa đón sân bay Nội Bài tại inoibai.vn.",
+    title: "Quy định vận chuyển hành khách | inhatrang.vn",
+    description: "Quy định đặt xe và đưa đón sân bay Cam Ranh tại inhatrang.vn.",
   },
 };
 
@@ -74,10 +74,10 @@ export default function TransportPolicyPage() {
             className="space-y-4 text-gray-700 text-sm md:text-base leading-relaxed"
           >
             <p>
-              <strong>Đón tại sân bay Nội Bài:</strong> Khi quý khách cung cấp mã hiệu chuyến bay, chúng tôi sẽ theo dõi giờ hạ cánh thực tế. Lái xe sẽ chủ động liên hệ và chờ đợi quý khách lấy hành lý tại sảnh ra mà KHÔNG tính phụ phí delay chuyến bay.
+              <strong>Đón tại sân bay Cam Ranh:</strong> Khi quý khách cung cấp mã hiệu chuyến bay, chúng tôi sẽ theo dõi giờ hạ cánh thực tế. Lái xe sẽ chủ động liên hệ và chờ đợi quý khách lấy hành lý tại sảnh ra mà KHÔNG tính phụ phí delay chuyến bay.
             </p>
             <p>
-              <strong>Đón tại nội thành Hà Nội & các tỉnh:</strong> Lái xe sẽ có mặt trước giờ hẹn 10 - 15 phút. Thời gian chờ tối đa miễn phí là 15 phút sau giờ hẹn đón. Nếu phát sinh thay đổi, quý khách vui lòng thông báo sớm với tổng đài.
+              <strong>Đón tại TP. Nha Trang & các resort Bãi Dài:</strong> Lái xe sẽ có mặt trước giờ hẹn 10 - 15 phút. Thời gian chờ tối đa miễn phí là 15 phút sau giờ hẹn đón. Nếu phát sinh thay đổi, quý khách vui lòng thông báo sớm với tổng đài.
             </p>
           </div>
         </div>

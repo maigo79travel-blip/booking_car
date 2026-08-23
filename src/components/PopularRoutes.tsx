@@ -8,23 +8,23 @@ export default function PopularRoutes() {
   const { t } = useLanguage();
 
   const airportRoutes = [
-    { name: "Hà Nội → Sân bay Nội Bài", price: `${t.common.fromPrice} 200.000${t.common.vnd}`, note: "Xe 5-7 chỗ đời mới đón tận nhà" },
-    { name: "Sân bay Nội Bài → Hà Nội", price: `${t.common.fromPrice} 250.000${t.common.vnd}`, note: "Đón sảnh A1, A2, T1, T2 đúng giờ" },
-    { name: "Hai chiều Hà Nội ↔ Nội Bài", price: `${t.common.fromPrice} 400.000${t.common.vnd}`, note: "Tiết kiệm tới 30% khi đặt khứ hồi" },
-    { name: "Cầu Giấy ↔ Sân bay Nội Bài", price: `${t.common.fromPrice} 200.000${t.common.vnd}`, note: "Đón tại nhà 24/7 chỉ sau 15 phút" },
-    { name: "Hoàn Kiếm ↔ Sân bay Nội Bài", price: `${t.common.fromPrice} 220.000${t.common.vnd}`, note: "Phố cổ, bờ hồ đón trả thuận tiện" },
-    { name: "Hà Đông ↔ Sân bay Nội Bài", price: `${t.common.fromPrice} 260.000${t.common.vnd}`, note: "Tuyến đường vành đai 3 thông thoáng" },
+    { name: "Sân bay Cam Ranh → TP. Nha Trang", price: `${t.common.fromPrice} 250.000${t.common.vnd}`, note: "Xe 5-7 chỗ đời mới đón tận nơi đường Trần Phú, Hòn Chồng..." },
+    { name: "TP. Nha Trang → Sân bay Cam Ranh", price: `${t.common.fromPrice} 250.000${t.common.vnd}`, note: "Đón tận khách sạn, đúng giờ, không lo trễ chuyến bay" },
+    { name: "Hai chiều Cam Ranh ↔ Nha Trang", price: `${t.common.fromPrice} 480.000${t.common.vnd}`, note: "Tiết kiệm tối đa khi đặt xe khứ hồi trọn gói" },
+    { name: "Sân bay Cam Ranh ↔ Resort Bãi Dài", price: `${t.common.fromPrice} 180.000${t.common.vnd}`, note: "Alma, Duyên Hà, Vinpearl, Radisson, Movenpick..." },
+    { name: "Sân bay Cam Ranh ↔ Vinpearl Cảng Cầu Đá", price: `${t.common.fromPrice} 280.000${t.common.vnd}`, note: "Đón trả tận ga cáp treo / bến tàu Vinpearl Harbour" },
+    { name: "Sân bay Cam Ranh ↔ Biển Dốc Lết / Ninh Hòa", price: `${t.common.fromPrice} 550.000${t.common.vnd}`, note: "Tuyến đường cao tốc ven biển thông thoáng, êm ái" },
   ];
 
   const provinceRoutes = [
-    { name: "Nội Bài ↔ Bắc Ninh", distance: "~45km", price: `${t.common.fromPrice} 400.000${t.common.vnd}` },
-    { name: "Nội Bài ↔ Vĩnh Phúc", distance: "~40km", price: `${t.common.fromPrice} 380.000${t.common.vnd}` },
-    { name: "Nội Bài ↔ Thái Nguyên", distance: "~65km", price: `${t.common.fromPrice} 550.000${t.common.vnd}` },
-    { name: "Nội Bài ↔ Hải Dương", distance: "~85km", price: `${t.common.fromPrice} 750.000${t.common.vnd}` },
-    { name: "Nội Bài ↔ Hải Phòng", distance: "~135km", price: `${t.common.fromPrice} 1.100.000${t.common.vnd}` },
-    { name: "Nội Bài ↔ Quảng Ninh", distance: "~165km", price: `${t.common.fromPrice} 1.350.000${t.common.vnd}` },
-    { name: "Nội Bài ↔ Ninh Bình", distance: "~120km", price: `${t.common.fromPrice} 1.000.000${t.common.vnd}` },
-    { name: "Nội Bài ↔ Phú Thọ", distance: "~75km", price: `${t.common.fromPrice} 650.000${t.common.vnd}` },
+    { name: "Nha Trang ↔ Đà Lạt", distance: "~135km", price: `${t.common.fromPrice} 1.200.000${t.common.vnd}` },
+    { name: "Nha Trang ↔ Mũi Né (Phan Thiết)", distance: "~220km", price: `${t.common.fromPrice} 1.500.000${t.common.vnd}` },
+    { name: "Nha Trang ↔ Tuy Hòa (Phú Yên)", distance: "~120km", price: `${t.common.fromPrice} 1.100.000${t.common.vnd}` },
+    { name: "Nha Trang ↔ Quy Nhơn (Bình Định)", distance: "~215km", price: `${t.common.fromPrice} 1.800.000${t.common.vnd}` },
+    { name: "Nha Trang ↔ Phan Rang (Ninh Thuận)", distance: "~100km", price: `${t.common.fromPrice} 950.000${t.common.vnd}` },
+    { name: "Nha Trang ↔ Vịnh Vĩnh Hy / Hang Rái", distance: "~90km", price: `${t.common.fromPrice} 900.000${t.common.vnd}` },
+    { name: "Nha Trang ↔ Đảo Điệp Sơn / Dốc Lết", distance: "~50km", price: `${t.common.fromPrice} 500.000${t.common.vnd}` },
+    { name: "Nha Trang ↔ Buôn Ma Thuột (Đắk Lắk)", distance: "~185km", price: `${t.common.fromPrice} 1.600.000${t.common.vnd}` },
   ];
 
   return (

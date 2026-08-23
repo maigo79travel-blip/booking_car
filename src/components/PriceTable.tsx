@@ -9,25 +9,25 @@ const PriceTable = () => {
     {
       title: t.priceTable.car5,
       routes: [
-        { from: t.priceTable.hanoiToAirportCol, price: `${t.common.fromPrice} 200.000${t.common.vnd}` },
+        { from: t.priceTable.hanoiToAirportCol, price: `${t.common.fromPrice} 250.000${t.common.vnd}` },
         { from: t.priceTable.airportToHanoiCol, price: `${t.common.fromPrice} 250.000${t.common.vnd}` },
-        { from: t.priceTable.roundTripCol, price: `${t.common.fromPrice} 400.000${t.common.vnd}` },
+        { from: t.priceTable.roundTripCol, price: `${t.common.fromPrice} 480.000${t.common.vnd}` },
       ],
     },
     {
       title: t.priceTable.car7,
       routes: [
-        { from: t.priceTable.hanoiToAirportCol, price: `${t.common.fromPrice} 250.000${t.common.vnd}` },
+        { from: t.priceTable.hanoiToAirportCol, price: `${t.common.fromPrice} 300.000${t.common.vnd}` },
         { from: t.priceTable.airportToHanoiCol, price: `${t.common.fromPrice} 300.000${t.common.vnd}` },
-        { from: t.priceTable.roundTripCol, price: `${t.common.fromPrice} 500.000${t.common.vnd}` },
+        { from: t.priceTable.roundTripCol, price: `${t.common.fromPrice} 580.000${t.common.vnd}` },
       ],
     },
     {
       title: t.priceTable.car16,
       routes: [
-        { from: t.priceTable.hanoiToAirportCol, price: `${t.common.fromPrice} 450.000${t.common.vnd}` },
+        { from: t.priceTable.hanoiToAirportCol, price: `${t.common.fromPrice} 550.000${t.common.vnd}` },
         { from: t.priceTable.airportToHanoiCol, price: `${t.common.fromPrice} 550.000${t.common.vnd}` },
-        { from: t.priceTable.roundTripCol, price: `${t.common.fromPrice} 900.000${t.common.vnd}` },
+        { from: t.priceTable.roundTripCol, price: `${t.common.fromPrice} 1.050.000${t.common.vnd}` },
       ],
     },
   ];

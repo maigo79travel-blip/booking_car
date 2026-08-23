@@ -5,6 +5,11 @@ import { ChevronDown, HelpCircle } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useSiteContent } from "@/context/SiteContentContext";
 
+interface FAQItem {
+  q: string;
+  a: string;
+}
+
 export default function FAQSection() {
   const { t, language } = useLanguage();
   const { faq: dynamicFaq } = useSiteContent();
@@ -14,18 +19,18 @@ export default function FAQSection() {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  const faqItems =
+  const faqItems: FAQItem[] =
     dynamicFaq && dynamicFaq.length > 0
       ? dynamicFaq.map((item) => ({
           q: item.q?.[language] || item.q?.vi || "",
           a: item.a?.[language] || item.a?.vi || "",
         }))
-      : t.faq.items;
+      : (t.faq.items as FAQItem[]);
 
   const jsonLdFaq = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": faqItems.map((item) => ({
+    "mainEntity": faqItems.map((item: FAQItem) => ({
       "@type": "Question",
       "name": item.q,
       "acceptedAnswer": {

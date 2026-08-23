@@ -10,7 +10,7 @@ const inter = Inter({
   weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://inoibai.vn";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://inhatrang.vn";
 
 export const viewport: Viewport = {
   themeColor: "#f97316",
@@ -22,26 +22,26 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Đặt xe sân bay Nội Bài giá rẻ, đưa đón 24/7 - inoibai.vn",
-    template: "%s | inoibai.vn",
+    default: "Đặt xe sân bay Cam Ranh – Taxi Nha Trang giá rẻ 24/7 - inhatrang.vn",
+    template: "%s | inhatrang.vn",
   },
   description:
-    "Dịch vụ đặt xe sân bay Nội Bài uy tín, giá rẻ trọn gói. Xe 4-7-16 chỗ đời mới. Đưa đón tận nơi 24/7, không phí ẩn. Hotline: 0928 015 280 - 0905 876 231",
+    "Dịch vụ đặt xe taxi đưa đón Sân bay Quốc tế Cam Ranh (CXR) về TP. Nha Trang và các resort Bãi Dài giá rẻ trọn gói chỉ từ 250k. Xe 5-7-16 chỗ đời mới đón trả 24/7. Hotline: 0928 015 280 - 0905 876 231",
   keywords: [
-    "đặt xe sân bay nội bài",
-    "taxi nội bài giá rẻ",
-    "xe đưa đón sân bay nội bài",
-    "taxi sân bay nội bài",
-    "đặt xe nội bài",
-    "inoibai",
-    "thuê xe sân bay",
-    "xe đi nội bài 200k",
-    "xe 7 chỗ nội bài",
-    "xe 16 chỗ sân bay",
+    "đặt xe sân bay cam ranh",
+    "taxi sân bay cam ranh nha trang",
+    "xe đưa đón sân bay cam ranh",
+    "taxi nha trang giá rẻ",
+    "thuê xe nha trang đi đà lạt",
+    "inhatrang",
+    "xe cam ranh về nha trang 250k",
+    "xe 7 chỗ sân bay cam ranh",
+    "xe 16 chỗ nha trang",
+    "xe đưa đón resort bãi dài",
   ],
-  authors: [{ name: "inoibai.vn", url: siteUrl }],
-  creator: "inoibai.vn",
-  publisher: "inoibai.vn",
+  authors: [{ name: "inhatrang.vn", url: siteUrl }],
+  creator: "inhatrang.vn",
+  publisher: "inhatrang.vn",
   formatDetection: {
     telephone: true,
     address: true,
@@ -69,24 +69,24 @@ export const metadata: Metadata = {
     type: "website",
     locale: "vi_VN",
     url: siteUrl,
-    title: "Đặt xe sân bay Nội Bài giá rẻ, đưa đón 24/7 - inoibai.vn",
+    title: "Đặt xe sân bay Cam Ranh – Taxi Nha Trang giá rẻ 24/7 - inhatrang.vn",
     description:
-      "Dịch vụ đặt xe sân bay Nội Bài uy tín, giá rẻ trọn gói. Xe 4-7-16 chỗ đời mới. Đưa đón tận nơi 24/7, không phát sinh chi phí.",
-    siteName: "inoibai.vn",
+      "Dịch vụ đặt xe taxi đưa đón Sân bay Cam Ranh về TP. Nha Trang và các resort Bãi Dài giá rẻ trọn gói. Xe 5-7-16 chỗ đời mới đón trả tận nơi 24/7.",
+    siteName: "inhatrang.vn",
     images: [
       {
         url: "/images/Brand.jpg",
         width: 1200,
         height: 630,
-        alt: "inoibai.vn - Đặt xe sân bay Nội Bài",
+        alt: "inhatrang.vn - Đặt xe sân bay Cam Ranh Nha Trang",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Đặt xe sân bay Nội Bài giá rẻ, đưa đón 24/7 - inoibai.vn",
+    title: "Đặt xe sân bay Cam Ranh – Taxi Nha Trang giá rẻ 24/7 - inhatrang.vn",
     description:
-      "Dịch vụ đặt xe sân bay Nội Bài uy tín, giá rẻ trọn gói. Xe 4-7-16 chỗ đời mới đón trả 24/7.",
+      "Dịch vụ đặt xe đưa đón sân bay Cam Ranh về Nha Trang và tour du lịch Đà Lạt, Mũi Né uy tín, giá rẻ trọn gói.",
     images: ["/images/Brand.jpg"],
   },
 };
@@ -98,9 +98,9 @@ const jsonLdGraph = {
       "@type": "WebSite",
       "@id": `${siteUrl}/#website`,
       "url": siteUrl,
-      "name": "inoibai.vn",
+      "name": "inhatrang.vn",
       "description":
-        "Dịch vụ đặt xe taxi đưa đón sân bay Nội Bài giá rẻ, uy tín 24/7",
+        "Dịch vụ đặt xe taxi đưa đón sân bay Cam Ranh về Nha Trang và tour du lịch giá rẻ, uy tín 24/7",
       "publisher": {
         "@id": `${siteUrl}/#taxiservice`,
       },
@@ -109,28 +109,28 @@ const jsonLdGraph = {
     {
       "@type": ["TaxiService", "LocalBusiness"],
       "@id": `${siteUrl}/#taxiservice`,
-      "name": "inoibai.vn - Đặt xe sân bay Nội Bài",
-      "alternateName": "Taxi Sân Bay Nội Bài - inoibai.vn",
+      "name": "inhatrang.vn - Đặt xe sân bay Cam Ranh Nha Trang",
+      "alternateName": "Taxi Sân Bay Cam Ranh - inhatrang.vn",
       "image": `${siteUrl}/images/Brand.jpg`,
       "logo": `${siteUrl}/images/Brand.jpg`,
       "url": siteUrl,
       "telephone": "+84928015280",
-      "email": "inoibai.vn@gmail.com",
-      "priceRange": "200.000đ - 900.000đ",
+      "email": "inhatrang.vn@gmail.com",
+      "priceRange": "250.000đ - 1.500.000đ",
       "currenciesAccepted": "VND",
       "paymentAccepted": "Tiền mặt, Chuyển khoản ngân hàng",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Ngõ 35 Nguyễn An Ninh, Tương Mai",
-        "addressLocality": "Hoàng Mai",
-        "addressRegion": "Hà Nội",
-        "postalCode": "100000",
+        "streetAddress": "28 Trần Phú, Phường Lộc Thọ",
+        "addressLocality": "TP. Nha Trang",
+        "addressRegion": "Khánh Hòa",
+        "postalCode": "650000",
         "addressCountry": "VN",
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": 20.9983,
-        "longitude": 105.8475,
+        "latitude": 12.2388,
+        "longitude": 109.1967,
       },
       "openingHoursSpecification": {
         "@type": "OpeningHoursSpecification",
@@ -149,21 +149,29 @@ const jsonLdGraph = {
       "areaServed": [
         {
           "@type": "AdministrativeArea",
-          "name": "Hà Nội",
+          "name": "Nha Trang",
         },
         {
           "@type": "AdministrativeArea",
-          "name": "Sân bay Quốc tế Nội Bài",
+          "name": "Sân bay Quốc tế Cam Ranh",
         },
         {
           "@type": "AdministrativeArea",
-          "name": "Miền Bắc Việt Nam",
+          "name": "Khánh Hòa",
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Đà Lạt, Lâm Đồng",
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Mũi Né, Bình Thuận",
         },
       ],
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "4.9",
-        "reviewCount": "1028",
+        "reviewCount": "1250",
         "bestRating": "5",
         "worstRating": "1",
       },
@@ -172,24 +180,14 @@ const jsonLdGraph = {
       ],
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
-        "name": "Bảng giá cước xe sân bay Nội Bài",
+        "name": "Bảng giá cước xe sân bay Cam Ranh Nha Trang",
         "itemListElement": [
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Xe 5 chỗ Hà Nội đi Nội Bài",
-              "description": "Xe 5 chỗ đón tận nơi Hà Nội đi sân bay Nội Bài",
-            },
-            "price": "200000",
-            "priceCurrency": "VND",
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Xe 7 chỗ Hà Nội đi Nội Bài",
-              "description": "Xe 7 chỗ đón tận nơi Hà Nội đi sân bay Nội Bài",
+              "name": "Xe 5 chỗ Sân bay Cam Ranh đi TP. Nha Trang",
+              "description": "Xe 5 chỗ đón tận nơi sân bay Cam Ranh về khách sạn TP. Nha Trang",
             },
             "price": "250000",
             "priceCurrency": "VND",
@@ -198,10 +196,20 @@ const jsonLdGraph = {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Xe 16 chỗ Hà Nội đi Nội Bài",
-              "description": "Xe 16 chỗ đón tận nơi Hà Nội đi sân bay Nội Bài",
+              "name": "Xe 7 chỗ Sân bay Cam Ranh đi TP. Nha Trang",
+              "description": "Xe 7 chỗ SUV đón tận nơi sân bay Cam Ranh về TP. Nha Trang",
             },
-            "price": "450000",
+            "price": "300000",
+            "priceCurrency": "VND",
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Xe 16 chỗ Sân bay Cam Ranh đi TP. Nha Trang",
+              "description": "Xe 16 chỗ Solati/Transit đón đoàn du lịch sân bay Cam Ranh đi Nha Trang",
+            },
+            "price": "550000",
             "priceCurrency": "VND",
           },
         ],

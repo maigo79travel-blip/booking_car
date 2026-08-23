@@ -59,33 +59,33 @@ export default function DashboardOverview({
 
   const topRoutes = [
     {
-      name: "Hà Nội → Sân bay Nội Bài (5 chỗ)",
-      count: "85/100 chuyến",
-      percent: 85,
+      name: "Sân bay Cam Ranh → TP. Nha Trang (5 chỗ)",
+      count: "88/100 chuyến",
+      percent: 88,
       color: "bg-orange-500",
     },
     {
-      name: "Nội Bài → Hà Nội (7 chỗ)",
-      count: "64/100 chuyến",
-      percent: 64,
+      name: "TP. Nha Trang → Sân bay Cam Ranh (7 chỗ)",
+      count: "72/100 chuyến",
+      percent: 72,
       color: "bg-emerald-500",
     },
     {
-      name: "Hai chiều Hà Nội ↔ Nội Bài",
-      count: "48/100 chuyến",
-      percent: 48,
+      name: "Cam Ranh ⇄ Resort Bãi Dài (Alma, Vinpearl...)",
+      count: "54/100 chuyến",
+      percent: 54,
       color: "bg-rose-500",
     },
     {
-      name: "Xe đi tỉnh (Hải Phòng, Q.Ninh, N.Bình)",
-      count: "36/100 chuyến",
-      percent: 36,
+      name: "Nha Trang ⇄ Đà Lạt (Lâm Đồng)",
+      count: "41/100 chuyến",
+      percent: 41,
       color: "bg-sky-500",
     },
     {
-      name: "Xe 16 chỗ đón tiễn đoàn hội nghị",
-      count: "22/100 chuyến",
-      percent: 22,
+      name: "Nha Trang ⇄ Mũi Né / Phan Thiết",
+      count: "29/100 chuyến",
+      percent: 29,
       color: "bg-purple-500",
     },
   ];

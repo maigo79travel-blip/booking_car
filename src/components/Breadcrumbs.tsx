@@ -11,7 +11,7 @@ interface BreadcrumbsProps {
 }
 
 export default function Breadcrumbs({ items }: BreadcrumbsProps) {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://inoibai.vn";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://inhatrang.vn";
 
   const allItems: BreadcrumbItem[] = [{ name: "Trang chủ", href: "/" }, ...items];
 

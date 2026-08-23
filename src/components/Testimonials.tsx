@@ -83,7 +83,7 @@ const Testimonials = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
           {currentTestimonials.map((testimonial, idx) => {
             const starsCount = testimonial.stars || testimonial.rating || 5;
-            const locationText = testimonial.route || testimonial.location || "Hà Nội ↔ Nội Bài";
+            const locationText = testimonial.route || testimonial.location || "Cam Ranh ↔ Nha Trang";
             const dateText = testimonial.date || "Đã trải nghiệm";
             const avatarUrl = testimonial.avatar || "/images/Hero1.jpg";
 

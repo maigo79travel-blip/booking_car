@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { getPublishedPosts } from "@/lib/server/content";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://inoibai.vn";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://inhatrang.vn";
   const posts = await getPublishedPosts();
 
   const staticRoutes: MetadataRoute.Sitemap = [

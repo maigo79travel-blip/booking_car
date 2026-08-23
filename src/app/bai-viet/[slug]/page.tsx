@@ -25,7 +25,7 @@ export async function generateMetadata({
 
   const pageTitle = text(post.seo_title) || text(post.title);
   const pageDesc = text(post.seo_description) || text(post.excerpt);
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://inoibai.vn";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://inhatrang.vn";
 
   return {
     title: pageTitle,
@@ -66,7 +66,7 @@ export default async function PostPage({
   const post = await getPost(slug);
   if (!post) notFound();
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://inoibai.vn";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://inhatrang.vn";
   const postTitle = text(post.title);
   const postDesc = text(post.excerpt);
   const postDate = post.published_at || new Date().toISOString();
@@ -81,12 +81,12 @@ export default async function PostPage({
     "dateModified": postDate,
     "author": {
       "@type": "Organization",
-      "name": "inoibai.vn",
+      "name": "inhatrang.vn",
       "url": siteUrl,
     },
     "publisher": {
       "@type": "Organization",
-      "name": "inoibai.vn",
+      "name": "inhatrang.vn",
       "logo": {
         "@type": "ImageObject",
         "url": `${siteUrl}/images/Brand.jpg`,
@@ -152,11 +152,11 @@ export default async function PostPage({
         {/* CTA Box */}
         <div className="mt-8 bg-linear-to-r from-orange-500 to-orange-600 rounded-2xl p-6 md:p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
-            <h2 className="text-xl md:text-2xl font-bold mb-1">
-              Cần Đặt Xe Sân Bay Nội Bài Đón Trả Tận Nơi?
+            <h2 className="text-xl md:text-2xl font-bold mb-3">
+              Cần Đặt Xe Sân Bay Cam Ranh – Nha Trang Đón Trả Tận Nơi?
             </h2>
             <p className="text-orange-100 text-sm md:text-base">
-              Xe 5 - 7 - 16 chỗ đón đúng giờ, giá trọn gói chỉ từ 200k. Phục vụ 24/7.
+              Xe 5 - 7 - 16 chỗ đón đúng giờ, giá trọn gói chỉ từ 250k. Phục vụ 24/7.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-3">

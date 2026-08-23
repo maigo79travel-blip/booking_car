@@ -64,25 +64,25 @@ export default function ContentManager({
   // State for all CMS sections
   const [heroData, setHeroData] = useState(() => ({
     title1: getContent("hero_section", {}).title1 || {
-      vi: "ĐẶT XE TAXI SÂN BAY NỘI BÀI",
-      en: "BOOK NOI BAI AIRPORT TAXI",
-      ko: "노이바이 공항 택시 예약",
-      ru: "ЗАКАЗ ТАКСИ В АЭРОПОРТ НОЙБАЙ",
-      zh: "预订内排机场出租车",
+      vi: "ĐẶT XE TAXI SÂN BAY CAM RANH – NHA TRANG",
+      en: "CAM RANH AIRPORT – NHA TRANG TAXI SERVICE",
+      ko: "깜란 국제공항 – 나트랑 시내 프라이빗 픽업 & 샌딩",
+      ru: "ТРАНСФЕР АЭРОПОРТ КАМРАНЬ – НЯЧАНГ ПОД КЛЮЧ",
+      zh: "芽庄金兰国际机场 – 市区专车接送服务",
     },
     title2: getContent("hero_section", {}).title2 || {
-      vi: "ĐÓN TIỄN ĐÚNG GIỜ • GIÁ RẺ TRỌN GÓI CHỈ TỪ 200K",
-      en: "PUNCTUAL PICKUP • ALL-INCLUSIVE FIXED FARE FROM 200K",
-      ko: "정시 픽업 • 올인클루시브 정액 요금 20만동부터",
-      ru: "ПОДАЧА ВОВРЕМЯ • ФИКСИРОВАННАЯ ЦЕНА ОТ 200К",
-      zh: "准时接送 • 全包一口价仅20万起",
+      vi: "ĐÓN TIỄN ĐÚNG GIỜ • GIÁ RẺ TRỌN GÓI CHỈ TỪ 250K",
+      en: "PUNCTUAL PICKUP • ALL-INCLUSIVE FIXED FARE FROM 250K",
+      ko: "정시 픽업 • 올인클루시브 정액 요금 25만동부터",
+      ru: "ПОДАЧА ВОВРЕМЯ • ФИКСИРОВАННАЯ ЦЕНА ОТ 250К",
+      zh: "准时接送 • 全包一口价仅25万起",
     },
     subtitle: getContent("hero_section", {}).subtitle || {
-      vi: "Dịch vụ xe riêng 5 - 7 - 16 chỗ đời mới, đưa đón tận nơi 24/7 không lo phụ phí",
-      en: "Private 5-7-16 seater modern cars, 24/7 door-to-door transfer with zero hidden fees",
-      ko: "최신 5-7-16인승 프라이빗 차량, 숨겨진 추가 요금 없는 24시간 도어투도어 서비스",
-      ru: "Новые авто 5-7-16 мест, круглосуточная доставка от двери до двери без скрытых доплат",
-      zh: "全新5座、7座、16座专车，24小时门到门接送，无任何隐藏费用",
+      vi: "Dịch vụ xe riêng 5 - 7 - 16 chỗ đời mới, đưa đón tận nơi Sân bay Cam Ranh ⇄ TP. Nha Trang, Resort Bãi Dài, Đà Lạt 24/7 không lo phụ phí",
+      en: "Private 5-7-16 seater modern cars, 24/7 door-to-door transfer Cam Ranh Airport ⇄ Nha Trang, Bai Dai Resorts, Da Lat with zero hidden fees",
+      ko: "최신 5-7-16인승 프라이빗 차량, 깜란 공항 ↔ 나트랑 시내, 바이 다이 리조트, 달랏 24시간 도어투도어 서비스",
+      ru: "Новые авто 5-7-16 мест, круглосуточная доставка от двери до двери Аэропорт Камрань ⇄ Нячанг, курорты Бай Дай, Далат без скрытых доплат",
+      zh: "全新5座、7座、16座专车，24小时门到门金兰机场 ⇄ 芽庄市区、白代度假村、大叻接送，无任何隐藏费用",
     },
     banners: getContent("hero_section", {}).banners || [
       "/images/Hero1.jpg",
@@ -90,23 +90,23 @@ export default function ContentManager({
       "/images/Hero22.jpg",
     ],
     badgeText: getContent("hero_section", {}).badgeText || {
-      vi: "HỆ THỐNG TAXI SÂN BAY UY TÍN HÀNG ĐẦU HÀ NỘI",
-      en: "HANOI'S LEADING AIRPORT TRANSFER SYSTEM",
-      ko: "하노이 최고의 프리미엄 공항 택시",
-      ru: "ВЕДУЩАЯ СЛУЖБА ТАКСИ В АЭРОПОРТ ХАНОЯ",
-      zh: "河内顶尖河内内排机场专车接送系统",
+      vi: "HỆ THỐNG XE SÂN BAY CAM RANH & TOUR NHA TRANG HÀNG ĐẦU",
+      en: "CAM RANH AIRPORT & NHA TRANG'S LEADING TRANSFER SERVICE",
+      ko: "나트랑 & 깜란 공항 최고의 프리미엄 픽업 서비스",
+      ru: "ВЕДУЩАЯ СЛУЖБА ТРАНСФЕРА В АЭРОПОРТ КАМРАНЬ И НЯЧАНГ",
+      zh: "芽庄金兰机场及芽庄周边旅游专车首选",
     },
   }));
 
   const [contactData, setContactData] = useState(() => ({
-    brand_name: getContent("contact_info", {}).brand_name || "inoibai.vn",
+    brand_name: getContent("contact_info", {}).brand_name || "inhatrang.vn",
     hotline: getContent("contact_info", {}).hotline || "0928015280",
     hotline_display: getContent("contact_info", {}).hotline_display || "0928.015.280",
     zalo: getContent("contact_info", {}).zalo || "0905876231",
     telegram: getContent("contact_info", {}).telegram || "https://t.me/inoibai_vn",
-    email: getContent("contact_info", {}).email || "inoibai.vn@gmail.com",
-    address: getContent("contact_info", {}).address || "Sảnh A1, T1 - Sân bay Quốc tế Nội Bài, Sóc Sơn, Hà Nội",
-    logo_url: getContent("contact_info", {}).logo_url || "/images/logo.png",
+    email: getContent("contact_info", {}).email || "inhatrang.vn@gmail.com",
+    address: getContent("contact_info", {}).address || "Cột số 3 & 4 - Sảnh Đến Ga Quốc Nội & Quốc Tế, Sân bay Quốc tế Cam Ranh, Khánh Hòa",
+    logo_url: getContent("contact_info", {}).logo_url || "/images/Brand.jpg",
     working_hours: getContent("contact_info", {}).working_hours || "24/7 (Phục vụ cả ngày lễ & Tết)",
   }));
 
@@ -119,7 +119,7 @@ export default function ContentManager({
         models: "Vios, Accent, City, Cerato đời mới",
         seats: "4 hành khách",
         luggage: "2 vali lớn + 2 balo",
-        price: "200.000đ",
+        price: "250.000đ",
         image: "/images/51.png",
         features: ["Điều hòa mát lạnh", "Ghế da êm ái", "Nước suối miễn phí", "Cốp rộng rãi"],
       },
@@ -130,7 +130,7 @@ export default function ContentManager({
         models: "Xpander, Innova, Veloz, Fortuner",
         seats: "6 hành khách",
         luggage: "4 vali lớn + 3 balo",
-        price: "250.000đ",
+        price: "300.000đ",
         image: "/images/71.png",
         features: ["Không gian rộng rãi", "Gầm cao êm ái", "Phù hợp gia đình", "Wifi tốc độ cao"],
       },
@@ -141,7 +141,7 @@ export default function ContentManager({
         models: "Ford Transit, Hyundai Solati",
         seats: "15 hành khách",
         luggage: "10-12 vali hành lý",
-        price: "450.000đ",
+        price: "550.000đ",
         image: "/images/big1.png",
         features: ["Ghế ngả cao cấp", "Khoang hành lý siêu rộng", "Phù hợp đoàn du lịch & công tác"],
       },
@@ -160,31 +160,31 @@ export default function ContentManager({
   const [testimonialsData, setTestimonialsData] = useState(() =>
     getContent("testimonials", [
       {
-        name: "Nguyễn Văn Hùng",
-        role: "Doanh nhân (Hà Nội)",
+        name: "Nguyễn Hoàng Nam",
+        role: "Khách du lịch (Hà Nội)",
         avatar: "/images/Hero1.jpg",
         stars: 5,
-        route: "Hoàn Kiếm ↔ Sân bay Nội Bài",
+        route: "Sân bay Cam Ranh ↔ Khách sạn Sheraton Trần Phú",
         comment:
-          "Dịch vụ rất tuyệt vời! Tài xế đón đúng giờ tại sảnh T1, xe Vios mới tinh thơm tho và chạy rất êm. Giá 200k trọn gói không phát sinh.",
+          "Dịch vụ rất tuyệt vời! Tài xế đón đúng giờ tại sảnh Ga Quốc Nội sân bay Cam Ranh, xe mới tinh thơm tho và chạy rất êm. Giá 250k trọn gói không phát sinh.",
       },
       {
-        name: "Kim Min-ji",
-        role: "Du khách Hàn Quốc",
+        name: "Park Ji-hoon",
+        role: "Du khách Hàn Quốc (Seoul)",
         avatar: "/images/Hero2.jpg",
         stars: 5,
-        route: "Nội Bài ↔ Khách sạn Lotte Liễu Giai",
+        route: "Cam Ranh Airport ↔ Alma Resort Bãi Dài",
         comment:
-          "Very friendly driver, clean car and on-time pickup. The driver was waiting with my nameplate at Terminal 2. Highly recommended!",
+          "Very friendly driver, clean car and on-time pickup. The driver was waiting with my nameplate at Cam Ranh Terminal 2. Highly recommended for family trips in Nha Trang!",
       },
       {
-        name: "Trần Mai Anh",
-        role: "Gia đình du lịch (Đà Nẵng)",
+        name: "Trần Thu Hà",
+        role: "Gia đình du lịch (TP.HCM)",
         avatar: "/images/Hero22.jpg",
         stars: 5,
-        route: "Nội Bài ↔ Cầu Giấy (Xe 7 chỗ Xpander)",
+        route: "Nha Trang ↔ Đà Lạt (Xe 7 chỗ Xpander)",
         comment:
-          "Gia đình mình có con nhỏ và nhiều hành lý, đặt xe 7 chỗ rất rộng rãi. Bác tài hỗ trợ mang vác vali nhiệt tình, lái xe an toàn.",
+          "Gia đình mình đi tour Nha Trang lên Đà Lạt qua đèo Khánh Lê, bác tài lái rất cẩn thận, êm ái không bị say xe. Xe sạch sẽ và nhiệt tình giới thiệu các điểm ăn uống.",
       },
     ])
   );
@@ -193,17 +193,17 @@ export default function ContentManager({
     getContent("faq_list", [
       {
         q: {
-          vi: "Giá xe sân bay Nội Bài tại inoibai.vn đã bao gồm các chi phí cầu đường chưa?",
-          en: "Does the price include all highway toll fees and airport surcharges?",
+          vi: "Giá xe sân bay Cam Ranh tại inhatrang.vn đã bao gồm các chi phí cầu đường và vé sân bay chưa?",
+          en: "Does the price include all highway toll fees and Cam Ranh airport surcharges?",
         },
         a: {
-          vi: "Toàn bộ giá cước hiển thị trên website là giá TRỌN GÓI 100%, đã bao gồm vé vào sân bay, phí cầu đường cao tốc và tài xế chờ đón.",
-          en: "All rates displayed on our website are 100% all-inclusive, covering airport parking fees, highway tolls, and driver waiting time.",
+          vi: "Toàn bộ giá cước hiển thị trên website là giá TRỌN GÓI 100%, đã bao gồm vé vào sân bay Cam Ranh, phí đường bộ và tài xế chờ đón tận sảnh.",
+          en: "All rates displayed on our website are 100% all-inclusive, covering Cam Ranh airport parking fees, tolls, and driver waiting time.",
         },
       },
       {
         q: {
-          vi: "Tôi cần đặt xe trước bao lâu để đảm bảo có xe đúng giờ?",
+          vi: "Tôi cần đặt xe trước bao lâu để đảm bảo có xe đón tại sân bay Cam Ranh?",
           en: "How far in advance should I book my airport transfer?",
         },
         a: {
@@ -213,12 +213,12 @@ export default function ContentManager({
       },
       {
         q: {
-          vi: "Nếu chuyến bay của tôi bị delay (hoãn chuyến) thì có bị tính thêm phí chờ không?",
-          en: "If my flight is delayed, will I be charged extra waiting fees?",
+          vi: "Nếu chuyến bay đến Cam Ranh bị hoãn (delay) thì có bị tính thêm phí chờ không?",
+          en: "If my flight to Cam Ranh is delayed, will I be charged extra waiting fees?",
         },
         a: {
-          vi: "inoibai.vn MIỄN PHÍ 100% phí chờ khi chuyến bay bị hoãn. Tài xế sẽ theo dõi số hiệu chuyến bay của bạn và có mặt đón đúng lúc bạn hạ cánh.",
-          en: "inoibai.vn provides 100% FREE waiting time for delayed flights. Our dispatchers track flight numbers and adjust pickup times accordingly.",
+          vi: "inhatrang.vn MIỄN PHÍ 100% phí chờ khi chuyến bay bị hoãn. Tài xế sẽ theo dõi số hiệu chuyến bay của bạn và có mặt đón đúng lúc bạn hạ cánh.",
+          en: "inhatrang.vn provides 100% FREE waiting time for delayed flights. Our dispatchers track flight numbers and adjust pickup times accordingly.",
         },
       },
     ])
@@ -573,14 +573,14 @@ export default function ContentManager({
                 type="email"
                 value={contactData.email}
                 onChange={(e) => setContactData({ ...contactData, email: e.target.value })}
-                placeholder="inoibai.vn@gmail.com"
+                placeholder="inhatrang.vn@gmail.com"
                 className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>
 
             <div className="md:col-span-2">
               <label className="block text-xs font-extrabold text-slate-800 mb-1.5">
-                Địa chỉ văn phòng / Sảnh đón Nội Bài
+                Địa chỉ văn phòng / Sảnh đón Sân bay Cam Ranh
               </label>
               <input
                 type="text"
@@ -763,10 +763,10 @@ export default function ContentManager({
                     ...testimonialsData,
                     {
                       name: "Khách hàng mới",
-                      role: "Hành khách Nội Bài",
+                      role: "Khách du lịch Nha Trang",
                       avatar: "/images/Hero1.jpg",
                       stars: 5,
-                      route: "Hà Nội → Sân bay Nội Bài",
+                      route: "Sân bay Cam Ranh → TP. Nha Trang",
                       comment: "Dịch vụ đón đúng giờ, tài xế lịch sự, xe sạch sẽ!",
                     },
                   ])

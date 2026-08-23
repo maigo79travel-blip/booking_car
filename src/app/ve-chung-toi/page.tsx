@@ -15,24 +15,24 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Về chúng tôi - Dịch vụ xe sân bay Nội Bài uy tín Hoàng Khôi",
+  title: "Về chúng tôi - Dịch vụ xe sân bay Cam Ranh & Nha Trang uy tín inhatrang.vn",
   description:
-    "Giới thiệu dịch vụ xe đưa đón sân bay Nội Bài uy tín Hoàng Khôi Limousine - inoibai.vn. Đội xe đời mới, tài xế phục vụ 24/7, cam kết đúng giờ và giá cước tốt nhất.",
+    "Giới thiệu dịch vụ xe đưa đón sân bay Cam Ranh và tour du lịch Nha Trang - inhatrang.vn. Đội xe đời mới, tài xế phục vụ 24/7, cam kết đúng giờ và giá cước tốt nhất.",
   alternates: {
     canonical: "/ve-chung-toi",
   },
   openGraph: {
-    title: "Về chúng tôi - Dịch vụ xe sân bay Nội Bài uy tín Hoàng Khôi",
+    title: "Về chúng tôi - Dịch vụ xe sân bay Cam Ranh & Nha Trang uy tín inhatrang.vn",
     description:
-      "Giới thiệu dịch vụ xe đưa đón sân bay Nội Bài uy tín. Đội xe đời mới, tài xế chuyên nghiệp 24/7 đón trả tận nơi.",
+      "Giới thiệu dịch vụ xe đưa đón sân bay Cam Ranh và tour du lịch Nha Trang. Đội xe đời mới, tài xế chuyên nghiệp 24/7 đón trả tận nơi.",
     url: "/ve-chung-toi",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Về chúng tôi - Dịch vụ xe sân bay Nội Bài uy tín Hoàng Khôi",
+    title: "Về chúng tôi - Dịch vụ xe sân bay Cam Ranh & Nha Trang uy tín",
     description:
-      "Đội xe đời mới chuyên phục vụ đưa đón sân bay Nội Bài và liên tỉnh 24/7.",
+      "Đội xe đời mới chuyên phục vụ đưa đón sân bay Cam Ranh và tour Nha Trang, Đà Lạt, Mũi Né 24/7.",
   },
 };
 
@@ -47,7 +47,7 @@ export default function AboutPage() {
       {/* Page Title */}
       <div className="container mx-auto px-4 md:px-12 lg:px-24 pt-4 md:pt-6 pb-2">
         <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-          Về Chúng Tôi - inoibai.vn (Hoàng Khôi Limousine)
+          Về Chúng Tôi - inhatrang.vn (Xe Sân Bay Cam Ranh & Tour Nha Trang)
         </h1>
         <div className="w-24 h-1 bg-orange-500"></div>
       </div>
@@ -56,14 +56,14 @@ export default function AboutPage() {
       <div className="container mx-auto px-4 md:px-12 lg:px-24 py-6 md:py-10">
         <div className="bg-white rounded-2xl p-6 md:p-10 mb-8 shadow-sm border border-gray-100">
           <h2 className="text-xl md:text-2xl font-bold text-blue-900 mb-6">
-            Giới Thiệu Đơn Vị Đưa Đón Sân Bay Nội Bài Hàng Đầu
+            Giới Thiệu Đơn Vị Đưa Đón Sân Bay Cam Ranh & Tour Nha Trang Uy Tín
           </h2>
           <div className="prose max-w-none text-gray-700 space-y-4">
             <p className="text-base md:text-lg leading-relaxed">
               Thành lập từ năm 2020,{" "}
-              <strong>Hoàng Khôi Limousine - Chuyên Xe Sân Bay (inoibai.vn)</strong> hiện nay
-              đã cung cấp dịch vụ xe đưa đón tại các sân bay lớn và các tuyến
-              đường dài khu vực phía Bắc và miền Trung Việt Nam.
+              <strong>Dịch Vụ Xe Sân Bay Cam Ranh & Tour Du Lịch Nha Trang (inhatrang.vn)</strong> hiện nay
+              là đơn vị hàng đầu cung cấp dịch vụ xe đưa đón tại Sân bay Quốc tế Cam Ranh (CXR),
+              khu nghỉ dưỡng Bãi Dài, trung tâm thành phố Nha Trang và các tuyến liên tỉnh (Đà Lạt, Mũi Né, Ninh Thuận, Phú Yên).
             </p>
             <p className="text-base md:text-lg leading-relaxed">
               Dựa trên nền tảng công nghệ điều xe thông minh và quản lý chuyên nghiệp,
@@ -71,16 +71,12 @@ export default function AboutPage() {
               xe tiện lợi, nhanh chóng và tiết kiệm chi phí tối đa.
             </p>
             <p className="text-base md:text-lg leading-relaxed">
-              Chúng tôi luôn sẵn sàng phục vụ mọi khách hàng cá nhân cũng như
-              các khách hàng tổ chức có nhu cầu ký kết hợp tác thường xuyên để
-              được hưởng các chính sách ưu đãi cước phí dài hạn.
+              Chúng tôi luôn sẵn sàng phục vụ du khách trong nước, quốc tế (Hàn Quốc, Nga, Trung Quốc, Âu Mỹ...)
+              cũng như các đối tác lữ hành, công ty tổ chức sự kiện tại Nha Trang với chính sách giá ưu đãi và xuất hóa đơn VAT đầy đủ.
             </p>
             <p className="text-base md:text-lg leading-relaxed">
               Là một trong những đơn vị cung cấp dịch vụ đón tiễn sân bay và
-              đường dài uy tín nhất hiện nay, chúng tôi vẫn luôn không ngừng cải
-              thiện quy trình hoạt động, mở rộng mạng lưới hoạt động và nâng cao
-              chất lượng đội ngũ xe và lái xe để đáp ứng nhu cầu khách hàng ngày
-              một tốt hơn.
+              tour du lịch uy tín nhất hiện nay, chúng tôi cam kết tài xế thân thiện, đón đúng giờ và mang lại cho bạn kỳ nghỉ trọn vẹn tại thành phố biển Nha Trang.
             </p>
           </div>
         </div>
@@ -103,7 +99,7 @@ export default function AboutPage() {
             </div>
             <h3 className="text-lg font-bold text-blue-900 mb-2">Đón Đúng Giờ</h3>
             <p className="text-sm text-gray-600">
-              Cam kết đón đúng giờ, không để quý khách chờ đợi trễ chuyến bay
+              Cam kết đón đúng giờ tại sảnh đến Cam Ranh, theo dõi sát sao giờ bay
             </p>
           </div>
 
@@ -115,7 +111,7 @@ export default function AboutPage() {
               Chuyên Nghiệp
             </h3>
             <p className="text-sm text-gray-600">
-              Tài xế được đào tạo bài bản, phục vụ tận tâm, hỗ trợ hành lý
+              Tài xế được đào tạo bài bản, phục vụ tận tâm, hỗ trợ hành lý chu đáo
             </p>
           </div>
 
@@ -133,7 +129,7 @@ export default function AboutPage() {
         {/* Our Advantages */}
         <div className="bg-white rounded-2xl p-6 md:p-10 mb-8 shadow-sm border border-gray-100">
           <h2 className="text-xl md:text-2xl font-bold text-blue-900 mb-6">
-            Ưu Điểm Của Dịch Vụ Xe inoibai.vn
+            Ưu Điểm Của Dịch Vụ Xe inhatrang.vn
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="flex items-start gap-3">
@@ -142,7 +138,7 @@ export default function AboutPage() {
                 size={20}
               />
               <p className="text-gray-700 text-sm md:text-base">
-                Dàn xe đời mới, chất lượng cao từ 4, 5, 7, 9, 16, 29, 35 đến 45 chỗ
+                Dàn xe đời mới, chất lượng cao từ 5, 7, 16, 29 đến 45 chỗ
               </p>
             </div>
             <div className="flex items-start gap-3">
@@ -151,7 +147,7 @@ export default function AboutPage() {
                 size={20}
               />
               <p className="text-gray-700 text-sm md:text-base">
-                Giá cước rẻ, giúp khách hàng tiết kiệm tối đa chi phí
+                Giá cước rẻ hơn 20% – 40% so với taxi truyền thống tại sân bay
               </p>
             </div>
             <div className="flex items-start gap-3">
@@ -160,7 +156,7 @@ export default function AboutPage() {
                 size={20}
               />
               <p className="text-gray-700 text-sm md:text-base">
-                Giá niêm yết trọn gói, không phí ẩn, không tính phí hủy chuyến trước
+                Giá niêm yết trọn gói, không phí ẩn, miễn phí hủy chuyến trước
               </p>
             </div>
             <div className="flex items-start gap-3">
@@ -187,7 +183,7 @@ export default function AboutPage() {
                 size={20}
               />
               <p className="text-gray-700 text-sm md:text-base">
-                Dịch vụ đón tiễn giơ biển tại sân bay miễn phí theo yêu cầu
+                Dịch vụ đón tiễn giơ biển tại sảnh đến Cam Ranh miễn phí
               </p>
             </div>
             <div className="flex items-start gap-3">
@@ -205,7 +201,7 @@ export default function AboutPage() {
                 size={20}
               />
               <p className="text-gray-700 text-sm md:text-base">
-                Ưu đãi thanh toán trả sau đối với khách hàng doanh nghiệp, tổ chức
+                Ưu đãi tour Nha Trang đi Đà Lạt, Mũi Né, Ninh Thuận, Phú Yên
               </p>
             </div>
           </div>
@@ -216,7 +212,7 @@ export default function AboutPage() {
           <p className="text-base md:text-lg leading-relaxed italic font-medium">
             Chúng tôi xin chân thành cảm ơn Quý khách hàng đã tin tưởng và ủng
             hộ chúng tôi trong thời gian qua và mong sẽ tiếp tục được là người
-            đồng hành, đối tác tin cậy của Quý khách hàng trên mọi hành trình!
+            đồng hành, đối tác tin cậy của Quý khách hàng trên mọi hành trình tại Nha Trang!
           </p>
         </div>
 
@@ -247,7 +243,7 @@ export default function AboutPage() {
               <div>
                 <h3 className="font-bold text-gray-800 mb-1">Địa chỉ</h3>
                 <p className="text-sm text-gray-600">
-                  Ngõ 35 Nguyễn An Ninh, Tương Mai, Hà Nội
+                  28 Trần Phú, Phường Lộc Thọ, TP. Nha Trang, Tỉnh Khánh Hòa
                 </p>
               </div>
             </div>
@@ -271,7 +267,7 @@ export default function AboutPage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-6">
             <h2 className="text-xl font-bold text-blue-900 mb-1">
-              Đặt Xe Sân Bay Ngay
+              Đặt Xe Sân Bay Cam Ranh Ngay
             </h2>
             <p className="text-gray-600 text-sm">
               Liên hệ với chúng tôi để được phục vụ tốt nhất

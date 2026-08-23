@@ -33,16 +33,16 @@ export default function RouteModal({
   // Form State
   const [vehicleType, setVehicleType] = useState(route?.vehicle_type || "5");
   const [tripType, setTripType] = useState(route?.trip_type || "one_way");
-  const [price, setPrice] = useState(route?.price ? String(route.price) : "200000");
+  const [price, setPrice] = useState(route?.price ? String(route.price) : "250000");
   const [sortOrder, setSortOrder] = useState(route?.sort_order ?? 0);
   const [isActive, setIsActive] = useState(route?.is_active ?? true);
 
   // Localized fields
   const [origin, setOrigin] = useState<Record<string, string>>(
-    typeof route?.origin === "object" && route?.origin ? (route.origin as Record<string, string>) : { vi: String(route?.origin || "Hà Nội") }
+    typeof route?.origin === "object" && route?.origin ? (route.origin as Record<string, string>) : { vi: String(route?.origin || "Sân bay Cam Ranh") }
   );
   const [destination, setDestination] = useState<Record<string, string>>(
-    typeof route?.destination === "object" && route?.destination ? (route.destination as Record<string, string>) : { vi: String(route?.destination || "Sân bay Nội Bài") }
+    typeof route?.destination === "object" && route?.destination ? (route.destination as Record<string, string>) : { vi: String(route?.destination || "TP. Nha Trang") }
   );
 
   const handleOriginChange = (val: string) => {
@@ -146,7 +146,7 @@ export default function RouteModal({
                 type="text"
                 value={origin[activeLang] || ""}
                 onChange={(e) => handleOriginChange(e.target.value)}
-                placeholder="VD: Hà Nội"
+                placeholder="VD: TP. Nha Trang"
                 required
                 className="w-full px-3 py-2 text-sm rounded-lg border border-gray-300 outline-none focus:border-blue-500 font-semibold"
               />
@@ -160,7 +160,7 @@ export default function RouteModal({
                 type="text"
                 value={destination[activeLang] || ""}
                 onChange={(e) => handleDestinationChange(e.target.value)}
-                placeholder="VD: Sân bay Nội Bài"
+                placeholder="VD: Sân bay Cam Ranh"
                 required
                 className="w-full px-3 py-2 text-sm rounded-lg border border-gray-300 outline-none focus:border-blue-500 font-semibold"
               />

@@ -12,15 +12,15 @@ export interface Testimonial {
 export const testimonials: Testimonial[] = [
   {
     id: 1,
-    name: "Nguyễn Văn Hùng",
+    name: "Nguyễn Hoàng Nam",
     avatar:
-      "https://ui-avatars.com/api/?name=Nguyen+Van+Hung&background=f97316&color=fff",
+      "https://ui-avatars.com/api/?name=Nguyen+Hoang+Nam&background=f97316&color=fff",
     rating: 5,
     comment:
-      "Dịch vụ tuyệt vời! Tài xế rất nhiệt tình, xe sạch sẽ, đúng giờ. Giá cả hợp lý, tôi sẽ tiếp tục sử dụng dịch vụ.",
+      "Dịch vụ rất tuyệt vời! Tài xế đón đúng giờ tại sảnh Ga Quốc Nội sân bay Cam Ranh, xe mới tinh thơm tho và chạy rất êm. Giá 250k trọn gói không phát sinh.",
     date: "10/01/2026",
-    location: "Hà Nội",
-    service: "Xe sân bay Nội Bài",
+    location: "Nha Trang",
+    service: "Xe sân bay Cam Ranh",
   },
   {
     id: 2,
@@ -29,10 +29,10 @@ export const testimonials: Testimonial[] = [
       "https://ui-avatars.com/api/?name=Tran+Thi+Mai&background=f97316&color=fff",
     rating: 5,
     comment:
-      "Đặt xe rất dễ dàng, tài xế đến đúng giờ. Xe 7 chỗ rộng rãi, phù hợp cho gia đình. Giá rẻ hơn nhiều so với taxi thường.",
+      "Đặt xe rất dễ dàng, tài xế đến đúng giờ. Xe 7 chỗ rộng rãi, đưa cả nhà từ Nha Trang lên Đà Lạt ngắm cảnh đèo Khánh Lê cực an toàn.",
     date: "08/01/2026",
-    location: "Hà Nội",
-    service: "Xe đi tỉnh",
+    location: "Nha Trang",
+    service: "Xe Nha Trang - Đà Lạt",
   },
   {
     id: 3,
@@ -41,10 +41,10 @@ export const testimonials: Testimonial[] = [
       "https://ui-avatars.com/api/?name=Le+Quang+Minh&background=f97316&color=fff",
     rating: 5,
     comment:
-      "Tôi đã sử dụng dịch vụ nhiều lần, luôn hài lòng. Tài xế lái xe an toàn, xe mới, sạch sẽ. Rất đáng tin cậy!",
+      "Tôi thường xuyên công tác tại Nha Trang, luôn tin tưởng đặt xe đưa đón sân bay Cam Ranh tại inhatrang.vn. Tài xế lịch sự, hỗ trợ hành lý chu đáo.",
     date: "05/01/2026",
-    location: "Hà Nội",
-    service: "Xe sân bay Nội Bài",
+    location: "Nha Trang",
+    service: "Xe sân bay Cam Ranh",
   },
   {
     id: 4,
@@ -53,10 +53,10 @@ export const testimonials: Testimonial[] = [
       "https://ui-avatars.com/api/?name=Pham+Thi+Huong&background=f97316&color=fff",
     rating: 5,
     comment:
-      "Dịch vụ chuyên nghiệp, giá cả minh bạch. Đi Hải Phòng với giá rất tốt. Sẽ giới thiệu cho bạn bè.",
+      "Dịch vụ chuyên nghiệp, giá cả minh bạch. Đặt xe đi Mũi Né Phan Thiết với giá rất tốt. Sẽ giới thiệu cho bạn bè và đối tác.",
     date: "03/01/2026",
-    location: "Hà Nội",
-    service: "Xe đi tỉnh",
+    location: "Nha Trang",
+    service: "Xe đi Mũi Né",
   },
   {
     id: 5,
@@ -65,22 +65,22 @@ export const testimonials: Testimonial[] = [
       "https://ui-avatars.com/api/?name=Hoang+Anh+Tuan&background=f97316&color=fff",
     rating: 5,
     comment:
-      "Xe 16 chỗ đi du lịch rất tiện, tài xế nhiệt tình hỗ trợ. Giá cả hợp lý, không phát sinh chi phí. Tuyệt vời!",
+      "Xe 16 chỗ Solati đi tour Dốc Lết - Điệp Sơn rất rộng và êm, tài xế nhiệt tình hỗ trợ đoàn chụp ảnh. Giá cả hợp lý, không phát sinh chi phí.",
     date: "01/01/2026",
-    location: "Hà Nội",
-    service: "Xe 16 chỗ",
+    location: "Nha Trang",
+    service: "Xe 16 chỗ tour du lịch",
   },
   {
     id: 6,
-    name: "Vũ Thị Lan",
+    name: "Park Ji-hoon",
     avatar:
-      "https://ui-avatars.com/api/?name=Vu+Thi+Lan&background=f97316&color=fff",
+      "https://ui-avatars.com/api/?name=Park+Ji+Hoon&background=f97316&color=fff",
     rating: 5,
     comment:
-      "Đặt xe đi sân bay lúc 4h sáng, tài xế vẫn đến đúng giờ. Rất ấn tượng với sự chuyên nghiệp.",
+      "Very friendly driver, clean car and on-time pickup. The driver was waiting with my nameplate at Cam Ranh Terminal 2. Highly recommended!",
     date: "28/12/2025",
-    location: "Hà Nội",
-    service: "Xe sân bay Nội Bài",
+    location: "Nha Trang",
+    service: "Cam Ranh Airport Transfer",
   },
   {
     id: 7,
@@ -89,10 +89,10 @@ export const testimonials: Testimonial[] = [
       "https://ui-avatars.com/api/?name=Do+Van+Nam&background=f97316&color=fff",
     rating: 5,
     comment:
-      "Giá rẻ hơn Grab nhiều, xe cũng đẹp hơn. Tài xế lịch sự, không nói nhiều. Rất hài lòng!",
+      "Giá rẻ hơn nhiều so với bắt taxi truyền thống tại sân bay, xe mới đẹp. Bác tài nhiệt tình chỉ cho những quán hải sản ngon rẻ ở bờ kè Tháp Bà.",
     date: "25/12/2025",
-    location: "Hà Nội",
-    service: "Xe 5 chỗ",
+    location: "Nha Trang",
+    service: "Xe 5 chỗ sân bay",
   },
   {
     id: 8,
@@ -101,10 +101,10 @@ export const testimonials: Testimonial[] = [
       "https://ui-avatars.com/api/?name=Ngo+Thi+Thanh&background=f97316&color=fff",
     rating: 5,
     comment:
-      "Dịch vụ tốt, xe sạch, tài xế thân thiện. Đi Ninh Bình với giá rất hợp lý. Sẽ dùng lại!",
+      "Dịch vụ tốt, xe sạch, tài xế thân thiện. Đi Ninh Thuận tham quan Vĩnh Hy Hang Rái với giá rất hợp lý. Nhất định sẽ ủng hộ tiếp!",
     date: "22/12/2025",
-    location: "Hà Nội",
-    service: "Xe đi tỉnh",
+    location: "Nha Trang",
+    service: "Xe tour Ninh Thuận",
   },
   {
     id: 9,
@@ -113,10 +113,10 @@ export const testimonials: Testimonial[] = [
       "https://ui-avatars.com/api/?name=Bui+Quang+Huy&background=f97316&color=fff",
     rating: 5,
     comment:
-      "Xe 7 chỗ đi Hạ Long rất thoải mái. Tài xế có kinh nghiệm, lái xe êm. Giá tốt nhất thị trường!",
+      "Xe 7 chỗ đưa đón resort Alma Bãi Dài rất tiện lợi. Lái xe cẩn thận, đúng giờ. Giá tốt nhất thị trường!",
     date: "20/12/2025",
-    location: "Hà Nội",
-    service: "Xe 7 chỗ",
+    location: "Nha Trang",
+    service: "Xe Resort Bãi Dài",
   },
   {
     id: 10,
@@ -125,10 +125,10 @@ export const testimonials: Testimonial[] = [
       "https://ui-avatars.com/api/?name=Trinh+Thi+Nga&background=f97316&color=fff",
     rating: 5,
     comment:
-      "Đặt xe qua điện thoại rất nhanh, nhân viên tư vấn nhiệt tình. Xe đến đúng giờ, sạch sẽ. Rất hài lòng!",
+      "Đặt xe qua Zalo rất nhanh, nhân viên trực tổng đài tư vấn nhiệt tình. Xe đón tận sảnh đến Cam Ranh đúng giờ, sạch sẽ. Rất hài lòng!",
     date: "18/12/2025",
-    location: "Hà Nội",
-    service: "Xe sân bay Nội Bài",
+    location: "Nha Trang",
+    service: "Xe sân bay Cam Ranh",
   },
   {
     id: 11,
@@ -137,10 +137,10 @@ export const testimonials: Testimonial[] = [
       "https://ui-avatars.com/api/?name=Phan+Van+Duc&background=f97316&color=fff",
     rating: 5,
     comment:
-      "Dùng dịch vụ đưa đón sân bay hàng tháng. Luôn đúng giờ, giá cố định, rất tiện lợi cho công việc.",
+      "Dùng dịch vụ đưa đón khách hàng và đối tác đến Nha Trang dự hội nghị. Luôn đúng giờ, giá cố định có xuất hóa đơn VAT nhanh chóng.",
     date: "15/12/2025",
-    location: "Hà Nội",
-    service: "Xe sân bay Nội Bài",
+    location: "Nha Trang",
+    service: "Xe sân bay Cam Ranh",
   },
   {
     id: 12,
@@ -149,9 +149,9 @@ export const testimonials: Testimonial[] = [
       "https://ui-avatars.com/api/?name=Ly+Thi+Hong&background=f97316&color=fff",
     rating: 5,
     comment:
-      "Xe mới, sạch sẽ, có wifi. Tài xế lịch sự, hỗ trợ xách hành lý. Dịch vụ 5 sao!",
+      "Xe mới, sạch sẽ, máy lạnh mát rượi. Tài xế lịch sự, hỗ trợ xách hành lý. Đánh giá 5 sao cho chất lượng phục vụ!",
     date: "12/12/2025",
-    location: "Hà Nội",
+    location: "Nha Trang",
     service: "Xe 5 chỗ",
   },
 ];

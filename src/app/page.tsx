@@ -14,7 +14,7 @@ export default function Home() {
     <main className="min-h-screen bg-gray-50 font-sans">
       {/* Visual & Semantic SEO H1 */}
       <h1 className="sr-only">
-        Đặt Xe Sân Bay Nội Bài Giá Rẻ Trọn Gói 24/7 - inoibai.vn
+        Đặt Xe Sân Bay Cam Ranh – Taxi Nha Trang Giá Rẻ Trọn Gói 24/7 - inhatrang.vn
       </h1>
 
       <Header />

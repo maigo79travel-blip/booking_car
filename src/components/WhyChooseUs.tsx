@@ -10,6 +10,11 @@ import {
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
+interface ReasonItem {
+  title: string;
+  desc: string;
+}
+
 export default function WhyChooseUs() {
   const { t } = useLanguage();
 
@@ -21,6 +26,8 @@ export default function WhyChooseUs() {
     { icon: Headphones, color: "bg-amber-100 text-amber-700" },
     { icon: Receipt, color: "bg-teal-100 text-teal-700" },
   ];
+
+  const reasons = (t.whyChooseUs.reasons || []) as ReasonItem[];
 
   return (
     <section className="py-12 md:py-16 bg-white">
@@ -39,7 +46,7 @@ export default function WhyChooseUs() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {t.whyChooseUs.reasons.map((item, idx) => {
+          {reasons.map((item: ReasonItem, idx) => {
             const Icon = icons[idx]?.icon || ShieldCheck;
             const colorClass = icons[idx]?.color || "bg-orange-100 text-orange-600";
 

@@ -231,7 +231,7 @@ export default function AdminPage() {
               IA
             </div>
             <h1 className="text-2xl font-black text-gray-950 tracking-tight">
-              inoibai<span className="text-blue-600">Admin</span>
+              inhatrang<span className="text-blue-600">Admin</span>
             </h1>
             <p className="text-xs md:text-sm text-gray-600 font-medium mt-1.5">
               Đăng nhập tài khoản quản trị hệ thống
@@ -254,7 +254,7 @@ export default function AdminPage() {
                 <Mail size={18} className="absolute left-3.5 text-gray-500" />
                 <input
                   type="email"
-                  placeholder="admin@inoibai.vn"
+                  placeholder="admin@inhatrang.vn"
                   value={credentials.email}
                   onChange={(e) =>
                     setCredentials({ ...credentials, email: e.target.value })
@@ -311,7 +311,7 @@ export default function AdminPage() {
           </form>
 
           <div className="mt-6 text-center text-xs font-medium text-gray-500">
-            inoibai.vn • Hệ thống điều phối & quản lý xe chuyên nghiệp 24/7
+            inhatrang.vn • Hệ thống điều phối & quản lý xe chuyên nghiệp 24/7
           </div>
         </div>
       </main>

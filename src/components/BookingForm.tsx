@@ -16,8 +16,8 @@ import LocationInput from "./LocationInput";
 import { useLanguage } from "@/context/LanguageContext";
 import { useSiteContent } from "@/context/SiteContentContext";
 
-const NOI_BAI_COORDS = { lat: "21.2187", lon: "105.8041" };
-const HANOI_COORDS = { lat: "21.0285", lon: "105.8542" };
+const CAM_RANH_AIRPORT_COORDS = { lat: "11.9981", lon: "109.2194" };
+const NHA_TRANG_COORDS = { lat: "12.2388", lon: "109.1967" };
 
 const BookingForm = () => {
   const { t } = useLanguage();
@@ -32,14 +32,14 @@ const BookingForm = () => {
   const [isCalculating, setIsCalculating] = useState(false);
 
   // Form states
-  const [fromLocation, setFromLocation] = useState("Hà Nội");
-  const [toLocation, setToLocation] = useState("Sân bay Nội Bài");
+  const [fromLocation, setFromLocation] = useState("Sân bay Cam Ranh");
+  const [toLocation, setToLocation] = useState("TP. Nha Trang");
   const [coords, setCoords] = useState<{
     from: { lat?: string; lon?: string };
     to: { lat?: string; lon?: string };
   }>({
-    from: HANOI_COORDS,
-    to: NOI_BAI_COORDS,
+    from: CAM_RANH_AIRPORT_COORDS,
+    to: NHA_TRANG_COORDS,
   });
   const [carType, setCarType] = useState("5");
   const [tripDate, setTripDate] = useState(() => new Date().toISOString().slice(0, 10));
@@ -184,7 +184,7 @@ const BookingForm = () => {
     lat2?: string,
     lon2?: string
   ) => {
-    if (!lat1 || !lon1 || !lat2 || !lon2) return 30; // Default fallback
+    if (!lat1 || !lon1 || !lat2 || !lon2) return 35; // Default distance Cam Ranh - Nha Trang is 35km
     const R = 6371; // Earth's radius in km
     const dLat = ((parseFloat(lat2) - parseFloat(lat1)) * Math.PI) / 180;
     const dLon = ((parseFloat(lon2) - parseFloat(lon1)) * Math.PI) / 180;
@@ -200,23 +200,21 @@ const BookingForm = () => {
 
   const calculateEstimatedPrice = () => {
     const isAirport =
-      fromLocation.toLowerCase().includes("nội bài") ||
-      toLocation.toLowerCase().includes("nội bài") ||
+      fromLocation.toLowerCase().includes("cam ranh") ||
+      toLocation.toLowerCase().includes("cam ranh") ||
+      fromLocation.toLowerCase().includes("sân bay") ||
+      toLocation.toLowerCase().includes("sân bay") ||
       activeTab === "airport";
 
     if (isAirport) {
-      const isFromAirport = fromLocation.toLowerCase().includes("nội bài");
       if (carType === "5") {
-        if (isFromAirport) return 250000;
-        return wayType === "two-way" ? 450000 : 200000;
+        return wayType === "two-way" ? 480000 : 250000;
       }
       if (carType === "7") {
-        if (isFromAirport) return 300000;
-        return wayType === "two-way" ? 550000 : 250000;
+        return wayType === "two-way" ? 580000 : 300000;
       }
       if (carType === "16") {
-        if (isFromAirport) return 500000;
-        return wayType === "two-way" ? 950000 : 450000;
+        return wayType === "two-way" ? 1050000 : 550000;
       }
     }
 
@@ -238,13 +236,13 @@ const BookingForm = () => {
   const handleTabChange = (tab: "airport" | "long-distance") => {
     setActiveTab(tab);
     if (tab === "airport") {
-      setFromLocation("Hà Nội");
-      setToLocation("Sân bay Nội Bài");
-      setCoords({ from: HANOI_COORDS, to: NOI_BAI_COORDS });
+      setFromLocation("Sân bay Cam Ranh");
+      setToLocation("TP. Nha Trang");
+      setCoords({ from: CAM_RANH_AIRPORT_COORDS, to: NHA_TRANG_COORDS });
     } else {
-      setFromLocation("Hà Nội");
-      setToLocation("");
-      setCoords({ from: HANOI_COORDS, to: {} });
+      setFromLocation("TP. Nha Trang");
+      setToLocation("TP. Đà Lạt");
+      setCoords({ from: NHA_TRANG_COORDS, to: {} });
     }
   };
 

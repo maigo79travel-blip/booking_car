@@ -30,10 +30,10 @@ const Footer = () => {
           {/* Company Info */}
           <div className="col-span-1">
             <div className="flex items-center gap-3 mb-4">
-              <Link href="/" aria-label="Trang chủ inoibai.vn">
+              <Link href="/" aria-label="Trang chủ inhatrang.vn">
                 <Image
                   src={contact.logo_url || "/images/Brand.jpg"}
-                  alt={`${contact.brand_name || "inoibai.vn"} - Taxi đưa đón sân bay Nội Bài giá rẻ`}
+                  alt={`${contact.brand_name || "inhatrang.vn"} - Taxi đưa đón sân bay Cam Ranh giá rẻ`}
                   width={60}
                   height={60}
                   className="rounded-lg hover:opacity-80 transition-opacity object-cover"
@@ -193,10 +193,10 @@ const Footer = () => {
                 <div>
                   <p className="text-xs text-gray-400 font-semibold">{t.footer.emailTitle}</p>
                   <a
-                    href={`mailto:${contact.email || "inoibai.vn@gmail.com"}`}
+                    href={`mailto:${contact.email || "inhatrang.vn@gmail.com"}`}
                     className="text-gray-300 hover:text-orange-500 text-sm"
                   >
-                    {contact.email || "inoibai.vn@gmail.com"}
+                    {contact.email || "inhatrang.vn@gmail.com"}
                   </a>
                 </div>
               </li>

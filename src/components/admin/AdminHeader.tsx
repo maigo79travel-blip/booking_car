@@ -9,7 +9,6 @@ import {
   CheckSquare,
   LogOut,
   User,
-  Shield,
   ChevronDown,
 } from "lucide-react";
 

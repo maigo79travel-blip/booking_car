@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Phone, MessageCircle } from "lucide-react";
+import { Phone } from "lucide-react";
 import { useSiteContent } from "@/context/SiteContentContext";
 
 const FloatingContacts = () => {

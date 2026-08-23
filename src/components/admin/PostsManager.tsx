@@ -9,16 +9,13 @@ import {
   Trash2,
   Search,
   ExternalLink,
-  Globe,
-  CheckCircle,
-  Clock,
   FileText,
 } from "lucide-react";
-import PostModal from "./PostModal";
+import PostModal, { PostRecord } from "./PostModal";
 
 interface PostsManagerProps {
-  posts: any[];
-  onSavePost: (id: string | null, data: any) => Promise<void>;
+  posts: PostRecord[];
+  onSavePost: (id: string | null, data: Record<string, unknown>) => Promise<void>;
   onDeletePost: (id: string) => Promise<void>;
 }
 
@@ -29,12 +26,13 @@ export default function PostsManager({
 }: PostsManagerProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
-  const [editingPost, setEditingPost] = useState<any | null>(null);
+  const [editingPost, setEditingPost] = useState<PostRecord | null>(null);
   const [isCreating, setIsCreating] = useState(false);
 
-  const getTitle = (p: any) => {
+  const getTitle = (p: PostRecord) => {
     if (typeof p.title === "object" && p.title) {
-      return p.title.vi || p.title.en || Object.values(p.title)[0] || "Không có tiêu đề";
+      const titleObj = p.title as Record<string, string>;
+      return titleObj.vi || titleObj.en || Object.values(titleObj)[0] || "Không có tiêu đề";
     }
     return String(p.title || "Không có tiêu đề");
   };
@@ -51,13 +49,14 @@ export default function PostsManager({
     return matchesSearch && matchesStatus;
   });
 
-  const handleSave = async (data: any) => {
-    await onSavePost(editingPost ? editingPost.id : null, data);
+  const handleSave = async (data: Record<string, unknown>) => {
+    await onSavePost(editingPost?.id || null, data);
     setEditingPost(null);
     setIsCreating(false);
   };
 
-  const handleDelete = async (id: string, titleStr: string) => {
+  const handleDelete = async (id: string | undefined, titleStr: string) => {
+    if (!id) return;
     if (confirm(`Bạn có chắc chắn muốn xóa bài viết "${titleStr}" không?`)) {
       await onDeletePost(id);
     }
@@ -128,7 +127,6 @@ export default function PostsManager({
               {filteredPosts.length > 0 ? (
                 filteredPosts.map((p) => {
                   const titleStr = getTitle(p);
-                  const langs = typeof p.title === "object" ? Object.keys(p.title) : ["vi"];
 
                   return (
                     <tr

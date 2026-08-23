@@ -11,7 +11,7 @@ import {
   Calendar,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
-import { useSiteContent, TestimonialConfig } from "@/context/SiteContentContext";
+import { useSiteContent } from "@/context/SiteContentContext";
 
 interface UnifiedTestimonial {
   id?: string | number;

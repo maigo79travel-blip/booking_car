@@ -256,7 +256,7 @@ const BookingForm = () => {
 
   return (
     <div className="w-full max-w-lg mx-auto">
-      <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl shadow-2xl overflow-hidden border border-orange-400/30">
+      <div className="bg-linear-to-br from-orange-500 to-orange-600 rounded-2xl shadow-2xl overflow-hidden border border-orange-400/30">
         {/* Header Tabs */}
         <div className="flex border-b border-orange-400/40 text-sm md:text-base font-bold">
           <button

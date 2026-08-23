@@ -13,22 +13,30 @@ import {
   ArrowRight,
   Phone,
   Eye,
-  CheckCircle2,
-  Clock,
 } from "lucide-react";
 import { AdminTab } from "./AdminSidebar";
 
+export interface BookingOverviewItem {
+  id?: string;
+  customer_name?: string;
+  phone_number?: string;
+  from_location?: string;
+  to_location?: string;
+  way_type?: string;
+  trip_date?: string;
+  trip_time?: string;
+  car_type?: string;
+  estimated_price?: number | string;
+  total_price?: number | string;
+}
+
 interface DashboardOverviewProps {
-  bookings: any[];
-  posts: any[];
-  routes: any[];
+  bookings: BookingOverviewItem[];
   onNavigateTab: (tab: AdminTab) => void;
 }
 
 export default function DashboardOverview({
   bookings,
-  posts,
-  routes,
   onNavigateTab,
 }: DashboardOverviewProps) {
   const [selectedRange, setSelectedRange] = useState("Tháng này");
@@ -281,7 +289,14 @@ export default function DashboardOverview({
                 Top Tuyến Xe Chạy
               </h2>
               <div className="relative">
-                <button className="bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 shadow-sm">
+                <button
+                  onClick={() =>
+                    setSelectedRange((prev) =>
+                      prev === "Tháng này" ? "Hôm nay" : prev === "Hôm nay" ? "Năm nay" : "Tháng này"
+                    )
+                  }
+                  className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 shadow-sm cursor-pointer"
+                >
                   <span>{selectedRange}</span>
                   <ChevronDown size={12} />
                 </button>

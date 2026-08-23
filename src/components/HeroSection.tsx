@@ -8,7 +8,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { useSiteContent } from "@/context/SiteContentContext";
 
 const HeroSection = () => {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const { hero } = useSiteContent();
   const images = hero.banners && hero.banners.length > 0 ? hero.banners : ["/images/Hero1.jpg", "/images/Hero2.jpg", "/images/Hero22.jpg"];
 

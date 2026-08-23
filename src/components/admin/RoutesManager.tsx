@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { Plus, Edit2, Trash2, Search, DollarSign, MapPin } from "lucide-react";
-import RouteModal from "./RouteModal";
+import { Plus, Edit2, Trash2, Search, MapPin } from "lucide-react";
+import RouteModal, { RouteRecord } from "./RouteModal";
 
 interface RoutesManagerProps {
-  routes: any[];
-  onSaveRoute: (id: string | null, data: any) => Promise<void>;
+  routes: RouteRecord[];
+  onSaveRoute: (id: string | null, data: Record<string, unknown>) => Promise<void>;
   onDeleteRoute: (id: string) => Promise<void>;
 }
 
@@ -17,12 +17,12 @@ export default function RoutesManager({
 }: RoutesManagerProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [vehicleFilter, setVehicleFilter] = useState("all");
-  const [editingRoute, setEditingRoute] = useState<any | null>(null);
+  const [editingRoute, setEditingRoute] = useState<RouteRecord | null>(null);
   const [isCreating, setIsCreating] = useState(false);
 
-  const getLabel = (val: any) => {
+  const getLabel = (val: Record<string, string> | string | undefined) => {
     if (typeof val === "object" && val) {
-      return val.vi || val.en || Object.values(val)[0] || "";
+      return (val as Record<string, string>).vi || (val as Record<string, string>).en || Object.values(val)[0] || "";
     }
     return String(val || "");
   };
@@ -40,13 +40,14 @@ export default function RoutesManager({
     return matchesSearch && matchesVehicle;
   });
 
-  const handleSave = async (data: any) => {
-    await onSaveRoute(editingRoute ? editingRoute.id : null, data);
+  const handleSave = async (data: Record<string, unknown>) => {
+    await onSaveRoute(editingRoute?.id || null, data);
     setEditingRoute(null);
     setIsCreating(false);
   };
 
-  const handleDelete = async (id: string, nameStr: string) => {
+  const handleDelete = async (id: string | undefined, nameStr: string) => {
+    if (!id) return;
     if (confirm(`Bạn có chắc chắn muốn xóa tuyến "${nameStr}" không?`)) {
       await onDeleteRoute(id);
     }

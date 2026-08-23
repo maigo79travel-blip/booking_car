@@ -1,16 +1,33 @@
-"use client";
-
 import React, { useState } from "react";
-import Image from "next/image";
 import { Language, SUPPORTED_LANGUAGES } from "@/lib/i18n/types";
-import { X, Save, Image as ImageIcon, Globe, FileText, CheckCircle } from "lucide-react";
+import { X, Save, Globe, FileText } from "lucide-react";
 import ImageUploadField from "./ImageUploadField";
 
-interface PostModalProps {
-  post: any | null;
-  onClose: () => void;
-  onSave: (data: any) => Promise<void>;
+export interface PostRecord {
+  id?: string;
+  slug?: string;
+  cover_image?: string | null;
+  status?: "published" | "draft";
+  published_at?: string | null;
+  title?: Record<string, string> | string;
+  seo_title?: Record<string, string> | string;
+  excerpt?: Record<string, string> | string;
+  seo_description?: Record<string, string> | string;
+  body?: Record<string, string> | string;
 }
+
+interface PostModalProps {
+  post: PostRecord | null;
+  onClose: () => void;
+  onSave: (data: Record<string, unknown>) => Promise<void>;
+}
+
+const getLangVal = (source: Record<string, string> | string | undefined, lang: Language): string => {
+  if (typeof source === "object" && source !== null) {
+    return (source as Record<string, string>)[lang] || "";
+  }
+  return lang === "vi" && typeof source === "string" ? source : "";
+};
 
 export default function PostModal({ post, onClose, onSave }: PostModalProps) {
   const isEditing = !!post?.id;
@@ -29,18 +46,45 @@ export default function PostModal({ post, onClose, onSave }: PostModalProps) {
       : new Date().toISOString().slice(0, 10)
   );
 
-  // Localized fields state
-  const [title, setTitle] = useState<Record<string, string>>(post?.title || {});
-  const [seoTitle, setSeoTitle] = useState<Record<string, string>>(
-    post?.seo_title || {}
-  );
-  const [excerpt, setExcerpt] = useState<Record<string, string>>(
-    post?.excerpt || {}
-  );
-  const [seoDescription, setSeoDescription] = useState<Record<string, string>>(
-    post?.seo_description || {}
-  );
-  const [body, setBody] = useState<Record<string, string>>(post?.body || {});
+  const [title, setTitle] = useState<Record<Language, string>>(() => ({
+    vi: getLangVal(post?.title, "vi"),
+    en: getLangVal(post?.title, "en"),
+    ko: getLangVal(post?.title, "ko"),
+    ru: getLangVal(post?.title, "ru"),
+    zh: getLangVal(post?.title, "zh"),
+  }));
+
+  const [seoTitle, setSeoTitle] = useState<Record<Language, string>>(() => ({
+    vi: getLangVal(post?.seo_title, "vi"),
+    en: getLangVal(post?.seo_title, "en"),
+    ko: getLangVal(post?.seo_title, "ko"),
+    ru: getLangVal(post?.seo_title, "ru"),
+    zh: getLangVal(post?.seo_title, "zh"),
+  }));
+
+  const [excerpt, setExcerpt] = useState<Record<Language, string>>(() => ({
+    vi: getLangVal(post?.excerpt, "vi"),
+    en: getLangVal(post?.excerpt, "en"),
+    ko: getLangVal(post?.excerpt, "ko"),
+    ru: getLangVal(post?.excerpt, "ru"),
+    zh: getLangVal(post?.excerpt, "zh"),
+  }));
+
+  const [seoDescription, setSeoDescription] = useState<Record<Language, string>>(() => ({
+    vi: getLangVal(post?.seo_description, "vi"),
+    en: getLangVal(post?.seo_description, "en"),
+    ko: getLangVal(post?.seo_description, "ko"),
+    ru: getLangVal(post?.seo_description, "ru"),
+    zh: getLangVal(post?.seo_description, "zh"),
+  }));
+
+  const [body, setBody] = useState<Record<Language, string>>(() => ({
+    vi: getLangVal(post?.body, "vi"),
+    en: getLangVal(post?.body, "en"),
+    ko: getLangVal(post?.body, "ko"),
+    ru: getLangVal(post?.body, "ru"),
+    zh: getLangVal(post?.body, "zh"),
+  }));
 
   const handleTextChange = (
     field: "title" | "seoTitle" | "excerpt" | "seoDescription" | "body",
@@ -93,8 +137,9 @@ export default function PostModal({ post, onClose, onSave }: PostModalProps) {
       };
 
       await onSave(payload);
-    } catch (err: any) {
-      alert(`Lỗi khi lưu bài viết: ${err.message}`);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : String(err);
+      alert(`Lỗi khi lưu bài viết: ${msg}`);
     } finally {
       setIsSaving(false);
     }

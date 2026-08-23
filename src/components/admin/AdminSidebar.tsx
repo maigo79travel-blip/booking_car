@@ -11,7 +11,6 @@ import {
   ExternalLink,
   LogOut,
   ChevronRight,
-  Shield,
 } from "lucide-react";
 
 export type AdminTab = "dashboard" | "bookings" | "posts" | "routes" | "content";

@@ -1,13 +1,24 @@
 "use client";
 
 import React, { useState } from "react";
-import { X, Save, DollarSign, MapPin } from "lucide-react";
+import { X, Save, DollarSign } from "lucide-react";
 import { Language, SUPPORTED_LANGUAGES } from "@/lib/i18n/types";
 
+export interface RouteRecord {
+  id?: string;
+  vehicle_type?: string;
+  trip_type?: string;
+  price?: number | string;
+  sort_order?: number;
+  is_active?: boolean;
+  origin?: Record<string, string> | string;
+  destination?: Record<string, string> | string;
+}
+
 interface RouteModalProps {
-  route: any | null;
+  route: RouteRecord | null;
   onClose: () => void;
-  onSave: (data: any) => Promise<void>;
+  onSave: (data: Record<string, unknown>) => Promise<void>;
 }
 
 export default function RouteModal({
@@ -28,10 +39,10 @@ export default function RouteModal({
 
   // Localized fields
   const [origin, setOrigin] = useState<Record<string, string>>(
-    typeof route?.origin === "object" && route?.origin ? route.origin : { vi: String(route?.origin || "Hà Nội") }
+    typeof route?.origin === "object" && route?.origin ? (route.origin as Record<string, string>) : { vi: String(route?.origin || "Hà Nội") }
   );
   const [destination, setDestination] = useState<Record<string, string>>(
-    typeof route?.destination === "object" && route?.destination ? route.destination : { vi: String(route?.destination || "Sân bay Nội Bài") }
+    typeof route?.destination === "object" && route?.destination ? (route.destination as Record<string, string>) : { vi: String(route?.destination || "Sân bay Nội Bài") }
   );
 
   const handleOriginChange = (val: string) => {
@@ -63,8 +74,9 @@ export default function RouteModal({
       };
 
       await onSave(payload);
-    } catch (err: any) {
-      alert(`Lỗi khi lưu tuyến xe: ${err.message}`);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : String(err);
+      alert(`Lỗi khi lưu tuyến xe: ${msg}`);
     } finally {
       setIsSaving(false);
     }

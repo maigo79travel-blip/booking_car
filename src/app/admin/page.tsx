@@ -17,11 +17,16 @@ import PostsManager from "@/components/admin/PostsManager";
 import RoutesManager from "@/components/admin/RoutesManager";
 import ContentManager from "@/components/admin/ContentManager";
 
-type Data = {
-  posts: any[];
-  routes: any[];
-  content: any[];
-  bookings: any[];
+export type PostItem = Record<string, unknown>;
+export type RouteItem = Record<string, unknown>;
+export type ContentItem = Record<string, unknown>;
+export type BookingItem = Record<string, unknown>;
+
+export type Data = {
+  posts: PostItem[];
+  routes: RouteItem[];
+  content: ContentItem[];
+  bookings: BookingItem[];
 };
 
 const emptyData: Data = {
@@ -64,7 +69,35 @@ export default function AdminPage() {
   };
 
   useEffect(() => {
-    load();
+    let isMounted = true;
+    fetch("/api/admin/data")
+      .then((res) => {
+        if (!res.ok) {
+          if (isMounted) {
+            setAuthorized(false);
+            setLoading(false);
+          }
+          return null;
+        }
+        return res.json();
+      })
+      .then((fetchedData) => {
+        if (isMounted && fetchedData) {
+          setData(fetchedData);
+          setAuthorized(true);
+          setLoading(false);
+        }
+      })
+      .catch(() => {
+        if (isMounted) {
+          setAuthorized(false);
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const login = async (e: FormEvent) => {
@@ -88,8 +121,9 @@ export default function AdminPage() {
         await load();
         setIsLoggingIn(false);
       }
-    } catch (err: any) {
-      setMessage("Không thể kết nối tới máy chủ: " + err.message);
+    } catch (err: unknown) {
+      const errMsg = err instanceof Error ? err.message : String(err);
+      setMessage("Không thể kết nối tới máy chủ: " + errMsg);
       setIsLoggingIn(false);
     }
   };
@@ -102,7 +136,7 @@ export default function AdminPage() {
   };
 
   // CRUD Handlers for Posts
-  const handleSavePost = async (id: string | null, postData: any) => {
+  const handleSavePost = async (id: string | null, postData: Record<string, unknown>) => {
     if (id) {
       // Update
       const res = await fetch("/api/admin/data", {
@@ -132,7 +166,7 @@ export default function AdminPage() {
   };
 
   // CRUD Handlers for Routes
-  const handleSaveRoute = async (id: string | null, routeData: any) => {
+  const handleSaveRoute = async (id: string | null, routeData: Record<string, unknown>) => {
     if (id) {
       const res = await fetch("/api/admin/data", {
         method: "PUT",
@@ -160,7 +194,7 @@ export default function AdminPage() {
   };
 
   // Handler for Content
-  const handleSaveContent = async (id: string, contentData: any) => {
+  const handleSaveContent = async (id: string, contentData: Record<string, unknown>) => {
     const res = await fetch("/api/admin/data", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -312,8 +346,6 @@ export default function AdminPage() {
           {activeTab === "dashboard" && (
             <DashboardOverview
               bookings={data.bookings}
-              posts={data.posts}
-              routes={data.routes}
               onNavigateTab={setActiveTab}
             />
           )}

@@ -3,20 +3,30 @@
 import React, { useState } from "react";
 import {
   Search,
-  Filter,
   Phone,
-  Trash2,
-  Calendar,
-  Car,
   MapPin,
   RefreshCw,
-  CheckCircle,
-  Clock,
   Download,
 } from "lucide-react";
 
+export interface BookingRecord {
+  id?: string;
+  customer_name?: string;
+  phone_number?: string;
+  from_location?: string;
+  to_location?: string;
+  car_type?: string;
+  way_type?: string;
+  trip_date?: string;
+  trip_time?: string;
+  estimated_price?: number | string;
+  total_price?: number | string;
+  notes?: string;
+  created_at?: string;
+}
+
 interface BookingsManagerProps {
-  bookings: any[];
+  bookings: BookingRecord[];
   onRefresh: () => void;
 }
 

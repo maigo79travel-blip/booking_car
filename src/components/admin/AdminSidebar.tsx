@@ -70,7 +70,7 @@ export default function AdminSidebar({
       items: [
         {
           id: "posts" as AdminTab,
-          label: "Bài viết SEO (5 ngôn ngữ)",
+          label: "Bài viết SEO",
           icon: FileText,
           badge: postsCount > 0 ? postsCount : null,
           badgeColor: "bg-green-500",

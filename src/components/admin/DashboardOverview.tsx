@@ -106,7 +106,7 @@ export default function DashboardOverview({
           <div className="flex items-start justify-between">
             <div>
               <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">
-                EARNINGS (DOANH THU DỰ KIẾN)
+                DOANH THU DỰ KIẾN
               </span>
               <span className="text-xl lg:text-2xl font-black text-gray-800 mt-1 block">
                 {totalRevenue > 0 ? formatCurrency(totalRevenue) : "45.800.000₫"}
@@ -128,7 +128,7 @@ export default function DashboardOverview({
           <div className="flex items-start justify-between">
             <div>
               <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">
-                SALES (TỔNG CUỐC XE)
+                TỔNG CUỐC XE
               </span>
               <span className="text-xl lg:text-2xl font-black text-gray-800 mt-1 block">
                 {totalBookings > 0 ? `${totalBookings} chuyến` : "142 chuyến"}
@@ -150,7 +150,7 @@ export default function DashboardOverview({
           <div className="flex items-start justify-between">
             <div>
               <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">
-                NEW USER (KHÁCH HÀNG)
+                KHÁCH HÀNG MỚI
               </span>
               <span className="text-xl lg:text-2xl font-black text-gray-800 mt-1 block">
                 {uniqueCustomers > 0 ? `${uniqueCustomers} khách` : "98 khách"}
@@ -172,7 +172,7 @@ export default function DashboardOverview({
           <div className="flex items-start justify-between">
             <div>
               <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">
-                PENDING REQUESTS (ĐƠN MỚI)
+                ĐƠN ĐẶT MỚI
               </span>
               <span className="text-xl lg:text-2xl font-black text-gray-800 mt-1 block">
                 {pendingRequests} đơn

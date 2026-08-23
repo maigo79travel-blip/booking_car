@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
-import { headers } from "next/headers";
 import "./globals.css";
 
 const inter = Inter({
@@ -223,22 +222,15 @@ const jsonLdGraph = {
 import { LanguageProvider } from "@/context/LanguageContext";
 import { SiteContentProvider } from "@/context/SiteContentContext";
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
-  let locale = "vi";
-  try {
-    const headerList = await headers();
-    locale = headerList.get("x-locale") || "vi";
-  } catch {
-    locale = "vi";
-  }
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang="vi" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"

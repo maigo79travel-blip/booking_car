@@ -229,7 +229,13 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
-  const locale = (await headers()).get("x-locale") || "vi";
+  let locale = "vi";
+  try {
+    const headerList = await headers();
+    locale = headerList.get("x-locale") || "vi";
+  } catch {
+    locale = "vi";
+  }
 
   return (
     <html lang={locale} suppressHydrationWarning>

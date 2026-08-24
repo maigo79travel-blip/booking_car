@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
+import { getAllSiteContent } from "@/lib/server/content";
 import "./globals.css";
 
 const inter = Inter({
@@ -19,7 +20,7 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
-export const metadata: Metadata = {
+const defaultMetadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: "Đặt xe sân bay Cam Ranh – Taxi Nha Trang giá rẻ 24/7 - maigo79.com",
@@ -91,6 +92,52 @@ export const metadata: Metadata = {
     images: ["/images/logo-maigo79.png"],
   },
 };
+
+type GlobalSeo = {
+  title?: string;
+  description?: string;
+  keywords?: string[];
+  og_image?: string;
+  site_name?: string;
+};
+
+export async function generateMetadata(): Promise<Metadata> {
+  try {
+    const content = await getAllSiteContent();
+    const seo = (content.site_seo || {}) as GlobalSeo;
+    const title = seo.title || "Đặt xe sân bay Cam Ranh – Taxi Nha Trang giá rẻ 24/7 - maigo79.com";
+    const description =
+      seo.description ||
+      "Dịch vụ đặt xe taxi đưa đón Sân bay Quốc tế Cam Ranh (CXR) về TP. Nha Trang và các resort Bãi Dài giá rẻ trọn gói chỉ từ 250k. Xe 5-7-16 chỗ đời mới đón trả 24/7. Hotline: 0928 015 280 - 0905 876 231";
+    const image = seo.og_image || "/images/logo-maigo79.png";
+    const siteName = seo.site_name || "maigo79.com";
+
+    return {
+      ...defaultMetadata,
+      title: { default: title, template: `%s | ${siteName}` },
+      description,
+      keywords: seo.keywords?.filter(Boolean) || defaultMetadata.keywords,
+      authors: [{ name: siteName, url: siteUrl }],
+      creator: siteName,
+      publisher: siteName,
+      openGraph: {
+        ...defaultMetadata.openGraph,
+        title,
+        description,
+        siteName,
+        images: [{ url: image, width: 1200, height: 630, alt: siteName }],
+      },
+      twitter: {
+        ...defaultMetadata.twitter,
+        title,
+        description,
+        images: [image],
+      },
+    };
+  } catch {
+    return defaultMetadata;
+  }
+}
 
 const jsonLdGraph = {
   "@context": "https://schema.org",

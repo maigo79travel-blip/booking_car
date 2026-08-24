@@ -217,6 +217,25 @@ export default function AdminAppPage() {
     await load();
   };
 
+  // CRUD Handlers for Bookings
+  const handleSaveBooking = async (id: string, bookingData: Record<string, unknown>) => {
+    const res = await fetch("/api/admin/data", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ table: "bookings", id, data: bookingData }),
+    });
+    if (!res.ok) throw new Error("Không thể cập nhật đơn đặt xe");
+    await load();
+  };
+
+  const handleDeleteBooking = async (id: string) => {
+    const res = await fetch(`/api/admin/data?table=bookings&id=${id}`, {
+      method: "DELETE",
+    });
+    if (!res.ok) alert("Không thể xóa đơn đặt xe!");
+    await load();
+  };
+
   // Handler for Content
   const handleSaveContent = async (id: string, contentData: Record<string, unknown>) => {
     const res = await fetch("/api/admin/data", {
@@ -384,6 +403,8 @@ export default function AdminAppPage() {
             <BookingsManager
               bookings={data.bookings}
               onRefresh={load}
+              onSaveBooking={handleSaveBooking}
+              onDeleteBooking={handleDeleteBooking}
             />
           )}
 

@@ -4,6 +4,23 @@ import { query } from "@/lib/server/db";
 
 export const runtime = "nodejs";
 
+const editableColumns = {
+  posts: new Set(["slug", "title", "excerpt", "body", "seo_title", "seo_description", "cover_image", "status", "published_at"]),
+  price_routes: new Set(["origin", "destination", "vehicle_type", "trip_type", "price", "currency", "is_active", "sort_order"]),
+  site_content: new Set(["content_key", "content_type", "value"]),
+  bookings: new Set(["customer_name", "phone_number", "from_location", "to_location", "car_type", "trip_date", "trip_time", "way_type", "total_price"]),
+} as const;
+
+type EditableTable = keyof typeof editableColumns;
+
+function isEditableTable(table: unknown): table is EditableTable {
+  return typeof table === "string" && table in editableColumns;
+}
+
+function hasOnlyEditableColumns(table: EditableTable, data: Record<string, unknown>) {
+  return Object.keys(data).every((key) => editableColumns[table].has(key));
+}
+
 export async function GET() {
   try {
     await requireAdmin();
@@ -27,16 +44,12 @@ export async function PUT(request: Request) {
   try {
     await requireAdmin();
     const { table, id, data } = await request.json();
-    if (
-      !["posts", "price_routes", "site_content", "bookings"].includes(table) ||
-      !id ||
-      !data
-    ) {
+    if (!isEditableTable(table) || !id || !data || typeof data !== "object" || Array.isArray(data)) {
       return NextResponse.json({ message: "Invalid request" }, { status: 400 });
     }
 
     const keys = Object.keys(data);
-    if (keys.length === 0) {
+    if (keys.length === 0 || !hasOnlyEditableColumns(table, data)) {
       return NextResponse.json({ message: "No data to update" }, { status: 400 });
     }
 
@@ -67,11 +80,14 @@ export async function POST(request: Request) {
   try {
     await requireAdmin();
     const { table, data } = await request.json();
-    if (!["posts", "price_routes", "site_content"].includes(table) || !data) {
+    if (!isEditableTable(table) || table === "bookings" || !data || typeof data !== "object" || Array.isArray(data)) {
       return NextResponse.json({ message: "Invalid request" }, { status: 400 });
     }
 
     const keys = Object.keys(data);
+    if (keys.length === 0 || !hasOnlyEditableColumns(table, data)) {
+      return NextResponse.json({ message: "Invalid fields" }, { status: 400 });
+    }
     const columnNames = keys.map((k) => `"${k}"`).join(", ");
     const valuePlaceholders = keys.map((_, i) => `$${i + 1}`).join(", ");
     const values = keys.map((key) => {
@@ -105,7 +121,7 @@ export async function DELETE(request: Request) {
     if (
       !table ||
       !id ||
-      !["posts", "price_routes", "site_content", "bookings"].includes(table)
+      !isEditableTable(table)
     ) {
       return NextResponse.json({ message: "Invalid request" }, { status: 400 });
     }

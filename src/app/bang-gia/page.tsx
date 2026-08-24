@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import PriceTable from "@/components/PriceTable";
+import PopularRoutes from "@/components/PopularRoutes";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import FAQSection from "@/components/FAQSection";
 import Testimonials from "@/components/Testimonials";
@@ -51,6 +52,9 @@ export default function PricingPage() {
 
       {/* Price Table */}
       <PriceTable />
+
+      {/* Popular Routes */}
+      <PopularRoutes />
 
       {/* Why Choose Us */}
       <WhyChooseUs />

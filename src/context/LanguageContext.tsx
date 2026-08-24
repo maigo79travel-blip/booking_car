@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { Language } from "@/lib/i18n/types";
 import { translations, TranslationDictionary } from "@/lib/i18n/translations";
+import { useSiteContent } from "@/context/SiteContentContext";
 
 interface LanguageContextProps {
   language: Language;
@@ -17,10 +18,30 @@ const LanguageContext = createContext<LanguageContextProps | undefined>(
 const STORAGE_KEY = "maigo79_preferred_language";
 const VALID_LANGS: Language[] = ["vi", "en", "ko", "ru", "zh"];
 
+function mergeTranslations<T>(base: T, override: unknown): T {
+  if (!override || typeof override !== "object" || Array.isArray(override)) return base;
+
+  const output: Record<string, unknown> = { ...(base as Record<string, unknown>) };
+  for (const [key, value] of Object.entries(override as Record<string, unknown>)) {
+    const baseValue = output[key];
+    output[key] =
+      baseValue &&
+      typeof baseValue === "object" &&
+      !Array.isArray(baseValue) &&
+      value &&
+      typeof value === "object" &&
+      !Array.isArray(value)
+        ? mergeTranslations(baseValue, value)
+        : value;
+  }
+  return output as T;
+}
+
 export const LanguageProvider: React.FC<{
   children: React.ReactNode;
   initialLanguage?: Language;
 }> = ({ children, initialLanguage }) => {
+  const { content } = useSiteContent();
   const [language, setLanguageState] = useState<Language>(() => {
     if (initialLanguage && VALID_LANGS.includes(initialLanguage)) return initialLanguage;
     if (typeof window === "undefined") return "vi";
@@ -45,7 +66,11 @@ export const LanguageProvider: React.FC<{
     document.documentElement.lang = lang;
   };
 
-  const t = (translations[language] || translations.vi) as TranslationDictionary;
+  const cmsTranslations = content.ui_translations as Partial<Record<Language, unknown>> | undefined;
+  const t = mergeTranslations(
+    (translations[language] || translations.vi) as TranslationDictionary,
+    cmsTranslations?.[language]
+  );
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, t }}>

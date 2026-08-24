@@ -18,26 +18,24 @@ import {
   Send,
   Bell,
   Loader2,
+  Compass,
+  Search,
 } from "lucide-react";
 import ImageUploadField from "./ImageUploadField";
 import { Language, SUPPORTED_LANGUAGES } from "@/lib/i18n/types";
+import { VehicleCategory, Vehicle } from "@/context/SiteContentContext";
+import {
+  FeaturedVehicle,
+  TravelDestination,
+  defaultFeaturedVehicles,
+  defaultDestinations,
+} from "@/context/SiteContentContext";
 
 export interface SiteContentRow {
   id: string;
   content_key: string;
   content_type?: string;
   value: unknown;
-}
-
-interface VehicleItem {
-  id?: string;
-  type: string;
-  name: string;
-  models: string;
-  seats: string;
-  luggage: string;
-  price: string;
-  image: string;
 }
 
 interface TestimonialItem {
@@ -62,11 +60,14 @@ interface ContentManagerProps {
 type CMSTab =
   | "hero"
   | "brand"
+  | "featured_vehicles"
+  | "destinations"
   | "vehicles"
-  | "why_us"
-  | "steps"
   | "testimonials"
   | "faq"
+  | "seo"
+  | "translations"
+  | "pages"
   | "cloudinary"
   | "telegram"
   | "raw_json";
@@ -89,9 +90,14 @@ export default function ContentManager({
         [
           "hero",
           "brand",
+          "featured_vehicles",
+          "destinations",
           "vehicles",
           "testimonials",
           "faq",
+          "seo",
+          "translations",
+          "pages",
           "cloudinary",
           "telegram",
           "raw_json",
@@ -188,40 +194,19 @@ export default function ContentManager({
     };
   });
 
-  const [vehiclesData, setVehiclesData] = useState<VehicleItem[]>(() =>
-    getContentArray<VehicleItem>("vehicles_fleet", [
-      {
-        id: "5-seater",
-        type: "5",
-        name: "Xe 5 Chỗ Sedan / Hatchback",
-        models: "Vios, Accent, City, Cerato đời mới",
-        seats: "4 hành khách",
-        luggage: "2 vali lớn + 2 vali nhỏ",
-        price: "250.000đ",
-        image: "/images/51.png",
-      },
-      {
-        id: "7-seater",
-        type: "7",
-        name: "Xe 7 Chỗ SUV / MPV",
-        models: "Innova, Xpander, Fortuner, Veloz đời mới",
-        seats: "6 hành khách",
-        luggage: "4 vali lớn + 3 vali nhỏ",
-        price: "350.000đ",
-        image: "/images/71.png",
-      },
-      {
-        id: "16-seater",
-        type: "16",
-        name: "Xe 16 Chỗ Du Lịch Cao Cấp",
-        models: "Ford Transit, Hyundai Solati đời mới",
-        seats: "15 hành khách",
-        luggage: "8 - 10 vali các loại",
-        price: "650.000đ",
-        image: "/images/161.png",
-      },
-    ])
-  );
+  const [vehicleCategoriesData, setVehicleCategoriesData] = useState<VehicleCategory[]>(() => {
+    return getContentArray<VehicleCategory>("vehicle_categories", []);
+  });
+
+  const [featuredVehiclesData, setFeaturedVehiclesData] = useState<FeaturedVehicle[]>(() => {
+    const raw = getContentArray<FeaturedVehicle>("featured_vehicles", []);
+    return raw && raw.length > 0 ? raw : defaultFeaturedVehicles;
+  });
+
+  const [destinationsData, setDestinationsData] = useState<TravelDestination[]>(() => {
+    const raw = getContentArray<TravelDestination>("nha_trang_destinations", []);
+    return raw && raw.length > 0 ? raw : defaultDestinations;
+  });
 
   const [testimonialsData, setTestimonialsData] = useState<TestimonialItem[]>(() =>
     getContentArray<TestimonialItem>("testimonials", [
@@ -309,6 +294,33 @@ export default function ContentManager({
       topic_id: (raw.topic_id as string) || "",
     };
   });
+
+  const [seoData, setSeoData] = useState(() => {
+    const raw = getContent("site_seo", {});
+    return {
+      title: (raw.title as string) || "",
+      description: (raw.description as string) || "",
+      keywords: Array.isArray(raw.keywords) ? (raw.keywords as string[]).join(", ") : "",
+      og_image: (raw.og_image as string) || "",
+      site_name: (raw.site_name as string) || "",
+    };
+  });
+
+  const [uiTranslationsData, setUiTranslationsData] = useState<Record<string, unknown>>(() =>
+    getContent("ui_translations", {})
+  );
+  const [translationDraft, setTranslationDraft] = useState("");
+  const [pageContentKey, setPageContentKey] = useState<"privacy_policy" | "transport_policy">("privacy_policy");
+  const [pageContentDraft, setPageContentDraft] = useState("");
+
+  useEffect(() => {
+    setTranslationDraft(JSON.stringify(uiTranslationsData[selectedLang] || {}, null, 2));
+  }, [selectedLang, uiTranslationsData]);
+
+  useEffect(() => {
+    const pageContent = content.find((item) => item.content_key === pageContentKey)?.value || {};
+    setPageContentDraft(JSON.stringify(pageContent, null, 2));
+  }, [content, pageContentKey]);
   const [isTestingTelegram, setIsTestingTelegram] = useState(false);
   const [testTelegramResult, setTestTelegramResult] = useState<{ success: boolean; message: string } | null>(null);
 
@@ -420,9 +432,14 @@ export default function ContentManager({
         {[
           { id: "hero", label: "Hero & Banner", icon: Sparkles },
           { id: "brand", label: "Thương hiệu & Hotline", icon: Phone },
-          { id: "vehicles", label: "Đội xe & Ảnh xe", icon: Car },
+          { id: "featured_vehicles", label: "Xe nổi bật (Trang chủ)", icon: Car },
+          { id: "destinations", label: "Địa điểm du lịch Nha Trang", icon: Compass },
+          { id: "vehicles", label: "Đội xe & Phân khúc (/loai-xe)", icon: Globe },
           { id: "testimonials", label: "Đánh giá khách hàng", icon: MessageSquare },
           { id: "faq", label: "Câu hỏi thường gặp FAQ", icon: HelpCircle },
+          { id: "seo", label: "SEO toàn website", icon: Search },
+          { id: "translations", label: "Nhãn giao diện 5 ngôn ngữ", icon: Globe },
+          { id: "pages", label: "Nội dung chính sách", icon: Code },
           { id: "cloudinary", label: "Cấu hình Cloudinary", icon: Cloud },
           { id: "telegram", label: "Thông báo Telegram", icon: Send },
           { id: "raw_json", label: "Dữ liệu thô (Raw JSON)", icon: Code },
@@ -657,14 +674,16 @@ export default function ContentManager({
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="md:col-span-2">
-              <ImageUploadField
-                label="Logo Thương Hiệu (Header & Footer)"
-                value={contactData.logo_url}
-                onChange={(url) => setContactData({ ...contactData, logo_url: url })}
-                folder="inhatrang/branding"
-                placeholder="/images/logo.png hoặc https://res.cloudinary.com/..."
-                helperText="Ảnh logo hiển thị trên thanh điều hướng đầu trang và chân trang website"
-              />
+              <div className="max-w-xs sm:max-w-sm">
+                <ImageUploadField
+                  label="Logo Thương Hiệu (Header & Footer)"
+                  value={contactData.logo_url}
+                  onChange={(url) => setContactData({ ...contactData, logo_url: url })}
+                  folder="inhatrang/branding"
+                  imageHeight="h-20 sm:h-24"
+                  helperText="Ảnh logo hiển thị trên thanh điều hướng đầu trang và chân trang website"
+                />
+              </div>
             </div>
 
             <div>
@@ -762,145 +781,613 @@ export default function ContentManager({
       )}
 
       {/* ========================================================================= */}
-      {/* TAB 3: VEHICLES & FLEET IMAGES */}
+      {/* TAB: FEATURED VEHICLES (Trang Chủ) */}
       {/* ========================================================================= */}
-      {activeTab === "vehicles" && (
+      {activeTab === "featured_vehicles" && (
         <div className="bg-white rounded-xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
             <div>
-              <h2 className="text-lg font-bold text-slate-900">
-                Đội Xe & Hình Ảnh Xe Đưa Đón (5 chỗ, 7 chỗ, 16 chỗ)
+              <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+                <Car size={20} className="text-blue-600" />
+                Các Loại Xe Nổi Bật (Hiển Thị Ở Trang Chủ)
               </h2>
-              <p className="text-xs text-slate-500 font-normal">
-                Thay đổi hình ảnh xe, tên dòng xe, số ghế ngồi, số vali và các tiện nghi đi kèm
+              <p className="text-xs text-slate-500 font-normal mt-0.5">
+                Quản lý danh sách các dòng xe hot trưng bày tại khối &quot;Đội Xe Phục Vụ Cao Cấp&quot; ở trang chủ
               </p>
             </div>
-            <button
-              type="button"
-              disabled={isSaving}
-              onClick={() => handleSaveSection("vehicles_fleet", vehiclesData)}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-xs font-semibold shadow-sm transition-all cursor-pointer"
-            >
-              <Save size={15} />
-              <span>{isSaving ? "Đang lưu..." : "Lưu Thông Tin Đội Xe"}</span>
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  const newCar: FeaturedVehicle = {
+                    id: `v-${Date.now()}`,
+                    name: "Dòng Xe Mới 2026",
+                    seats: "7 chỗ (Tối đa 6 khách)",
+                    type: "SUV 7 chỗ cao cấp",
+                    image: "/images/71.png",
+                    price: "Từ 350.000đ",
+                    tag: "Mới nhất",
+                    features: ["Nội thất sạch sẽ, êm ái", "Cốp rộng chứa đồ", "Nước suối & khăn lạnh"],
+                  };
+                  setFeaturedVehiclesData([...featuredVehiclesData, newCar]);
+                }}
+                className="flex items-center gap-1.5 px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition-colors cursor-pointer"
+              >
+                <Plus size={14} />
+                <span>Thêm Xe Nổi Bật</span>
+              </button>
+
+              <button
+                type="button"
+                disabled={isSaving}
+                onClick={() => handleSaveSection("featured_vehicles", featuredVehiclesData)}
+                className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow-sm transition-all cursor-pointer"
+              >
+                <Save size={15} />
+                <span>{isSaving ? "Đang lưu..." : "Lưu Danh Sách Xe Nổi Bật"}</span>
+              </button>
+            </div>
           </div>
 
           <div className="space-y-6">
-            {vehiclesData.map((v: VehicleItem, index: number) => (
+            {featuredVehiclesData.map((v, idx) => (
               <div
-                key={v.id || index}
-                className="p-5 bg-slate-50 rounded-lg border border-slate-200 space-y-4"
+                key={v.id || idx}
+                className="p-5 md:p-6 bg-slate-50 rounded-xl border border-slate-200 shadow-xs space-y-4"
               >
-                <div className="flex items-center justify-between">
-                  <span className="px-3 py-1 bg-blue-600 text-white rounded-md text-xs font-semibold">
-                    Xe {v.type} Chỗ
-                  </span>
-                  <span className="text-xs font-medium text-slate-500">
-                    Giá từ: <span className="text-orange-600 font-bold">{v.price}</span>
-                  </span>
+                {/* Header of each car card */}
+                <div className="flex items-center justify-between pb-3 border-b border-slate-200">
+                  <div className="flex items-center gap-2.5">
+                    <span className="px-2.5 py-1 bg-blue-600 text-white rounded-md text-xs font-bold shadow-2xs">
+                      Xe #{idx + 1}
+                    </span>
+                    <span className="text-sm font-bold text-slate-900">
+                      {v.name || "Mẫu xe chưa đặt tên"}
+                    </span>
+                    {v.tag && (
+                      <span className="px-2 py-0.5 bg-blue-100 text-blue-800 rounded text-[11px] font-semibold">
+                        {v.tag}
+                      </span>
+                    )}
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const confirm = window.confirm(`Bạn có chắc muốn xóa xe "${v.name}"?`);
+                      if (!confirm) return;
+                      setFeaturedVehiclesData(featuredVehiclesData.filter((_, i) => i !== idx));
+                    }}
+                    className="flex items-center gap-1 px-2.5 py-1 text-red-600 hover:bg-red-50 rounded text-xs font-medium transition-colors cursor-pointer"
+                    title="Xóa xe này"
+                  >
+                    <Trash2 size={14} />
+                    <span>Xóa xe</span>
+                  </button>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {/* Image Upload for vehicle */}
-                  <div>
+                {/* Body: Left Image (4 cols) | Right Info (8 cols) */}
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+                  <div className="md:col-span-4">
                     <ImageUploadField
-                      label={`Hình ảnh xe ${v.type} chỗ`}
+                      label="Hình ảnh xe"
                       value={v.image}
                       onChange={(url) => {
-                        const updated = [...vehiclesData];
-                        updated[index].image = url;
-                        setVehiclesData(updated);
+                        const updated = [...featuredVehiclesData];
+                        updated[idx].image = url;
+                        setFeaturedVehiclesData(updated);
                       }}
-                      folder="inhatrang/vehicles"
-                      placeholder={`/images/${v.type}1.png`}
-                      helperText="Ảnh hiển thị trên trang danh sách loại xe và form chọn xe"
+                      folder="inhatrang/featured-vehicles"
+                      placeholder="/images/51.png"
+                      helperText="Ảnh xe nền trắng hoặc ảnh xe thật hiển thị tại trang chủ"
                     />
                   </div>
 
-                  {/* Vehicle Details */}
-                  <div className="md:col-span-2 space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="md:col-span-8 space-y-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-xs font-semibold text-slate-700 mb-1">
-                          Tên hiển thị
+                          Tên dòng xe
                         </label>
                         <input
                           type="text"
                           value={v.name}
                           onChange={(e) => {
-                            const updated = [...vehiclesData];
-                            updated[index].name = e.target.value;
-                            setVehiclesData(updated);
+                            const updated = [...featuredVehiclesData];
+                            updated[idx].name = e.target.value;
+                            setFeaturedVehiclesData(updated);
                           }}
-                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm font-semibold text-slate-900 outline-none focus:border-blue-600"
+                          placeholder="Ví dụ: Honda City / Toyota Vios"
+                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-xs font-bold text-slate-900 outline-none focus:border-blue-600"
                         />
                       </div>
 
                       <div>
                         <label className="block text-xs font-semibold text-slate-700 mb-1">
-                          Các dòng xe đại diện
+                          Huy hiệu nổi bật (Tag)
                         </label>
                         <input
                           type="text"
-                          value={v.models}
+                          value={v.tag || ""}
                           onChange={(e) => {
-                            const updated = [...vehiclesData];
-                            updated[index].models = e.target.value;
-                            setVehiclesData(updated);
+                            const updated = [...featuredVehiclesData];
+                            updated[idx].tag = e.target.value;
+                            setFeaturedVehiclesData(updated);
                           }}
-                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm font-medium text-slate-800 outline-none focus:border-blue-600"
+                          placeholder="Ví dụ: Phổ biến nhất / VIP"
+                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-xs font-medium text-slate-800 outline-none focus:border-blue-600"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-700 mb-1">
+                          Phân khúc / Loại xe
+                        </label>
+                        <input
+                          type="text"
+                          value={v.type}
+                          onChange={(e) => {
+                            const updated = [...featuredVehiclesData];
+                            updated[idx].type = e.target.value;
+                            setFeaturedVehiclesData(updated);
+                          }}
+                          placeholder="Sedan 5 chỗ đời mới"
+                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-xs font-medium text-slate-800 outline-none focus:border-blue-600"
                         />
                       </div>
 
                       <div>
                         <label className="block text-xs font-semibold text-slate-700 mb-1">
-                          Số lượng hành khách
+                          Số chỗ & Khách hàng
                         </label>
                         <input
                           type="text"
                           value={v.seats}
                           onChange={(e) => {
-                            const updated = [...vehiclesData];
-                            updated[index].seats = e.target.value;
-                            setVehiclesData(updated);
+                            const updated = [...featuredVehiclesData];
+                            updated[idx].seats = e.target.value;
+                            setFeaturedVehiclesData(updated);
                           }}
-                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm font-medium text-slate-800 outline-none focus:border-blue-600"
+                          placeholder="5 chỗ (Tối đa 4 khách)"
+                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-xs font-medium text-slate-800 outline-none focus:border-blue-600"
                         />
                       </div>
 
                       <div>
                         <label className="block text-xs font-semibold text-slate-700 mb-1">
-                          Sức chứa hành lý
-                        </label>
-                        <input
-                          type="text"
-                          value={v.luggage}
-                          onChange={(e) => {
-                            const updated = [...vehiclesData];
-                            updated[index].luggage = e.target.value;
-                            setVehiclesData(updated);
-                          }}
-                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm font-medium text-slate-800 outline-none focus:border-blue-600"
-                        />
-                      </div>
-
-                      <div className="md:col-span-2">
-                        <label className="block text-xs font-semibold text-slate-700 mb-1">
-                          Giá khởi điểm hiển thị
+                          Giá cước hiển thị
                         </label>
                         <input
                           type="text"
                           value={v.price}
                           onChange={(e) => {
-                            const updated = [...vehiclesData];
-                            updated[index].price = e.target.value;
-                            setVehiclesData(updated);
+                            const updated = [...featuredVehiclesData];
+                            updated[idx].price = e.target.value;
+                            setFeaturedVehiclesData(updated);
                           }}
-                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm font-semibold text-orange-600 outline-none focus:border-blue-600"
+                          placeholder="Từ 250.000đ"
+                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-xs font-bold text-emerald-700 outline-none focus:border-blue-600"
                         />
                       </div>
                     </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* TAB: DESTINATIONS (Địa Điểm Du Lịch Nha Trang) */}
+      {/* ========================================================================= */}
+      {activeTab === "destinations" && (
+        <div className="bg-white rounded-xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+            <div>
+              <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+                <Compass size={20} className="text-blue-600" />
+                Địa Điểm Du Lịch Nha Trang (Dạng Lưới Trang Chủ)
+              </h2>
+              <p className="text-xs text-slate-500 font-normal mt-0.5">
+                Đăng ảnh, tiêu đề, khoảng cách và mô tả các danh thắng du lịch nổi tiếng ở Nha Trang – Cam Ranh
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  const newDest: TravelDestination = {
+                    id: `dest-${Date.now()}`,
+                    title: "Địa Điểm Du Lịch Mới",
+                    subtitle: "Danh lam thắng cảnh nổi tiếng",
+                    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+                    distance: "Cách trung tâm ~10km",
+                    description: "Mô tả ngắn gọn vẻ đẹp và các trải nghiệm thú vị tại điểm du lịch này.",
+                    tag: "Khám phá",
+                  };
+                  setDestinationsData([...destinationsData, newDest]);
+                }}
+                className="flex items-center gap-1.5 px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition-colors cursor-pointer"
+              >
+                <Plus size={14} />
+                <span>Thêm Địa Điểm Du Lịch</span>
+              </button>
+
+              <button
+                type="button"
+                disabled={isSaving}
+                onClick={() => handleSaveSection("nha_trang_destinations", destinationsData)}
+                className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow-sm transition-all cursor-pointer"
+              >
+                <Save size={15} />
+                <span>{isSaving ? "Đang lưu..." : "Lưu Danh Sách Địa Điểm"}</span>
+              </button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {destinationsData.map((dest, idx) => (
+              <div
+                key={dest.id || idx}
+                className="p-5 bg-slate-50 rounded-xl border border-slate-200 shadow-xs space-y-4 flex flex-col justify-between"
+              >
+                <div className="space-y-3.5">
+                  {/* Destination Card Header */}
+                  <div className="flex items-center justify-between pb-2 border-b border-slate-200">
+                    <div className="flex items-center gap-2">
+                      <span className="px-2.5 py-1 bg-indigo-600 text-white rounded-md text-xs font-bold">
+                        #{idx + 1}
+                      </span>
+                      <span className="text-xs font-bold text-slate-900 truncate max-w-42.5" title={dest.title}>
+                        {dest.title}
+                      </span>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const confirm = window.confirm(`Bạn có chắc muốn xóa địa điểm "${dest.title}"?`);
+                        if (!confirm) return;
+                        setDestinationsData(destinationsData.filter((_, i) => i !== idx));
+                      }}
+                      className="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded transition-colors cursor-pointer"
+                      title="Xóa địa điểm này"
+                    >
+                      <Trash2 size={15} />
+                    </button>
+                  </div>
+
+                  {/* Destination Image Upload */}
+                  <div>
+                    <ImageUploadField
+                      label="Hình ảnh địa điểm du lịch"
+                      value={dest.image}
+                      onChange={(url) => {
+                        const updated = [...destinationsData];
+                        updated[idx].image = url;
+                        setDestinationsData(updated);
+                      }}
+                      folder="inhatrang/destinations"
+                      placeholder="https://images.unsplash.com/..."
+                      helperText="Ảnh hiển thị dạng lưới ngoài trang chủ"
+                    />
+                  </div>
+
+                  {/* Inputs */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-700 mb-1">
+                        Tên địa điểm
+                      </label>
+                      <input
+                        type="text"
+                        value={dest.title}
+                        onChange={(e) => {
+                          const updated = [...destinationsData];
+                          updated[idx].title = e.target.value;
+                          setDestinationsData(updated);
+                        }}
+                        className="w-full px-2.5 py-1.5 bg-white border border-slate-300 rounded text-xs font-bold text-slate-900 outline-none focus:border-blue-600"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-700 mb-1">
+                        Loại hình / Tag
+                      </label>
+                      <input
+                        type="text"
+                        value={dest.tag || ""}
+                        onChange={(e) => {
+                          const updated = [...destinationsData];
+                          updated[idx].tag = e.target.value;
+                          setDestinationsData(updated);
+                        }}
+                        placeholder="Biển đảo / Văn hóa"
+                        className="w-full px-2.5 py-1.5 bg-white border border-slate-300 rounded text-xs font-medium text-slate-800 outline-none focus:border-blue-600"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-700 mb-1">
+                        Phụ đề / Điểm nhấn
+                      </label>
+                      <input
+                        type="text"
+                        value={dest.subtitle || ""}
+                        onChange={(e) => {
+                          const updated = [...destinationsData];
+                          updated[idx].subtitle = e.target.value;
+                          setDestinationsData(updated);
+                        }}
+                        placeholder="Thiên đường vui chơi..."
+                        className="w-full px-2.5 py-1.5 bg-white border border-slate-300 rounded text-xs font-medium text-slate-800 outline-none focus:border-blue-600"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-700 mb-1">
+                        Khoảng cách di chuyển
+                      </label>
+                      <input
+                        type="text"
+                        value={dest.distance || ""}
+                        onChange={(e) => {
+                          const updated = [...destinationsData];
+                          updated[idx].distance = e.target.value;
+                          setDestinationsData(updated);
+                        }}
+                        placeholder="Cách trung tâm ~5km"
+                        className="w-full px-2.5 py-1.5 bg-white border border-slate-300 rounded text-xs font-medium text-slate-800 outline-none focus:border-blue-600"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      Mô tả ngắn gọn
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={dest.description}
+                      onChange={(e) => {
+                        const updated = [...destinationsData];
+                        updated[idx].description = e.target.value;
+                        setDestinationsData(updated);
+                      }}
+                      className="w-full px-2.5 py-1.5 bg-white border border-slate-300 rounded text-xs text-slate-700 outline-none focus:border-blue-600"
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* TAB 3: VEHICLES & FLEET IMAGES */}
+      {/* ========================================================================= */}
+      {activeTab === "vehicles" && (
+        <div className="bg-white rounded-xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+            <div>
+              <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+                <Car size={20} className="text-blue-600" />
+                Quản Lý Đội Xe & Toàn Bộ Hình Ảnh Mẫu Xe (5, 7, 16 Chỗ...)
+              </h2>
+              <p className="text-xs text-slate-500 font-normal mt-0.5">
+                Thêm, sửa tên, thay đổi / tải lên hình ảnh từng mẫu xe (Honda City, Mazda 3, VF6, Fortuner, Xpander, Solati...)
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  const newCategory: VehicleCategory = {
+                    title: "PHÂN KHÚC XE MỚI",
+                    seats: "",
+                    luggage: "",
+                    maxPassengers: "",
+                    maxLuggage: "",
+                    features: [],
+                    vehicles: [],
+                  };
+                  setVehicleCategoriesData([...vehicleCategoriesData, newCategory]);
+                }}
+                className="flex items-center gap-1.5 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-md text-xs font-semibold transition-colors cursor-pointer"
+              >
+                <Plus size={14} />
+                <span>Thêm Phân Khúc Xe</span>
+              </button>
+
+              <button
+                type="button"
+                disabled={isSaving}
+                onClick={() => handleSaveSection("vehicle_categories", vehicleCategoriesData)}
+                className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-xs font-semibold shadow-sm transition-all cursor-pointer"
+              >
+                <Save size={15} />
+                <span>{isSaving ? "Đang lưu..." : "Lưu Toàn Bộ Ảnh & Đội Xe"}</span>
+              </button>
+            </div>
+          </div>
+
+          <div className="space-y-8">
+            {vehicleCategoriesData.map((cat: VehicleCategory, catIdx: number) => (
+              <div
+                key={catIdx}
+                className="p-5 md:p-6 bg-slate-50 rounded-xl border border-slate-200 shadow-xs space-y-6"
+              >
+                {/* Category Header */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-200">
+                  <div className="flex items-center gap-3">
+                    <span className="px-3.5 py-1.5 bg-linear-to-r from-blue-600 to-indigo-700 text-white rounded-lg text-sm font-bold shadow-xs">
+                      {cat.title}
+                    </span>
+                    <span className="text-xs font-medium text-slate-500">
+                      ({cat.vehicles.length} mẫu xe hiển thị)
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const newVehicle: Vehicle = {
+                          id: Date.now(),
+                          name: "",
+                          image: "",
+                          category: "",
+                        };
+                        const updatedCats = [...vehicleCategoriesData];
+                        updatedCats[catIdx].vehicles.push(newVehicle);
+                        setVehicleCategoriesData(updatedCats);
+                      }}
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-700 hover:bg-blue-100 rounded-md text-xs font-semibold transition-colors cursor-pointer border border-blue-200"
+                    >
+                      <Plus size={13} />
+                      <span>Thêm Xe Vào {cat.title}</span>
+                    </button>
+
+                    {vehicleCategoriesData.length > 1 && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const confirm = window.confirm(`Bạn có chắc muốn xóa toàn bộ phân khúc "${cat.title}"?`);
+                          if (!confirm) return;
+                          const updatedCats = vehicleCategoriesData.filter((_, idx) => idx !== catIdx);
+                          setVehicleCategoriesData(updatedCats);
+                        }}
+                        className="p-1.5 text-red-500 hover:bg-red-50 rounded-md transition-colors cursor-pointer"
+                        title="Xóa phân khúc này"
+                      >
+                        <Trash2 size={15} />
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                {/* Category Specs Inputs */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      Tên phân khúc
+                    </label>
+                    <input
+                      type="text"
+                      value={cat.title}
+                      onChange={(e) => {
+                        const updated = [...vehicleCategoriesData];
+                        updated[catIdx].title = e.target.value;
+                        setVehicleCategoriesData(updated);
+                      }}
+                      className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-xs font-semibold text-slate-900 outline-none focus:border-blue-600"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      Số lượng hành khách tối đa
+                    </label>
+                    <input
+                      type="text"
+                      value={cat.maxPassengers}
+                      onChange={(e) => {
+                        const updated = [...vehicleCategoriesData];
+                        updated[catIdx].maxPassengers = e.target.value;
+                        setVehicleCategoriesData(updated);
+                      }}
+                      className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-xs font-medium text-slate-800 outline-none focus:border-blue-600"
+                      placeholder="Tối đa 4 khách hàng"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      Quy chuẩn hành lý
+                    </label>
+                    <input
+                      type="text"
+                      value={cat.seats || cat.luggage}
+                      onChange={(e) => {
+                        const updated = [...vehicleCategoriesData];
+                        updated[catIdx].seats = e.target.value;
+                        updated[catIdx].luggage = e.target.value;
+                        setVehicleCategoriesData(updated);
+                      }}
+                      className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-xs font-medium text-slate-800 outline-none focus:border-blue-600"
+                      placeholder="2 hàng lý trình + 1 hàng xách"
+                    />
+                  </div>
+                </div>
+
+                {/* Grid of Car Models in this Category */}
+                <div>
+                  <h4 className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-3">
+                    Danh Sách Mẫu Xe & Hình Ảnh ({cat.title}):
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3.5">
+                    {cat.vehicles.map((car: Vehicle, carIdx: number) => (
+                      <div
+                        key={car.id || carIdx}
+                        className="bg-white p-3 border border-slate-200 hover:border-blue-400 transition-all flex flex-col justify-between relative group"
+                      >
+                        {/* Delete single car button */}
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const updatedCats = [...vehicleCategoriesData];
+                            updatedCats[catIdx].vehicles = updatedCats[catIdx].vehicles.filter(
+                              (_, idx) => idx !== carIdx
+                            );
+                            setVehicleCategoriesData(updatedCats);
+                          }}
+                          className="absolute top-1.5 right-1.5 z-10 p-1 bg-white/90 hover:bg-red-50 text-slate-400 hover:text-red-600 transition-colors cursor-pointer"
+                          title="Xóa mẫu xe này"
+                        >
+                          <Trash2 size={13} />
+                        </button>
+
+                        <div className="space-y-2.5">
+                          {/* Image upload preview */}
+                          <ImageUploadField
+                            label=""
+                            value={car.image}
+                            onChange={(url) => {
+                              const updatedCats = [...vehicleCategoriesData];
+                              updatedCats[catIdx].vehicles[carIdx].image = url;
+                              setVehicleCategoriesData(updatedCats);
+                            }}
+                            folder="inhatrang/vehicles"
+                            helperText=""
+                          />
+
+                          {/* Car Name */}
+                          <div>
+                            <label className="block text-[11px] font-semibold text-slate-600 mb-1">
+                              Tên dòng xe:
+                            </label>
+                            <input
+                              type="text"
+                              value={car.name}
+                              onChange={(e) => {
+                                const updatedCats = [...vehicleCategoriesData];
+                                updatedCats[catIdx].vehicles[carIdx].name = e.target.value.toUpperCase();
+                                setVehicleCategoriesData(updatedCats);
+                              }}
+                              className="w-full px-2.5 py-1.5 bg-slate-50 border border-slate-200 text-xs font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+                              placeholder="Ví dụ: HONDA CITY"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -1183,6 +1670,134 @@ export default function ContentManager({
               </div>
             ))}
           </div>
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* TAB: GLOBAL SEO */}
+      {/* ========================================================================= */}
+      {activeTab === "seo" && (
+        <div className="bg-white rounded-xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+            <div>
+              <h2 className="text-lg font-bold text-slate-900">SEO Toàn Website</h2>
+              <p className="text-xs text-slate-500 mt-0.5">Tiêu đề, mô tả, từ khóa và ảnh chia sẻ mặc định của toàn bộ website.</p>
+            </div>
+            <button
+              type="button"
+              disabled={isSaving}
+              onClick={() => handleSaveSection("site_seo", {
+                ...seoData,
+                keywords: seoData.keywords.split(",").map((item) => item.trim()).filter(Boolean),
+              })}
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-xs font-semibold shadow-sm transition-all cursor-pointer"
+            >
+              <Save size={15} />
+              <span>{isSaving ? "Đang lưu..." : "Lưu SEO mặc định"}</span>
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 gap-5">
+            <div>
+              <label className="block text-xs font-semibold text-slate-800 mb-1.5">Tên thương hiệu</label>
+              <input value={seoData.site_name} onChange={(event) => setSeoData({ ...seoData, site_name: event.target.value })} className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm outline-none focus:bg-white focus:border-blue-600" placeholder="maigo79.com" />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-slate-800 mb-1.5">SEO title mặc định</label>
+              <input value={seoData.title} onChange={(event) => setSeoData({ ...seoData, title: event.target.value })} className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm outline-none focus:bg-white focus:border-blue-600" />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-slate-800 mb-1.5">SEO description mặc định</label>
+              <textarea value={seoData.description} onChange={(event) => setSeoData({ ...seoData, description: event.target.value })} rows={4} className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm outline-none focus:bg-white focus:border-blue-600" />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-slate-800 mb-1.5">Từ khóa (cách nhau bằng dấu phẩy)</label>
+              <textarea value={seoData.keywords} onChange={(event) => setSeoData({ ...seoData, keywords: event.target.value })} rows={3} className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm outline-none focus:bg-white focus:border-blue-600" />
+            </div>
+            <ImageUploadField label="Ảnh chia sẻ Facebook / Open Graph" value={seoData.og_image} onChange={(url) => setSeoData({ ...seoData, og_image: url })} folder="maigo79/seo" />
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* TAB: UI TRANSLATIONS */}
+      {/* ========================================================================= */}
+      {activeTab === "translations" && (
+        <div className="bg-white rounded-xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+            <div>
+              <h2 className="text-lg font-bold text-slate-900">Nhãn Giao Diện Đa Ngôn Ngữ</h2>
+              <p className="text-xs text-slate-500 mt-0.5">Sửa toàn bộ text hiển thị của website theo từng ngôn ngữ. Giữ nguyên cấu trúc JSON/key để các vị trí trên web tiếp tục hoạt động.</p>
+            </div>
+            <button
+              type="button"
+              disabled={isSaving}
+              onClick={() => {
+                try {
+                  const parsed = JSON.parse(translationDraft);
+                  if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+                    throw new Error("Nội dung phải là một đối tượng JSON");
+                  }
+                  const next = { ...uiTranslationsData, [selectedLang]: parsed };
+                  setUiTranslationsData(next);
+                  void handleSaveSection("ui_translations", next);
+                } catch (error) {
+                  alert(error instanceof Error ? `JSON không hợp lệ: ${error.message}` : "JSON không hợp lệ");
+                }
+              }}
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-xs font-semibold shadow-sm transition-all cursor-pointer"
+            >
+              <Save size={15} />
+              <span>{isSaving ? "Đang lưu..." : `Lưu nhãn ${selectedLang.toUpperCase()}`}</span>
+            </button>
+          </div>
+          <textarea
+            value={translationDraft}
+            onChange={(event) => setTranslationDraft(event.target.value)}
+            rows={24}
+            spellCheck={false}
+            className="w-full p-4 bg-slate-950 text-slate-100 border border-slate-700 rounded-lg text-xs font-mono leading-relaxed outline-none focus:border-blue-500"
+            aria-label={`Dữ liệu nhãn giao diện ${selectedLang.toUpperCase()}`}
+          />
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* TAB: LEGAL PAGES */}
+      {/* ========================================================================= */}
+      {activeTab === "pages" && (
+        <div className="bg-white rounded-xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+            <div>
+              <h2 className="text-lg font-bold text-slate-900">Nội Dung Trang Chính Sách</h2>
+              <p className="text-xs text-slate-500 mt-0.5">Quản lý toàn bộ tiêu đề, đoạn nội dung và điều khoản hiển thị trên website.</p>
+            </div>
+            <button
+              type="button"
+              disabled={isSaving}
+              onClick={() => {
+                try {
+                  const parsed = JSON.parse(pageContentDraft);
+                  if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) throw new Error("Nội dung phải là một đối tượng JSON");
+                  void handleSaveSection(pageContentKey, parsed);
+                } catch (error) {
+                  alert(error instanceof Error ? `JSON không hợp lệ: ${error.message}` : "JSON không hợp lệ");
+                }
+              }}
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-xs font-semibold shadow-sm transition-all cursor-pointer"
+            >
+              <Save size={15} />
+              <span>{isSaving ? "Đang lưu..." : "Lưu nội dung trang"}</span>
+            </button>
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-slate-800 mb-1.5">Chọn trang</label>
+            <select value={pageContentKey} onChange={(event) => setPageContentKey(event.target.value as "privacy_policy" | "transport_policy")} className="w-full sm:w-96 px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm outline-none focus:bg-white focus:border-blue-600">
+              <option value="privacy_policy">Chính sách bảo vệ quyền riêng tư</option>
+              <option value="transport_policy">Quy định vận chuyển hành khách</option>
+            </select>
+          </div>
+          <textarea value={pageContentDraft} onChange={(event) => setPageContentDraft(event.target.value)} rows={24} spellCheck={false} className="w-full p-4 bg-slate-950 text-slate-100 border border-slate-700 rounded-lg text-xs font-mono leading-relaxed outline-none focus:border-blue-500" aria-label="Nội dung trang chính sách" />
         </div>
       )}
 

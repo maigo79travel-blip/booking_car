@@ -1,6 +1,22 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect, useTransition } from "react";
+export interface Vehicle {
+  id: number;
+  name: string;
+  image: string;
+  category: string;
+}
+
+export interface VehicleCategory {
+  title: string;
+  seats: string;
+  luggage: string;
+  maxPassengers: string;
+  maxLuggage: string;
+  features: string[];
+  vehicles: Vehicle[];
+}
 
 export interface ContactConfig {
   brand_name: string;
@@ -36,6 +52,27 @@ export interface VehicleConfig {
   features: string[];
 }
 
+export interface FeaturedVehicle {
+  id: string;
+  name: string;
+  seats: string;
+  type: string;
+  image: string;
+  price: string;
+  tag?: string;
+  features: string[];
+}
+
+export interface TravelDestination {
+  id: string;
+  title: string;
+  subtitle: string;
+  image: string;
+  distance?: string;
+  description: string;
+  tag?: string;
+}
+
 export interface TestimonialConfig {
   name: string;
   role: string;
@@ -55,6 +92,9 @@ export interface SiteContentContextProps {
   contact: ContactConfig;
   hero: HeroConfig;
   vehicles: VehicleConfig[];
+  vehicleCategories: VehicleCategory[];
+  featuredVehicles: FeaturedVehicle[];
+  destinations: TravelDestination[];
   testimonials: TestimonialConfig[];
   faq: FAQConfig[];
   reloadContent: () => Promise<void>;
@@ -209,6 +249,106 @@ const defaultFAQ: FAQConfig[] = [
   },
 ];
 
+export const defaultFeaturedVehicles: FeaturedVehicle[] = [
+  {
+    id: "v-5",
+    name: "Honda City / Toyota Vios",
+    seats: "5 chỗ (Tối đa 4 khách)",
+    type: "Sedan 5 chỗ đời mới",
+    image: "/images/51.png",
+    price: "Từ 250.000đ",
+    tag: "Phổ biến nhất",
+    features: ["Cốp rộng để 2-3 vali", "Máy lạnh mát rượi, nội thất sạch sẽ", "Phù hợp gia đình nhỏ & công tác"],
+  },
+  {
+    id: "v-7",
+    name: "Mitsubishi Xpander / Fortuner",
+    seats: "7 chỗ (Tối đa 6 khách)",
+    type: "SUV / MPV 7 chỗ gia đình",
+    image: "/images/71.png",
+    price: "Từ 300.000đ",
+    tag: "Gia đình yêu thích",
+    features: ["Không gian rộng rãi, êm ái", "Chứa được 4-5 vali lớn", "Động cơ mạnh mẽ, vượt đèo êm ái"],
+  },
+  {
+    id: "v-16",
+    name: "Hyundai Solati / Ford Transit",
+    seats: "16 chỗ (Tối đa 15 khách)",
+    type: "Xe 16 chỗ du lịch cao cấp",
+    image: "/images/big5.jpg",
+    price: "Từ 550.000đ",
+    tag: "Đoàn đông người",
+    features: ["Ghế ngả cao cấp, trần cao thoáng", "Khoang hành lý siêu rộng", "Phù hợp đoàn du lịch, công ty"],
+  },
+  {
+    id: "v-vip",
+    name: "Kia Carnival / Limousine VIP",
+    seats: "7 chỗ VIP Thương gia",
+    type: "Xe VIP sang trọng 2024 - 2026",
+    image: "/images/73.png",
+    price: "Từ 650.000đ",
+    tag: "VIP Đẳng cấp",
+    features: ["Ghế massage hạng thương gia", "Màn hình giải trí & sạc điện thoại", "Dành cho chuyên gia, khách VIP"],
+  },
+];
+
+export const defaultDestinations: TravelDestination[] = [
+  {
+    id: "dest-1",
+    title: "Vinpearl Harbour & Đảo Hòn Tre",
+    subtitle: "Thiên đường vui chơi & Cáp treo vượt biển",
+    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+    distance: "Cách trung tâm Nha Trang ~5km",
+    description: "Tổ hợp mua sắm, ẩm thực 24/7 và bến cáp treo vượt vịnh biển Nha Trang tuyệt đẹp.",
+    tag: "Vui chơi giải trí",
+  },
+  {
+    id: "dest-2",
+    title: "Tháp Bà Ponagar Nha Trang",
+    subtitle: "Di tích lịch sử văn hóa Chăm Pa cổ kính",
+    image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80",
+    distance: "Cách trung tâm TP ~3km",
+    description: "Quần thể đền tháp Chăm Pa nghìn năm tuổi linh thiêng nằm bên bờ sông Cái êm đềm.",
+    tag: "Văn hóa tâm linh",
+  },
+  {
+    id: "dest-3",
+    title: "Resort & Bãi Dài Cam Ranh",
+    subtitle: "Bờ biển cát trắng mịn & Thiên đường nghỉ dưỡng",
+    image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80",
+    distance: "Cách sân bay Cam Ranh ~5-10km",
+    description: "Quy tụ hàng loạt resort 5 sao quốc tế như Alma, Duyên Hà, Movenpick, Radisson Blu.",
+    tag: "Nghỉ dưỡng cao cấp",
+  },
+  {
+    id: "dest-4",
+    title: "Viện Hải Dương Học Nha Trang",
+    subtitle: "Bảo tàng sinh vật biển lớn nhất Đông Nam Á",
+    image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80",
+    distance: "Gần cảng Cầu Đá (~6km từ trung tâm)",
+    description: "Nơi lưu giữ hơn 20.000 mẫu vật sinh vật biển và bộ xương cá voi khổng lồ dài 26m.",
+    tag: "Khám phá đại dương",
+  },
+  {
+    id: "dest-5",
+    title: "Đảo Điệp Sơn & Biển Dốc Lết",
+    subtitle: "Con đường đi bộ giữa biển độc nhất vô nhị",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+    distance: "Cách Nha Trang ~55km về phía Bắc",
+    description: "Trải nghiệm dạo bước trên dải cát trắng nối liền 3 hòn đảo nhỏ giữa đại dương xanh biếc.",
+    tag: "Biển đảo độc lạ",
+  },
+  {
+    id: "dest-6",
+    title: "Vịnh Vĩnh Hy & Hang Rái",
+    subtitle: "Tuyệt tác thiên nhiên & Rạn san hô cổ",
+    image: "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=800&q=80",
+    distance: "Cách Nha Trang ~90km theo đường biển",
+    description: "Một trong bốn vịnh biển đẹp nhất Việt Nam với công viên đá Hang Rái kỳ vĩ.",
+    tag: "Tour trong ngày",
+  },
+];
+
 const SiteContentContext = createContext<SiteContentContextProps | undefined>(
   undefined
 );
@@ -275,6 +415,21 @@ export const SiteContentProvider: React.FC<{ children: React.ReactNode }> = ({
       ? (content.vehicles_fleet as VehicleConfig[])
       : defaultVehicles;
 
+  const vehicleCategories: VehicleCategory[] =
+    content.vehicle_categories && Array.isArray(content.vehicle_categories)
+      ? (content.vehicle_categories as VehicleCategory[])
+      : [];
+
+  const featuredVehicles: FeaturedVehicle[] =
+    content.featured_vehicles && Array.isArray(content.featured_vehicles)
+      ? (content.featured_vehicles as FeaturedVehicle[])
+      : defaultFeaturedVehicles;
+
+  const destinations: TravelDestination[] =
+    content.nha_trang_destinations && Array.isArray(content.nha_trang_destinations)
+      ? (content.nha_trang_destinations as TravelDestination[])
+      : defaultDestinations;
+
   const testimonials: TestimonialConfig[] =
     content.testimonials && Array.isArray(content.testimonials)
       ? (content.testimonials as TestimonialConfig[])
@@ -292,6 +447,9 @@ export const SiteContentProvider: React.FC<{ children: React.ReactNode }> = ({
         contact,
         hero,
         vehicles,
+        vehicleCategories,
+        featuredVehicles,
+        destinations,
         testimonials,
         faq,
         reloadContent,
@@ -310,6 +468,9 @@ export const useSiteContent = (): SiteContentContextProps => {
       contact: defaultContact,
       hero: defaultHero,
       vehicles: defaultVehicles,
+      vehicleCategories: [],
+      featuredVehicles: defaultFeaturedVehicles,
+      destinations: defaultDestinations,
       testimonials: defaultTestimonials,
       faq: defaultFAQ,
       reloadContent: async () => {},

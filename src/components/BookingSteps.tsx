@@ -50,18 +50,23 @@ export default function BookingSteps() {
             return (
               <div
                 key={idx}
-                className="bg-white p-6 md:p-8 border border-gray-100 shadow-xs hover:shadow-md transition-all relative flex flex-col items-center text-center group"
+                className="bg-white p-5 md:p-8 border border-gray-100 shadow-xs hover:shadow-md transition-all relative flex flex-col group rounded-xs"
               >
-                <div className="absolute -top-3.5 bg-linear-to-r from-[#003366] to-[#174978] text-white text-[11px] font-semibold px-3 py-0.5 uppercase tracking-wider">
+                <div className="absolute -top-3.5 left-5 md:left-1/2 md:-translate-x-1/2 bg-linear-to-r from-[#003366] to-[#174978] text-white text-[11px] font-semibold px-3 py-0.5 uppercase tracking-wider shadow-xs">
                   {t.bookingSteps.stepBadge} {step.number}
                 </div>
-                <div className="w-12 h-12 bg-brand-light flex items-center justify-center text-[#174978] my-4 group-hover:scale-105 transition-transform">
-                  <Icon size={24} />
+                
+                {/* Header: Icon + Title on 1 row on mobile, stacked and centered on desktop */}
+                <div className="flex items-center gap-3.5 md:flex-col md:items-center md:text-center mt-2 md:mt-0 mb-3 md:mb-0">
+                  <div className="w-11 h-11 md:w-12 md:h-12 shrink-0 bg-brand-light flex items-center justify-center text-[#174978] md:my-4 group-hover:scale-105 transition-transform rounded-xs">
+                    <Icon size={22} className="md:w-6 md:h-6" />
+                  </div>
+                  <h3 className="text-base md:text-xl font-bold md:font-semibold text-gray-900 md:text-gray-800 md:mb-3 group-hover:text-[#003366] transition-colors leading-snug">
+                    {step.title}
+                  </h3>
                 </div>
-                <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-3 group-hover:text-[#003366] transition-colors">
-                  {step.title}
-                </h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
+
+                <p className="text-gray-600 text-xs md:text-sm leading-relaxed text-left md:text-center">
                   {step.description}
                 </p>
               </div>

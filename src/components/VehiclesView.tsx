@@ -1,7 +1,6 @@
 "use client";
 import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { vehicleCategories } from "@/data/vehicles";
 import { Users, Briefcase, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import FloatingContacts from "@/components/FloatingContacts";
@@ -9,9 +8,11 @@ import Footer from "@/components/Footer";
 import { useState } from "react";
 import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
+import { useSiteContent } from "@/context/SiteContentContext";
 
 export default function VehiclesView() {
   const { t } = useLanguage();
+  const { vehicleCategories } = useSiteContent();
   const [currentPages, setCurrentPages] = useState<{ [key: number]: number }>({});
 
   const itemsPerPage = 2;

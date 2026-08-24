@@ -45,7 +45,7 @@ export default function WhyChooseUs() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
           {reasons.map((item: ReasonItem, idx) => {
             const Icon = icons[idx]?.icon || ShieldCheck;
             const colorClass = icons[idx]?.color || "bg-[#EAF2F8] text-[#174978]";
@@ -53,17 +53,20 @@ export default function WhyChooseUs() {
             return (
               <div
                 key={idx}
-                className="bg-gray-50/70 hover:bg-white p-6 md:p-8 border border-gray-100 hover:border-gray-200 shadow-xs hover:shadow-md transition-all duration-300 group"
+                className="bg-gray-50/70 hover:bg-white p-5 md:p-8 border border-gray-100 hover:border-gray-200 shadow-xs hover:shadow-md transition-all duration-300 group rounded-xs"
               >
-                <div
-                  className={`w-12 h-12 flex items-center justify-center mb-5 ${colorClass} group-hover:scale-105 transition-transform`}
-                >
-                  <Icon size={24} />
+                {/* Header: Icon + Title on 1 row on mobile, stacked on desktop */}
+                <div className="flex items-center gap-3.5 md:block mb-3 md:mb-0">
+                  <div
+                    className={`w-11 h-11 md:w-12 md:h-12 shrink-0 flex items-center justify-center md:mb-5 ${colorClass} group-hover:scale-105 transition-transform rounded-xs`}
+                  >
+                    <Icon size={22} className="md:w-6 md:h-6" />
+                  </div>
+                  <h3 className="text-base md:text-xl font-bold md:font-semibold text-gray-900 md:text-gray-800 md:mb-3 group-hover:text-[#003366] transition-colors leading-snug">
+                    {item.title}
+                  </h3>
                 </div>
-                <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-3 group-hover:text-[#003366] transition-colors">
-                  {item.title}
-                </h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
+                <p className="text-gray-600 text-xs md:text-sm leading-relaxed">
                   {item.desc}
                 </p>
               </div>

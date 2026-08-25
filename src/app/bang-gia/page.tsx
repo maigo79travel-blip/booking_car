@@ -44,7 +44,7 @@ export default function PricingPage() {
         <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
           Bảng Giá Xe Sân Bay Cam Ranh – Nha Trang Trọn Gói 24/7
         </h1>
-        <div className="w-24 h-1 bg-[#174978] mb-3 rounded-full"></div>
+        <div className="w-24 h-1 bg-[#174978] mb-3"></div>
         <p className="text-gray-600 text-sm md:text-base max-w-3xl">
           Cam kết giá cước niêm yết công khai, đã bao gồm phí cầu đường và vé vào sân bay Cam Ranh. Không tăng giá vào giờ cao điểm, đêm muộn hay dịp lễ tết.
         </p>

@@ -44,7 +44,7 @@ export default function VehiclesView() {
         <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
           {t.vehicles.pageTitle}
         </h1>
-        <div className="w-24 h-1 bg-[#174978] mb-3 rounded-full"></div>
+        <div className="w-24 h-1 bg-[#174978] mb-3"></div>
         <p className="text-gray-600 text-sm md:text-base max-w-3xl">
           {t.vehicles.pageDesc}
         </p>

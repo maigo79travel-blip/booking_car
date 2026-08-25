@@ -30,17 +30,17 @@ export default function WhyChooseUs() {
   const reasons = (t.whyChooseUs.reasons || []) as ReasonItem[];
 
   return (
-    <section className="py-12 md:py-16 bg-white">
+    <section className="py-6 md:py-8 bg-white">
       <div className="container mx-auto px-4 md:px-12 lg:px-24">
-        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
+        <div className="text-center max-w-3xl mx-auto mb-5 md:mb-6">
           <span className="text-[#174978] font-semibold uppercase tracking-wider text-xs md:text-sm">
             {t.whyChooseUs.tag}
           </span>
-          <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">
+          <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-gray-900 mt-1 mb-2">
             {t.whyChooseUs.title}
           </h2>
-          <div className="w-24 h-1 bg-[#174978] mx-auto mb-4"></div>
-          <p className="text-gray-600 text-sm md:text-base leading-relaxed">
+          <div className="w-20 md:w-24 h-1 bg-[#174978] mx-auto mb-2.5"></div>
+          <p className="text-gray-600 text-xs sm:text-sm md:text-base leading-relaxed">
             {t.whyChooseUs.subtitle}
           </p>
         </div>
@@ -53,16 +53,16 @@ export default function WhyChooseUs() {
             return (
               <div
                 key={idx}
-                className="bg-gray-50/70 hover:bg-white p-5 md:p-8 border border-gray-100 hover:border-gray-200 shadow-xs hover:shadow-md transition-all duration-300 group rounded-xs"
+                className="bg-gray-50/70 hover:bg-white p-5 md:p-8 border border-gray-100 hover:border-gray-200 shadow-xs hover:shadow-md transition-all duration-300 group"
               >
                 {/* Header: Icon + Title on 1 row on mobile, stacked on desktop */}
                 <div className="flex items-center gap-3.5 md:block mb-3 md:mb-0">
                   <div
-                    className={`w-11 h-11 md:w-12 md:h-12 shrink-0 flex items-center justify-center md:mb-5 ${colorClass} group-hover:scale-105 transition-transform rounded-xs`}
+                    className={`w-11 h-11 md:w-12 md:h-12 shrink-0 flex items-center justify-center md:mb-5 ${colorClass} group-hover:scale-105 transition-transform`}
                   >
                     <Icon size={22} className="md:w-6 md:h-6" />
                   </div>
-                  <h3 className="text-base md:text-xl font-bold md:font-semibold text-gray-900 md:text-gray-800 md:mb-3 group-hover:text-[#003366] transition-colors leading-snug">
+                  <h3 className="text-base md:text-xl font-bold text-[#174978] md:mb-3 group-hover:text-[#003366] transition-colors leading-snug">
                     {item.title}
                   </h3>
                 </div>

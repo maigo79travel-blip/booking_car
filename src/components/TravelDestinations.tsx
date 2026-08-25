@@ -12,17 +12,17 @@ export default function TravelDestinations() {
   if (!destinations || destinations.length === 0) return null;
 
   return (
-    <section className="py-8 md:py-14 bg-white">
+    <section className="py-6 md:py-8 bg-white">
       <div className="container mx-auto px-4 md:px-12 lg:px-24">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
+        <div className="text-center max-w-3xl mx-auto mb-5 md:mb-6">
           <span className="text-[#174978] font-bold uppercase tracking-wider text-xs md:text-sm flex items-center justify-center">
             KHÁM PHÁ DU LỊCH NHA TRANG – CAM RANH
           </span>
-          <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-gray-900 mt-1.5 mb-2.5">
+          <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-gray-900 mt-1 mb-2">
             Các Địa Điểm Du Lịch Nổi Tiếng
           </h2>
-          <div className="w-20 md:w-24 h-1 bg-[#174978] mx-auto mb-3 md:mb-4"></div>
+          <div className="w-20 md:w-24 h-1 bg-[#174978] mx-auto mb-2.5"></div>
           <p className="text-gray-600 text-xs sm:text-sm md:text-base leading-relaxed">
             Dịch vụ xe riêng đưa đón tận nơi từ sân bay Cam Ranh và khách sạn Nha Trang đến các danh lam thắng cảnh đẹp nhất với giá cước niêm yết trọn gói.
           </p>

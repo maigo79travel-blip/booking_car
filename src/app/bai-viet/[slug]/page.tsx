@@ -99,7 +99,7 @@ export default async function PostPage({
   };
 
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdArticle) }}
@@ -114,7 +114,7 @@ export default async function PostPage({
         ]}
       />
 
-      <article className="container mx-auto max-w-4xl px-4 md:px-12 py-6 md:py-10">
+      <article className="container mx-auto px-4 md:px-12 lg:px-24 py-4 md:py-8">
         <header className="mb-6">
           <h1 className="text-2xl md:text-4xl font-bold text-gray-900 leading-tight mb-3">
             {postTitle}
@@ -133,24 +133,24 @@ export default async function PostPage({
         </header>
 
         {post.cover_image && (
-          <div className="relative h-64 md:h-105 rounded-2xl overflow-hidden shadow-sm mb-8 bg-gray-100">
+          <div className="relative h-64 md:h-105 rounded-none overflow-hidden shadow-xs mb-6 bg-gray-100">
             <Image
               src={post.cover_image}
               alt={`Hình ảnh bài viết: ${postTitle}`}
               fill
               priority
-              className="object-cover"
+              className="object-cover rounded-none"
             />
           </div>
         )}
 
-        {/* Content Body */}
-        <div className="bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-gray-100 text-gray-800 text-base md:text-lg leading-relaxed whitespace-pre-wrap">
+        {/* Content Body - No card wrapper */}
+        <div className="text-gray-800 text-base md:text-lg leading-relaxed whitespace-pre-wrap py-2">
           {text(post.body)}
         </div>
 
         {/* CTA Box */}
-        <div className="mt-8 bg-linear-to-r from-[#003366] via-[#174978] to-brand-marine rounded-2xl p-6 md:p-8 text-white shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="mt-10 bg-linear-to-r from-[#003366] via-[#174978] to-brand-marine rounded-none p-6 md:p-8 text-white shadow-xs flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <h2 className="text-xl md:text-2xl font-bold mb-2">
               Cần Đặt Xe Sân Bay Cam Ranh – Nha Trang Đón Trả Tận Nơi?
@@ -162,14 +162,14 @@ export default async function PostPage({
           <div className="flex flex-wrap items-center gap-3">
             <a
               href="tel:0928015280"
-              className="bg-white text-[#003366] font-extrabold px-5 py-3 rounded-xl shadow-xs hover:bg-brand-light transition-colors inline-flex items-center gap-2 text-sm"
+              className="bg-white text-[#003366] font-extrabold px-5 py-3 rounded-none shadow-xs hover:bg-brand-light transition-colors inline-flex items-center gap-2 text-sm"
             >
               <PhoneCall size={18} className="text-[#174978]" />
               0928.015.280
             </a>
             <Link
               href="/#formbooking"
-              className="bg-[#002244] hover:bg-[#00172e] text-white font-extrabold px-6 py-3 rounded-xl transition-all text-sm shadow-xs"
+              className="bg-[#002244] hover:bg-[#00172e] text-white font-extrabold px-6 py-3 rounded-none transition-all text-sm shadow-xs"
             >
               Đặt xe ngay
             </Link>

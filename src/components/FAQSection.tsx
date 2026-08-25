@@ -46,18 +46,18 @@ export default function FAQSection() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdFaq) }}
       />
-      <section className="py-12 md:py-16 bg-white">
+      <section className="py-6 md:py-8 bg-white">
         <div className="container mx-auto px-4 md:px-12 lg:px-24">
-          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
+          <div className="text-center max-w-3xl mx-auto mb-5 md:mb-6">
             <div className="inline-flex items-center gap-2 text-[#174978] font-semibold uppercase tracking-wider text-xs md:text-sm">
               <HelpCircle size={18} />
               <span>{t.faq.tag}</span>
             </div>
-            <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">
+            <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-gray-900 mt-1 mb-2">
               {t.faq.title}
             </h2>
-            <div className="w-24 h-1 bg-[#174978] mx-auto mb-4"></div>
-            <p className="text-gray-600 text-sm md:text-base">
+            <div className="w-20 md:w-24 h-1 bg-[#174978] mx-auto mb-2.5"></div>
+            <p className="text-gray-600 text-xs sm:text-sm md:text-base">
               {t.faq.subtitle}
             </p>
           </div>

@@ -48,7 +48,7 @@ export default function PolicyPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-white">
       <Header />
 
       {/* Breadcrumbs */}
@@ -59,12 +59,12 @@ export default function PolicyPage() {
         <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
           Chính Sách & Điều Khoản Dịch Vụ
         </h1>
-        <div className="w-24 h-1 bg-[#174978] rounded-full"></div>
+        <div className="w-24 h-1 bg-[#174978]"></div>
       </div>
 
-      <div className="container mx-auto px-4 md:px-12 lg:px-24 py-6 md:py-10">
-        {/* Introduction */}
-        <div className="bg-white rounded-2xl p-6 md:p-8 mb-8 shadow-sm border border-gray-100">
+      <div className="container mx-auto px-4 md:px-12 lg:px-24 py-4 md:py-6">
+        {/* Introduction - Direct text */}
+        <div className="mb-6">
           <p className="text-gray-700 text-base md:text-lg leading-relaxed">
             Chào mừng quý khách đến với <strong>maigo79.com (Dịch vụ xe sân bay Cam Ranh & Nha Trang)</strong>. Dưới đây là các
             chính sách và điều khoản sử dụng dịch vụ của chúng tôi nhằm đảm bảo quyền lợi cao nhất cho khách hàng và tính minh bạch trong vận hành.
@@ -72,34 +72,33 @@ export default function PolicyPage() {
         </div>
 
         {/* Policy Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
           {policyPages.map((policy, index) => {
             const Icon = policy.icon;
             const bgColor = "bg-[#EAF2F8]";
             const textColor = "text-[#174978]";
-            const hoverBorder = "hover:border-[#75A2BF]";
 
             return (
               <Link
                 key={index}
                 href={policy.href}
-                className={`bg-white rounded-2xl p-6 md:p-8 border border-gray-100 ${hoverBorder} shadow-xs hover:shadow-sm transition-all group`}
+                className="bg-slate-50/70 p-5 md:p-6 shadow-xs hover:shadow-md transition-all group"
               >
                 <div className="flex items-start gap-4">
-                  <div className={`${bgColor} p-4 rounded-xl shrink-0`}>
-                    <Icon className={textColor} size={32} />
+                  <div className={`${bgColor} p-3 shrink-0`}>
+                    <Icon className={textColor} size={28} />
                   </div>
                   <div className="flex-1">
-                    <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-2 group-hover:text-[#003366] transition-colors">
+                    <h2 className="text-lg md:text-xl font-bold text-gray-800 mb-1.5 group-hover:text-[#003366] transition-colors">
                       {policy.title}
                     </h2>
-                    <p className="text-gray-600 text-sm md:text-base mb-4 leading-relaxed">
+                    <p className="text-gray-600 text-xs sm:text-sm mb-3 leading-relaxed">
                       {policy.description}
                     </p>
-                    <div className="flex items-center text-[#174978] group-hover:text-[#003366] font-bold text-sm">
+                    <div className="flex items-center text-[#174978] group-hover:text-[#003366] font-bold text-xs sm:text-sm">
                       Xem chi tiết quy định
                       <ChevronRight
-                        size={18}
+                        size={16}
                         className="ml-1 group-hover:translate-x-1 transition-transform"
                       />
                     </div>

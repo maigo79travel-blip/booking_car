@@ -49,7 +49,7 @@ export default async function PostsPage() {
           <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mt-1 mb-2">
             Cẩm Nang & Bài Viết Hướng Dẫn Đi Sân Bay Cam Ranh – Nha Trang
           </h1>
-          <div className="w-24 h-1 bg-[#174978] mb-3 rounded-full"></div>
+          <div className="w-24 h-1 bg-[#174978] mb-3"></div>
           <p className="text-gray-600 text-sm md:text-base max-w-3xl">
             Cập nhật các thông tin hữu ích về giá vé, lộ trình, kinh nghiệm đón tiễn và các lưu ý quan trọng khi di chuyển tới sân bay Cam Ranh và các tour du lịch Nha Trang.
           </p>
@@ -60,16 +60,16 @@ export default async function PostsPage() {
             {posts.map((post) => (
               <article
                 key={post.id}
-                className="bg-white rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all border border-gray-100 flex flex-col justify-between group"
+                className="bg-white rounded-none overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between group"
               >
                 <div>
-                  <div className="relative h-48 bg-gray-100 overflow-hidden">
+                  <div className="relative h-48 bg-gray-100 overflow-hidden rounded-none">
                     {post.cover_image ? (
                       <Image
                         src={post.cover_image}
                         alt={`Ảnh đại diện bài viết ${text(post.title)}`}
                         fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        className="object-cover group-hover:scale-105 transition-transform duration-300 rounded-none"
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center bg-brand-light text-[#174978] font-bold text-sm">
@@ -111,7 +111,7 @@ export default async function PostsPage() {
             ))}
           </div>
         ) : (
-          <div className="bg-white rounded-2xl p-8 text-center text-gray-500 border border-gray-100">
+          <div className="bg-white rounded-none p-8 text-center text-gray-500 shadow-xs">
             Hiện chưa có bài viết nào được đăng tải. Vui lòng quay lại sau!
           </div>
         )}

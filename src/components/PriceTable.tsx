@@ -37,7 +37,7 @@ const PriceTable = () => {
 
   return (
     <section
-      className={`py-12 md:py-16 relative border-y border-gray-100 ${
+      className={`py-6 md:py-8 relative border-y border-gray-100 ${
         hasCustomBg ? "" : "bg-linear-to-b from-slate-50 via-blue-50/20 to-white"
       }`}
       style={
@@ -53,9 +53,9 @@ const PriceTable = () => {
       {hasCustomBg && <div className="absolute inset-0 bg-white/90"></div>}
       <div className="container mx-auto px-4 md:px-12 lg:px-24 relative z-10">
         {/* Header */}
-        <div className="text-center mb-8 md:mb-12">
-          <div className="inline-flex items-center gap-3 mb-3">
-            <div className="bg-[#174978] p-2.5 text-white shadow-xs">
+        <div className="text-center mb-5 md:mb-6">
+          <div className="inline-flex items-center gap-3 mb-2">
+            <div className="bg-[#174978] p-2 text-white shadow-xs">
               <svg
                 className="w-6 h-6 md:w-8 md:h-8"
                 fill="none"
@@ -181,11 +181,11 @@ const PriceTable = () => {
         </div>
 
         {/* Informational Message */}
-        <div className="mt-6 bg-white/90 backdrop-blur-xs p-5 md:p-6 shadow-xs border border-gray-100 space-y-2">
-          <p className="text-gray-800 text-sm md:text-base leading-relaxed font-medium">
+        <div className="mt-4 bg-white/90 backdrop-blur-xs p-3.5 md:p-4 shadow-xs border border-gray-100 space-y-1.5">
+          <p className="text-gray-800 text-xs sm:text-sm md:text-base leading-relaxed font-medium">
             ✓ {t.priceTable.note1}
           </p>
-          <p className="text-gray-800 text-sm md:text-base leading-relaxed font-medium">
+          <p className="text-gray-800 text-xs sm:text-sm md:text-base leading-relaxed font-medium">
             ✓ {t.priceTable.note2}
           </p>
         </div>

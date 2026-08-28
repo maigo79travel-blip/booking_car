@@ -188,7 +188,7 @@ export default function ContentManager({
       zalo: (raw.zalo as string) || "0905876231",
       telegram: (raw.telegram as string) || "https://t.me/maigo79_vn",
       email: (raw.email as string) || "contact@maigo79.com",
-      address: (raw.address as string) || "Cột số 3 & 4 - Sảnh Đến Ga Quốc Nội & Quốc Tế, Sân bay Quốc tế Cam Ranh, Khánh Hòa",
+      address: (raw.address as string) || "",
       logo_url: (raw.logo_url as string) || "/images/logo-maigo79.png",
       working_hours: (raw.working_hours as string) || "24/7 (Phục vụ cả ngày lễ & Tết)",
     };

@@ -10,7 +10,6 @@ import {
   Shield,
   Clock,
   Phone,
-  MapPin,
   CheckCircle,
 } from "lucide-react";
 
@@ -221,13 +220,13 @@ export default function AboutPage() {
           <h2 className="text-xl md:text-2xl font-bold text-[#003366] mb-4">
             Thông Tin Liên Hệ Trực Tiếp
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="flex items-start gap-3 p-4 bg-slate-50/70 shadow-xs">
               <div className="bg-brand-light p-2.5 shrink-0">
                 <Phone className="text-[#174978]" size={20} />
               </div>
               <div>
-                <h3 className="font-bold text-gray-800 text-sm mb-0.5">Hotline 24/7</h3>
+                <h3 className="font-bold text-gray-800 text-sm mb-0.5">Hotline & Zalo 24/7</h3>
                 <a
                   href="tel:0928015280"
                   className="text-sm md:text-base text-[#174978] font-bold hover:underline"
@@ -237,24 +236,13 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="flex items-start gap-3 p-4 bg-slate-50/70 shadow-xs">
-              <div className="bg-blue-100 p-2.5 shrink-0">
-                <MapPin className="text-[#003366]" size={20} />
-              </div>
-              <div>
-                <h3 className="font-bold text-gray-800 text-sm mb-0.5">Địa chỉ</h3>
-                <p className="text-xs sm:text-sm text-gray-600">
-                  28 Trần Phú, Phường Lộc Thọ, TP. Nha Trang, Tỉnh Khánh Hòa
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3 p-4 bg-slate-50/70 shadow-xs">
               <div className="bg-green-100 p-2.5 shrink-0">
                 <Clock className="text-green-700" size={20} />
               </div>
               <div>
-                <h3 className="font-bold text-gray-800 text-sm mb-0.5">Giờ làm việc</h3>
+                <h3 className="font-bold text-gray-800 text-sm mb-0.5">Thời Gian Phục Vụ</h3>
                 <p className="text-xs sm:text-sm text-gray-600">
-                  24/7 - Luôn sẵn sàng phục vụ
+                  24/7 - Luôn sẵn sàng đón tiễn mọi chuyến bay ngày & đêm
                 </p>
               </div>
             </div>

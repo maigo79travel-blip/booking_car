@@ -107,7 +107,7 @@ const defaultContact: ContactConfig = {
   zalo: "0905876231",
   telegram: "https://t.me/maigo79_vn",
   email: "contact@maigo79.com",
-  address: "Cột số 3 & 4 - Sảnh Đến Ga Quốc Nội & Quốc Tế, Sân bay Quốc tế Cam Ranh, Khánh Hòa",
+  address: "",
   logo_url: "/images/logo-maigo79.png",
   working_hours: "24/7 (Phục vụ cả ngày lễ & Tết)",
 };

@@ -4,7 +4,6 @@ import Link from "next/link";
 import {
   Phone,
   Mail,
-  MapPin,
   Facebook,
   Twitter,
   Instagram,
@@ -193,18 +192,6 @@ const Footer = () => {
                   >
                     {contact.email || "contact@maigo79.com"}
                   </a>
-                </div>
-              </li>
-              <li className="flex items-start gap-2.5">
-                <MapPin
-                  size={18}
-                  className="text-brand-coastal mt-0.5 shrink-0"
-                />
-                <div>
-                  <p className="text-xs text-slate-400 font-semibold">{t.footer.addressTitle}</p>
-                  <p className="text-sm text-slate-300 font-medium leading-relaxed">
-                    {contact.address || t.footer.addressContent}
-                  </p>
                 </div>
               </li>
             </ul>

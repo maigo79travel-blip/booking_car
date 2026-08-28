@@ -161,11 +161,11 @@ export default async function PostPage({
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <a
-              href="tel:0928015280"
+              href="tel:0878458885"
               className="bg-white text-[#003366] font-extrabold px-5 py-3 rounded-none shadow-xs hover:bg-brand-light transition-colors inline-flex items-center gap-2 text-sm"
             >
               <PhoneCall size={18} className="text-[#174978]" />
-              0928.015.280
+              0878.458.885
             </a>
             <Link
               href="/#formbooking"

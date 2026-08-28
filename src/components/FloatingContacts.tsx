@@ -1,64 +1,201 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-import { Phone } from "lucide-react";
+import { Phone, X } from "lucide-react";
 import { useSiteContent } from "@/context/SiteContentContext";
 
 const FloatingContacts = () => {
   const { contact } = useSiteContent();
+  const [showKakaoModal, setShowKakaoModal] = useState(false);
 
-  const phone1 = contact.hotline || "0928015280";
-  const zaloNumber = contact.zalo || "0905876231";
-  const zaloLink = zaloNumber.startsWith("http")
-    ? zaloNumber
-    : `https://zalo.me/${zaloNumber.replace(/[^0-9+]/g, "")}`;
-  const telegramLink = contact.telegram || "https://t.me/maigo79_vn";
+  const phoneNum = contact.hotline || "0878458885";
+  const zaloNum = contact.zalo || "0878458885";
+  const whatsappNum = contact.whatsapp || "0878458885";
+  const fbLink =
+    contact.facebook ||
+    "https://www.facebook.com/share/1BhL4Qut3u/?mibextid=wwXIfr";
+  const teleLink = contact.telegram || "https://t.me/maigo79_vn";
+
+  const zaloUrl = zaloNum.startsWith("http")
+    ? zaloNum
+    : `https://zalo.me/${zaloNum.replace(/[^0-9+]/g, "")}`;
+
+  const whatsappUrl = whatsappNum.startsWith("http")
+    ? whatsappNum
+    : `https://wa.me/${whatsappNum.replace(/[^0-9]/g, "").replace(/^0/, "84")}`;
 
   const contacts = [
     {
-      name: "Hotline 0928.015.280",
-      icon: <Phone size={22} />,
-      bgColor: "bg-green-500",
-      hoverColor: "hover:bg-green-600",
-      link: `tel:${phone1.replace(/[^0-9+]/g, "")}`,
-    },
-    {
-      name: "Zalo 0905.876.231",
-      icon: <Image src="/images/zalo-lumina.png" alt="" width={56} height={56} className="h-14 w-14 rounded-full object-cover" />,
-      bgColor: "bg-blue-600",
-      hoverColor: "hover:bg-blue-700",
-      link: zaloLink,
-    },
-    {
-      name: "Telegram Hỗ Trợ",
+      name: "Gọi Hotline 0878.458.885",
       icon: (
-        <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.19-.08-.05-.19-.02-.27 0-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.05-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.75 4-.1.74 6.69-2.9 8.08-3.48 3.85-1.61 4.65-1.89 5.17-1.9.11 0 .37.03.54.17.14.12.18.28.2.45-.02.07-.02.14-.04.22z" />
-        </svg>
+        <div className="w-11 h-11 md:w-12 md:h-12 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center shadow-lg transform hover:scale-105 transition-all">
+          <Phone size={22} className="animate-pulse" />
+        </div>
       ),
-      bgColor: "bg-sky-500",
-      hoverColor: "hover:bg-sky-600",
-      link: telegramLink,
+      link: `tel:${phoneNum.replace(/[^0-9+]/g, "")}`,
+      isExternal: false,
+    },
+    {
+      name: "Chat Zalo 0878.458.885",
+      icon: (
+        <div className="w-11 h-11 md:w-12 md:h-12 rounded-full overflow-hidden shadow-lg transform hover:scale-105 transition-all bg-white border border-blue-100 flex items-center justify-center p-0.5">
+          <Image
+            src="/icon/zalo.png"
+            alt="Zalo maigo79.com"
+            width={48}
+            height={48}
+            className="w-full h-full object-cover rounded-full"
+          />
+        </div>
+      ),
+      link: zaloUrl,
+      isExternal: true,
+    },
+    {
+      name: "WhatsApp 0878.458.885",
+      icon: (
+        <div className="w-11 h-11 md:w-12 md:h-12 rounded-full overflow-hidden shadow-lg transform hover:scale-105 transition-all bg-white border border-emerald-100 flex items-center justify-center p-0.5">
+          <Image
+            src="/icon/whatapp.png"
+            alt="WhatsApp maigo79.com"
+            width={48}
+            height={48}
+            className="w-full h-full object-cover rounded-full"
+          />
+        </div>
+      ),
+      link: whatsappUrl,
+      isExternal: true,
+    },
+    {
+      name: "KakaoTalk 0878.458.885",
+      icon: (
+        <div className="w-11 h-11 md:w-12 md:h-12 rounded-full overflow-hidden shadow-lg transform hover:scale-105 transition-all bg-[#FFE812] border border-amber-200 flex items-center justify-center p-1 cursor-pointer">
+          <Image
+            src="/icon/kakao.png"
+            alt="KakaoTalk maigo79.com"
+            width={44}
+            height={44}
+            className="w-full h-full object-contain"
+          />
+        </div>
+      ),
+      onClick: () => setShowKakaoModal(true),
+    },
+    {
+      name: "Facebook / Messenger",
+      icon: (
+        <div className="w-11 h-11 md:w-12 md:h-12 rounded-full overflow-hidden shadow-lg transform hover:scale-105 transition-all bg-white border border-blue-100 flex items-center justify-center p-0.5">
+          <Image
+            src="/icon/facebook.png"
+            alt="Facebook maigo79.com"
+            width={48}
+            height={48}
+            className="w-full h-full object-contain rounded-full"
+          />
+        </div>
+      ),
+      link: fbLink,
+      isExternal: true,
     },
   ];
 
   return (
-    <div className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 flex flex-col gap-2 md:gap-3">
-      {contacts.map((c, index) => (
-        <a
-          key={index}
-          href={c.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`${index === 1 ? "bg-transparent hover:bg-transparent p-0" : `${c.bgColor} ${c.hoverColor} p-3 md:p-3.5`} text-white rounded-full shadow-md transform hover:scale-105 transition-all duration-200 flex items-center justify-center`}
-          title={c.name}
-          aria-label={c.name}
+    <>
+      <div className="fixed bottom-4 right-3 md:bottom-6 md:right-5 z-50 flex flex-col gap-2.5 items-center">
+        {contacts.map((c, index) => {
+          if (c.onClick) {
+            return (
+              <button
+                key={index}
+                type="button"
+                onClick={c.onClick}
+                title={c.name}
+                aria-label={c.name}
+                className="cursor-pointer focus:outline-none"
+              >
+                {c.icon}
+              </button>
+            );
+          }
+
+          return (
+            <a
+              key={index}
+              href={c.link}
+              target={c.isExternal ? "_blank" : undefined}
+              rel={c.isExternal ? "noopener noreferrer" : undefined}
+              title={c.name}
+              aria-label={c.name}
+              className="focus:outline-none"
+            >
+              {c.icon}
+            </a>
+          );
+        })}
+      </div>
+
+      {/* KakaoTalk Modal */}
+      {showKakaoModal && (
+        <div
+          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4"
+          onClick={() => setShowKakaoModal(false)}
         >
-          {c.icon}
-        </a>
-      ))}
-    </div>
+          <div
+            className="bg-white max-w-sm w-full p-6 shadow-2xl relative border border-gray-100 animate-in zoom-in-95 duration-200 text-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setShowKakaoModal(false)}
+              className="absolute top-3 right-3 text-gray-400 hover:text-gray-700 p-1 cursor-pointer"
+              aria-label="Đóng"
+            >
+              <X size={20} />
+            </button>
+
+            <div className="w-14 h-14 bg-[#FFE812] rounded-full flex items-center justify-center mx-auto mb-3.5 p-2 shadow-xs">
+              <Image
+                src="/icon/kakao.png"
+                alt="KakaoTalk"
+                width={40}
+                height={40}
+                className="object-contain"
+              />
+            </div>
+
+            <h3 className="text-lg font-bold text-gray-900 mb-1">
+              Liên Hệ Qua KakaoTalk
+            </h3>
+            <p className="text-xs sm:text-sm text-gray-600 mb-4">
+              카카오톡으로 문의 및 차량 예약이 가능합니다.
+            </p>
+
+            <div className="bg-amber-50/80 p-3.5 border border-amber-200 mb-4 text-left">
+              <p className="text-xs text-gray-700 mb-1">
+                <strong>ID / Phone:</strong>{" "}
+                <span className="text-[#003366] font-bold text-base select-all">
+                  0878458885
+                </span>
+              </p>
+              <p className="text-xs text-gray-700">
+                <strong>Hotline Quốc Tế:</strong>{" "}
+                <span className="text-[#003366] font-bold select-all">
+                  +84 878 458 885
+                </span>
+              </p>
+            </div>
+
+            <a
+              href="tel:0878458885"
+              className="w-full bg-[#003366] hover:bg-[#002244] text-white font-bold py-2.5 px-4 text-sm flex items-center justify-center gap-2 transition-all shadow-xs"
+            >
+              <Phone size={16} /> Gọi 0878.458.885
+            </a>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

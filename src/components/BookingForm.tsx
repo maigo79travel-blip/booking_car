@@ -59,8 +59,8 @@ const BookingForm = () => {
     "16": 16000,
   };
 
-  const hotlineNum = contact.hotline || "0928015280";
-  const hotlineDisplay = contact.hotline_display || "0928.015.280";
+  const hotlineNum = contact.hotline || "0878458885";
+  const hotlineDisplay = contact.hotline_display || "0878.458.885";
 
   // Mount effect
   useEffect(() => {

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { ChevronDown, HelpCircle } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
-import { useSiteContent } from "@/context/SiteContentContext";
+import { useSiteContent, type FAQConfig } from "@/context/SiteContentContext";
 
 interface FAQItem {
   q: string;
@@ -21,7 +21,7 @@ export default function FAQSection() {
 
   const faqItems: FAQItem[] =
     dynamicFaq && dynamicFaq.length > 0
-      ? dynamicFaq.map((item) => ({
+      ? dynamicFaq.map((item: FAQConfig) => ({
           q: item.q?.[language] || item.q?.vi || "",
           a: item.a?.[language] || item.a?.vi || "",
         }))

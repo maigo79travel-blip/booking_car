@@ -27,7 +27,7 @@ const defaultMetadata: Metadata = {
     template: "%s | maigo79.com",
   },
   description:
-    "Dịch vụ đặt xe taxi đưa đón Sân bay Quốc tế Cam Ranh (CXR) về TP. Nha Trang và các resort Bãi Dài giá rẻ trọn gói chỉ từ 250k. Xe 5-7-16 chỗ đời mới đón trả 24/7. Hotline: 0928 015 280 - 0905 876 231",
+    "Dịch vụ đặt xe taxi đưa đón Sân bay Quốc tế Cam Ranh (CXR) về TP. Nha Trang và các resort Bãi Dài giá rẻ trọn gói chỉ từ 250k. Xe 5-7-16 chỗ đời mới đón trả 24/7. Hotline: 0878 458 885",
   keywords: [
     "đặt xe sân bay cam ranh",
     "taxi sân bay cam ranh nha trang",
@@ -108,7 +108,7 @@ export async function generateMetadata(): Promise<Metadata> {
     const title = seo.title || "Đặt xe sân bay Cam Ranh – Taxi Nha Trang giá rẻ 24/7 - maigo79.com";
     const description =
       seo.description ||
-      "Dịch vụ đặt xe taxi đưa đón Sân bay Quốc tế Cam Ranh (CXR) về TP. Nha Trang và các resort Bãi Dài giá rẻ trọn gói chỉ từ 250k. Xe 5-7-16 chỗ đời mới đón trả 24/7. Hotline: 0928 015 280 - 0905 876 231";
+      "Dịch vụ đặt xe taxi đưa đón Sân bay Quốc tế Cam Ranh (CXR) về TP. Nha Trang và các resort Bãi Dài giá rẻ trọn gói chỉ từ 250k. Xe 5-7-16 chỗ đời mới đón trả 24/7. Hotline: 0878 458 885";
     const image = seo.og_image || "/images/logo-maigo79.png";
     const siteName = seo.site_name || "maigo79.com";
 
@@ -162,7 +162,7 @@ const jsonLdGraph = {
       "image": `${siteUrl}/images/logo-maigo79.png`,
       "logo": `${siteUrl}/images/logo-maigo79.png`,
       "url": siteUrl,
-      "telephone": "+84928015280",
+      "telephone": "+84878458885",
       "email": "contact@maigo79.com",
       "priceRange": "250.000đ - 1.500.000đ",
       "currenciesAccepted": "VND",

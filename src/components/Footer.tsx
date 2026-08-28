@@ -202,7 +202,10 @@ const Footer = () => {
         <div className="mt-10 pt-6 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex gap-4">
             <a
-              href="https://www.facebook.com"
+              href={
+                contact.facebook ||
+                "https://www.facebook.com/share/1BhL4Qut3u/?mibextid=wwXIfr"
+              }
               target="_blank"
               rel="noopener noreferrer"
               className="bg-[#174978] hover:bg-[#003366] p-2.5 transition-colors text-white"

@@ -23,6 +23,9 @@ export interface ContactConfig {
   hotline: string;
   hotline_display: string;
   zalo: string;
+  whatsapp?: string;
+  kakaotalk?: string;
+  facebook?: string;
   telegram: string;
   email: string;
   address: string;
@@ -44,12 +47,32 @@ export interface VehicleConfig {
   id: string;
   type: string;
   name: string;
-  models: string;
-  seats: string;
-  luggage: string;
+  models?: string;
+  seats?: string;
+  capacity?: string;
+  luggage?: string;
   price: string;
   image: string;
-  features: string[];
+  features?: string[];
+}
+
+export interface RouteConfig {
+  from: string;
+  to: string;
+  price: string;
+  time: string;
+}
+
+export interface ReasonConfig {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+export interface StepConfig {
+  step: string;
+  title: string;
+  description: string;
 }
 
 export interface FeaturedVehicle {
@@ -76,9 +99,9 @@ export interface TravelDestination {
 export interface TestimonialConfig {
   name: string;
   role: string;
-  avatar: string;
+  route?: string;
   stars: number;
-  route: string;
+  avatar: string;
   comment: string;
 }
 
@@ -102,9 +125,12 @@ export interface SiteContentContextProps {
 
 const defaultContact: ContactConfig = {
   brand_name: "maigo79.com",
-  hotline: "0928015280",
-  hotline_display: "0928.015.280",
-  zalo: "0905876231",
+  hotline: "0878458885",
+  hotline_display: "0878.458.885",
+  zalo: "0878458885",
+  whatsapp: "0878458885",
+  kakaotalk: "0878458885",
+  facebook: "https://www.facebook.com/share/1BhL4Qut3u/?mibextid=wwXIfr",
   telegram: "https://t.me/maigo79_vn",
   email: "contact@maigo79.com",
   address: "",

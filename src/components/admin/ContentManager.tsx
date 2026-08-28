@@ -183,9 +183,14 @@ export default function ContentManager({
     const raw = getContent("contact_info", {});
     return {
       brand_name: (raw.brand_name as string) || "maigo79.com",
-      hotline: (raw.hotline as string) || "0928015280",
-      hotline_display: (raw.hotline_display as string) || "0928.015.280",
-      zalo: (raw.zalo as string) || "0905876231",
+      hotline: (raw.hotline as string) || "0878458885",
+      hotline_display: (raw.hotline_display as string) || "0878.458.885",
+      zalo: (raw.zalo as string) || "0878458885",
+      whatsapp: (raw.whatsapp as string) || "0878458885",
+      kakaotalk: (raw.kakaotalk as string) || "0878458885",
+      facebook:
+        (raw.facebook as string) ||
+        "https://www.facebook.com/share/1BhL4Qut3u/?mibextid=wwXIfr",
       telegram: (raw.telegram as string) || "https://t.me/maigo79_vn",
       email: (raw.email as string) || "contact@maigo79.com",
       address: (raw.address as string) || "",
@@ -706,7 +711,7 @@ export default function ContentManager({
                 type="text"
                 value={contactData.hotline}
                 onChange={(e) => setContactData({ ...contactData, hotline: e.target.value })}
-                placeholder="0928015280"
+                placeholder="0878458885"
                 className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-semibold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>
@@ -721,7 +726,7 @@ export default function ContentManager({
                 onChange={(e) =>
                   setContactData({ ...contactData, hotline_display: e.target.value })
                 }
-                placeholder="0928.015.280"
+                placeholder="0878.458.885"
                 className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-semibold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>
@@ -734,7 +739,46 @@ export default function ContentManager({
                 type="text"
                 value={contactData.zalo}
                 onChange={(e) => setContactData({ ...contactData, zalo: e.target.value })}
-                placeholder="0905876231 hoặc https://zalo.me/..."
+                placeholder="0878458885 hoặc https://zalo.me/0878458885"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-semibold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                Số điện thoại WhatsApp
+              </label>
+              <input
+                type="text"
+                value={contactData.whatsapp}
+                onChange={(e) => setContactData({ ...contactData, whatsapp: e.target.value })}
+                placeholder="0878458885 hoặc +84878458885"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-semibold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                Số / ID KakaoTalk
+              </label>
+              <input
+                type="text"
+                value={contactData.kakaotalk}
+                onChange={(e) => setContactData({ ...contactData, kakaotalk: e.target.value })}
+                placeholder="0878458885"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-semibold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                Link Facebook / Messenger
+              </label>
+              <input
+                type="text"
+                value={contactData.facebook}
+                onChange={(e) => setContactData({ ...contactData, facebook: e.target.value })}
+                placeholder="https://www.facebook.com/share/1BhL4Qut3u/?mibextid=wwXIfr"
                 className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-semibold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
             </div>

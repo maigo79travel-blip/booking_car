@@ -33,7 +33,7 @@ const posts = [
       zh: "金兰机场到芽庄专车接送 一口价25万盾 - maigo79.com",
     },
     seo_description: {
-      vi: "Đặt xe đưa đón sân bay Cam Ranh đi Nha Trang giá rẻ trọn gói từ 250k. Đón tận sảnh, xe riêng đời mới 5, 7, 16 chỗ, tài xế lịch sự, hotline 0928.015.280.",
+      vi: "Đặt xe đưa đón sân bay Cam Ranh đi Nha Trang giá rẻ trọn gói từ 250k. Đón tận sảnh, xe riêng đời mới 5, 7, 16 chỗ, tài xế lịch sự, hotline 0878.458.885.",
       en: "Book private taxi transfer from Cam Ranh Airport to Nha Trang city. 5, 7, 16 seaters available. Flight tracking, meet & greet service.",
       ko: "나트랑 깜란 공항 단독 픽업 및 샌딩 서비스. 5인승, 7인승, 16인승 최신 차량, 24시간 예약 가능.",
       ru: "Заказ такси и трансфера из аэропорта Камрань в Нячанг. Автомобили 5, 7, 16 мест, круглосуточно.",
@@ -76,8 +76,8 @@ Dịch vụ xe riêng của maigo79.com cam kết giá niêm yết trọn gói, 
 
 5. Cách Thức Đặt Xe Nhanh Chóng 24/7
 - Đặt trực tuyến: Nhập thông tin ngày giờ, số lượng khách và điểm đón trên form đặt xe tại trang chủ maigo79.com.
-- Gọi Hotline trực tiếp: 0928.015.280 (Hỗ trợ 24/7 mọi lúc, kể cả chuyến bay đêm muộn hoặc sáng sớm).
-- Nhắn tin qua Zalo: 0905.876.231 để nhận báo giá tức thì trong 1 phút.`,
+- Gọi Hotline trực tiếp: 0878.458.885 (Hỗ trợ 24/7 mọi lúc, kể cả chuyến bay đêm muộn hoặc sáng sớm).
+- Nhắn tin qua Zalo: 0878.458.885 để nhận báo giá tức thì trong 1 phút.`,
       en: `Complete guide for hiring a private car or taxi from Cam Ranh International Airport (CXR) to Nha Trang city and hotels. All-inclusive price from 250,000 VND. 24/7 flight tracking, English speaking support, modern clean vehicles.`,
       ko: `깜란 국제공항에서 나트랑 시내 및 호텔까지 이동하는 가장 편안하고 저렴한 단독 프라이빗 픽업 서비스 가이드입니다. 250,000동 정찰제 가격, 항공편 지연 무료 대기, 24시간 실시간 예약.`,
       ru: `Полное руководство по заказу такси и индивидуального трансфера из аэропорта Камрань в Нячанг от 250 000 донгов. Фиксированная цена, встреча в зале прилета, круглосуточно.`,
@@ -108,7 +108,7 @@ Dịch vụ xe riêng của maigo79.com cam kết giá niêm yết trọn gói, 
       zh: "金兰机场到芽庄出租车价格表 - maigo79.com",
     },
     seo_description: {
-      vi: "Bảng giá taxi sân bay Cam Ranh về Nha Trang: xe 5 chỗ 250k, 7 chỗ 300k, 16 chỗ 550k. Đã bao gồm vé sân bay, không phụ phí ban đêm. Hotline 0928.015.280.",
+      vi: "Bảng giá taxi sân bay Cam Ranh về Nha Trang: xe 5 chỗ 250k, 7 chỗ 300k, 16 chỗ 550k. Đã bao gồm vé sân bay, không phụ phí ban đêm. Hotline 0878.458.885.",
       en: "Transparent price for Cam Ranh Airport transfer: 5-seater 250k, 7-seater 300k, 16-seater 550k. Tolls and airport fees included. 24/7 hotline.",
       ko: "깜란 공항 픽업 가격표: 5인승 25만동, 7인승 30만동, 16인승 55만동. 톨비 및 공항 통행료 포함, 심야 할증 없음.",
       ru: "Прайс-лист на такси из аэропорта Камрань: 5 мест 250k, 7 мест 300k, 16 мест 550k. Все сборы включены.",
@@ -157,7 +157,7 @@ Khi đặt xe tại maigo79.com, quý khách được hưởng trọn gói các 
 5. Mẹo Giúp Du Khách Đặt Xe Tiết Kiệm & An Toàn Nhất
 - Đặt xe trước ít nhất 1-2 tiếng trước giờ cất cánh để tổng đài sắp xếp tài xế chu đáo nhất.
 - Đặt luôn vé khứ hồi 2 chiều để được giảm giá cước và an tâm có xe đón đúng giờ về lại sân bay.
-- Lưu số hotline 0928.015.280 trong danh bạ để liên hệ nhanh khi cần xe khẩn cấp.`,
+- Lưu số hotline 0878.458.885 trong danh bạ để liên hệ nhanh khi cần xe khẩn cấp.`,
       en: `Detailed price comparison and fare guide for Cam Ranh Airport taxis and private cars. Transparent rates from 250,000 VND, no hidden fees, flight delay guarantee.`,
       ko: `깜란 공항 택시 및 프라이빗 픽업 최신 요금표 안내. 5인승 25만동, 7인승 30만동, 16인승 55만동 정찰제 요금과 요금 절약 팁.`,
       ru: `Подробный прайс-лист на поездки из аэропорта Камрань в Нячанг. Фиксированные тарифы без доплат, скидки на поездки туда и обратно.`,
@@ -188,7 +188,7 @@ Khi đặt xe tại maigo79.com, quý khách được hưởng trọn gói các 
       zh: "金兰机场到长滩度假村专车接送 18万盾起 - maigo79.com",
     },
     seo_description: {
-      vi: "Xe sân bay Cam Ranh đi Alma Resort, The Anam, Mövenpick, Radisson Blu, Fusion, The Arena giá chỉ từ 180k. Đón tận sảnh 24/7, hotline 0928.015.280.",
+      vi: "Xe sân bay Cam Ranh đi Alma Resort, The Anam, Mövenpick, Radisson Blu, Fusion, The Arena giá chỉ từ 180k. Đón tận sảnh 24/7, hotline 0878.458.885.",
       en: "Private airport transfer to Bai Dai luxury resorts: Alma, The Anam, Mövenpick, Radisson Blu. 5-10 mins ride from 180k VND. Book 24/7.",
       ko: "깜란 공항에서 알마 리조트, 더 아남, 뫼벤픽, 래디슨 블루 픽업 서비스. 18만동부터, 24시간 실시간 예약 가능.",
       ru: "Индивидуальный трансфер из аэропорта Камрань в отели Бай Зай от 180 000 донгов. Быстрая подача автомобиля.",
@@ -228,7 +228,7 @@ Nhiều du khách lưu trú tại Bãi Dài thường có nhu cầu vào trung t
 - Gói thuê xe trọn gói theo ngày / nửa ngày tham quan Tháp Bà Ponagar, Viện Hải Dương Học, Chùa Long Sơn, VinWonders.
 
 4. Hotline Đặt Xe Bãi Dài 24/7
-- Điện thoại / Zalo: 0928.015.280
+- Điện thoại / Zalo: 0878.458.885
 - Phục vụ 24/7 kể cả ngày lễ, Tết.`,
       en: `Private airport transfers from Cam Ranh Airport (CXR) to luxury Bai Dai resorts including Alma, The Anam, Mövenpick, Radisson Blu, Fusion, and Arena. Quick 5-10 minute drive starting from 180,000 VND.`,
       ko: `깜란 국제공항에서 바이다이 해변 특급 리조트(알마, 더 아남, 뫼벤픽, 래디슨 블루, 퓨전 등)까지 가장 빠르고 편리한 프라이빗 픽업 서비스. 18만동부터.`,
@@ -260,11 +260,11 @@ Nhiều du khách lưu trú tại Bãi Dài thường có nhu cầu vào trung t
       zh: "金兰机场到芽庄交通完全指南 - maigo79.com",
     },
     seo_description: {
-      vi: "Kinh nghiệm đặt xe sân bay Cam Ranh về Nha Trang: khoảng cách 35km, mất 35 phút. Bật mí mẹo đặt xe riêng đón tận sảnh giá rẻ chỉ 250k. Hotline 0928.015.280.",
+      vi: "Kinh nghiệm đặt xe sân bay Cam Ranh về Nha Trang: khoảng cách 35km, mất 35 phút. Bật mí mẹo đặt xe riêng đón tận sảnh giá rẻ chỉ 250k. Hotline 0878.458.885.",
       en: "Essential tips for Cam Ranh Airport transfer to Nha Trang city. 35km distance, 35 minutes travel time. Fixed private car rates from 250k VND.",
       ko: "깜란 공항에서 나트랑 시내까지 거리 35km, 35분 소요. 단독 프라이빗 차량 25만동 예약 팁 및 공항 이용 안내.",
       ru: "Полезные советы для поездки из аэропорта Камрань в Нячанг. Расстояние 35 км, время в пути 35 минут, трансфер от 250k.",
-      zh: "金兰机场到芽庄市区攻略：全程35公里约35分钟。专车接送仅需25万盾，24小时服务热线0928.015.280。",
+      zh: "金兰机场到芽庄市区攻略：全程35公里约35分钟。专车接送仅需25万盾，24小时服务热线0878.458.885。",
     },
     cover_image: "/images/Hero1.jpg",
     body: {
@@ -296,7 +296,7 @@ Nhiều chuyến bay từ Hà Nội, TP.HCM, Hải Phòng hay các chuyến bay 
 - Bước 3: Tài xế đợi sẵn, hỗ trợ đưa hành lý lên cốp xe và di chuyển an toàn, êm ái về khách sạn của bạn tại Nha Trang.
 
 5. Thông Tin Liên Hệ Đặt Xe
-- Hotline / Zalo đặt xe 24/7: 0928.015.280 - 0905.876.231
+- Hotline / Zalo đặt xe 24/7: 0878.458.885 - 0878.458.885
 - Website: maigo79.com`,
       en: `Everything you need to know before landing at Cam Ranh Airport: travel distance, average duration, transport options comparison, and tips for late-night arrivals.`,
       ko: `깜란 공항 도착 후 나트랑 시내까지 이동하는 방법, 거리와 시간, 교통수단별 장단점 및 심야 비행기 이용 시 주의사항 안내.`,
@@ -328,7 +328,7 @@ Nhiều chuyến bay từ Hà Nội, TP.HCM, Hải Phòng hay các chuyến bay 
       zh: "芽庄包车去大叻 美奈 潘朗 一日游 - maigo79.com",
     },
     seo_description: {
-      vi: "Thuê xe riêng từ Nha Trang đi Đà Lạt 1.200k, đi Ninh Thuận 900k, đi Mũi Né 1.500k. Xe 5, 7, 16 chỗ đời mới 2022 - 2026, lái xe an toàn. Hotline 0928.015.280.",
+      vi: "Thuê xe riêng từ Nha Trang đi Đà Lạt 1.200k, đi Ninh Thuận 900k, đi Mũi Né 1.500k. Xe 5, 7, 16 chỗ đời mới 2022 - 2026, lái xe an toàn. Hotline 0878.458.885.",
       en: "Rent a private car with driver from Nha Trang to Da Lat (1.2M), Ninh Thuan (900k), Mui Ne (1.5M). Comfortable 5, 7, 16-seater vehicles.",
       ko: "나트랑에서 달랏, 판랑, 무이네까지 전용 차량 렌트. 안전하고 쾌적한 최신 차량, 친절한 기사 포함.",
       ru: "Трансфер из Нячанга в Далат, Муйне и Фанранг на комфортабельных автомобилях 5, 7, 16 мест.",
@@ -374,7 +374,7 @@ Nhiều chuyến bay từ Hà Nội, TP.HCM, Hải Phòng hay các chuyến bay 
 - Hỗ trợ dừng nghỉ, chụp ảnh tại các điểm ngắm cảnh đẹp trên đường (Đèo Cù Hin, Đèo Khánh Lê, Vườn nho Thái An, Cung đường ven biển Vĩnh Hy...).
 
 4. Đặt Xe Nhanh Chóng
-- Hotline: 0928.015.280 | Zalo: 0905.876.231
+- Hotline: 0878.458.885 | Zalo: 0878.458.885
 - Đặt trước 1 ngày để nhận xe tốt nhất.`,
       en: `Private intercity car rental from Nha Trang to Da Lat, Phan Rang, Mui Ne, Phu Yen, and coastal day tours. Safe driving, modern fleet, transparent pricing.`,
       ko: `나트랑에서 달랏, 판랑, 무이네, 독렛 해변까지 전용 차량 투어 및 장거리 렌터카 서비스.`,
@@ -406,7 +406,7 @@ Nhiều chuyến bay từ Hà Nội, TP.HCM, Hải Phòng hay các chuyến bay 
       zh: "金兰机场5座7座16座专车车型 - maigo79.com",
     },
     seo_description: {
-      vi: "Dịch vụ thuê xe 5 chỗ, 7 chỗ, 16 chỗ sân bay Cam Ranh - Nha Trang. Xe đời mới 2022 - 2026, cốp rộng chứa nhiều hành lý, đón tận sảnh 24/7. Hotline 0928.015.280.",
+      vi: "Dịch vụ thuê xe 5 chỗ, 7 chỗ, 16 chỗ sân bay Cam Ranh - Nha Trang. Xe đời mới 2022 - 2026, cốp rộng chứa nhiều hành lý, đón tận sảnh 24/7. Hotline 0878.458.885.",
       en: "Rent 5, 7, 16 seater cars at Cam Ranh Airport. Modern fleet, generous luggage room, meet & greet service at terminal.",
       ko: "깜란 공항 5인승, 7인승, 16인승 최신 차량 단독 픽업. 캐리어 많은 가족 및 단체 여행 추천.",
       ru: "Заказ авто 5, 7, 16 мест в аэропорту Камрань. Новые машины, просторный багажник, встреча 24/7.",
@@ -440,8 +440,8 @@ Nhiều chuyến bay từ Hà Nội, TP.HCM, Hải Phòng hay các chuyến bay 
 - Tài xế có mặt tại sảnh trước 15 phút, luôn mở cửa và hỗ trợ bưng bê hành lý tận tình.
 
 5. Liên Hệ Đặt Xe
-- Hotline 24/7: 0928.015.280
-- Zalo: 0905.876.231
+- Hotline 24/7: 0878.458.885
+- Zalo: 0878.458.885
 - Đặt trực tuyến tại: maigo79.com`,
       en: `Complete guide on choosing between 5-seater sedans, 7-seater MPVs, and 16-seater vans for your Cam Ranh Airport transfer based on group size and luggage count.`,
       ko: `탑승 인원과 캐리어 개수에 맞춘 깜란 공항 5인승, 7인승, 16인승 차량 선택 가이드.`,

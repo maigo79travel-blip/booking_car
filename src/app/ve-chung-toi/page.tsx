@@ -228,10 +228,10 @@ export default function AboutPage() {
               <div>
                 <h3 className="font-bold text-gray-800 text-sm mb-0.5">Hotline & Zalo 24/7</h3>
                 <a
-                  href="tel:0928015280"
+                  href="tel:0878458885"
                   className="text-sm md:text-base text-[#174978] font-bold hover:underline"
                 >
-                  0928.015.280
+                  0878.458.885
                 </a>
               </div>
             </div>

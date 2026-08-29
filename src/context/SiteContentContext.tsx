@@ -110,10 +110,26 @@ export interface FAQConfig {
   a: Record<string, string>;
 }
 
+export interface PriceTableRow {
+  id: string;
+  carType: string;
+  oneWayAirportToCity: string;
+  oneWayCityToAirport: string;
+  roundTrip: string;
+}
+
+export interface PriceTableConfig {
+  title?: string;
+  rows: PriceTableRow[];
+  note1?: string;
+  note2?: string;
+}
+
 export interface SiteContentContextProps {
   content: Record<string, unknown>;
   contact: ContactConfig;
   hero: HeroConfig;
+  priceTable: PriceTableConfig;
   vehicles: VehicleConfig[];
   vehicleCategories: VehicleCategory[];
   featuredVehicles: FeaturedVehicle[];
@@ -211,6 +227,35 @@ const defaultVehicles: VehicleConfig[] = [
     features: ["Ghế ngả cao cấp", "Khoang hành lý siêu rộng", "Phù hợp đoàn du lịch & công tác"],
   },
 ];
+
+const defaultPriceTable: PriceTableConfig = {
+  title: "BẢNG GIÁ XE SÂN BAY CAM RANH – NHA TRANG",
+  rows: [
+    {
+      id: "5-seater",
+      carType: "Xe 5 Chỗ",
+      oneWayAirportToCity: "Từ 250.000đ",
+      oneWayCityToAirport: "Từ 250.000đ",
+      roundTrip: "Từ 480.000đ",
+    },
+    {
+      id: "7-seater",
+      carType: "Xe 7 Chỗ",
+      oneWayAirportToCity: "Từ 300.000đ",
+      oneWayCityToAirport: "Từ 300.000đ",
+      roundTrip: "Từ 580.000đ",
+    },
+    {
+      id: "16-seater",
+      carType: "Xe 16 Chỗ",
+      oneWayAirportToCity: "Từ 550.000đ",
+      oneWayCityToAirport: "Từ 550.000đ",
+      roundTrip: "Từ 1.050.000đ",
+    },
+  ],
+  note1: "Giá TRỌN GÓI 100%, đã BAO GỒM vé vào sân bay Cam Ranh và cầu đường.",
+  note2: "Giá cước tour du lịch Đà Lạt, Mũi Né, Ninh Thuận: Cam kết rẻ hơn 20% – 40% so với taxi truyền thống.",
+};
 
 const defaultTestimonials: TestimonialConfig[] = [
   {
@@ -466,12 +511,18 @@ export const SiteContentProvider: React.FC<{ children: React.ReactNode }> = ({
       ? (content.faq_list as FAQConfig[])
       : defaultFAQ;
 
+  const priceTable: PriceTableConfig =
+    content.price_table && typeof content.price_table === "object"
+      ? { ...defaultPriceTable, ...(content.price_table as Partial<PriceTableConfig>) }
+      : defaultPriceTable;
+
   return (
     <SiteContentContext.Provider
       value={{
         content,
         contact,
         hero,
+        priceTable,
         vehicles,
         vehicleCategories,
         featuredVehicles,
@@ -493,6 +544,7 @@ export const useSiteContent = (): SiteContentContextProps => {
       content: {},
       contact: defaultContact,
       hero: defaultHero,
+      priceTable: defaultPriceTable,
       vehicles: defaultVehicles,
       vehicleCategories: [],
       featuredVehicles: defaultFeaturedVehicles,

@@ -20,6 +20,7 @@ import {
   Loader2,
   Compass,
   Search,
+  Table,
 } from "lucide-react";
 import ImageUploadField from "./ImageUploadField";
 import { Language, SUPPORTED_LANGUAGES } from "@/lib/i18n/types";
@@ -27,6 +28,8 @@ import { VehicleCategory, Vehicle } from "@/context/SiteContentContext";
 import {
   FeaturedVehicle,
   TravelDestination,
+  PriceTableConfig,
+  PriceTableRow,
   defaultFeaturedVehicles,
   defaultDestinations,
 } from "@/context/SiteContentContext";
@@ -60,6 +63,7 @@ interface ContentManagerProps {
 type CMSTab =
   | "hero"
   | "brand"
+  | "price_table"
   | "featured_vehicles"
   | "destinations"
   | "vehicles"
@@ -90,6 +94,7 @@ export default function ContentManager({
         [
           "hero",
           "brand",
+          "price_table",
           "featured_vehicles",
           "destinations",
           "vehicles",
@@ -196,6 +201,45 @@ export default function ContentManager({
       address: (raw.address as string) || "",
       logo_url: (raw.logo_url as string) || "/images/logo-maigo79.png",
       working_hours: (raw.working_hours as string) || "24/7 (Phục vụ cả ngày lễ & Tết)",
+    };
+  });
+
+  const [priceTableData, setPriceTableData] = useState<PriceTableConfig>(() => {
+    const raw = getContent("price_table", {});
+    return {
+      title: (raw.title as string) || "BẢNG GIÁ XE SÂN BAY CAM RANH – NHA TRANG",
+      rows:
+        Array.isArray(raw.rows) && raw.rows.length > 0
+          ? (raw.rows as PriceTableRow[])
+          : [
+              {
+                id: "5-seater",
+                carType: "Xe 5 Chỗ",
+                oneWayAirportToCity: "Từ 250.000đ",
+                oneWayCityToAirport: "Từ 250.000đ",
+                roundTrip: "Từ 480.000đ",
+              },
+              {
+                id: "7-seater",
+                carType: "Xe 7 Chỗ",
+                oneWayAirportToCity: "Từ 300.000đ",
+                oneWayCityToAirport: "Từ 300.000đ",
+                roundTrip: "Từ 580.000đ",
+              },
+              {
+                id: "16-seater",
+                carType: "Xe 16 Chỗ",
+                oneWayAirportToCity: "Từ 550.000đ",
+                oneWayCityToAirport: "Từ 550.000đ",
+                roundTrip: "Từ 1.050.000đ",
+              },
+            ],
+      note1:
+        (raw.note1 as string) ||
+        "Giá TRỌN GÓI 100%, đã BAO GỒM vé vào sân bay Cam Ranh và cầu đường.",
+      note2:
+        (raw.note2 as string) ||
+        "Giá cước tour du lịch Đà Lạt, Mũi Né, Ninh Thuận: Cam kết rẻ hơn 20% – 40% so với taxi truyền thống.",
     };
   });
 
@@ -437,6 +481,7 @@ export default function ContentManager({
         {[
           { id: "hero", label: "Hero & Banner", icon: Sparkles },
           { id: "brand", label: "Thương hiệu & Hotline", icon: Phone },
+          { id: "price_table", label: "Bảng giá xe sân bay (Trang chủ)", icon: Table },
           { id: "featured_vehicles", label: "Xe nổi bật (Trang chủ)", icon: Car },
           { id: "destinations", label: "Địa điểm du lịch Nha Trang", icon: Compass },
           { id: "vehicles", label: "Đội xe & Phân khúc (/loai-xe)", icon: Globe },
@@ -819,6 +864,209 @@ export default function ContentManager({
                 onChange={(e) => setContactData({ ...contactData, address: e.target.value })}
                 className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-semibold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
               />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* TAB: PRICE TABLE (BẢNG GIÁ XE SÂN BAY TRANG CHỦ & TRANG /BANG-GIA) */}
+      {/* ========================================================================= */}
+      {activeTab === "price_table" && (
+        <div className="bg-white rounded-xl p-6 lg:p-8 border border-slate-200 shadow-sm space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+            <div>
+              <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+                <Table size={20} className="text-blue-600" />
+                Bảng Giá Xe Sân Bay Cam Ranh – Nha Trang
+              </h2>
+              <p className="text-xs text-slate-500 font-normal mt-0.5">
+                Chỉnh sửa giá vé, các tuyến chiều đón tiễn sân bay và ghi chú hiển thị ở Bảng giá trang chủ và trang /bang-gia
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => handleSaveSection("price_table", priceTableData)}
+              disabled={isSaving}
+              className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow-sm transition-all cursor-pointer disabled:opacity-50"
+            >
+              {isSaving ? <Loader2 size={16} className="animate-spin" /> : <Save size={16} />}
+              <span>Lưu Bảng Giá</span>
+            </button>
+          </div>
+
+          <div className="space-y-4">
+            <div>
+              <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                Tiêu đề chính của bảng giá
+              </label>
+              <input
+                type="text"
+                value={priceTableData.title || ""}
+                onChange={(e) =>
+                  setPriceTableData({ ...priceTableData, title: e.target.value })
+                }
+                placeholder="BẢNG GIÁ XE SÂN BAY CAM RANH – NHA TRANG"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-sm font-semibold text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+              />
+            </div>
+
+            <div className="border border-slate-200 rounded-xl overflow-hidden shadow-2xs">
+              <div className="bg-slate-50 p-4 border-b border-slate-200 flex items-center justify-between">
+                <span className="text-xs font-bold text-slate-800 uppercase tracking-wider">
+                  Danh Sách Các Loại Xe & Mức Giá Cước
+                </span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const newRow: PriceTableRow = {
+                      id: `car-${Date.now()}`,
+                      carType: "Xe Mới",
+                      oneWayAirportToCity: "Từ 250.000đ",
+                      oneWayCityToAirport: "Từ 250.000đ",
+                      roundTrip: "Từ 480.000đ",
+                    };
+                    setPriceTableData({
+                      ...priceTableData,
+                      rows: [...priceTableData.rows, newRow],
+                    });
+                  }}
+                  className="flex items-center gap-1.5 px-3 py-1.5 bg-white hover:bg-blue-50 text-blue-600 border border-blue-200 rounded-md text-xs font-semibold shadow-2xs transition-all cursor-pointer"
+                >
+                  <Plus size={14} />
+                  <span>Thêm Hàng Mới</span>
+                </button>
+              </div>
+
+              <div className="p-4 space-y-4">
+                {priceTableData.rows.map((row, idx) => (
+                  <div
+                    key={row.id || idx}
+                    className="p-4 bg-slate-50/70 border border-slate-200 rounded-lg space-y-3 relative group"
+                  >
+                    <div className="flex items-center justify-between gap-2 border-b border-slate-200 pb-2.5">
+                      <span className="text-xs font-bold text-blue-900">
+                        Hàng #{idx + 1}: {row.carType}
+                      </span>
+                      {priceTableData.rows.length > 1 && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const newRows = priceTableData.rows.filter((_, i) => i !== idx);
+                            setPriceTableData({ ...priceTableData, rows: newRows });
+                          }}
+                          className="text-red-500 hover:text-red-700 p-1 cursor-pointer transition-colors"
+                          title="Xóa hàng này"
+                        >
+                          <Trash2 size={15} />
+                        </button>
+                      )}
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                      <div>
+                        <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                          Tên loại xe (Cột 1)
+                        </label>
+                        <input
+                          type="text"
+                          value={row.carType}
+                          onChange={(e) => {
+                            const newRows = [...priceTableData.rows];
+                            newRows[idx].carType = e.target.value;
+                            setPriceTableData({ ...priceTableData, rows: newRows });
+                          }}
+                          placeholder="Ví dụ: Xe 5 Chỗ"
+                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded text-xs font-semibold text-slate-900 outline-none focus:border-blue-600"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                          Cam Ranh ➔ Nha Trang (Cột 2)
+                        </label>
+                        <input
+                          type="text"
+                          value={row.oneWayAirportToCity}
+                          onChange={(e) => {
+                            const newRows = [...priceTableData.rows];
+                            newRows[idx].oneWayAirportToCity = e.target.value;
+                            setPriceTableData({ ...priceTableData, rows: newRows });
+                          }}
+                          placeholder="Ví dụ: Từ 250.000đ"
+                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded text-xs font-semibold text-blue-700 outline-none focus:border-blue-600"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                          Nha Trang ➔ Cam Ranh (Cột 3)
+                        </label>
+                        <input
+                          type="text"
+                          value={row.oneWayCityToAirport}
+                          onChange={(e) => {
+                            const newRows = [...priceTableData.rows];
+                            newRows[idx].oneWayCityToAirport = e.target.value;
+                            setPriceTableData({ ...priceTableData, rows: newRows });
+                          }}
+                          placeholder="Ví dụ: Từ 250.000đ"
+                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded text-xs font-semibold text-blue-700 outline-none focus:border-blue-600"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                          Xe Đi 2 Chiều (Cột 4)
+                        </label>
+                        <input
+                          type="text"
+                          value={row.roundTrip}
+                          onChange={(e) => {
+                            const newRows = [...priceTableData.rows];
+                            newRows[idx].roundTrip = e.target.value;
+                            setPriceTableData({ ...priceTableData, rows: newRows });
+                          }}
+                          placeholder="Ví dụ: Từ 480.000đ"
+                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded text-xs font-semibold text-blue-700 outline-none focus:border-blue-600"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+              <div>
+                <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                  Ghi chú 1 dưới bảng giá
+                </label>
+                <input
+                  type="text"
+                  value={priceTableData.note1 || ""}
+                  onChange={(e) =>
+                    setPriceTableData({ ...priceTableData, note1: e.target.value })
+                  }
+                  placeholder="Giá TRỌN GÓI 100%, đã BAO GỒM vé vào sân bay..."
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-xs font-medium text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                  Ghi chú 2 dưới bảng giá
+                </label>
+                <input
+                  type="text"
+                  value={priceTableData.note2 || ""}
+                  onChange={(e) =>
+                    setPriceTableData({ ...priceTableData, note2: e.target.value })
+                  }
+                  placeholder="Giá cước tour du lịch Đà Lạt, Mũi Né..."
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-md text-xs font-medium text-slate-900 outline-none focus:bg-white focus:border-blue-600"
+                />
+              </div>
             </div>
           </div>
         </div>

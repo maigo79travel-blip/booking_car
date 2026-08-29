@@ -31,8 +31,21 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const post = slug ? await getPost(slug) : null;
   const title = post ? text(post.seo_title, locale) || text(post.title, locale) : titleFor(path, locale);
   const description = post ? text(post.seo_description, locale) || text(post.excerpt, locale) : `maigo79.com - ${title}`;
-  const canonical = `/${locale}/${path.join("/")}`.replace(/\/$/, "") || `/${locale}`;
-  return { title, description, alternates: { canonical, languages: Object.fromEntries(locales.map((item) => [item, canonical.replace(`/${locale}`, `/${item}`)]).concat([["x-default", canonical.replace(`/${locale}`, "")]])) } };
+  const pathSuffix = path.length ? `/${path.join("/")}` : "";
+  const canonical = `/${locale}${pathSuffix}`;
+  const xDefault = pathSuffix || "/";
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical,
+      languages: Object.fromEntries([
+        ...locales.map((item) => [item, `/${item}${pathSuffix}`]),
+        ["x-default", xDefault],
+      ]),
+    },
+  };
 }
 
 export default async function LocalizedPage({ params }: { params: Promise<{ locale: string; path?: string[] }> }) {

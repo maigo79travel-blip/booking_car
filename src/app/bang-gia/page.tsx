@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Header from "@/components/Header";
-import Breadcrumbs from "@/components/Breadcrumbs";
+import PricingPageIntro from "@/components/PricingPageIntro";
 import PriceTable from "@/components/PriceTable";
 import PopularRoutes from "@/components/PopularRoutes";
 import WhyChooseUs from "@/components/WhyChooseUs";
@@ -36,19 +36,7 @@ export default function PricingPage() {
     <main className="min-h-screen bg-gray-50">
       <Header />
 
-      {/* Breadcrumbs */}
-      <Breadcrumbs items={[{ name: "Bảng giá cước" }]} />
-
-      {/* Page Title */}
-      <div className="container mx-auto px-4 md:px-12 lg:px-24 pt-4 md:pt-6 pb-2">
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-          Bảng Giá Xe Sân Bay Cam Ranh – Nha Trang Trọn Gói 24/7
-        </h1>
-        <div className="w-24 h-1 bg-[#174978] mb-3"></div>
-        <p className="text-gray-600 text-sm md:text-base max-w-3xl">
-          Cam kết giá cước niêm yết công khai, đã bao gồm phí cầu đường và vé vào sân bay Cam Ranh. Không tăng giá vào giờ cao điểm, đêm muộn hay dịp lễ tết.
-        </p>
-      </div>
+      <PricingPageIntro />
 
       {/* Price Table */}
       <PriceTable />

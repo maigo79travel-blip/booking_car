@@ -5,9 +5,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { MapPin } from "lucide-react";
 import { useSiteContent } from "@/context/SiteContentContext";
+import { useLanguage } from "@/context/LanguageContext";
+
+const copy = {
+  vi: { tag: "KHÁM PHÁ DU LỊCH NHA TRANG – CAM RANH", title: "Các Địa Điểm Du Lịch Nổi Tiếng", description: "Dịch vụ xe riêng đưa đón tận nơi từ sân bay Cam Ranh và khách sạn Nha Trang đến các danh lam thắng cảnh đẹp nhất với giá cước niêm yết trọn gói.", book: "Đặt xe đi" },
+  en: { tag: "EXPLORE NHA TRANG & CAM RANH", title: "Popular Travel Destinations", description: "Private transfers from Cam Ranh Airport and Nha Trang hotels to the region's best attractions at transparent all-inclusive rates.", book: "Book a ride to" },
+  ko: { tag: "나트랑 · 깜란 여행", title: "인기 관광 명소", description: "깜란 공항과 나트랑 호텔에서 주요 관광지까지 정액 요금으로 편안하게 이동하세요.", book: "차량 예약:" },
+  ru: { tag: "ОТКРОЙТЕ НЯЧАНГ И КАМРАНЬ", title: "Популярные достопримечательности", description: "Индивидуальные трансферы из аэропорта Камрань и отелей Нячанга к лучшим достопримечательностям по фиксированной цене.", book: "Заказать поездку в" },
+  zh: { tag: "探索芽庄与金兰", title: "热门旅游目的地", description: "从金兰机场和芽庄酒店出发，以透明全包价格舒适前往当地热门景点。", book: "预订前往" },
+};
 
 export default function TravelDestinations() {
   const { destinations } = useSiteContent();
+  const { language } = useLanguage();
+  const text = copy[language];
 
   if (!destinations || destinations.length === 0) return null;
 
@@ -17,14 +28,14 @@ export default function TravelDestinations() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-5 md:mb-6">
           <span className="text-[#174978] font-bold uppercase tracking-wider text-xs md:text-sm flex items-center justify-center">
-            KHÁM PHÁ DU LỊCH NHA TRANG – CAM RANH
+            {text.tag}
           </span>
           <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-gray-900 mt-1 mb-2">
-            Các Địa Điểm Du Lịch Nổi Tiếng
+            {text.title}
           </h2>
           <div className="w-20 md:w-24 h-1 bg-[#174978] mx-auto mb-2.5"></div>
           <p className="text-gray-600 text-xs sm:text-sm md:text-base leading-relaxed">
-            Dịch vụ xe riêng đưa đón tận nơi từ sân bay Cam Ranh và khách sạn Nha Trang đến các danh lam thắng cảnh đẹp nhất với giá cước niêm yết trọn gói.
+            {text.description}
           </p>
         </div>
 
@@ -87,7 +98,7 @@ export default function TravelDestinations() {
                   href="/#formbooking"
                   className="w-full min-h-10.5 py-2.5 px-4 rounded-none bg-slate-50 hover:bg-blue-600 text-slate-700 hover:text-white font-semibold text-xs transition-all flex items-center justify-center border border-slate-200 hover:border-blue-600 text-center touch-manipulation"
                 >
-                  <span>Đặt Xe Đi {dest.title.split("&")[0].trim()}</span>
+                  <span>{text.book} {dest.title.split("&")[0].trim()}</span>
                 </Link>
               </div>
             </div>

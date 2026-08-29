@@ -21,7 +21,7 @@ const CAM_RANH_AIRPORT_COORDS = { lat: "11.9981", lon: "109.2194" };
 const NHA_TRANG_COORDS = { lat: "12.2388", lon: "109.1967" };
 
 const BookingForm = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { contact } = useSiteContent();
   const [, startTransition] = useTransition();
 
@@ -61,6 +61,13 @@ const BookingForm = () => {
 
   const hotlineNum = contact.hotline || "0878458885";
   const hotlineDisplay = contact.hotline_display || "0878.458.885";
+  const quickBookingCopy = {
+    vi: "Để đặt xe nhanh, anh/chị vui lòng liên hệ:",
+    en: "For a quick booking, please contact:",
+    ko: "빠른 예약을 원하시면 아래 번호로 연락해 주세요:",
+    ru: "Для быстрого бронирования свяжитесь с нами:",
+    zh: "如需快速预订，请联系：",
+  }[language];
 
   // Mount effect
   useEffect(() => {
@@ -413,12 +420,12 @@ const BookingForm = () => {
           </button>
 
           <p className="text-blue-100 text-center text-xs font-medium">
-            {t.common.hotline}:{" "}
+            {quickBookingCopy}{" "}
             <a
               href={`tel:${hotlineNum.replace(/[^0-9+]/g, "")}`}
               className="font-semibold text-white hover:underline"
             >
-              {hotlineDisplay}
+              087.84.58885
             </a>
           </p>
         </div>

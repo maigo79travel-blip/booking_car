@@ -4,36 +4,17 @@ import { useLanguage } from "@/context/LanguageContext";
 import { useSiteContent } from "@/context/SiteContentContext";
 
 const PriceTable = () => {
-  const { t } = useLanguage();
-  const { hero } = useSiteContent();
+  const { t, language } = useLanguage();
+  const { hero, priceTable } = useSiteContent();
   const hasCustomBg = !!hero?.pricing_bg_image;
 
-  const priceData = [
-    {
-      title: t.priceTable.car5,
-      routes: [
-        { from: t.priceTable.hanoiToAirportCol, price: `${t.common.fromPrice} 250.000${t.common.vnd}` },
-        { from: t.priceTable.airportToHanoiCol, price: `${t.common.fromPrice} 250.000${t.common.vnd}` },
-        { from: t.priceTable.roundTripCol, price: `${t.common.fromPrice} 480.000${t.common.vnd}` },
-      ],
-    },
-    {
-      title: t.priceTable.car7,
-      routes: [
-        { from: t.priceTable.hanoiToAirportCol, price: `${t.common.fromPrice} 300.000${t.common.vnd}` },
-        { from: t.priceTable.airportToHanoiCol, price: `${t.common.fromPrice} 300.000${t.common.vnd}` },
-        { from: t.priceTable.roundTripCol, price: `${t.common.fromPrice} 580.000${t.common.vnd}` },
-      ],
-    },
-    {
-      title: t.priceTable.car16,
-      routes: [
-        { from: t.priceTable.hanoiToAirportCol, price: `${t.common.fromPrice} 550.000${t.common.vnd}` },
-        { from: t.priceTable.airportToHanoiCol, price: `${t.common.fromPrice} 550.000${t.common.vnd}` },
-        { from: t.priceTable.roundTripCol, price: `${t.common.fromPrice} 1.050.000${t.common.vnd}` },
-      ],
-    },
-  ];
+  const rows = priceTable?.rows || [];
+  const carTypeLabels = [t.priceTable.car5, t.priceTable.car7, t.priceTable.car16];
+
+  // The CMS values predate the localized interface and are currently authored
+  // in Vietnamese. Do not let those values override the selected locale.
+  const localizedPrice = (value: string) =>
+    language === "vi" ? value : value.replace(/^Từ\s*/i, `${t.common.fromPrice} `);
 
   return (
     <section
@@ -72,36 +53,49 @@ const PriceTable = () => {
             </div>
           </div>
           <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-2">
-            {t.priceTable.heading}
+            {language === "vi" ? priceTable?.title || t.priceTable.heading : t.priceTable.heading}
           </h2>
           <div className="w-24 h-1 bg-[#174978] mx-auto"></div>
         </div>
 
         {/* Mobile Card Layout */}
         <div className="block md:hidden space-y-4">
-          {priceData.map((vehicle, index) => (
+          {rows.map((row, index) => (
             <div
-              key={index}
+              key={row.id || index}
               className="bg-white shadow-xs overflow-hidden border border-gray-100"
             >
               {/* Card Header */}
               <div className="bg-linear-to-r from-[#003366] to-[#174978] text-white text-center py-2.5 font-semibold text-base">
-                {vehicle.title}
+                {language === "vi" ? row.carType : carTypeLabels[index] || row.carType}
               </div>
 
               {/* Card Body */}
               <div className="p-4 space-y-2">
-                {vehicle.routes.map((route, idx) => (
-                  <div
-                    key={idx}
-                    className="flex justify-between items-center py-2.5 border-b border-gray-100 last:border-0"
-                  >
-                    <span className="text-gray-700 text-sm font-medium">{route.from}</span>
-                    <span className="text-[#003366] font-semibold text-sm">
-                      {route.price}
-                    </span>
-                  </div>
-                ))}
+                <div className="flex justify-between items-center py-2.5 border-b border-gray-100">
+                  <span className="text-gray-700 text-sm font-medium">
+                    {t.priceTable.hanoiToAirportCol}
+                  </span>
+                  <span className="text-[#003366] font-semibold text-sm">
+                    {localizedPrice(row.oneWayAirportToCity)}
+                  </span>
+                </div>
+                <div className="flex justify-between items-center py-2.5 border-b border-gray-100">
+                  <span className="text-gray-700 text-sm font-medium">
+                    {t.priceTable.airportToHanoiCol}
+                  </span>
+                  <span className="text-[#003366] font-semibold text-sm">
+                    {localizedPrice(row.oneWayCityToAirport)}
+                  </span>
+                </div>
+                <div className="flex justify-between items-center py-2.5">
+                  <span className="text-gray-700 text-sm font-medium">
+                    {t.priceTable.roundTripCol}
+                  </span>
+                  <span className="text-[#003366] font-semibold text-sm">
+                    {localizedPrice(row.roundTrip)}
+                  </span>
+                </div>
               </div>
             </div>
           ))}
@@ -128,53 +122,27 @@ const PriceTable = () => {
                 </tr>
               </thead>
               <tbody>
-                {/* Xe 5 chỗ */}
-                <tr className="border-b border-gray-100 hover:bg-brand-light/60 transition-colors">
-                  <td className="px-6 py-4.5 font-semibold text-gray-800 text-base lg:text-lg border-r border-gray-100">
-                    {t.priceTable.car5}
-                  </td>
-                  <td className="px-6 py-4.5 text-center font-bold text-[#003366] text-base lg:text-lg border-r border-gray-100">
-                    {t.common.fromPrice} 250.000{t.common.vnd}
-                  </td>
-                  <td className="px-6 py-4.5 text-center font-bold text-[#003366] text-base lg:text-lg border-r border-gray-100">
-                    {t.common.fromPrice} 250.000{t.common.vnd}
-                  </td>
-                  <td className="px-6 py-4.5 text-center font-bold text-[#003366] text-base lg:text-lg">
-                    {t.common.fromPrice} 480.000{t.common.vnd}
-                  </td>
-                </tr>
-
-                {/* Xe 7 chỗ */}
-                <tr className="border-b border-gray-100 hover:bg-brand-light/60 transition-colors">
-                  <td className="px-6 py-4.5 font-semibold text-gray-800 text-base lg:text-lg border-r border-gray-100">
-                    {t.priceTable.car7}
-                  </td>
-                  <td className="px-6 py-4.5 text-center font-bold text-[#003366] text-base lg:text-lg border-r border-gray-100">
-                    {t.common.fromPrice} 300.000{t.common.vnd}
-                  </td>
-                  <td className="px-6 py-4.5 text-center font-bold text-[#003366] text-base lg:text-lg border-r border-gray-100">
-                    {t.common.fromPrice} 300.000{t.common.vnd}
-                  </td>
-                  <td className="px-6 py-4.5 text-center font-bold text-[#003366] text-base lg:text-lg">
-                    {t.common.fromPrice} 580.000{t.common.vnd}
-                  </td>
-                </tr>
-
-                {/* Xe 16 chỗ */}
-                <tr className="hover:bg-brand-light/60 transition-colors bg-gray-50/50">
-                  <td className="px-6 py-4.5 font-semibold text-gray-800 text-base lg:text-lg border-r border-gray-100">
-                    {t.priceTable.car16}
-                  </td>
-                  <td className="px-6 py-4.5 text-center font-bold text-[#003366] text-base lg:text-lg border-r border-gray-100">
-                    {t.common.fromPrice} 550.000{t.common.vnd}
-                  </td>
-                  <td className="px-6 py-4.5 text-center font-bold text-[#003366] text-base lg:text-lg border-r border-gray-100">
-                    {t.common.fromPrice} 550.000{t.common.vnd}
-                  </td>
-                  <td className="px-6 py-4.5 text-center font-bold text-[#003366] text-base lg:text-lg">
-                    {t.common.fromPrice} 1.050.000{t.common.vnd}
-                  </td>
-                </tr>
+                {rows.map((row, idx) => (
+                  <tr
+                    key={row.id || idx}
+                    className={`border-b border-gray-100 hover:bg-brand-light/60 transition-colors ${
+                      idx % 2 === 1 ? "bg-gray-50/50" : ""
+                    }`}
+                  >
+                    <td className="px-6 py-4.5 font-semibold text-gray-800 text-base lg:text-lg border-r border-gray-100">
+                      {language === "vi" ? row.carType : carTypeLabels[idx] || row.carType}
+                    </td>
+                    <td className="px-6 py-4.5 text-center font-bold text-[#003366] text-base lg:text-lg border-r border-gray-100">
+                      {localizedPrice(row.oneWayAirportToCity)}
+                    </td>
+                    <td className="px-6 py-4.5 text-center font-bold text-[#003366] text-base lg:text-lg border-r border-gray-100">
+                      {localizedPrice(row.oneWayCityToAirport)}
+                    </td>
+                    <td className="px-6 py-4.5 text-center font-bold text-[#003366] text-base lg:text-lg">
+                      {localizedPrice(row.roundTrip)}
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
@@ -183,10 +151,10 @@ const PriceTable = () => {
         {/* Informational Message */}
         <div className="mt-4 bg-white/90 backdrop-blur-xs p-3.5 md:p-4 shadow-xs border border-gray-100 space-y-1.5">
           <p className="text-gray-800 text-xs sm:text-sm md:text-base leading-relaxed font-medium">
-            ✓ {t.priceTable.note1}
+            ✓ {language === "vi" ? priceTable?.note1 || t.priceTable.note1 : t.priceTable.note1}
           </p>
           <p className="text-gray-800 text-xs sm:text-sm md:text-base leading-relaxed font-medium">
-            ✓ {t.priceTable.note2}
+            ✓ {language === "vi" ? priceTable?.note2 || t.priceTable.note2 : t.priceTable.note2}
           </p>
         </div>
       </div>

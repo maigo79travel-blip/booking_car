@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { ChevronRight, Home } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export interface BreadcrumbItem {
   name: string;
@@ -11,9 +14,10 @@ interface BreadcrumbsProps {
 }
 
 export default function Breadcrumbs({ items }: BreadcrumbsProps) {
+  const { t } = useLanguage();
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://maigo79.com";
 
-  const allItems: BreadcrumbItem[] = [{ name: "Trang chủ", href: "/" }, ...items];
+  const allItems: BreadcrumbItem[] = [{ name: t.nav.home, href: "/" }, ...items];
 
   const jsonLdBreadcrumb = {
     "@context": "https://schema.org",

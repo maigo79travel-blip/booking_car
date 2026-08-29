@@ -11,11 +11,44 @@ import { useLanguage } from "@/context/LanguageContext";
 import { useSiteContent } from "@/context/SiteContentContext";
 
 export default function VehiclesView() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { vehicleCategories } = useSiteContent();
   const [currentPages, setCurrentPages] = useState<{ [key: number]: number }>({});
 
   const itemsPerPage = 2;
+
+  const localizedCategoryTitle = (title: string, index: number) => {
+    if (language === "vi") return title;
+    return [t.priceTable.car5, t.priceTable.car7, t.priceTable.car16][index] || title;
+  };
+
+  const localizedPassengers = (value: string) => {
+    if (language === "vi") return value;
+    const count = value.match(/\d+/)?.[0];
+    if (!count) return value;
+
+    const labels = {
+      en: `Up to ${count} passengers`,
+      ko: `최대 ${count}명`,
+      ru: `До ${count} пассажиров`,
+      zh: `最多 ${count} 位乘客`,
+    };
+    return labels[language];
+  };
+
+  const localizedLuggage = (value: string) => {
+    if (language === "vi") return value;
+    const checkedBags = value.match(/\d+/)?.[0];
+    if (!checkedBags) return value;
+
+    const labels = {
+      en: `${checkedBags} checked bags + 1 carry-on`,
+      ko: `위탁 수하물 ${checkedBags}개 + 기내 수하물 1개`,
+      ru: `${checkedBags} места для багажа + 1 ручная кладь`,
+      zh: `${checkedBags} 件托运行李 + 1 件随身行李`,
+    };
+    return labels[language];
+  };
 
   const handleNext = (categoryIndex: number, totalVehicles: number) => {
     const currentPage = currentPages[categoryIndex] || 0;
@@ -63,7 +96,7 @@ export default function VehiclesView() {
             <div key={categoryIndex} className="mb-10 md:mb-14">
               <div className="mb-6 md:mb-8">
                 <h2 className="text-xl md:text-2xl font-bold text-[#003366] mb-4">
-                  {category.title}
+                  {localizedCategoryTitle(category.title, categoryIndex)}
                 </h2>
 
                 {/* Mobile: Carousel */}
@@ -78,7 +111,7 @@ export default function VehiclesView() {
                           <div className="w-full h-24 relative mb-2">
                             <Image
                               src={vehicle.image}
-                              alt={`${category.title} - ${vehicle.name}`}
+                              alt={`${localizedCategoryTitle(category.title, categoryIndex)} - ${vehicle.name}`}
                               fill
                               className="object-contain"
                               unoptimized={vehicle.image.startsWith("http") || vehicle.image.startsWith("data:")}
@@ -138,7 +171,7 @@ export default function VehiclesView() {
                       <div className="w-full h-32 relative mb-3">
                         <Image
                           src={vehicle.image}
-                          alt={`${category.title} - ${vehicle.name}`}
+                          alt={`${localizedCategoryTitle(category.title, categoryIndex)} - ${vehicle.name}`}
                           fill
                           className="object-contain"
                           unoptimized={vehicle.image.startsWith("http") || vehicle.image.startsWith("data:")}
@@ -157,11 +190,11 @@ export default function VehiclesView() {
                     <div className="flex flex-wrap items-center gap-4 text-[#003366] font-bold text-sm md:text-base">
                       <div className="flex items-center gap-1.5">
                         <Users size={18} className="text-[#174978]" />
-                        <span>{category.maxPassengers}</span>
+                        <span>{localizedPassengers(category.maxPassengers)}</span>
                       </div>
                       <div className="flex items-center gap-1.5">
                         <Briefcase size={18} className="text-[#174978]" />
-                        <span>{category.luggage}</span>
+                        <span>{localizedLuggage(category.luggage)}</span>
                       </div>
                     </div>
                     <p className="text-gray-600 text-sm">

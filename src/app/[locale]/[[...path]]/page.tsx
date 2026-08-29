@@ -44,7 +44,7 @@ export default async function LocalizedPage({ params }: { params: Promise<{ loca
   else if (path[0] === "bang-gia" && path.length === 1) page = <PricingPage />;
   else if (path[0] === "loai-xe" && path.length === 1) page = <VehiclesPage />;
   else if (path[0] === "bai-viet" && path.length === 1) page = <PostsPage />;
-  else if (path[0] === "bai-viet" && path[1]) page = <PostPage params={Promise.resolve({ slug: path[1] })} />;
+  else if (path[0] === "bai-viet" && path[1]) page = <PostPage params={Promise.resolve({ slug: path[1] })} locale={locale} />;
   else if (path[0] === "ve-chung-toi" && path.length === 1) page = <AboutPage />;
   else if (path[0] === "chinh-sach" && path.length === 1) page = <PolicyPage />;
   else if (path.join("/") === "chinh-sach/bao-ve-quyen-rieng-tu") page = <PrivacyPolicyPage />;

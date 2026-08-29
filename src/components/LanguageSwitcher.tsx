@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
 import { SUPPORTED_LANGUAGES, Language } from "@/lib/i18n/types";
 import { ChevronDown, Check } from "lucide-react";
@@ -13,6 +14,8 @@ export default function LanguageSwitcher({
   variant = "header",
 }: LanguageSwitcherProps) {
   const { language, setLanguage } = useLanguage();
+  const pathname = usePathname() || "/";
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -36,6 +39,16 @@ export default function LanguageSwitcher({
   const handleSelect = (code: Language) => {
     setLanguage(code);
     setIsOpen(false);
+
+    const segments = pathname.split("/").filter(Boolean);
+    const hasLocalePrefix = SUPPORTED_LANGUAGES.some((lang) => lang.code === segments[0]);
+    const pageSegments = hasLocalePrefix ? segments.slice(1) : segments;
+    const targetPath = `/${code}${pageSegments.length ? `/${pageSegments.join("/")}` : ""}`;
+    const query = window.location.search;
+
+    if (targetPath !== pathname || query) {
+      router.push(`${targetPath}${query}`);
+    }
   };
 
   if (variant === "mobile") {

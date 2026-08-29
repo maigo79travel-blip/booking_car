@@ -8,6 +8,7 @@ import FloatingContacts from "@/components/FloatingContacts";
 import { getPost, getPublishedPosts, text } from "@/lib/server/content";
 import PostCoverImage from "@/components/PostCoverImage";
 import ArticleContent from "@/components/ArticleContent";
+import { Language } from "@/lib/i18n/types";
 
 export const revalidate = 60;
 import { Calendar, PhoneCall } from "lucide-react";
@@ -62,16 +63,18 @@ export async function generateMetadata({
 
 export default async function PostPage({
   params,
+  locale = "vi",
 }: {
   params: Promise<{ slug: string }>;
+  locale?: Language;
 }) {
   const { slug } = await params;
   const post = await getPost(slug);
   if (!post) notFound();
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://maigo79.com";
-  const postTitle = text(post.title);
-  const postDesc = text(post.excerpt);
+  const postTitle = text(post.title, locale);
+  const postDesc = text(post.excerpt, locale);
   const postDate = post.published_at || new Date().toISOString();
 
   const jsonLdArticle = {
@@ -127,7 +130,7 @@ export default async function PostPage({
             <div className="flex items-center gap-2 text-sm text-gray-500">
               <Calendar size={15} className="text-[#174978]" />
               <time dateTime={post.published_at}>
-                {new Intl.DateTimeFormat("vi-VN", {
+                {new Intl.DateTimeFormat(locale, {
                   dateStyle: "full",
                 }).format(new Date(post.published_at))}
               </time>
@@ -147,7 +150,7 @@ export default async function PostPage({
         )}
 
         {/* Content Body - No card wrapper */}
-        <ArticleContent content={text(post.body)} />
+        <ArticleContent content={text(post.body, locale)} />
 
         {/* CTA Box */}
         <div className="mt-10 bg-linear-to-r from-[#003366] via-[#174978] to-brand-marine rounded-none p-6 md:p-8 text-white shadow-xs flex flex-col md:flex-row items-center justify-between gap-6">

@@ -171,7 +171,7 @@ export const translations = {
       subtitle: "Hơn 10,000+ lượt khách hàng đã tin tưởng lựa chọn dịch vụ xe đưa đón sân bay Cam Ranh và tour du lịch Nha Trang của chúng tôi.",
     },
     vehicles: {
-      pageTitle: "Các Loại Xe Sân Bay Cam Ranh & Tour Nha Trang 4 - 45 Chỗ Đời Mới",
+      pageTitle: "Các Loại Xe Sân Bay Cam Ranh & Tour Nha Trang",
       pageDesc: "Đội xe đưa đón sân bay Cam Ranh đa dạng phân khúc từ xe 5 chỗ sedan, 7 chỗ SUV/MPV đa dụng đến xe 16 chỗ và 45 chỗ phục vụ đoàn du lịch, công tác. Toàn bộ xe đời mới, tiện nghi, sang trọng.",
       subDesc: "Dàn xe đời mới, máy lạnh mát rượi, cốp rộng rãi chứa vali thoải mái. Lái xe cẩn thận, đón trả tận nơi.",
     },

@@ -74,11 +74,11 @@ export default function VehiclesView() {
 
       {/* Page Title */}
       <div className="container mx-auto px-4 md:px-12 lg:px-24 pt-4 md:pt-6 pb-4">
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+        <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-2 leading-snug">
           {t.vehicles.pageTitle}
         </h1>
-        <div className="w-24 h-1 bg-[#174978] mb-3"></div>
-        <p className="text-gray-600 text-sm md:text-base max-w-3xl">
+        <div className="w-16 md:w-24 h-1 bg-[#174978] mb-3"></div>
+        <p className="text-gray-600 text-xs sm:text-sm md:text-base max-w-3xl">
           {t.vehicles.pageDesc}
         </p>
       </div>
@@ -95,14 +95,14 @@ export default function VehiclesView() {
           return (
             <div key={categoryIndex} className="mb-10 md:mb-14">
               <div className="mb-6 md:mb-8">
-                <h2 className="text-xl md:text-2xl font-bold text-[#003366] mb-4">
+                <h2 className="text-base sm:text-lg md:text-xl font-bold text-[#003366] mb-3">
                   {localizedCategoryTitle(category.title, categoryIndex)}
                 </h2>
 
                 {/* Mobile: Carousel */}
                 <div className="md:hidden">
                   <div className="relative">
-                    <div className="grid grid-cols-2 gap-3 mb-4">
+                    <div className="grid grid-cols-2 gap-3 mb-3">
                       {visibleVehicles.map((vehicle) => (
                         <div
                           key={vehicle.id}
@@ -125,24 +125,31 @@ export default function VehiclesView() {
                     </div>
 
                     {totalPages > 1 && (
-                      <div className="flex items-center justify-center gap-4 mb-4">
+                      <div className="flex items-center justify-center gap-2 mb-4">
                         <button
                           onClick={() => handlePrev(categoryIndex)}
                           disabled={currentPage === 0}
-                          className="bg-[#174978] text-white p-2 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#003366] transition-colors"
+                          className="w-8 h-8 flex items-center justify-center border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 hover:text-[#003366] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                           aria-label="Previous"
                         >
-                          <ChevronLeft size={18} />
+                          <ChevronLeft size={16} />
                         </button>
 
-                        <div className="flex gap-2">
+                        <div className="flex items-center gap-1.5">
                           {Array.from({ length: totalPages }).map((_, idx) => (
-                            <div
+                            <button
                               key={idx}
-                              className={`h-2 transition-all ${
-                                idx === currentPage ? "bg-[#003366] w-6" : "bg-gray-300 w-2"
+                              onClick={() =>
+                                setCurrentPages({ ...currentPages, [categoryIndex]: idx })
+                              }
+                              className={`w-8 h-8 text-xs font-bold transition-all ${
+                                idx === currentPage
+                                  ? "bg-[#003366] text-white border border-[#003366] shadow-xs"
+                                  : "bg-white text-gray-700 border border-gray-200 hover:bg-gray-50"
                               }`}
-                            />
+                            >
+                              {idx + 1}
+                            </button>
                           ))}
                         </div>
 
@@ -151,10 +158,10 @@ export default function VehiclesView() {
                             handleNext(categoryIndex, category.vehicles.length)
                           }
                           disabled={currentPage === totalPages - 1}
-                          className="bg-[#174978] text-white p-2 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#003366] transition-colors"
+                          className="w-8 h-8 flex items-center justify-center border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 hover:text-[#003366] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                           aria-label="Next"
                         >
-                          <ChevronRight size={18} />
+                          <ChevronRight size={16} />
                         </button>
                       </div>
                     )}

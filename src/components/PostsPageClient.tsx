@@ -70,9 +70,9 @@ export default function PostsPageClient({ posts }: { posts: Post[] }) {
             <BookOpen size={18} />
             <span>{page.tag}</span>
           </div>
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mt-1 mb-2">{page.title}</h1>
-          <div className="w-24 h-1 bg-[#174978] mb-3" />
-          <p className="text-gray-600 text-sm md:text-base max-w-3xl">{page.description}</p>
+          <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mt-1 mb-2 leading-snug">{page.title}</h1>
+          <div className="w-16 md:w-24 h-1 bg-[#174978] mb-3" />
+          <p className="text-gray-600 text-xs sm:text-sm md:text-base max-w-3xl">{page.description}</p>
         </div>
 
         {posts.length > 0 ? (

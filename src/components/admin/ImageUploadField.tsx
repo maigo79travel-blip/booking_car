@@ -36,8 +36,8 @@ export default function ImageUploadField({
       return;
     }
 
-    if (file.size > 10 * 1024 * 1024) {
-      setError("Dung lượng ảnh tối đa là 10MB");
+    if (file.size > 8 * 1024 * 1024) {
+      setError("Dung lượng ảnh tối đa là 8MB");
       return;
     }
 
@@ -166,7 +166,7 @@ export default function ImageUploadField({
                 Tải ảnh lên hoặc <span className="text-blue-600 underline">chọn từ máy</span>
               </p>
               <p className="text-[10px] text-slate-400">
-                PNG, JPG, WEBP (tối đa 10MB)
+                PNG, JPG, WEBP, GIF (tối đa 8MB)
               </p>
             </div>
           </div>

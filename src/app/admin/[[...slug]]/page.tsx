@@ -15,6 +15,7 @@ import AdminHeader from "@/components/admin/AdminHeader";
 import DashboardOverview from "@/components/admin/DashboardOverview";
 import BookingsManager from "@/components/admin/BookingsManager";
 import PostsManager from "@/components/admin/PostsManager";
+import PostModal, { PostRecord } from "@/components/admin/PostModal";
 import RoutesManager from "@/components/admin/RoutesManager";
 import ContentManager from "@/components/admin/ContentManager";
 
@@ -68,7 +69,12 @@ export default function AdminAppPage() {
     return "dashboard";
   };
 
+  const pathSegments = pathname.split("/").filter(Boolean);
   const activeTab = getTabFromPath(pathname);
+  const postEditorId = activeTab === "posts" ? pathSegments[2] : undefined;
+  const editingPost = postEditorId && postEditorId !== "new"
+    ? (data.posts.find((post) => String(post.id) === postEditorId) as PostRecord | undefined)
+    : null;
 
   const handleNavigateTab = (tab: AdminTab) => {
     router.push(`/admin/${tab}`);
@@ -161,24 +167,24 @@ export default function AdminAppPage() {
     setLoading(false);
   };
 
-  // CRUD Handlers for Posts
   const handleSavePost = async (id: string | null, postData: Record<string, unknown>) => {
-    if (id) {
-      const res = await fetch("/api/admin/data", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ table: "posts", id, data: postData }),
-      });
-      if (!res.ok) throw new Error("Không thể cập nhật bài viết");
-    } else {
-      const res = await fetch("/api/admin/data", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ table: "posts", data: postData }),
-      });
-      if (!res.ok) throw new Error("Không thể tạo bài viết mới");
+    const response = await fetch("/api/admin/data", {
+      method: id ? "PUT" : "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(
+        id
+          ? { table: "posts", id, data: postData }
+          : { table: "posts", data: postData }
+      ),
+    });
+
+    if (!response.ok) {
+      const body = await response.json().catch(() => null);
+      throw new Error(body?.message || "Không thể lưu bài viết");
     }
+
     await load();
+    router.push("/admin/posts");
   };
 
   const handleDeletePost = async (id: string) => {
@@ -409,11 +415,25 @@ export default function AdminAppPage() {
           )}
 
           {activeTab === "posts" && (
-            <PostsManager
-              posts={data.posts}
-              onSavePost={handleSavePost}
-              onDeletePost={handleDeletePost}
-            />
+            postEditorId ? (
+              postEditorId !== "new" && !editingPost ? (
+                <div className="rounded-xl border border-red-200 bg-red-50 p-6 text-sm text-red-700">
+                  Không tìm thấy bài viết cần chỉnh sửa.
+                </div>
+              ) : (
+                <PostModal
+                  post={editingPost || null}
+                  mode="embedded"
+                  onClose={() => router.push("/admin/posts")}
+                  onSave={(postData) => handleSavePost(editingPost?.id || null, postData)}
+                />
+              )
+            ) : (
+              <PostsManager
+                posts={data.posts}
+                onDeletePost={handleDeletePost}
+              />
+            )
           )}
 
           {activeTab === "routes" && (

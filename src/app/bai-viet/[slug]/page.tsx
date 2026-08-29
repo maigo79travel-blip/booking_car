@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
@@ -7,6 +6,10 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import Footer from "@/components/Footer";
 import FloatingContacts from "@/components/FloatingContacts";
 import { getPost, getPublishedPosts, text } from "@/lib/server/content";
+import PostCoverImage from "@/components/PostCoverImage";
+import ArticleContent from "@/components/ArticleContent";
+
+export const revalidate = 60;
 import { Calendar, PhoneCall } from "lucide-react";
 
 export async function generateStaticParams() {
@@ -134,20 +137,17 @@ export default async function PostPage({
 
         {post.cover_image && (
           <div className="relative h-64 md:h-105 rounded-none overflow-hidden shadow-xs mb-6 bg-gray-100">
-            <Image
+            <PostCoverImage
+              key={post.cover_image}
               src={post.cover_image}
               alt={`Hình ảnh bài viết: ${postTitle}`}
-              fill
               priority
-              className="object-cover rounded-none"
             />
           </div>
         )}
 
         {/* Content Body - No card wrapper */}
-        <div className="text-gray-800 text-base md:text-lg leading-relaxed whitespace-pre-wrap py-2">
-          {text(post.body)}
-        </div>
+        <ArticleContent content={text(post.body)} />
 
         {/* CTA Box */}
         <div className="mt-10 bg-linear-to-r from-[#003366] via-[#174978] to-brand-marine rounded-none p-6 md:p-8 text-white shadow-xs flex flex-col md:flex-row items-center justify-between gap-6">

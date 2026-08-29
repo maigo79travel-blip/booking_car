@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   Plus,
   Edit2,
@@ -11,23 +12,20 @@ import {
   ExternalLink,
   FileText,
 } from "lucide-react";
-import PostModal, { PostRecord } from "./PostModal";
+import { PostRecord } from "./PostModal";
 
 interface PostsManagerProps {
   posts: PostRecord[];
-  onSavePost: (id: string | null, data: Record<string, unknown>) => Promise<void>;
   onDeletePost: (id: string) => Promise<void>;
 }
 
 export default function PostsManager({
   posts,
-  onSavePost,
   onDeletePost,
 }: PostsManagerProps) {
+  const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
-  const [editingPost, setEditingPost] = useState<PostRecord | null>(null);
-  const [isCreating, setIsCreating] = useState(false);
 
   const getTitle = (p: PostRecord) => {
     if (typeof p.title === "object" && p.title) {
@@ -49,12 +47,6 @@ export default function PostsManager({
     return matchesSearch && matchesStatus;
   });
 
-  const handleSave = async (data: Record<string, unknown>) => {
-    await onSavePost(editingPost?.id || null, data);
-    setEditingPost(null);
-    setIsCreating(false);
-  };
-
   const handleDelete = async (id: string | undefined, titleStr: string) => {
     if (!id) return;
     if (confirm(`Bạn có chắc chắn muốn xóa bài viết "${titleStr}" không?`)) {
@@ -75,7 +67,7 @@ export default function PostsManager({
           </p>
         </div>
         <button
-          onClick={() => setIsCreating(true)}
+          onClick={() => router.push("/admin/posts/new")}
           className="flex items-center gap-2 px-4 py-2 bg-linear-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white rounded-md text-xs md:text-sm font-semibold shadow-sm transition-all cursor-pointer"
         >
           <Plus size={16} />
@@ -213,7 +205,7 @@ export default function PostsManager({
                             <ExternalLink size={16} />
                           </Link>
                           <button
-                            onClick={() => setEditingPost(p)}
+                            onClick={() => router.push(`/admin/posts/${p.id}`)}
                             className="p-1.5 rounded-lg text-gray-400 hover:text-orange-600 hover:bg-orange-50 transition-colors cursor-pointer"
                             title="Sửa bài viết"
                           >
@@ -242,18 +234,6 @@ export default function PostsManager({
           </table>
         </div>
       </div>
-
-      {/* Modal Editor */}
-      {(isCreating || editingPost) && (
-        <PostModal
-          post={editingPost}
-          onClose={() => {
-            setIsCreating(false);
-            setEditingPost(null);
-          }}
-          onSave={handleSave}
-        />
-      )}
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Language, SUPPORTED_LANGUAGES } from "@/lib/i18n/types";
 import { X, Save, Globe, FileText } from "lucide-react";
 import ImageUploadField from "./ImageUploadField";
+import ArticleEditor from "./ArticleEditor";
 
 export interface PostRecord {
   id?: string;
@@ -20,17 +21,38 @@ interface PostModalProps {
   post: PostRecord | null;
   onClose: () => void;
   onSave: (data: Record<string, unknown>) => Promise<void>;
+  mode?: "modal" | "page" | "embedded";
 }
 
-const getLangVal = (source: Record<string, string> | string | undefined, lang: Language): string => {
+const getLocalizedObject = (source: Record<string, string> | string | undefined) => {
   if (typeof source === "object" && source !== null) {
-    return (source as Record<string, string>)[lang] || "";
+    return source as Record<string, string>;
   }
+
+  if (typeof source === "string" && source.trim().startsWith("{")) {
+    try {
+      const parsed = JSON.parse(source);
+      if (typeof parsed === "object" && parsed !== null && !Array.isArray(parsed)) {
+        return parsed as Record<string, string>;
+      }
+    } catch {
+      // Legacy plain text is handled as Vietnamese content below.
+    }
+  }
+
+  return null;
+};
+
+const getLangVal = (source: Record<string, string> | string | undefined, lang: Language): string => {
+  const localized = getLocalizedObject(source);
+  if (localized) return localized[lang] || "";
   return lang === "vi" && typeof source === "string" ? source : "";
 };
 
-export default function PostModal({ post, onClose, onSave }: PostModalProps) {
+export default function PostModal({ post, onClose, onSave, mode = "modal" }: PostModalProps) {
   const isEditing = !!post?.id;
+  const isPageEditor = mode === "page";
+  const isWideEditor = mode !== "modal";
   const [activeLang, setActiveLang] = useState<Language>("vi");
   const [isSaving, setIsSaving] = useState(false);
 
@@ -117,8 +139,8 @@ export default function PostModal({ post, onClose, onSave }: PostModalProps) {
       alert("Vui lòng nhập đường dẫn tĩnh (Slug) cho bài viết!");
       return;
     }
-    if (!title.vi && !title.en) {
-      alert("Vui lòng nhập tiêu đề bài viết (ít nhất Tiếng Việt hoặc Tiếng Anh)!");
+    if (!SUPPORTED_LANGUAGES.some((language) => title[language.code].trim())) {
+      alert("Vui lòng nhập tiêu đề bài viết cho ít nhất một ngôn ngữ!");
       return;
     }
 
@@ -145,32 +167,43 @@ export default function PostModal({ post, onClose, onSave }: PostModalProps) {
     }
   };
 
+  const hasLanguageContent = (language: Language) => Boolean(
+    title[language]?.trim() ||
+    excerpt[language]?.trim() ||
+    seoTitle[language]?.trim() ||
+    seoDescription[language]?.trim() ||
+    body[language]?.trim()
+  );
+
   return (
-    <div className="fixed inset-0 z-100000 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs overflow-y-auto">
-      <div className="bg-white rounded-xl shadow-lg w-full max-w-4xl max-h-[90vh] flex flex-col border border-gray-100 animate-in zoom-in-95 duration-200">
+    <div className={isPageEditor ? "min-h-screen bg-slate-100 p-3 md:p-8" : mode === "embedded" ? "w-full" : "fixed inset-0 z-100000 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs overflow-y-auto"}>
+      <div className={`bg-white w-full border border-gray-100 ${isWideEditor ? "rounded-xl shadow-sm" : "max-w-4xl max-h-[90vh] flex flex-col rounded-xl shadow-lg animate-in zoom-in-95 duration-200"} ${isPageEditor ? "max-w-7xl mx-auto" : ""}`}>
         {/* Modal Header */}
-        <div className="bg-linear-to-r from-blue-600 to-indigo-700 p-4 md:p-6 text-white flex items-center justify-between rounded-t-xl">
-          <div className="flex items-center gap-2.5">
-            <FileText size={22} className="text-orange-300" />
+        <div className="bg-white border-b border-gray-200 p-4 md:p-6 flex items-center justify-between rounded-t-xl">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-blue-50 text-blue-600 rounded-lg">
+              <FileText size={20} />
+            </div>
             <div>
-              <h2 className="text-lg md:text-xl font-bold">
+              <h2 className="text-lg md:text-xl font-bold text-gray-900">
                 {isEditing ? "Chỉnh sửa bài viết SEO" : "Thêm bài viết mới"}
               </h2>
-              <p className="text-xs text-blue-100">
+              <p className="text-xs text-gray-500 font-normal mt-0.5">
                 Soạn thảo nội dung và tối ưu thẻ meta SEO theo 5 ngôn ngữ
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="text-white hover:text-orange-200 p-1 rounded-md cursor-pointer"
+            className="text-gray-400 hover:text-gray-700 hover:bg-gray-100 p-2 rounded-lg transition-colors cursor-pointer"
+            aria-label="Đóng"
           >
-            <X size={22} />
+            <X size={20} />
           </button>
         </div>
 
         {/* Form Body */}
-        <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-6 space-y-6">
+        <form onSubmit={handleSubmit} className={`space-y-6 ${isWideEditor ? "p-5 md:p-8 lg:p-10" : "flex-1 overflow-y-auto p-6"}`}>
           {/* General Metadata Section */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
             <div>
@@ -267,7 +300,7 @@ export default function PostModal({ post, onClose, onSave }: PostModalProps) {
                 >
                   <span>{lang.flag}</span>
                   <span>{lang.name}</span>
-                  {title[lang.code] && (
+                  {hasLanguageContent(lang.code) && (
                     <span className="w-1.5 h-1.5 rounded-full bg-green-400"></span>
                   )}
                 </button>
@@ -335,18 +368,16 @@ export default function PostModal({ post, onClose, onSave }: PostModalProps) {
               <label className="block text-xs font-bold text-gray-800 mb-1">
                 Nội dung chi tiết bài viết (Body Content)
               </label>
-              <textarea
-                rows={10}
+              <ArticleEditor
                 value={body[activeLang] || ""}
-                onChange={(e) => handleTextChange("body", e.target.value)}
-                placeholder="Nhập toàn bộ nội dung bài viết..."
-                className="w-full px-4 py-3 text-sm bg-white rounded-md border border-gray-300 outline-none focus:border-blue-500 leading-relaxed font-sans"
+                onChange={(value) => handleTextChange("body", value)}
+                language={SUPPORTED_LANGUAGES.find((lang) => lang.code === activeLang)?.name || activeLang}
               />
             </div>
           </div>
 
           {/* Action Buttons */}
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-gray-100">
+          <div className={`flex items-center justify-end gap-3 pt-4 border-t border-gray-100 ${isWideEditor ? "sticky bottom-0 bg-white py-4" : ""}`}>
             <button
               type="button"
               onClick={onClose}

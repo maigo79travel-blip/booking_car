@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/server/admin";
 import { query } from "@/lib/server/db";
 
@@ -19,6 +20,11 @@ function isEditableTable(table: unknown): table is EditableTable {
 
 function hasOnlyEditableColumns(table: EditableTable, data: Record<string, unknown>) {
   return Object.keys(data).every((key) => editableColumns[table].has(key));
+}
+
+function revalidatePosts(post?: { slug?: string }) {
+  revalidatePath("/bai-viet");
+  if (post?.slug) revalidatePath(`/bai-viet/${post.slug}`);
 }
 
 export async function GET() {
@@ -66,7 +72,13 @@ export async function PUT(request: Request) {
     const sql = `UPDATE public.${table} SET ${setClauses}, updated_at = now() WHERE id = $${values.length} RETURNING *`;
     const rows = await query(sql, values);
 
-    return NextResponse.json(rows[0] || { success: true });
+    if (!rows[0]) {
+      return NextResponse.json({ message: "Không tìm thấy dữ liệu cần cập nhật" }, { status: 404 });
+    }
+
+    if (table === "posts") revalidatePosts(rows[0]);
+
+    return NextResponse.json(rows[0]);
   } catch (error) {
     console.error("PUT error:", error);
     return NextResponse.json(
@@ -101,6 +113,8 @@ export async function POST(request: Request) {
     const sql = `INSERT INTO public.${table} (${columnNames}) VALUES (${valuePlaceholders}) RETURNING *`;
     const rows = await query(sql, values);
 
+    if (table === "posts") revalidatePosts(rows[0]);
+
     return NextResponse.json(rows[0] || { success: true });
   } catch (error) {
     console.error("POST error:", error);
@@ -126,7 +140,8 @@ export async function DELETE(request: Request) {
       return NextResponse.json({ message: "Invalid request" }, { status: 400 });
     }
 
-    await query(`DELETE FROM public.${table} WHERE id = $1`, [id]);
+    const rows = await query<{ slug?: string }>(`DELETE FROM public.${table} WHERE id = $1 RETURNING slug`, [id]);
+    if (table === "posts") revalidatePosts(rows[0]);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("DELETE error:", error);

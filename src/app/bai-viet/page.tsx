@@ -3,6 +3,8 @@ import Header from "@/components/Header";
 import PostsPageClient from "@/components/PostsPageClient";
 import { getPublishedPosts } from "@/lib/server/content";
 
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   title: "Cẩm nang & Tin tức kinh nghiệm đặt xe sân bay Cam Ranh – Nha Trang",
   description:

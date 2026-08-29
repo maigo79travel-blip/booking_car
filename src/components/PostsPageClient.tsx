@@ -1,11 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, BookOpen } from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Footer from "@/components/Footer";
 import FloatingContacts from "@/components/FloatingContacts";
+import PostCoverImage from "@/components/PostCoverImage";
 import { useLanguage } from "@/context/LanguageContext";
 import type { Post } from "@/lib/server/content";
 import type { Language } from "@/lib/i18n/types";
@@ -85,11 +85,7 @@ export default function PostsPageClient({ posts }: { posts: Post[] }) {
                 <article key={post.id} className="bg-white rounded-none overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between group">
                   <div>
                     <div className="relative h-48 bg-gray-100 overflow-hidden rounded-none">
-                      {post.cover_image ? (
-                        <Image src={post.cover_image} alt={title} fill className="object-cover group-hover:scale-105 transition-transform duration-300 rounded-none" />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-brand-light text-[#174978] font-bold text-sm">maigo79.com</div>
-                      )}
+                      <PostCoverImage key={post.cover_image || post.id} src={post.cover_image} alt={title} />
                     </div>
                     <div className="p-5">
                       {post.published_at && (

@@ -4,10 +4,6 @@ import Link from "next/link";
 import {
   Phone,
   Mail,
-  Facebook,
-  Twitter,
-  Instagram,
-  Youtube,
   ShieldCheck,
 } from "lucide-react";
 import Image from "next/image";
@@ -195,48 +191,6 @@ const Footer = () => {
                 </div>
               </li>
             </ul>
-          </div>
-        </div>
-
-        {/* Social Media */}
-        <div className="mt-10 pt-6 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex gap-4">
-            <a
-              href={
-                contact.facebook ||
-                "https://www.facebook.com/share/1BhL4Qut3u/?mibextid=wwXIfr"
-              }
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-[#174978] hover:bg-[#003366] p-2.5 transition-colors text-white"
-              aria-label="Facebook maigo79.com"
-            >
-              <Facebook size={18} />
-            </a>
-            <a
-              href="#"
-              className="bg-brand-marine hover:bg-[#174978] p-2.5 transition-colors text-white"
-              aria-label="Twitter maigo79.com"
-            >
-              <Twitter size={18} />
-            </a>
-            <a
-              href="#"
-              className="bg-brand-steel hover:bg-brand-marine p-2.5 transition-colors text-white"
-              aria-label="Instagram maigo79.com"
-            >
-              <Instagram size={18} />
-            </a>
-            <a
-              href="#"
-              className="bg-[#003366] hover:bg-[#002244] p-2.5 transition-colors text-white"
-              aria-label="Youtube maigo79.com"
-            >
-              <Youtube size={18} />
-            </a>
-          </div>
-          <div className="text-xs md:text-sm text-slate-400 text-center md:text-right font-medium">
-            <p>{t.footer.workingHours}</p>
           </div>
         </div>
       </div>

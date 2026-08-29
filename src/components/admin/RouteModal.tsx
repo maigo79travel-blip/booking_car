@@ -86,23 +86,26 @@ export default function RouteModal({
     <div className="fixed inset-0 z-100000 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs overflow-y-auto">
       <div className="bg-white rounded-xl shadow-lg w-full max-w-2xl flex flex-col border border-gray-100 animate-in zoom-in-95 duration-200">
         {/* Header */}
-        <div className="bg-linear-to-r from-blue-600 to-indigo-700 p-4 md:p-6 text-white flex items-center justify-between rounded-t-xl">
-          <div className="flex items-center gap-2.5">
-            <DollarSign size={22} className="text-orange-300" />
+        <div className="bg-white border-b border-gray-200 p-4 md:p-6 flex items-center justify-between rounded-t-xl">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-blue-50 text-blue-600 rounded-lg">
+              <DollarSign size={20} />
+            </div>
             <div>
-              <h2 className="text-lg md:text-xl font-bold">
+              <h2 className="text-lg md:text-xl font-bold text-gray-900">
                 {isEditing ? "Chỉnh sửa tuyến giá cước" : "Thêm tuyến xe mới"}
               </h2>
-              <p className="text-xs text-blue-100">
+              <p className="text-xs text-gray-500 font-normal mt-0.5">
                 Cấu hình giá xe đưa đón sân bay và liên tỉnh
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="text-white hover:text-orange-200 p-1 rounded-md cursor-pointer"
+            className="text-gray-400 hover:text-gray-700 hover:bg-gray-100 p-2 rounded-lg transition-colors cursor-pointer"
+            aria-label="Đóng"
           >
-            <X size={22} />
+            <X size={20} />
           </button>
         </div>
 

@@ -28,7 +28,7 @@ export async function GET() {
       query("SELECT * FROM public.posts ORDER BY updated_at DESC"),
       query("SELECT * FROM public.price_routes ORDER BY sort_order ASC"),
       query("SELECT * FROM public.site_content ORDER BY content_key ASC"),
-      query("SELECT * FROM public.bookings ORDER BY created_at DESC LIMIT 200"),
+      query("SELECT * FROM public.bookings ORDER BY created_at DESC"),
     ]);
     return NextResponse.json({ posts, routes, content, bookings });
   } catch (error) {

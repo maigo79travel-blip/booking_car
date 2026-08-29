@@ -8,8 +8,6 @@ import {
   MessageSquare,
   TrendingUp,
   TrendingDown,
-  MoreVertical,
-  ChevronDown,
   ArrowRight,
   Phone,
   Eye,
@@ -28,6 +26,7 @@ export interface BookingOverviewItem {
   car_type?: string;
   estimated_price?: number | string;
   total_price?: number | string;
+  created_at?: string;
 }
 
 interface DashboardOverviewProps {
@@ -39,16 +38,97 @@ export default function DashboardOverview({
   bookings,
   onNavigateTab,
 }: DashboardOverviewProps) {
-  const [selectedRange, setSelectedRange] = useState("Tháng này");
+  const [selectedRange, setSelectedRange] = useState<"Hôm nay" | "Tháng này" | "Năm nay">("Tháng này");
+  const now = new Date();
 
-  // Calculate real metrics from bookings
-  const totalRevenue = bookings.reduce(
-    (acc, b) => acc + (Number(b.total_price) || 0),
-    0
-  );
-  const totalBookings = bookings.length;
-  const uniqueCustomers = new Set(bookings.map((b) => b.phone_number || b.customer_name)).size;
-  const pendingRequests = bookings.slice(0, 10).length;
+  const dateForBooking = (booking: BookingOverviewItem) => {
+    const date = booking.created_at ? new Date(booking.created_at) : null;
+    return date && !Number.isNaN(date.getTime()) ? date : null;
+  };
+
+  const isInMonth = (booking: BookingOverviewItem, year: number, month: number) => {
+    const date = dateForBooking(booking);
+    return date?.getFullYear() === year && date.getMonth() === month;
+  };
+
+  const sumRevenue = (items: BookingOverviewItem[]) =>
+    items.reduce((total, booking) => total + (Number(booking.total_price) || 0), 0);
+
+  const percentChange = (current: number, previous: number) => {
+    if (previous === 0) return current > 0 ? 100 : 0;
+    return Math.round(((current - previous) / previous) * 1000) / 10;
+  };
+
+  const dashboardData = (() => {
+    const currentMonthBookings = bookings.filter((booking) =>
+      isInMonth(booking, now.getFullYear(), now.getMonth())
+    );
+    const previousMonthDate = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+    const previousMonthBookings = bookings.filter((booking) =>
+      isInMonth(booking, previousMonthDate.getFullYear(), previousMonthDate.getMonth())
+    );
+
+    const currentRevenue = sumRevenue(currentMonthBookings);
+    const previousRevenue = sumRevenue(previousMonthBookings);
+    const currentCustomers = new Set(
+      currentMonthBookings.map((booking) => booking.phone_number || booking.customer_name).filter(Boolean)
+    ).size;
+    const previousCustomers = new Set(
+      previousMonthBookings.map((booking) => booking.phone_number || booking.customer_name).filter(Boolean)
+    ).size;
+
+    const rangeBookings = bookings.filter((booking) => {
+      const date = dateForBooking(booking);
+      if (!date) return false;
+      if (selectedRange === "Hôm nay") return date.toDateString() === now.toDateString();
+      if (selectedRange === "Năm nay") return date.getFullYear() === now.getFullYear();
+      return isInMonth(booking, now.getFullYear(), now.getMonth());
+    });
+
+    const routeCounts = new Map<string, number>();
+    rangeBookings.forEach((booking) => {
+      const route = [booking.from_location, booking.to_location].filter(Boolean).join(" → ");
+      if (route) routeCounts.set(route, (routeCounts.get(route) || 0) + 1);
+    });
+    const maxRouteCount = Math.max(...routeCounts.values(), 1);
+    const colors = ["bg-orange-500", "bg-emerald-500", "bg-rose-500", "bg-sky-500", "bg-purple-500"];
+    const topRoutes = [...routeCounts.entries()]
+      .sort(([, left], [, right]) => right - left)
+      .slice(0, 5)
+      .map(([name, count], index) => ({
+        name,
+        count: `${count} chuyến`,
+        percent: Math.round((count / maxRouteCount) * 100),
+        color: colors[index],
+      }));
+
+    const monthlyRevenue = Array.from({ length: 12 }, (_, index) => {
+      const date = new Date(now.getFullYear(), now.getMonth() - 11 + index, 1);
+      const revenue = sumRevenue(
+        bookings.filter((booking) => isInMonth(booking, date.getFullYear(), date.getMonth()))
+      );
+      return { label: `Thg ${date.getMonth() + 1}`, revenue };
+    });
+
+    return {
+      currentMonthBookings,
+      currentRevenue,
+      currentCustomers,
+      revenueChange: percentChange(currentRevenue, previousRevenue),
+      bookingChange: percentChange(currentMonthBookings.length, previousMonthBookings.length),
+      customerChange: percentChange(currentCustomers, previousCustomers),
+      topRoutes,
+      monthlyRevenue,
+    };
+  })();
+
+  const chartMax = Math.max(...dashboardData.monthlyRevenue.map((item) => item.revenue), 1);
+  const chartPoints = dashboardData.monthlyRevenue.map((item, index) => ({
+    x: (index / Math.max(dashboardData.monthlyRevenue.length - 1, 1)) * 500,
+    y: 180 - (item.revenue / chartMax) * 150,
+  }));
+  const chartLine = chartPoints.map((point, index) => `${index === 0 ? "M" : "L"} ${point.x} ${point.y}`).join(" ");
+  const chartArea = `${chartLine} L 500 190 L 0 190 Z`;
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat("vi-VN", {
@@ -57,38 +137,17 @@ export default function DashboardOverview({
     }).format(amount);
   };
 
-  const topRoutes = [
-    {
-      name: "Sân bay Cam Ranh → TP. Nha Trang (5 chỗ)",
-      count: "88/100 chuyến",
-      percent: 88,
-      color: "bg-orange-500",
-    },
-    {
-      name: "TP. Nha Trang → Sân bay Cam Ranh (7 chỗ)",
-      count: "72/100 chuyến",
-      percent: 72,
-      color: "bg-emerald-500",
-    },
-    {
-      name: "Cam Ranh ⇄ Resort Bãi Dài (Alma, Vinpearl...)",
-      count: "54/100 chuyến",
-      percent: 54,
-      color: "bg-rose-500",
-    },
-    {
-      name: "Nha Trang ⇄ Đà Lạt (Lâm Đồng)",
-      count: "41/100 chuyến",
-      percent: 41,
-      color: "bg-sky-500",
-    },
-    {
-      name: "Nha Trang ⇄ Mũi Né / Phan Thiết",
-      count: "29/100 chuyến",
-      percent: 29,
-      color: "bg-purple-500",
-    },
-  ];
+  const trend = (value: number) => {
+    const isPositive = value >= 0;
+    const Icon = isPositive ? TrendingUp : TrendingDown;
+    return (
+      <div className={`flex items-center gap-1.5 text-xs font-semibold mt-4 ${isPositive ? "text-emerald-600" : "text-rose-600"}`}>
+        <Icon size={14} />
+        <span>{isPositive ? "↑" : "↓"} {Math.abs(value)}%</span>
+        <span className="text-gray-400 font-normal text-[11px]">so với tháng trước</span>
+      </div>
+    );
+  };
 
   return (
     <div className="space-y-6 pb-12">
@@ -117,18 +176,14 @@ export default function DashboardOverview({
                 DOANH THU DỰ KIẾN
               </span>
               <span className="text-xl lg:text-2xl font-bold text-gray-800 mt-1 block">
-                {totalRevenue > 0 ? formatCurrency(totalRevenue) : "45.800.000₫"}
+                {formatCurrency(dashboardData.currentRevenue)}
               </span>
             </div>
             <div className="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shadow-xs shrink-0">
               <Calendar size={20} />
             </div>
           </div>
-          <div className="flex items-center gap-1.5 text-xs text-emerald-600 font-semibold mt-4">
-            <TrendingUp size={14} />
-            <span>↑ 14.8%</span>
-            <span className="text-gray-400 font-normal text-[11px]">so với tháng trước</span>
-          </div>
+          {trend(dashboardData.revenueChange)}
         </div>
 
         {/* Card 2: Tổng cuốc xe */}
@@ -139,18 +194,14 @@ export default function DashboardOverview({
                 TỔNG CUỐC XE
               </span>
               <span className="text-xl lg:text-2xl font-bold text-gray-800 mt-1 block">
-                {totalBookings > 0 ? `${totalBookings} chuyến` : "142 chuyến"}
+                {dashboardData.currentMonthBookings.length} chuyến
               </span>
             </div>
             <div className="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shadow-xs shrink-0">
               <Car size={20} />
             </div>
           </div>
-          <div className="flex items-center gap-1.5 text-xs text-emerald-600 font-semibold mt-4">
-            <TrendingUp size={14} />
-            <span>↑ 12%</span>
-            <span className="text-gray-400 font-normal text-[11px]">tăng trưởng đều đặn</span>
-          </div>
+          {trend(dashboardData.bookingChange)}
         </div>
 
         {/* Card 3: Khách hàng mới */}
@@ -161,18 +212,14 @@ export default function DashboardOverview({
                 KHÁCH HÀNG MỚI
               </span>
               <span className="text-xl lg:text-2xl font-bold text-gray-800 mt-1 block">
-                {uniqueCustomers > 0 ? `${uniqueCustomers} khách` : "98 khách"}
+                {dashboardData.currentCustomers} khách
               </span>
             </div>
             <div className="w-10 h-10 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center shadow-xs shrink-0">
               <Users size={20} />
             </div>
           </div>
-          <div className="flex items-center gap-1.5 text-xs text-emerald-600 font-semibold mt-4">
-            <TrendingUp size={14} />
-            <span>↑ 20.4%</span>
-            <span className="text-gray-400 font-normal text-[11px]">khách quay lại 45%</span>
-          </div>
+          {trend(dashboardData.customerChange)}
         </div>
 
         {/* Card 4: Đơn chờ xử lý */}
@@ -183,17 +230,15 @@ export default function DashboardOverview({
                 ĐƠN ĐẶT MỚI
               </span>
               <span className="text-xl lg:text-2xl font-bold text-gray-800 mt-1 block">
-                {pendingRequests} đơn
+                {dashboardData.currentMonthBookings.length} đơn
               </span>
             </div>
             <div className="w-10 h-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shadow-xs shrink-0">
               <MessageSquare size={20} />
             </div>
           </div>
-          <div className="flex items-center gap-1.5 text-xs text-rose-600 font-semibold mt-4">
-            <TrendingDown size={14} />
-            <span>↓ 1.10%</span>
-            <span className="text-gray-400 font-normal text-[11px]">thời gian phản hồi &lt; 3p</span>
+          <div className="flex items-center gap-1.5 text-xs text-gray-500 font-medium mt-4">
+            <span>Đơn được tạo trong tháng hiện tại</span>
           </div>
         </div>
       </div>
@@ -211,9 +256,6 @@ export default function DashboardOverview({
                 Biểu đồ xu hướng doanh thu đặt xe 12 tháng qua
               </p>
             </div>
-            <button className="text-gray-400 hover:text-gray-600 p-1.5 rounded-lg hover:bg-gray-100 cursor-pointer">
-              <MoreVertical size={18} />
-            </button>
           </div>
 
           {/* Spline Area SVG Chart */}
@@ -238,13 +280,13 @@ export default function DashboardOverview({
 
               {/* Area Fill */}
               <path
-                d="M 0 170 C 40 160, 60 140, 90 140 C 130 140, 160 180, 190 130 C 230 70, 260 160, 290 120 C 330 80, 360 110, 400 70 C 440 30, 470 60, 500 20 L 500 190 L 0 190 Z"
+                d={chartArea}
                 fill="url(#chartGradient)"
               />
 
               {/* Curve Line */}
               <path
-                d="M 0 170 C 40 160, 60 140, 90 140 C 130 140, 160 180, 190 130 C 230 70, 260 160, 290 120 C 330 80, 360 110, 400 70 C 440 30, 470 60, 500 20"
+                d={chartLine}
                 fill="none"
                 stroke="#4338ca"
                 strokeWidth="3.5"
@@ -252,17 +294,11 @@ export default function DashboardOverview({
               />
 
               {/* Point Nodes */}
-              {[
-                { cx: 90, cy: 140 },
-                { cx: 190, cy: 130 },
-                { cx: 290, cy: 120 },
-                { cx: 400, cy: 70 },
-                { cx: 500, cy: 20 },
-              ].map((pt, i) => (
+              {chartPoints.map((pt, i) => (
                 <circle
                   key={i}
-                  cx={pt.cx}
-                  cy={pt.cy}
+                  cx={pt.x}
+                  cy={pt.y}
                   r="5"
                   className="fill-white stroke-blue-700 stroke-3 transition-transform hover:scale-150"
                 />
@@ -271,12 +307,9 @@ export default function DashboardOverview({
 
             {/* X-axis labels */}
             <div className="flex justify-between text-[11px] font-bold text-gray-400 mt-2 px-1">
-              <span>Jan</span>
-              <span>Mar</span>
-              <span>May</span>
-              <span>Jul</span>
-              <span>Sep</span>
-              <span>Nov</span>
+              {dashboardData.monthlyRevenue.filter((_, index) => index % 2 === 0).map((item) => (
+                <span key={item.label}>{item.label}</span>
+              ))}
             </div>
           </div>
         </div>
@@ -289,23 +322,22 @@ export default function DashboardOverview({
                 Top Tuyến Xe Chạy
               </h2>
               <div className="relative">
-                <button
-                  onClick={() =>
-                    setSelectedRange((prev) =>
-                      prev === "Tháng này" ? "Hôm nay" : prev === "Hôm nay" ? "Năm nay" : "Tháng này"
-                    )
-                  }
-                  className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-3 py-1.5 rounded-md flex items-center gap-1 shadow-xs cursor-pointer"
+                <select
+                  aria-label="Khoảng thời gian thống kê tuyến xe"
+                  value={selectedRange}
+                  onChange={(event) => setSelectedRange(event.target.value as typeof selectedRange)}
+                  className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-3 py-1.5 rounded-md shadow-xs cursor-pointer"
                 >
-                  <span>{selectedRange}</span>
-                  <ChevronDown size={12} />
-                </button>
+                  <option value="Hôm nay">Hôm nay</option>
+                  <option value="Tháng này">Tháng này</option>
+                  <option value="Năm nay">Năm nay</option>
+                </select>
               </div>
             </div>
 
             {/* Progress Bars */}
             <div className="space-y-4">
-              {topRoutes.map((route, i) => (
+              {dashboardData.topRoutes.length > 0 ? dashboardData.topRoutes.map((route, i) => (
                 <div key={i} className="space-y-1.5">
                   <div className="flex justify-between text-xs font-medium">
                     <span className="text-gray-700 truncate max-w-42.5" title={route.name}>
@@ -322,7 +354,7 @@ export default function DashboardOverview({
                     />
                   </div>
                 </div>
-              ))}
+              )) : <p className="text-sm text-gray-400 py-8 text-center">Chưa có dữ liệu đặt xe trong khoảng thời gian này.</p>}
             </div>
           </div>
 

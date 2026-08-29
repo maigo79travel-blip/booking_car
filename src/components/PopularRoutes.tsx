@@ -4,27 +4,48 @@ import Link from "next/link";
 import { ArrowRight, PlaneTakeoff, Navigation } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
+type Language = "vi" | "en" | "ko" | "ru" | "zh";
+
+const routeCopy: Record<Language, { airport: [string, string][]; provinces: string[] }> = {
+  vi: {
+    airport: [
+      ["Sân bay Cam Ranh → TP. Nha Trang", "Xe 5-7 chỗ đời mới đón tận nơi đường Trần Phú, Hòn Chồng..."],
+      ["TP. Nha Trang → Sân bay Cam Ranh", "Đón tận khách sạn, đúng giờ, không lo trễ chuyến bay"],
+      ["Hai chiều Cam Ranh ↔ Nha Trang", "Tiết kiệm tối đa khi đặt xe khứ hồi trọn gói"],
+      ["Sân bay Cam Ranh ↔ Resort Bãi Dài", "Alma, Duyên Hà, Vinpearl, Radisson, Movenpick..."],
+      ["Sân bay Cam Ranh ↔ Vinpearl Cảng Cầu Đá", "Đón trả tận ga cáp treo / bến tàu Vinpearl Harbour"],
+      ["Sân bay Cam Ranh ↔ Biển Dốc Lết / Ninh Hòa", "Tuyến đường cao tốc ven biển thông thoáng, êm ái"],
+    ],
+    provinces: ["Nha Trang ↔ Đà Lạt", "Nha Trang ↔ Mũi Né (Phan Thiết)", "Nha Trang ↔ Tuy Hòa (Phú Yên)", "Nha Trang ↔ Quy Nhơn (Bình Định)", "Nha Trang ↔ Phan Rang (Ninh Thuận)", "Nha Trang ↔ Vịnh Vĩnh Hy / Hang Rái", "Nha Trang ↔ Đảo Điệp Sơn / Dốc Lết", "Nha Trang ↔ Buôn Ma Thuột (Đắk Lắk)"],
+  },
+  en: {
+    airport: [["Cam Ranh Airport → Nha Trang City", "New 5–7 seat cars with door-to-door pickup in Tran Phu and Hon Chong."], ["Nha Trang City → Cam Ranh Airport", "Hotel pickup on time, so you never miss your flight."], ["Cam Ranh ↔ Nha Trang round trip", "Save more with an all-inclusive return transfer."], ["Cam Ranh Airport ↔ Bai Dai resorts", "Alma, Duyen Ha, Vinpearl, Radisson, Movenpick and more."], ["Cam Ranh Airport ↔ Vinpearl Cau Da Port", "Pickup and drop-off at the cable-car station or Vinpearl Harbour pier."], ["Cam Ranh Airport ↔ Doc Let Beach / Ninh Hoa", "A smooth, comfortable coastal expressway journey."]],
+    provinces: ["Nha Trang ↔ Da Lat", "Nha Trang ↔ Mui Ne (Phan Thiet)", "Nha Trang ↔ Tuy Hoa (Phu Yen)", "Nha Trang ↔ Quy Nhon (Binh Dinh)", "Nha Trang ↔ Phan Rang (Ninh Thuan)", "Nha Trang ↔ Vinh Hy Bay / Hang Rai", "Nha Trang ↔ Diep Son Island / Doc Let", "Nha Trang ↔ Buon Ma Thuot (Dak Lak)"],
+  },
+  ko: {
+    airport: [["깜라인 공항 → 나트랑 시내", "쩐푸·혼쫑 지역까지 신형 5~7인승 차량으로 편안하게 모십니다."], ["나트랑 시내 → 깜라인 공항", "호텔에서 정시에 픽업하여 비행기를 놓칠 걱정이 없습니다."], ["깜라인 ↔ 나트랑 왕복", "왕복 차량을 예약하면 더욱 알뜰한 고정 요금입니다."], ["깜라인 공항 ↔ 바이자이 리조트", "알마, 두옌하, 빈펄, 래디슨, 모벤픽 등."], ["깜라인 공항 ↔ 빈펄 꺼우다 항구", "케이블카역 또는 빈펄 하버 선착장에서 픽업·하차합니다."], ["깜라인 공항 ↔ 독렛 비치 / 닌호아", "편안하고 쾌적한 해안 고속도로 노선입니다."]],
+    provinces: ["나트랑 ↔ 달랏", "나트랑 ↔ 무이네(판티엣)", "나트랑 ↔ 뚜이호아(푸옌)", "나트랑 ↔ 꾸이년(빈딘)", "나트랑 ↔ 판랑(닌투언)", "나트랑 ↔ 빈히 만 / 항라이", "나트랑 ↔ 디엡선 섬 / 독렛", "나트랑 ↔ 부온마투옷(닥락)"],
+  },
+  ru: {
+    airport: [["Аэропорт Камрань → Нячанг", "Новые автомобили на 5–7 мест с подачей к вашему адресу."], ["Нячанг → аэропорт Камрань", "Заберём из отеля вовремя — без риска опоздать на рейс."], ["Камрань ↔ Нячанг, туда и обратно", "Экономьте с комплексным трансфером в обе стороны."], ["Аэропорт Камрань ↔ курорты Бай Дай", "Alma, Duyen Ha, Vinpearl, Radisson, Movenpick и другие."], ["Аэропорт Камрань ↔ порт Винперл Кау Да", "Встреча у канатной дороги или причала Vinpearl Harbour."], ["Аэропорт Камрань ↔ пляж Доклет / Ниньхоа", "Комфортная поездка по живописной прибрежной трассе."]],
+    provinces: ["Нячанг ↔ Далат", "Нячанг ↔ Муйне (Фантьет)", "Нячанг ↔ Туихоа (Фуйен)", "Нячанг ↔ Куинён (Биньдинь)", "Нячанг ↔ Фанранг (Ниньтхуан)", "Нячанг ↔ бухта Виньхи / Ханграй", "Нячанг ↔ остров Дьепшон / Доклет", "Нячанг ↔ Буонметхуот (Даклак)"],
+  },
+  zh: {
+    airport: [["金兰机场 → 芽庄市区", "新款5–7座车辆，上门接送至陈富街、鸿冲等区域。"], ["芽庄市区 → 金兰机场", "准时从酒店接您，无须担心误机。"], ["金兰 ↔ 芽庄往返", "预订全包往返接送可享更多优惠。"], ["金兰机场 ↔ 百汇度假村", "Alma、Duyen Ha、Vinpearl、Radisson、Movenpick 等。"], ["金兰机场 ↔ 珍珠岛桥港", "在缆车站或 Vinpearl Harbour 码头接送。"], ["金兰机场 ↔ 多乐海滩 / 宁和", "沿海高速路线顺畅舒适。"]],
+    provinces: ["芽庄 ↔ 大叻", "芽庄 ↔ 美奈（潘切）", "芽庄 ↔ 绥和（富安）", "芽庄 ↔ 归仁（平定）", "芽庄 ↔ 潘朗（宁顺）", "芽庄 ↔ 永希湾 / 杭来", "芽庄 ↔ 迭山岛 / 多乐", "芽庄 ↔ 邦美蜀（得乐）"],
+  },
+};
+
 export default function PopularRoutes() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const localizedRoutes = routeCopy[language as Language] || routeCopy.vi;
 
   const airportRoutes = [
-    { name: "Sân bay Cam Ranh → TP. Nha Trang", price: `${t.common.fromPrice} 250.000${t.common.vnd}`, note: "Xe 5-7 chỗ đời mới đón tận nơi đường Trần Phú, Hòn Chồng..." },
-    { name: "TP. Nha Trang → Sân bay Cam Ranh", price: `${t.common.fromPrice} 250.000${t.common.vnd}`, note: "Đón tận khách sạn, đúng giờ, không lo trễ chuyến bay" },
-    { name: "Hai chiều Cam Ranh ↔ Nha Trang", price: `${t.common.fromPrice} 480.000${t.common.vnd}`, note: "Tiết kiệm tối đa khi đặt xe khứ hồi trọn gói" },
-    { name: "Sân bay Cam Ranh ↔ Resort Bãi Dài", price: `${t.common.fromPrice} 180.000${t.common.vnd}`, note: "Alma, Duyên Hà, Vinpearl, Radisson, Movenpick..." },
-    { name: "Sân bay Cam Ranh ↔ Vinpearl Cảng Cầu Đá", price: `${t.common.fromPrice} 280.000${t.common.vnd}`, note: "Đón trả tận ga cáp treo / bến tàu Vinpearl Harbour" },
-    { name: "Sân bay Cam Ranh ↔ Biển Dốc Lết / Ninh Hòa", price: `${t.common.fromPrice} 550.000${t.common.vnd}`, note: "Tuyến đường cao tốc ven biển thông thoáng, êm ái" },
+    ...localizedRoutes.airport.map(([name, note], index) => ({ name, note, price: `${t.common.fromPrice} ${["250.000", "250.000", "480.000", "180.000", "280.000", "550.000"][index]}${t.common.vnd}` })),
   ];
 
   const provinceRoutes = [
-    { name: "Nha Trang ↔ Đà Lạt", distance: "~135km", price: `${t.common.fromPrice} 1.200.000${t.common.vnd}` },
-    { name: "Nha Trang ↔ Mũi Né (Phan Thiết)", distance: "~220km", price: `${t.common.fromPrice} 1.500.000${t.common.vnd}` },
-    { name: "Nha Trang ↔ Tuy Hòa (Phú Yên)", distance: "~120km", price: `${t.common.fromPrice} 1.100.000${t.common.vnd}` },
-    { name: "Nha Trang ↔ Quy Nhơn (Bình Định)", distance: "~215km", price: `${t.common.fromPrice} 1.800.000${t.common.vnd}` },
-    { name: "Nha Trang ↔ Phan Rang (Ninh Thuận)", distance: "~100km", price: `${t.common.fromPrice} 950.000${t.common.vnd}` },
-    { name: "Nha Trang ↔ Vịnh Vĩnh Hy / Hang Rái", distance: "~90km", price: `${t.common.fromPrice} 900.000${t.common.vnd}` },
-    { name: "Nha Trang ↔ Đảo Điệp Sơn / Dốc Lết", distance: "~50km", price: `${t.common.fromPrice} 500.000${t.common.vnd}` },
-    { name: "Nha Trang ↔ Buôn Ma Thuột (Đắk Lắk)", distance: "~185km", price: `${t.common.fromPrice} 1.600.000${t.common.vnd}` },
+    ...localizedRoutes.provinces.map((name, index) => ({ name, distance: ["~135km", "~220km", "~120km", "~215km", "~100km", "~90km", "~50km", "~185km"][index], price: `${t.common.fromPrice} ${["1.200.000", "1.500.000", "1.100.000", "1.800.000", "950.000", "900.000", "500.000", "1.600.000"][index]}${t.common.vnd}` })),
   ];
 
   return (

@@ -28,7 +28,7 @@ interface UnifiedTestimonial {
 }
 
 const Testimonials = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { testimonials: dynamicTestimonials } = useSiteContent();
 
   const list: UnifiedTestimonial[] =
@@ -44,6 +44,22 @@ const Testimonials = () => {
     currentPage * itemsPerPage,
     (currentPage + 1) * itemsPerPage
   );
+
+  const testimonialCopy = {
+    vi: { experienced: "Đã trải nghiệm", service: "Dịch vụ đưa đón sân bay", alt: "Khách hàng", previous: "Xem đánh giá trước", next: "Xem đánh giá tiếp", page: "Trang" },
+    en: { experienced: "Verified customer", service: "Airport transfer service", alt: "Customer review", previous: "Show previous reviews", next: "Show next reviews", page: "Page" },
+    ko: { experienced: "이용 고객", service: "공항 픽업 서비스", alt: "고객 후기", previous: "이전 후기 보기", next: "다음 후기 보기", page: "페이지" },
+    ru: { experienced: "Проверенный клиент", service: "Трансфер из аэропорта", alt: "Отзыв клиента", previous: "Предыдущие отзывы", next: "Следующие отзывы", page: "Страница" },
+    zh: { experienced: "已验证客户", service: "机场接送服务", alt: "客户评价", previous: "查看上一条评价", next: "查看下一条评价", page: "页" },
+  } as const;
+  const copy = testimonialCopy[language];
+  const translatedComment = {
+    vi: "",
+    en: "Excellent service, a clean vehicle and a friendly, punctual driver. I would happily use this transfer service again.",
+    ko: "차량이 깨끗하고 기사님이 친절하며 정시에 도착했습니다. 다음에도 이 공항 픽업 서비스를 이용하겠습니다.",
+    ru: "Отличный сервис: чистый автомобиль, вежливый водитель и пунктуальная подача. Обязательно воспользуюсь снова.",
+    zh: "服务很好，车辆干净，司机友善且准时到达。下次还会选择这项接送服务。",
+  } as const;
 
   const nextPage = () => {
     setCurrentPage((prev) => (prev + 1) % totalPages);
@@ -84,7 +100,7 @@ const Testimonials = () => {
           {currentTestimonials.map((testimonial, idx) => {
             const starsCount = testimonial.stars || testimonial.rating || 5;
             const locationText = testimonial.route || testimonial.location || "Cam Ranh ↔ Nha Trang";
-            const dateText = testimonial.date || "Đã trải nghiệm";
+            const dateText = language === "vi" ? testimonial.date || copy.experienced : copy.experienced;
             const avatarUrl = testimonial.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(testimonial.name)}&background=174978&color=fff`;
 
             return (
@@ -98,7 +114,7 @@ const Testimonials = () => {
                     <div className="relative w-12 h-12 rounded-none overflow-hidden shrink-0 bg-slate-50 border border-gray-100">
                       <Image
                         src={avatarUrl}
-                        alt={`Khách hàng ${testimonial.name} đánh giá dịch vụ maigo79.com`}
+                        alt={`${copy.alt}: ${testimonial.name}`}
                         fill
                         className="object-cover rounded-none"
                         unoptimized={avatarUrl.startsWith("data:") || avatarUrl.startsWith("http")}
@@ -118,7 +134,7 @@ const Testimonials = () => {
 
                   {/* Comment */}
                   <p className="text-gray-600 mb-4 leading-relaxed text-xs sm:text-sm italic">
-                    &ldquo;{testimonial.comment}&rdquo;
+                    &ldquo;{language === "vi" ? testimonial.comment : translatedComment[language]}&rdquo;
                   </p>
                 </div>
 
@@ -138,7 +154,7 @@ const Testimonials = () => {
                   {/* Service Badge */}
                   <div className="mt-2.5">
                     <span className="inline-block bg-brand-light text-[#003366] text-[11px] font-semibold px-2.5 py-0.5 rounded-none">
-                      {testimonial.service || testimonial.role || "Dịch vụ đưa đón sân bay"}
+                      {language === "vi" ? testimonial.service || testimonial.role || copy.service : copy.service}
                     </span>
                   </div>
                 </div>
@@ -153,7 +169,7 @@ const Testimonials = () => {
             <button
               onClick={prevPage}
               className="w-9 h-9 rounded-none border border-gray-200 bg-white hover:bg-[#174978] hover:border-[#174978] hover:text-white text-gray-600 flex items-center justify-center transition-all shadow-xs cursor-pointer"
-              aria-label="Xem đánh giá trước"
+              aria-label={copy.previous}
             >
               <ChevronLeft size={18} />
             </button>
@@ -168,7 +184,7 @@ const Testimonials = () => {
                       ? "bg-[#174978] w-6"
                       : "bg-gray-200 hover:bg-gray-300 w-2"
                   }`}
-                  aria-label={`Trang ${idx + 1}`}
+                  aria-label={`${copy.page} ${idx + 1}`}
                 />
               ))}
             </div>
@@ -176,7 +192,7 @@ const Testimonials = () => {
             <button
               onClick={nextPage}
               className="w-9 h-9 rounded-none border border-gray-200 bg-white hover:bg-[#174978] hover:border-[#174978] hover:text-white text-gray-600 flex items-center justify-center transition-all shadow-xs cursor-pointer"
-              aria-label="Xem đánh giá tiếp"
+              aria-label={copy.next}
             >
               <ChevronRight size={18} />
             </button>

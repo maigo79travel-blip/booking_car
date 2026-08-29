@@ -4,9 +4,20 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { Phone, X } from "lucide-react";
 import { useSiteContent } from "@/context/SiteContentContext";
+import { useLanguage } from "@/context/LanguageContext";
+
+const contactCopy = {
+  vi: { call: "Gọi hotline", zalo: "Chat Zalo", close: "Đóng", kakao: "Liên hệ qua KakaoTalk", kakaoDesc: "Bạn có thể hỏi thông tin và đặt xe qua KakaoTalk.", international: "Hotline quốc tế", callNow: "Gọi" },
+  en: { call: "Call hotline", zalo: "Chat on Zalo", close: "Close", kakao: "Contact via KakaoTalk", kakaoDesc: "You can ask questions and book a car through KakaoTalk.", international: "International hotline", callNow: "Call" },
+  ko: { call: "전화 상담", zalo: "잘로 채팅", close: "닫기", kakao: "카카오톡 문의", kakaoDesc: "카카오톡으로 문의 및 차량 예약이 가능합니다.", international: "해외 고객센터", callNow: "전화" },
+  ru: { call: "Позвонить", zalo: "Чат в Zalo", close: "Закрыть", kakao: "Связаться через KakaoTalk", kakaoDesc: "Задавайте вопросы и бронируйте автомобиль через KakaoTalk.", international: "Международная горячая линия", callNow: "Позвонить" },
+  zh: { call: "拨打热线", zalo: "Zalo 聊天", close: "关闭", kakao: "通过 KakaoTalk 联系", kakaoDesc: "您可以通过 KakaoTalk 咨询和预订车辆。", international: "国际热线", callNow: "拨打" },
+} as const;
 
 const FloatingContacts = () => {
   const { contact } = useSiteContent();
+  const { language } = useLanguage();
+  const copy = contactCopy[language];
   const [showKakaoModal, setShowKakaoModal] = useState(false);
 
   const phoneNum = contact.hotline || "0878458885";
@@ -15,7 +26,6 @@ const FloatingContacts = () => {
   const fbLink =
     contact.facebook ||
     "https://www.facebook.com/share/1BhL4Qut3u/?mibextid=wwXIfr";
-  const teleLink = contact.telegram || "https://t.me/maigo79_vn";
 
   const zaloUrl = zaloNum.startsWith("http")
     ? zaloNum
@@ -27,7 +37,7 @@ const FloatingContacts = () => {
 
   const contacts = [
     {
-      name: "Gọi Hotline 0878.458.885",
+      name: `${copy.call} 0878.458.885`,
       icon: (
         <div className="w-11 h-11 md:w-12 md:h-12 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center shadow-lg transform hover:scale-105 transition-all">
           <Phone size={22} className="animate-pulse" />
@@ -37,7 +47,7 @@ const FloatingContacts = () => {
       isExternal: false,
     },
     {
-      name: "Chat Zalo 0878.458.885",
+      name: `${copy.zalo} 0878.458.885`,
       icon: (
         <div className="w-11 h-11 md:w-12 md:h-12 rounded-full overflow-hidden shadow-lg transform hover:scale-105 transition-all bg-white border border-blue-100 flex items-center justify-center p-0.5">
           <Image
@@ -149,7 +159,7 @@ const FloatingContacts = () => {
             <button
               onClick={() => setShowKakaoModal(false)}
               className="absolute top-3 right-3 text-gray-400 hover:text-gray-700 p-1 cursor-pointer"
-              aria-label="Đóng"
+              aria-label={copy.close}
             >
               <X size={20} />
             </button>
@@ -165,10 +175,10 @@ const FloatingContacts = () => {
             </div>
 
             <h3 className="text-lg font-bold text-gray-900 mb-1">
-              Liên Hệ Qua KakaoTalk
+              {copy.kakao}
             </h3>
             <p className="text-xs sm:text-sm text-gray-600 mb-4">
-              카카오톡으로 문의 및 차량 예약이 가능합니다.
+              {copy.kakaoDesc}
             </p>
 
             <div className="bg-amber-50/80 p-3.5 border border-amber-200 mb-4 text-left">
@@ -179,7 +189,7 @@ const FloatingContacts = () => {
                 </span>
               </p>
               <p className="text-xs text-gray-700">
-                <strong>Hotline Quốc Tế:</strong>{" "}
+                <strong>{copy.international}:</strong>{" "}
                 <span className="text-[#003366] font-bold select-all">
                   +84 878 458 885
                 </span>
@@ -190,7 +200,7 @@ const FloatingContacts = () => {
               href="tel:0878458885"
               className="w-full bg-[#003366] hover:bg-[#002244] text-white font-bold py-2.5 px-4 text-sm flex items-center justify-center gap-2 transition-all shadow-xs"
             >
-              <Phone size={16} /> Gọi 0878.458.885
+              <Phone size={16} /> {copy.callNow} 0878.458.885
             </a>
           </div>
         </div>

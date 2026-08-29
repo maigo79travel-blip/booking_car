@@ -39,8 +39,8 @@ const FloatingContacts = () => {
     {
       name: `${copy.call} 0878.458.885`,
       icon: (
-        <div className="w-11 h-11 md:w-12 md:h-12 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center shadow-lg transform hover:scale-105 transition-all">
-          <Phone size={22} className="animate-pulse" />
+        <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center shadow-lg transform hover:scale-105 transition-all">
+          <Phone size={18} className="animate-pulse md:w-5 md:h-5" />
         </div>
       ),
       link: `tel:${phoneNum.replace(/[^0-9+]/g, "")}`,
@@ -49,7 +49,7 @@ const FloatingContacts = () => {
     {
       name: `${copy.zalo} 0878.458.885`,
       icon: (
-        <div className="w-11 h-11 md:w-12 md:h-12 rounded-full overflow-hidden shadow-lg transform hover:scale-105 transition-all bg-white border border-blue-100 flex items-center justify-center p-0.5">
+        <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full overflow-hidden shadow-lg transform hover:scale-105 transition-all bg-white border border-blue-100 flex items-center justify-center p-0.5">
           <Image
             src="/icon/zalo.png"
             alt="Zalo maigo79.com"
@@ -65,7 +65,7 @@ const FloatingContacts = () => {
     {
       name: "WhatsApp 0878.458.885",
       icon: (
-        <div className="w-11 h-11 md:w-12 md:h-12 rounded-full overflow-hidden shadow-lg transform hover:scale-105 transition-all bg-white border border-emerald-100 flex items-center justify-center p-0.5">
+        <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full overflow-hidden shadow-lg transform hover:scale-105 transition-all bg-white border border-emerald-100 flex items-center justify-center p-0.5">
           <Image
             src="/icon/whatapp.png"
             alt="WhatsApp maigo79.com"
@@ -81,7 +81,7 @@ const FloatingContacts = () => {
     {
       name: "KakaoTalk 0878.458.885",
       icon: (
-        <div className="w-11 h-11 md:w-12 md:h-12 rounded-full overflow-hidden shadow-lg transform hover:scale-105 transition-all bg-[#FFE812] border border-amber-200 flex items-center justify-center p-1 cursor-pointer">
+        <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full overflow-hidden shadow-lg transform hover:scale-105 transition-all bg-[#FFE812] border border-amber-200 flex items-center justify-center p-1 cursor-pointer">
           <Image
             src="/icon/kakao.png"
             alt="KakaoTalk maigo79.com"
@@ -96,7 +96,7 @@ const FloatingContacts = () => {
     {
       name: "Facebook / Messenger",
       icon: (
-        <div className="w-11 h-11 md:w-12 md:h-12 rounded-full overflow-hidden shadow-lg transform hover:scale-105 transition-all bg-white border border-blue-100 flex items-center justify-center p-0.5">
+        <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full overflow-hidden shadow-lg transform hover:scale-105 transition-all bg-white border border-blue-100 flex items-center justify-center p-0.5">
           <Image
             src="/icon/facebook.png"
             alt="Facebook maigo79.com"
@@ -113,7 +113,7 @@ const FloatingContacts = () => {
 
   return (
     <>
-      <div className="fixed bottom-4 right-3 md:bottom-6 md:right-5 z-50 flex flex-col gap-2.5 items-center">
+      <div className="fixed bottom-3 right-2 sm:bottom-4 sm:right-3 md:bottom-6 md:right-5 z-50 flex flex-col gap-1.5 md:gap-2.5 items-center">
         {contacts.map((c, index) => {
           if (c.onClick) {
             return (

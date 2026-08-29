@@ -6,7 +6,14 @@ export const runtime = "nodejs";
 export async function POST(request: Request) {
   try {
     const { email, password } = await request.json();
-    if (!email || !password) {
+    if (
+      typeof email !== "string" ||
+      typeof password !== "string" ||
+      !email ||
+      !password ||
+      email.length > 254 ||
+      password.length > 1024
+    ) {
       return NextResponse.json(
         { message: "Vui lòng nhập đầy đủ email và mật khẩu" },
         { status: 400 }
@@ -50,9 +57,8 @@ export async function POST(request: Request) {
     return response;
   } catch (error) {
     console.error("Admin login error:", error);
-    const errMsg = error instanceof Error ? error.message : String(error);
     return NextResponse.json(
-      { message: `Lỗi đăng nhập: ${errMsg}` },
+      { message: "Không thể xử lý đăng nhập. Vui lòng thử lại sau." },
       { status: 500 }
     );
   }

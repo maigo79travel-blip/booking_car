@@ -86,10 +86,10 @@ const Testimonials = () => {
           <span className="text-[#174978] font-semibold uppercase tracking-wider text-xs md:text-sm">
             {t.testimonials.tag}
           </span>
-          <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-gray-900 mt-1 mb-2">
+          <h2 className="text-base sm:text-lg md:text-2xl lg:text-3xl font-bold text-gray-900 mt-1 mb-2 leading-snug">
             {t.testimonials.title}
           </h2>
-          <div className="w-20 md:w-24 h-1 bg-[#174978] mx-auto mb-2.5"></div>
+          <div className="w-16 md:w-24 h-1 bg-[#174978] mx-auto mb-2.5"></div>
           <p className="text-gray-600 text-xs sm:text-sm md:text-base">
             {t.testimonials.subtitle}
           </p>

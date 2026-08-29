@@ -53,10 +53,10 @@ export default function FAQSection() {
               <HelpCircle size={18} />
               <span>{t.faq.tag}</span>
             </div>
-            <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-gray-900 mt-1 mb-2">
+            <h2 className="text-base sm:text-lg md:text-2xl lg:text-3xl font-bold text-gray-900 mt-1 mb-2 leading-snug">
               {t.faq.title}
             </h2>
-            <div className="w-20 md:w-24 h-1 bg-[#174978] mx-auto mb-2.5"></div>
+            <div className="w-16 md:w-24 h-1 bg-[#174978] mx-auto mb-2.5"></div>
             <p className="text-gray-600 text-xs sm:text-sm md:text-base">
               {t.faq.subtitle}
             </p>

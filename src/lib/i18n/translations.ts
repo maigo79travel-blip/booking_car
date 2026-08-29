@@ -136,7 +136,7 @@ export const translations = {
     },
     faq: {
       tag: "Giải đáp thắc mắc",
-      title: "Câu Hỏi Thường Gặp Về Đặt Xe Sân Bay Cam Ranh",
+      title: "Câu Hỏi Thường Gặp Khi Đặt Xe Sân Bay",
       subtitle: "Tổng hợp những câu hỏi và thông tin cần biết khi sử dụng dịch vụ taxi đưa đón sân bay của maigo79.com.",
       items: [
         {

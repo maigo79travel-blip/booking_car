@@ -5,6 +5,9 @@ import crypto from "crypto";
 
 export const runtime = "nodejs";
 
+const MAX_IMAGE_BYTES = 8 * 1024 * 1024;
+const ALLOWED_IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/gif"]);
+
 // Max file size: 10MB
 export const maxDuration = 30;
 
@@ -14,11 +17,19 @@ export async function POST(request: Request) {
 
     const formData = await request.formData();
     const file = formData.get("file") as File | null;
-    const folder = (formData.get("folder") as string) || "maigo79";
+    const requestedFolder = (formData.get("folder") as string) || "maigo79";
+    const folder = requestedFolder.replace(/[^a-zA-Z0-9_/-]/g, "").slice(0, 100) || "maigo79";
 
     if (!file) {
       return NextResponse.json(
         { message: "Không tìm thấy file ảnh" },
+        { status: 400 }
+      );
+    }
+
+    if (!ALLOWED_IMAGE_TYPES.has(file.type) || file.size <= 0 || file.size > MAX_IMAGE_BYTES) {
+      return NextResponse.json(
+        { message: "Chỉ hỗ trợ ảnh JPG, PNG, WebP hoặc GIF có dung lượng tối đa 8 MB" },
         { status: 400 }
       );
     }
@@ -94,15 +105,10 @@ export async function POST(request: Request) {
       }
     }
 
-    // 3. Fallback: Return data URI if Cloudinary is not configured yet
-    return NextResponse.json({
-      success: true,
-      url: dataUri,
-      provider: "local_base64",
-      warning: !cloudName
-        ? "Vui lòng cấu hình Cloudinary trong trang Quản trị để lưu trữ ảnh vĩnh viễn trên đám mây!"
-        : undefined,
-    });
+    return NextResponse.json(
+      { message: "Không thể tải ảnh lên Cloudinary. Vui lòng kiểm tra cấu hình lưu trữ ảnh." },
+      { status: 502 }
+    );
   } catch (error: unknown) {
     console.error("Image upload error:", error);
     const msg = error instanceof Error ? error.message : "Lỗi khi tải ảnh lên";

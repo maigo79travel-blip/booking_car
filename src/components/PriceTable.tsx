@@ -52,10 +52,10 @@ const PriceTable = () => {
               </svg>
             </div>
           </div>
-          <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-2">
+          <h2 className="text-base sm:text-lg md:text-2xl lg:text-3xl font-bold text-gray-900 mb-2 leading-snug">
             {language === "vi" ? priceTable?.title || t.priceTable.heading : t.priceTable.heading}
           </h2>
-          <div className="w-24 h-1 bg-[#174978] mx-auto"></div>
+          <div className="w-16 md:w-24 h-1 bg-[#174978] mx-auto"></div>
         </div>
 
         {/* Mobile Card Layout */}

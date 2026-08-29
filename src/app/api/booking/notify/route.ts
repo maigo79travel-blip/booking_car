@@ -28,6 +28,21 @@ type BookingPayload = {
   total_price?: number;
 };
 
+const MAX_REQUEST_BYTES = 16 * 1024;
+const MAX_TEXT_LENGTH = 200;
+
+function escapeTelegramHtml(value: string) {
+  return value.replace(/[&<>]/g, (character) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+  })[character] || character);
+}
+
+function isValidText(value: string) {
+  return value.length > 0 && value.length <= MAX_TEXT_LENGTH;
+}
+
 function formatTelegramMessage(data: {
   customerName: string;
   customerPhone: string;
@@ -72,22 +87,22 @@ function formatTelegramMessage(data: {
     "🔔 <b>CÓ ĐƠN ĐẶT XE MỚI - MAIGO79.COM</b>",
     "━━━━━━━━━━━━━━━━━━━━━━━━━",
     "👤 <b>THÔNG TIN KHÁCH HÀNG:</b>",
-    `• Họ và tên: <b>${data.customerName}</b>`,
-    `• Số điện thoại: <b><a href="tel:${data.customerPhone}">${data.customerPhone}</a></b>`,
+    `• Họ và tên: <b>${escapeTelegramHtml(data.customerName)}</b>`,
+    `• Số điện thoại: <b>${escapeTelegramHtml(data.customerPhone)}</b>`,
     "",
     "🚗 <b>DỊCH VỤ & LOẠI XE:</b>",
     `• Loại dịch vụ: <b>${serviceType}</b>`,
-    `• Loại xe: <b>${data.carType}</b>`,
+    `• Loại xe: <b>${escapeTelegramHtml(data.carType)}</b>`,
     `• Hình thức di chuyển: <b>${wayText}</b>`,
     "",
     "📍 <b>LỘ TRÌNH DI CHUYỂN:</b>",
-    `• Điểm đón: <b>${data.fromLocation}</b>`,
-    `• Điểm đến: <b>${data.toLocation}</b>`,
+    `• Điểm đón: <b>${escapeTelegramHtml(data.fromLocation)}</b>`,
+    `• Điểm đến: <b>${escapeTelegramHtml(data.toLocation)}</b>`,
     `• Quãng đường dự kiến: <b>${distanceText}</b>`,
     "",
     "⏰ <b>THỜI GIAN ĐÓN:</b>",
-    `• Giờ đón: <b>${data.tripTime}</b>`,
-    `• Ngày đón: <b>${data.tripDate}</b>`,
+    `• Giờ đón: <b>${escapeTelegramHtml(data.tripTime)}</b>`,
+    `• Ngày đón: <b>${escapeTelegramHtml(data.tripDate)}</b>`,
     "",
     "💰 <b>CƯỚC PHÍ DỰ KIẾN:</b>",
     `• Tổng tiền: <b>${formattedPrice}</b> (Trọn gói)`,
@@ -99,6 +114,14 @@ function formatTelegramMessage(data: {
 
 export async function POST(request: Request) {
   try {
+    const contentLength = Number(request.headers.get("content-length") || 0);
+    if (Number.isFinite(contentLength) && contentLength > MAX_REQUEST_BYTES) {
+      return NextResponse.json(
+        { success: false, message: "Dữ liệu gửi lên quá lớn" },
+        { status: 413 }
+      );
+    }
+
     const raw = (await request.json()) as BookingPayload;
 
     const customerName = (raw.customer_name || raw.customerName || "").trim();
@@ -113,9 +136,21 @@ export async function POST(request: Request) {
     const distanceKm = Number(raw.distance_km || raw.distanceKm || 0);
     const totalPrice = Number(raw.total_price || raw.price || 0);
 
-    if (!customerName || !customerPhone) {
+    if (
+      !isValidText(customerName) ||
+      !isValidText(customerPhone) ||
+      !isValidText(fromLocation) ||
+      !isValidText(toLocation) ||
+      !/^[0-9+()\s.-]{7,24}$/.test(customerPhone) ||
+      !Number.isFinite(distanceKm) ||
+      distanceKm < 0 ||
+      distanceKm > 5_000 ||
+      !Number.isFinite(totalPrice) ||
+      totalPrice < 0 ||
+      totalPrice > 100_000_000
+    ) {
       return NextResponse.json(
-        { success: false, message: "Thiếu thông tin khách hàng" },
+        { success: false, message: "Thông tin đặt xe không hợp lệ" },
         { status: 400 }
       );
     }
@@ -201,6 +236,7 @@ export async function POST(request: Request) {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
+            signal: AbortSignal.timeout(10_000),
           }
         );
         const teleData = await teleRes.json();

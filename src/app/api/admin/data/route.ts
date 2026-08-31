@@ -148,8 +148,13 @@ export async function DELETE(request: Request) {
       return NextResponse.json({ message: "Invalid request" }, { status: 400 });
     }
 
-    const rows = await query<{ slug?: string }>(`DELETE FROM public.${table} WHERE id = $1 RETURNING slug`, [id]);
-    if (table === "posts") revalidatePosts(rows[0]);
+    if (table === "posts") {
+      const rows = await query<{ slug?: string }>(`DELETE FROM public.posts WHERE id = $1 RETURNING slug`, [id]);
+      if (rows[0]) revalidatePosts(rows[0]);
+    } else {
+      await query(`DELETE FROM public.${table} WHERE id = $1`, [id]);
+    }
+
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("DELETE error:", error);

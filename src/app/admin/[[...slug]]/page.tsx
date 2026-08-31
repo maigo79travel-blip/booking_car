@@ -259,11 +259,19 @@ export default function AdminAppPage() {
   };
 
   const handleDeleteBooking = async (id: string) => {
-    const res = await fetch(`/api/admin/data?table=bookings&id=${id}`, {
-      method: "DELETE",
-    });
-    if (!res.ok) alert("Không thể xóa đơn đặt xe!");
-    await load();
+    try {
+      const res = await fetch(`/api/admin/data?table=bookings&id=${id}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        alert(errorData.message || "Không thể xóa đơn đặt xe!");
+        return;
+      }
+      await load();
+    } catch {
+      alert("Không thể xóa đơn đặt xe!");
+    }
   };
 
   // Handler for Content

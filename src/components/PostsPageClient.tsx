@@ -80,6 +80,7 @@ export default function PostsPageClient({ posts }: { posts: Post[] }) {
             {posts.map((post) => {
               const title = localizedText(post.title, language);
               const excerpt = localizedText(post.excerpt, language);
+              const postHref = `/${language}/bai-viet/${post.slug}`;
 
               return (
                 <article key={post.id} className="bg-white rounded-none overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between group">
@@ -94,13 +95,13 @@ export default function PostsPageClient({ posts }: { posts: Post[] }) {
                         </time>
                       )}
                       <h2 className="font-bold text-lg md:text-xl text-gray-900 mb-2 leading-snug group-hover:text-[#003366] transition-colors line-clamp-2">
-                        <Link href={`/bai-viet/${post.slug}`}>{title}</Link>
+                        <Link href={postHref}>{title}</Link>
                       </h2>
                       <p className="text-gray-600 text-sm line-clamp-3 leading-relaxed">{excerpt}</p>
                     </div>
                   </div>
                   <div className="p-5 pt-0">
-                    <Link className="inline-flex items-center gap-1 text-sm font-bold text-[#174978] hover:text-[#003366] group-hover:translate-x-1 transition-transform" href={`/bai-viet/${post.slug}`}>
+                    <Link className="inline-flex items-center gap-1 text-sm font-bold text-[#174978] hover:text-[#003366] group-hover:translate-x-1 transition-transform" href={postHref}>
                       {page.readMore} <ArrowRight size={15} />
                     </Link>
                   </div>

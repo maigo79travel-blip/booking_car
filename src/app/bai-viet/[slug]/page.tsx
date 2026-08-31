@@ -13,6 +13,34 @@ import { Language } from "@/lib/i18n/types";
 export const revalidate = 60;
 import { Calendar, PhoneCall } from "lucide-react";
 
+const articleCta = {
+  vi: {
+    title: "Cần Đặt Xe Sân Bay Cam Ranh – Nha Trang Đón Trả Tận Nơi?",
+    description: "Xe 5 - 7 - 16 chỗ đón đúng giờ, giá trọn gói chỉ từ 250k. Phục vụ 24/7.",
+    booking: "Đặt xe ngay",
+  },
+  en: {
+    title: "Need a Private Transfer from Cam Ranh Airport to Nha Trang?",
+    description: "5, 7 and 16-seat cars with punctual pickup and fixed fares from 250,000 VND. Available 24/7.",
+    booking: "Book now",
+  },
+  ko: {
+    title: "깜란 공항에서 나트랑까지 차량이 필요하신가요?",
+    description: "5·7·16인승 차량, 정시 픽업 및 250,000VND부터의 정액 요금. 24시간 운행합니다.",
+    booking: "지금 예약하기",
+  },
+  ru: {
+    title: "Нужен трансфер из аэропорта Камрань в Нячанг?",
+    description: "Автомобили на 5, 7 и 16 мест, подача вовремя и фиксированная цена от 250 000 VND. Работаем 24/7.",
+    booking: "Забронировать",
+  },
+  zh: {
+    title: "需要从金兰机场前往芽庄的专车接送吗？",
+    description: "提供5座、7座和16座车辆，准时接送，套餐价格250,000越南盾起，全天24小时服务。",
+    booking: "立即预订",
+  },
+} satisfies Record<Language, { title: string; description: string; booking: string }>;
+
 export async function generateStaticParams() {
   const posts = await getPublishedPosts();
   return posts.map(({ slug }) => ({ slug }));
@@ -76,6 +104,7 @@ export default async function PostPage({
   const postTitle = text(post.title, locale);
   const postDesc = text(post.excerpt, locale);
   const postDate = post.published_at || new Date().toISOString();
+  const cta = articleCta[locale];
 
   const jsonLdArticle = {
     "@context": "https://schema.org",
@@ -156,10 +185,10 @@ export default async function PostPage({
         <div className="mt-10 bg-linear-to-r from-[#003366] via-[#174978] to-brand-marine rounded-none p-6 md:p-8 text-white shadow-xs flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <h2 className="text-xl md:text-2xl font-bold mb-2">
-              Cần Đặt Xe Sân Bay Cam Ranh – Nha Trang Đón Trả Tận Nơi?
+              {cta.title}
             </h2>
             <p className="text-blue-100 text-sm md:text-base">
-              Xe 5 - 7 - 16 chỗ đón đúng giờ, giá trọn gói chỉ từ 250k. Phục vụ 24/7.
+              {cta.description}
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
@@ -171,10 +200,10 @@ export default async function PostPage({
               0878.458.885
             </a>
             <Link
-              href="/#formbooking"
+              href={`/${locale}#formbooking`}
               className="bg-[#002244] hover:bg-[#00172e] text-white font-extrabold px-6 py-3 rounded-none transition-all text-sm shadow-xs"
             >
-              Đặt xe ngay
+              {cta.booking}
             </Link>
           </div>
         </div>

@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
 import { SUPPORTED_LANGUAGES, Language } from "@/lib/i18n/types";
-import { ChevronDown, Check } from "lucide-react";
+import { ChevronDown, Check, Globe2 } from "lucide-react";
 
 interface LanguageSwitcherProps {
   variant?: "header" | "mobile" | "footer";
@@ -83,6 +83,7 @@ export default function LanguageSwitcher({
         aria-label="Chọn ngôn ngữ / Select Language"
         aria-expanded={isOpen}
       >
+        <Globe2 size={16} className="shrink-0 text-[#174978]" aria-hidden="true" />
         <span className="text-base leading-none">{currentLang.flag}</span>
         <span className="hidden sm:inline">{currentLang.name}</span>
         <span className="sm:hidden uppercase">{currentLang.code}</span>

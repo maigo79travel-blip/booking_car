@@ -28,7 +28,10 @@ export default function ArticleContent({ content }: { content: string }) {
   return (
     <div className="text-gray-800 text-base md:text-lg leading-relaxed py-2 space-y-5">
       {blocks.map((block, index) => {
-        const image = block.match(/^!\[([^\]]*)\]\(([^\s)]+)\)$/);
+        // Older posts may have a line break between the alt text and URL.
+        // Accept both `![alt](url)` and `![alt]\n(url)` so valid uploaded
+        // Cloudinary images are rendered instead of displayed as Markdown.
+        const image = block.match(/^!\[([^\]]*)\]\s*\(\s*([^\s)]+)\s*\)$/);
         if (image) {
           const src = imageSource(image[2]);
           return src ? (

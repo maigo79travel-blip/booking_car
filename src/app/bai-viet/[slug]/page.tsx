@@ -9,6 +9,7 @@ import { getPost, getPublishedPosts, text } from "@/lib/server/content";
 import PostCoverImage from "@/components/PostCoverImage";
 import ArticleContent from "@/components/ArticleContent";
 import { Language } from "@/lib/i18n/types";
+import { translations } from "@/lib/i18n/translations";
 
 export const revalidate = 60;
 import { Calendar, PhoneCall } from "lucide-react";
@@ -144,7 +145,7 @@ export default async function PostPage({
       {/* Breadcrumbs */}
       <Breadcrumbs
         items={[
-          { name: "Cẩm nang", href: "/bai-viet" },
+          { name: translations[locale]?.nav?.articles || "Bài viết", href: "/bai-viet" },
           { name: postTitle },
         ]}
       />

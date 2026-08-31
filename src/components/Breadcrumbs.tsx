@@ -17,7 +17,26 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
   const { t } = useLanguage();
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://maigo79.com";
 
-  const allItems: BreadcrumbItem[] = [{ name: t.nav.home, href: "/" }, ...items];
+  const resolvedItems = items.map((item) => {
+    if (item.href === "/bai-viet" || item.name === "Cẩm nang" || item.name === "Bài viết") {
+      return { ...item, name: t.nav.articles };
+    }
+    if (item.href === "/loai-xe" || item.name === "Loại xe") {
+      return { ...item, name: t.nav.vehicles };
+    }
+    if (item.href === "/bang-gia" || item.name === "Bảng giá") {
+      return { ...item, name: t.nav.pricing };
+    }
+    if (item.href === "/ve-chung-toi" || item.name === "Về chúng tôi") {
+      return { ...item, name: t.nav.about };
+    }
+    if (item.href === "/chinh-sach" || item.name === "Chính sách") {
+      return { ...item, name: t.nav.policies };
+    }
+    return item;
+  });
+
+  const allItems: BreadcrumbItem[] = [{ name: t.nav.home, href: "/" }, ...resolvedItems];
 
   const jsonLdBreadcrumb = {
     "@context": "https://schema.org",

@@ -12,15 +12,16 @@ export type Post = {
   published_at: string | null;
   seo_title: LocalizedText;
   seo_description: LocalizedText;
+  sort_order: number;
 };
 
 export async function getPublishedPosts(): Promise<Post[]> {
   try {
     return await query<Post>(
-      `SELECT id, slug, title, excerpt, body, cover_image, published_at, seo_title, seo_description
+      `SELECT id, slug, title, excerpt, body, cover_image, published_at, seo_title, seo_description, sort_order
        FROM public.posts
        WHERE status = 'published'
-       ORDER BY published_at DESC NULLS LAST`
+       ORDER BY sort_order ASC NULLS LAST, published_at DESC NULLS LAST`
     );
   } catch (err) {
     console.error("Error fetching published posts:", err);
@@ -31,7 +32,7 @@ export async function getPublishedPosts(): Promise<Post[]> {
 export async function getPost(slug: string): Promise<Post | null> {
   try {
     const posts = await query<Post>(
-      `SELECT id, slug, title, excerpt, body, cover_image, published_at, seo_title, seo_description
+      `SELECT id, slug, title, excerpt, body, cover_image, published_at, seo_title, seo_description, sort_order
        FROM public.posts
        WHERE slug = $1 AND status = 'published'
        LIMIT 1`,

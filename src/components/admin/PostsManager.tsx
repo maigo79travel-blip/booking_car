@@ -11,21 +11,26 @@ import {
   Search,
   ExternalLink,
   FileText,
+  ArrowDown,
+  ArrowUp,
 } from "lucide-react";
 import { PostRecord } from "./PostModal";
 
 interface PostsManagerProps {
   posts: PostRecord[];
   onDeletePost: (id: string) => Promise<void>;
+  onReorderPosts: (updates: Array<{ id: string; sort_order: number }>) => Promise<void>;
 }
 
 export default function PostsManager({
   posts,
   onDeletePost,
+  onReorderPosts,
 }: PostsManagerProps) {
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
+  const [isReordering, setIsReordering] = useState(false);
 
   const getTitle = (p: PostRecord) => {
     if (typeof p.title === "object" && p.title) {
@@ -35,7 +40,14 @@ export default function PostsManager({
     return String(p.title || "Không có tiêu đề");
   };
 
-  const filteredPosts = posts.filter((p) => {
+  const orderedPosts = [...posts].sort((left, right) => {
+    const leftOrder = left.sort_order ?? Number.MAX_SAFE_INTEGER;
+    const rightOrder = right.sort_order ?? Number.MAX_SAFE_INTEGER;
+    if (leftOrder !== rightOrder) return leftOrder - rightOrder;
+    return String(right.published_at || "").localeCompare(String(left.published_at || ""));
+  });
+
+  const filteredPosts = orderedPosts.filter((p) => {
     const titleText = getTitle(p).toLowerCase();
     const slugText = (p.slug || "").toLowerCase();
     const matchesSearch =
@@ -51,6 +63,27 @@ export default function PostsManager({
     if (!id) return;
     if (confirm(`Bạn có chắc chắn muốn xóa bài viết "${titleStr}" không?`)) {
       await onDeletePost(id);
+    }
+  };
+
+  const handleMove = async (post: PostRecord, direction: -1 | 1) => {
+    const currentIndex = orderedPosts.findIndex((item) => item.id === post.id);
+    const targetIndex = currentIndex + direction;
+    if (currentIndex < 0 || targetIndex < 0 || targetIndex >= orderedPosts.length) return;
+
+    const nextOrder = [...orderedPosts];
+    [nextOrder[currentIndex], nextOrder[targetIndex]] = [nextOrder[targetIndex], nextOrder[currentIndex]];
+    const updates = nextOrder
+      .filter((item): item is PostRecord & { id: string } => Boolean(item.id))
+      .map((item, index) => ({ id: item.id, sort_order: index + 1 }));
+
+    setIsReordering(true);
+    try {
+      await onReorderPosts(updates);
+    } catch (error) {
+      alert(error instanceof Error ? error.message : "Không thể sắp xếp bài viết");
+    } finally {
+      setIsReordering(false);
     }
   };
 
@@ -107,6 +140,7 @@ export default function PostsManager({
           <table className="w-full text-left text-sm">
             <thead>
               <tr className="border-b border-gray-100 text-[11px] font-semibold text-gray-400 uppercase tracking-wider bg-gray-50/50">
+                <th className="py-3.5 px-3 text-center">Thứ tự</th>
                 <th className="py-3.5 px-4">Bài Viết</th>
                 <th className="py-3.5 px-3">Đường Dẫn (Slug)</th>
                 <th className="py-3.5 px-3">Đa Ngôn Ngữ</th>
@@ -119,12 +153,40 @@ export default function PostsManager({
               {filteredPosts.length > 0 ? (
                 filteredPosts.map((p) => {
                   const titleStr = getTitle(p);
+                  const currentIndex = orderedPosts.findIndex((item) => item.id === p.id);
 
                   return (
                     <tr
                       key={p.id}
                       className="hover:bg-blue-50/40 transition-colors group"
                     >
+                      <td className="py-3.5 px-3">
+                        <div className="flex items-center justify-center gap-0.5">
+                          <span className="w-5 text-center text-xs font-semibold text-gray-500">
+                            {currentIndex + 1}
+                          </span>
+                          <div className="flex flex-col">
+                            <button
+                              type="button"
+                              onClick={() => void handleMove(p, -1)}
+                              disabled={isReordering || currentIndex === 0}
+                              className="p-0.5 text-gray-400 hover:text-blue-600 disabled:cursor-not-allowed disabled:opacity-30"
+                              title="Đưa bài viết lên trên"
+                            >
+                              <ArrowUp size={14} />
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => void handleMove(p, 1)}
+                              disabled={isReordering || currentIndex === orderedPosts.length - 1}
+                              className="p-0.5 text-gray-400 hover:text-blue-600 disabled:cursor-not-allowed disabled:opacity-30"
+                              title="Đưa bài viết xuống dưới"
+                            >
+                              <ArrowDown size={14} />
+                            </button>
+                          </div>
+                        </div>
+                      </td>
                       <td className="py-3.5 px-4">
                         <div className="flex items-center gap-3">
                           <div className="relative w-12 h-12 rounded-md overflow-hidden bg-gray-100 shrink-0 border border-gray-200">
@@ -225,7 +287,7 @@ export default function PostsManager({
                 })
               ) : (
                 <tr>
-                  <td colSpan={6} className="py-12 text-center text-gray-400 text-sm">
+                  <td colSpan={7} className="py-12 text-center text-gray-400 text-sm">
                     Chưa có bài viết nào phù hợp.
                   </td>
                 </tr>

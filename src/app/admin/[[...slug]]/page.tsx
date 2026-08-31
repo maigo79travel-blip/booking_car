@@ -195,6 +195,30 @@ export default function AdminAppPage() {
     await load();
   };
 
+  const handleReorderPosts = async (updates: Array<{ id: string; sort_order: number }>) => {
+    const responses = await Promise.all(
+      updates.map((update) =>
+        fetch("/api/admin/data", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            table: "posts",
+            id: update.id,
+            data: { sort_order: update.sort_order },
+          }),
+        })
+      )
+    );
+
+    const failed = responses.find((response) => !response.ok);
+    if (failed) {
+      const body = await failed.json().catch(() => null);
+      throw new Error(body?.message || "Không thể lưu thứ tự bài viết");
+    }
+
+    await load();
+  };
+
   // CRUD Handlers for Routes
   const handleSaveRoute = async (id: string | null, routeData: Record<string, unknown>) => {
     if (id) {
@@ -432,6 +456,7 @@ export default function AdminAppPage() {
               <PostsManager
                 posts={data.posts}
                 onDeletePost={handleDeletePost}
+                onReorderPosts={handleReorderPosts}
               />
             )
           )}

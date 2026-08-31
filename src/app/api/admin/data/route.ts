@@ -6,10 +6,10 @@ import { query } from "@/lib/server/db";
 export const runtime = "nodejs";
 
 const editableColumns = {
-  posts: new Set(["slug", "title", "excerpt", "body", "seo_title", "seo_description", "cover_image", "status", "published_at"]),
+  posts: new Set(["slug", "title", "excerpt", "body", "seo_title", "seo_description", "cover_image", "status", "published_at", "sort_order"]),
   price_routes: new Set(["origin", "destination", "vehicle_type", "trip_type", "price", "currency", "is_active", "sort_order"]),
   site_content: new Set(["content_key", "content_type", "value"]),
-  bookings: new Set(["customer_name", "phone_number", "from_location", "to_location", "car_type", "trip_date", "trip_time", "way_type", "total_price"]),
+  bookings: new Set(["customer_name", "phone_number", "from_location", "to_location", "car_type", "trip_date", "trip_time", "way_type", "total_price", "status", "note"]),
 } as const;
 
 type EditableTable = keyof typeof editableColumns;
@@ -31,7 +31,7 @@ export async function GET() {
   try {
     await requireAdmin();
     const [posts, routes, content, bookings] = await Promise.all([
-      query("SELECT * FROM public.posts ORDER BY updated_at DESC"),
+      query("SELECT * FROM public.posts ORDER BY sort_order ASC NULLS LAST, published_at DESC NULLS LAST, created_at DESC"),
       query("SELECT * FROM public.price_routes ORDER BY sort_order ASC"),
       query("SELECT * FROM public.site_content ORDER BY content_key ASC"),
       query("SELECT * FROM public.bookings ORDER BY created_at DESC"),
@@ -96,14 +96,22 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: "Invalid request" }, { status: 400 });
     }
 
-    const keys = Object.keys(data);
-    if (keys.length === 0 || !hasOnlyEditableColumns(table, data)) {
+    const payload = { ...data } as Record<string, unknown>;
+    if (table === "posts" && payload.sort_order === undefined) {
+      const rows = await query<{ next_sort_order: number }>(
+        "SELECT COALESCE(MAX(sort_order), 0) + 1 AS next_sort_order FROM public.posts"
+      );
+      payload.sort_order = rows[0]?.next_sort_order || 1;
+    }
+
+    const keys = Object.keys(payload);
+    if (keys.length === 0 || !hasOnlyEditableColumns(table, payload)) {
       return NextResponse.json({ message: "Invalid fields" }, { status: 400 });
     }
     const columnNames = keys.map((k) => `"${k}"`).join(", ");
     const valuePlaceholders = keys.map((_, i) => `$${i + 1}`).join(", ");
     const values = keys.map((key) => {
-      const val = data[key];
+      const val = payload[key];
       if (typeof val === "object" && val !== null) {
         return JSON.stringify(val);
       }

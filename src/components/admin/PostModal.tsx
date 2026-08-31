@@ -10,6 +10,7 @@ export interface PostRecord {
   cover_image?: string | null;
   status?: "published" | "draft";
   published_at?: string | null;
+  sort_order?: number | null;
   title?: Record<string, string> | string;
   seo_title?: Record<string, string> | string;
   excerpt?: Record<string, string> | string;

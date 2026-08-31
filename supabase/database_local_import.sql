@@ -94,12 +94,14 @@ CREATE TABLE IF NOT EXISTS public.posts (
   seo_description jsonb NOT NULL DEFAULT '{}'::jsonb,
   cover_image text,
   status text NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'published')),
+  sort_order integer NOT NULL DEFAULT 0,
   published_at timestamptz,
   created_at timestamptz NOT NULL DEFAULT now(),
   updated_at timestamptz NOT NULL DEFAULT now()
 );
 
 CREATE INDEX IF NOT EXISTS posts_published_at_idx ON public.posts (published_at DESC) WHERE status = 'published';
+CREATE INDEX IF NOT EXISTS posts_sort_order_idx ON public.posts (sort_order ASC, published_at DESC) WHERE status = 'published';
 
 CREATE TABLE IF NOT EXISTS public.media_assets (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -122,7 +124,10 @@ CREATE TABLE IF NOT EXISTS public.bookings (
   trip_time text NOT NULL,
   way_type text NOT NULL,
   total_price numeric(12,0) NOT NULL DEFAULT 0,
-  created_at timestamptz NOT NULL DEFAULT now()
+  status text NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'completed')),
+  note text,
+  created_at timestamptz NOT NULL DEFAULT now(),
+  updated_at timestamptz NOT NULL DEFAULT now()
 );
 
 CREATE INDEX IF NOT EXISTS bookings_created_at_idx ON public.bookings (created_at DESC);

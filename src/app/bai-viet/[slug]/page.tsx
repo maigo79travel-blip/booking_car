@@ -56,7 +56,10 @@ export async function generateMetadata({
   const post = await getPost(slug);
   if (!post) return {};
 
-  const pageTitle = text(post.seo_title) || text(post.title);
+  // The root metadata template appends the brand. Remove a duplicate brand
+  // suffix entered by an editor so search snippets keep one clean title.
+  const rawTitle = text(post.seo_title) || text(post.title);
+  const pageTitle = rawTitle.replace(/\s*[|–-]\s*maigo79\.com\s*$/i, "");
   const pageDesc = text(post.seo_description) || text(post.excerpt);
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://maigo79.com";
 

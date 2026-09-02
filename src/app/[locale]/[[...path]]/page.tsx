@@ -14,6 +14,11 @@ import PrivacyPolicyPage from "@/app/chinh-sach/bao-ve-quyen-rieng-tu/page";
 import TransportPolicyPage from "@/app/chinh-sach/van-chuyen-hanh-khach/page";
 
 const locales: Language[] = ["vi", "en", "ko", "ru", "zh"];
+
+function withoutBrandSuffix(title: string) {
+  return title.replace(/\s*[|–-]\s*maigo79\.com\s*$/i, "");
+}
+
 function titleFor(path: string[], locale: Language) {
   const names: Record<string, Record<Language, string>> = {
     "": { vi: "Đặt xe sân bay Cam Ranh", en: "Cam Ranh Airport Transfers", ko: "깜란 공항 픽업", ru: "Трансфер из аэропорта Камрань", zh: "金兰机场接送" },
@@ -29,7 +34,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const locale = locales.includes(rawLocale as Language) ? rawLocale as Language : "vi";
   const slug = path[0] === "bai-viet" && path[1];
   const post = slug ? await getPost(slug) : null;
-  const title = post ? text(post.seo_title, locale) || text(post.title, locale) : titleFor(path, locale);
+  const rawTitle = post ? text(post.seo_title, locale) || text(post.title, locale) : titleFor(path, locale);
+  const title = withoutBrandSuffix(rawTitle);
   const description = post ? text(post.seo_description, locale) || text(post.excerpt, locale) : `maigo79.com - ${title}`;
   const pathSuffix = path.length ? `/${path.join("/")}` : "";
   const canonical = `/${locale}${pathSuffix}`;

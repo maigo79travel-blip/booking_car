@@ -63,19 +63,19 @@ const FloatingContacts = () => {
       isExternal: true,
     },
     {
-      name: "Telegram @maigo79travel",
+      name: "Telegram @Nyachang_taksi_tury",
       icon: (
         <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full overflow-hidden shadow-lg transform hover:scale-105 transition-all bg-white border border-sky-100 flex items-center justify-center p-0.5">
           <Image
             src="/icon/tele.png"
-            alt="Telegram maigo79travel"
+            alt="Telegram Nyachang taksi tury"
             width={48}
             height={48}
             className="w-full h-full object-contain rounded-full"
           />
         </div>
       ),
-      link: "https://t.me/maigo79travel",
+      link: "https://t.me/Nyachang_taksi_tury",
       isExternal: true,
     },
     {

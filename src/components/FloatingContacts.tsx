@@ -63,6 +63,22 @@ const FloatingContacts = () => {
       isExternal: true,
     },
     {
+      name: "Telegram @maigo79travel",
+      icon: (
+        <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full overflow-hidden shadow-lg transform hover:scale-105 transition-all bg-white border border-sky-100 flex items-center justify-center p-0.5">
+          <Image
+            src="/icon/tele.png"
+            alt="Telegram maigo79travel"
+            width={48}
+            height={48}
+            className="w-full h-full object-contain rounded-full"
+          />
+        </div>
+      ),
+      link: "https://t.me/maigo79travel",
+      isExternal: true,
+    },
+    {
       name: "WhatsApp 0878.458.885",
       icon: (
         <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full overflow-hidden shadow-lg transform hover:scale-105 transition-all bg-white border border-emerald-100 flex items-center justify-center p-0.5">
@@ -123,7 +139,7 @@ const FloatingContacts = () => {
                 onClick={c.onClick}
                 title={c.name}
                 aria-label={c.name}
-                className="cursor-pointer focus:outline-none"
+                className="min-w-11 min-h-11 flex items-center justify-center cursor-pointer focus:outline-none"
               >
                 {c.icon}
               </button>
@@ -138,7 +154,7 @@ const FloatingContacts = () => {
               rel={c.isExternal ? "noopener noreferrer" : undefined}
               title={c.name}
               aria-label={c.name}
-              className="focus:outline-none"
+              className="min-w-11 min-h-11 flex items-center justify-center focus:outline-none"
             >
               {c.icon}
             </a>
